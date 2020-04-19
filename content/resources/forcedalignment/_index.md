@@ -38,6 +38,3 @@ Here I will describe how I managed to acquire automatic time-aligned .Textgrids 
 >
 >Feel free to leave a comment if you have a question or issue, but I'm probably unable to offer personal assistance to your problems (I'm in the middle of my dissertation). In short, this website is not responsible for any troubles.
 >**Good luck!**
-
-I mainly use {{< icon name="terminal" pack="fas" >}} Terminal,
-{{< icon name="python" pack="fab" >}} Python, {{< icon name="r-project" pack="fab" >}} R, and Praat in these posts. So it would make more sense to you if you have some very basic ideas about Shell scripts and Praat. 

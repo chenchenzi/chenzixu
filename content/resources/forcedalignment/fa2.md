@@ -1,6 +1,6 @@
 ---
 title: Prepare Transcripts files
-linktitle: Transcripts
+linktitle: 2.Transcripts
 toc: true
 type: docs
 date: "2020-04-19T00:00:00+01:00"

@@ -1,6 +1,6 @@
 ---
 title: Use Penn Forced Aligner (P2FA)
-linktitle: P2FA
+linktitle: 3.P2FA
 toc: true
 type: docs
 date: "2020-04-19T00:00:00+01:00"
@@ -59,7 +59,14 @@ $ join -v 1 -1 2 -2 1 tmp1.txt tmp2.txt >missingwords.txt
 This `missingwords.txt` lists the missing Chinese characters and you can manually add them to the original `dict` file in the `/model`.
 
 ## 3.3 Running P2FA
-Running P2FA is easy when you have all the input files prepared as required. You just need one single line in the Terminal calling the `Calign2textgrid.py` and filling in relevant arguments: `.wav` file path, `.txt` file path, (output) `.Textgrid` file path. This script returns the short form `.Textgrid` file.
+Running P2FA is easy when you have all the input files prepared as required. Here is a checklist:
+
+- [x] All `.wav` files are in 16KHz, 16-bit, mono channel
+- [x] Each `.wav` file has a `.txt`transcript file with a matching filename
+- [x] The pronunciation dictionary in the P2FA model has been updated
+- [x] All the files has been put in the same directory `/P2FA_Mandarin/run`
+
+You just need one single line in the Terminal calling the `Calign2textgrid.py` and filling in relevant arguments: `.wav` file path, `.txt` file path, (output) `.Textgrid` file path. This script returns the short form `.Textgrid` file.
 If you want to run the aligner for all of the audio files in a directory, you can make use of a loop structure:
 ```
 $ for i in *.wav; do python Calign2textgrid.py $i $i.txt $i.TextGrid; done

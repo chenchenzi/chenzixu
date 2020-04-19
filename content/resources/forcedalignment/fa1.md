@@ -1,6 +1,6 @@
 ---
 title: Prepare .wav files
-linktitle: .wav files
+linktitle: 1.Audio files
 toc: false
 type: docs
 date: "2020-04-19T00:00:00+01:00"
