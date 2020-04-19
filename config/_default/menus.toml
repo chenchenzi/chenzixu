@@ -15,7 +15,7 @@
 
 [[main]]
   name = "Resources"
-  url = "#posts"
+  url = "resources/"
   weight = 30
 
 [[main]]
