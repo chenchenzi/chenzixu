@@ -8,6 +8,7 @@ weight: 1
 title: Forced Alignment Using P2FA and Montreal
 date: "2020-04-19T12:00:00Z"
 lastmod: "2020-04-19T12:00:00Z"
+tags: ["speech processing", "Mandarin", "forced alignment"]
 draft: false  # Is this a draft? true/false
 toc: true  # Show table of contents? true/false
 type: docs  # Do not modify.

@@ -1,11 +1,11 @@
 ---
 # Course title, summary, and position.
 linktitle: Polynomial F0 Curve Fitting
-summary: A step-to-step guide to fitting polynomials to F0 curves.
+summary: A step-to-step guide to fitting polynomial models to F0 curves.
 weight: 2
 
 # Page metadata.
-title: Forced Alignment Using P2FA and Montreal
+title: Polynomial F0 Curve Fitting
 date: "2020-04-19T12:00:00Z"
 lastmod: "2020-04-19T12:00:00Z"
 draft: false  # Is this a draft? true/false

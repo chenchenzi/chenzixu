@@ -15,3 +15,4 @@ weight: 4
 ---
 
 ## 4.1 Installation
+The Montreal Forced Aligner can be downloaded from [here](https://github.com/MontrealCorpusTools/Montreal-Forced-Aligner/releases). They have a detailed documentation, so I will only mention it briefly.
