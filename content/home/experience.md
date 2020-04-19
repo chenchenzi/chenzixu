@@ -25,8 +25,8 @@ date_format = "Jan 2006"
   date_start = "2019-10-01"
   date_end = ""
   description = """
- *processed Bengali speech corpus in a Bengali intonation research project
- *Assisted EEG Experiments of an MMN study
+  *Processed Bengali speech corpus in a Bengali intonation research project  
+  *Assisted EEG Experiments of an MMN study
   """
 
 [[experience]]
