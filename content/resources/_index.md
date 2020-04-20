@@ -2,6 +2,7 @@
 title: Resources
 layout: docs  # Do not modify.
 
+view: 2
 # Optional header image (relative to `static/img/` folder).
 header:
   caption: ""

@@ -75,6 +75,6 @@ email: ""
 #- Visitors
 ---
 
-I'm a DPhil student in Linguistics at the University of Oxford and I specialise in **phonetics**. Speech sounds of all kinds never fail to fascinate me. Abundant information ranging from lexical meanings and discourse structure to emotions, attitudes, and speaker identity is ubiquitous in speech. I'm interested in exploring the ways different layers of meanings encode in speech. 
+I'm a DPhil student in Linguistics at the **University of Oxford** and I specialise in **phonetics**. Speech sounds of all kinds never fail to fascinate me. Abundant information ranging from lexical meanings and discourse structure to emotions, attitudes, and speaker identity is ubiquitous in speech. I'm interested in exploring the ways different layers of meanings encode in speech. 
 
 The vast variation and fuzzy boundaries of speech sounds can be daunting, but reveal that quantitative methods are conducive to representing and analysing sounds. I'm keen in experimental and computational approaches to phonetic research.
