@@ -1,5 +1,0 @@
-https://chenzixu.netlify.app/* https://chenzixu.rbind.io/:splat 301!
-http://chenzixu.netlify.app/* https://chenzixu.rbind.io/:splat 301!
-http://chenzixu.rbind.io/* https://chenzixu.rbind.io/:splat 301!
-
-

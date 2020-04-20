@@ -28,3 +28,21 @@ HUGO_VERSION = "0.69.0"
 
 [context.next.environment]
 HUGO_ENABLEGITINFO = "true"
+
+[[redirects]]
+  from = "https://chenzixu.netlify.app/*"
+  to = "https://chenzixu.rbind.io/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://chenzixu.netlify.app/*"
+  to = "https://chenzixu.rbind.io/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://chenzixu.rbind.io/*"
+  to = "https://chenzixu.rbind.io/:splat"
+  status = 301
+  force = true
