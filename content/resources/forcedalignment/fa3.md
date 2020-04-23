@@ -17,12 +17,13 @@ weight: 3
 ## 3.1 Installation
 The Penn Forced Aligner (P2FA) can be downloaded from [here](https://web.sas.upenn.edu/phonetics-lab/facilities/). They have a version for American English and one for Mandarin Chinese, though there's only scant documentation. The installation of P2FA can be a bit of hassle. Fortunately we have detailed instructions:
 
-For Mac users: Check [Will Styler's post](http://wstyler.ucsd.edu/posts/p2fa_mac.html). The installation is the same for English and Chinese versions.
+- For Mac users: Check [Will Styler's post](http://wstyler.ucsd.edu/posts/p2fa_mac.html). The installation is the same for English and Mandarin versions.
 
-For Windows users: Check [Cong Zhang's post](https://congzhanglinguist.wordpress.com/2018/09/03/p2fa_chinese_2/).
-I rewrite a bit of the python code for the Mandarin version and make it a python 3 script since python 2 is getting outdated. 
+- For Windows users: Check [Cong Zhang's post](https://congzhanglinguist.wordpress.com/2018/09/03/p2fa_chinese_2/).
 
-Check my Github repository [P2FA_Mandarin_py3](https://github.com/chenchenzi/P2FA_Mandarin_py3/tree/master) for it.
+I rewrite a bit of the python code for the Mandarin version and make it a python 3 script since python 2 is getting outdated. If you *have installed* it successfully, you can check my Github repository [P2FA_Mandarin_py3](https://github.com/chenchenzi/P2FA_Mandarin_py3/tree/master) for an enhanced Python 3 script for **Mandarin** alignment.
+
+There is also [FAVE](https://github.com/JoFrhwld/FAVE), a up-to-date implementation of the P2FA with pre-trained acoustic models of **American English**.
 
 ## 3.2 Pronunciation Dictionary
 Before running the aligner, we need to make sure that the pronunciation dictionary `/P2FA_Mandarin/run/model/dict` contains all the characters appeared in our transcripts. Again, Bash Shell commands can help us with that (idea from here, adapted for Chinese orthography).

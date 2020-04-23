@@ -26,6 +26,8 @@ Acquiring a large amount of speech data can be 'cheap' and relatively easy. The 
 
 A forced alignment system usually takes an audio file and its corresponding transcript as input and returns a text file, which is time-aligned at the phone and word levels. I employed two forced alignment systems: the **Penn Forced Aligner (P2FA)** and the **Montreal Forced Aligner**. The former is built with the HTK speech recognition toolkit, while the latter with a similar system Kaldi ASR toolkit. Many other aligners are based on one of these two toolkits. I'll briefly walk through how to use them from data preparation and installation to post-aligning processing, pooling relevant online resources (instead of reinventing the wheels) and adding in some of my own snippets of code. 
 
+`{{< icon name="terminal" pack="fas" >}} Terminal` `{{< icon name="python" pack="fab" >}} Python`
+
 ## General procedure
 1. Prepare the `.wav` files
 2. Prepare the transcript files (`.txt`/`.lab`/`.TextGrid`)
