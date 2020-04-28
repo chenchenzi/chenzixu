@@ -1,6 +1,6 @@
 ---
 title: Prepare Transcripts files
-linktitle: 2.Transcripts
+linktitle: 2. Prepare Transcripts
 toc: true
 type: docs
 date: "2020-04-19T00:00:00+01:00"
@@ -16,14 +16,14 @@ weight: 2
 
 I'm using **Mandarin Chinese** here as an example. My goal here is to align each Chinese character (each syllable) with its corresponding sound interval. Thus I need to prepare transcript files in which there is a space between any two characters. Besides, there are many audio files in a corpus to be aligned. We would want to name all the transcript files accordingly (matching with the `.wav` filename) so that we can write a loop script to run an aligner for all of the `.wav` files at once. Since `.txt` files work for both aligners, I'll demonstrate how to prepare a `.txt` file (relatively efficiently) for each `.wav` file when you have assembled transcripts such as **pre-designed speech stimuli** in speech production experiments. One way to do this is:
 
-## 2.1. Acquire a list of `.wav` files
+## 2.1. Acquire a List of `.wav` Files
 Put all the `.wav` files in a directory and open Terminal and navigate to that directory. In Terminal: 
 ```
 $ ls *.wav >> list.txt 
 ```
 We obtain a .txt file with each .wav filename being a row in one column. 
 
-## 2.2. Add corresponding transcripts
+## 2.2. Add Corresponding Transcripts
 Then we add in the corresponding transcript of the audio on the same row following the .wav filename with a space (i.e. we have the second column of transcript texts). 
 For my project, I have pre-designed speech stimuli, so I can just copy them over and slightly modify them manually when speakers made any variation. An example of the updated list.txt file is:
 
@@ -33,7 +33,7 @@ For my project, I have pre-designed speech stimuli, so I can just copy them over
 1_3_101.wav 他们堆的台阶很稳当
 ```
 
-## 2.3. Insert spaces
+## 2.3. Insert Spaces
 Then we can make use of bash shell commands to insert a space between every character:
 ```
 $ sed -e 's/./& /' list.txt
@@ -44,7 +44,7 @@ So now the list.txt is as follows:
 1_2_101.wav 他 们 堆 的 城 堡 很 稳 当
 1_3_101.wav 他 们 堆 的 台 阶 很 稳 当
 ```
-## 2.4. Generate individual `.txt` files
+## 2.4. Generate Individual `.txt` Files
 We want the characters in each line to be an independent `.txt` file whose filename is the first field but with `.txt` extension. File-naming is very important because you need to think about the next step.
 
 ### 2.4.1 Filenaming for Penn Forced Aligner

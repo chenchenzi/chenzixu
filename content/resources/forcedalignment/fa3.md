@@ -1,6 +1,6 @@
 ---
 title: Use Penn Forced Aligner (P2FA)
-linktitle: 3.P2FA
+linktitle: 3. Use Penn Forced Aligner
 toc: true
 type: docs
 date: "2020-04-19T00:00:00+01:00"

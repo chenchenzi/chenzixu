@@ -8,10 +8,12 @@ weight: 1
 title: Forced Alignment Using P2FA and Montreal
 date: "2020-04-19T12:00:00Z"
 lastmod: "2020-04-19T12:00:00Z"
-tags: ["speech processing", "Mandarin", "forced alignment"]
+tags: ["speech processing", "Mandarin", "forced alignment", "P2FA", "MFA", "speech recognition"]
 draft: false  # Is this a draft? true/false
 toc: true  # Show table of contents? true/false
 type: docs  # Do not modify.
+reading_time: true
+share: true
 
 # Add menu entry to sidebar.
 # - name: Declare this menu item as a parent with ID `name`.
@@ -34,7 +36,10 @@ A forced alignment system usually takes an audio file and its corresponding tran
 3. Obtain a pronunciation dictionary with canonical phonetic transcription for words/characters
 4. Run the aligner with pre-trained acoustic models
 
-Here I will describe how I managed to acquire automatic time-aligned .Textgrids using open-source softwares and tools on my Mac (*Mojave 10.14.6*) in details. I will first introduce how to prepare input data including `.wav` files and transcript files and then how to work with the Penn Forced Aligner and Montreal Forced Aligner respectively. I'm trying my best to be clear and hope this is helpful for those who want to achieve similar goals, especially for non-programmers and linguistic students.
+## Post-alignment options
+5. Convert .Textgrid files into readable table format with temporal information
+
+Here I basically describe how I managed to acquire automatic time-aligned .Textgrids using open-source softwares and tools on my Mac (*Mojave 10.14.6*) in details. I will first introduce how to prepare input data including `.wav` files and transcript files and then how to work with the Penn Forced Aligner and Montreal Forced Aligner respectively. I'm trying my best to be clear and hope this is helpful for those who want to achieve similar goals, especially for non-programmers and linguistic students.
 
 
 >**DISCLAIMER**
