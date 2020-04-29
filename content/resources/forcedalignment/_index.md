@@ -5,7 +5,7 @@ summary: A step-to-step guide to automatic forced alignment of your own corpus u
 weight: 1
 
 # Page metadata.
-title: Forced Alignment Using P2FA and Montreal
+title: Forced Alignment Using P2FA and MFA
 date: "2020-04-19T12:00:00Z"
 lastmod: "2020-04-19T12:00:00Z"
 tags: ["speech processing", "Mandarin", "forced alignment", "P2FA", "MFA", "speech recognition"]
@@ -24,7 +24,7 @@ menu:
     weight: 1
 ---
 
-Acquiring a large amount of speech data can be 'cheap' and relatively easy. The traditional way of manually transcribing and segmenting audios is, however, very time-consuming and 'expensive'. Algorithms of automatic speech recognition (ASR) can be extremely helpful in automatic transcription through speech-to-text, as well as allow for automatic alignment and synchronisation of speech signals to phonetic units.
+Acquiring a large amount of speech data can be 'cheap' and relatively easy today. The traditional way of manually transcribing and segmenting audios is, however, very time-consuming and 'expensive'. Algorithms of automatic speech recognition (ASR) can be extremely helpful in automatic transcription through speech-to-text, as well as allow for automatic alignment and synchronisation of speech signals to phonetic units.
 
 A forced alignment system usually takes an audio file and its corresponding transcript as input and returns a text file, which is time-aligned at the phone and word levels. I employed two forced alignment systems: the **Penn Forced Aligner (P2FA)** and the **Montreal Forced Aligner**. The former is built with the HTK speech recognition toolkit, while the latter with a similar system Kaldi ASR toolkit. Many other aligners are based on one of these two toolkits. I'll briefly walk through how to use them from data preparation and installation to post-aligning processing, pooling relevant online resources (instead of reinventing the wheels) and adding in some of my own snippets of code. 
 

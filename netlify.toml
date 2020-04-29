@@ -46,3 +46,9 @@ HUGO_ENABLEGITINFO = "true"
   to = "https://chenzixu.rbind.io/:splat"
   status = 301
   force = true
+  
+[[redirects]]
+  from = "https://xchenzi1994.wixsite.com/xuchenziamy/*"
+  to = "https://chenzixu.rbind.io/:splat"
+  status = 301
+  force = true
