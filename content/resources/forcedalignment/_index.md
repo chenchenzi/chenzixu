@@ -12,10 +12,10 @@ tags: ["speech processing", "Mandarin", "forced alignment", "P2FA", "MFA", "spee
 draft: false  # Is this a draft? true/false
 toc: true  # Show table of contents? true/false
 type: docs  # Do not modify.
-reading_time: true
-share: true
-profile: true
-editable: true
+reading_time: true # does not work here?
+share: true # does not work here?
+profile: true # does not work here?
+editable: true # does not work here?
 
 # Add menu entry to sidebar.
 # - name: Declare this menu item as a parent with ID `name`.
@@ -48,3 +48,5 @@ Here I basically describe how I managed to acquire automatic time-aligned .Textg
 >
 >Feel free to leave a comment if you have a question or issue, but I'm probably unable to offer personal assistance to your problems (I'm in the middle of my dissertation). In short, this website is not responsible for any troubles.
 >**Good luck!**
+
+Feel free to share this tutorial! {{< icon name="facebook" pack="fab" >}} {{< icon name="twitter" pack="fab" >}} {{< icon name="whatsapp" pack="fab" >}} {{< icon name="weibo" pack="fab" >}} {{< icon name="weixin" pack="fab" >}}
