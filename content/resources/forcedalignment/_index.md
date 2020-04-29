@@ -14,6 +14,8 @@ toc: true  # Show table of contents? true/false
 type: docs  # Do not modify.
 reading_time: true
 share: true
+profile: true
+editable: true
 
 # Add menu entry to sidebar.
 # - name: Declare this menu item as a parent with ID `name`.
