@@ -21,7 +21,7 @@ The Penn Forced Aligner (P2FA) can be downloaded from [here](https://web.sas.upe
 
 - For Windows users: Check [Cong Zhang's post](https://congzhanglinguist.wordpress.com/2018/09/03/p2fa_chinese_2/).
 
-I rewrite a bit of the python code for the Mandarin version and make it a python 3 script since python 2 is getting outdated. If you *have installed* it successfully, you can check my Github repository [P2FA_Mandarin_py3](https://github.com/chenchenzi/P2FA_Mandarin_py3/tree/master) for an enhanced Python 3 script for **Mandarin** alignment.
+I rewrite a bit of the python code for the Mandarin version and make it a python 3 script since python 2 is getting outdated. If you **have installed** it successfully, you can check my Github repository [P2FA_Mandarin_py3](https://github.com/chenchenzi/P2FA_Mandarin_py3/tree/master) for an enhanced Python 3 script for **Mandarin** alignment.
 
 There is also [FAVE](https://github.com/JoFrhwld/FAVE), a up-to-date implementation of the P2FA with pre-trained acoustic models of **American English**.
 
