@@ -27,7 +27,7 @@ There is also [FAVE](https://github.com/JoFrhwld/FAVE), a up-to-date implementat
 
 ## 3.2 Pronunciation Dictionary
 Before running the aligner, we need to make sure that the pronunciation dictionary `/P2FA_Mandarin/run/model/dict` contains all the characters appeared in our transcripts. Again, Bash Shell commands can help us with that (idea from here, adapted for Chinese orthography).
-First we obtain a wordlist from our transcripts. Continuing with the above example `list.txt`, we make a copy of it, and in Terminal we navigate to this directory.
+First we obtain a wordlist from our transcripts. Continuing with the previous example `list.txt` in section 2.3, we make a copy of it, and in Terminal we navigate to this directory.
 ```
 $ tr ' ' '\n' < list.txt|sort|uniq -c|sed 's/^ *//'|sort -r -n > wordlist.txt
 ```
