@@ -29,8 +29,9 @@ There is also [FAVE](https://github.com/JoFrhwld/FAVE), a up-to-date implementat
 Before running the aligner, we need to make sure that the pronunciation dictionary `/P2FA_Mandarin/run/model/dict` contains all the characters appeared in our transcripts. Again, Bash Shell commands can help us with that (idea from here, adapted for Chinese orthography).
 First we obtain a wordlist from our transcripts. Continuing with the previous example `list.txt` in section 2.3, we make a copy of it, and in Terminal we navigate to this directory.
 ```
-$ tr ' ' '\n' < list.txt|sort|uniq -c|sed 's/^ *//'|sort -r -n > wordlist.txt
+$ tr ' ' '\n' < list.txt|sed '/^$/d'|sort|uniq -c|sed 's/^ *//'|sort -r -n > wordlist.txt
 ```
+(if there are trailling white spaces after each line, we will have some blank lines after replacing the space with `\n` a new line. So we delete the blank lines `sed '/^$/d'`. `uniq` works after you `sort` them first.)
 {{% alert note %}}
 **Tip**: No space in front of sort! Otherwise you might get the error message: "Command not found", since Bash is sensitive to spaces when you're piping.
 {{% /alert %}}
@@ -60,7 +61,7 @@ Then we find out whether there are any characters in `tmp1.txt` but missing in `
 ```
 $ join -v 1 -1 2 -2 1 tmp1.txt tmp2.txt >missingwords.txt
 ```
-(`-v 1`: this flag displays the non-matching records of the file 1. The following `-1 2 -2 1`: file 1 second column or field; file 2 first column)
+(`-v 1`: this flag displays the non-matching records of the file 1. The following `-1 2 -2 1`: file 1, second column or field; file 2, first column.)
 This `missingwords.txt` lists the missing Chinese characters and you can manually add them to the original `dict` file in the `/model`.
 
 ## 3.3 Running P2FA
