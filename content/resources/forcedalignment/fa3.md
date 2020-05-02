@@ -31,7 +31,7 @@ First we obtain a wordlist from our transcripts. Continuing with the previous ex
 ```
 $ tr ' ' '\n' < list.txt|sed '/^$/d'|sort|uniq -c|sed 's/^ *//'|sort -r -n > wordlist.txt
 ```
-(if there are trailling white spaces after each line, we will have some blank lines after replacing the space with `\n` a new line. So we delete the blank lines `sed '/^$/d'`. `uniq` works after you `sort` them first.)
+(If there are trailling white spaces after each line, we will have some blank lines after replacing a space with `\n` a new line. So we delete the blank lines `sed '/^$/d'`. `uniq` works after you `sort` them first.)
 {{% alert note %}}
 **Tip**: No space in front of sort! Otherwise you might get the error message: "Command not found", since Bash is sensitive to spaces when you're piping.
 {{% /alert %}}
@@ -73,6 +73,11 @@ Running P2FA is easy when you have all the input files prepared as required. Her
 - [x] All the files has been put in the same directory `/P2FA_Mandarin/run`
 
 You just need one single line in the Terminal calling the `Calign2textgrid.py` and filling in relevant arguments: `.wav` file path, `.txt` file path, (output) `.Textgrid` file path. This script returns the short form `.Textgrid` file.
+
+{{% alert note %}}
+Remember to **modify** the path of your `/run` folder `HOMEDIR =` in line 21 of `Calign2textgrid.py`. You can find the path by dragging the folder into the Terminal on a Mac.
+{{% /alert %}}
+
 If you want to run the aligner for all of the audio files in a directory, you can make use of a loop structure:
 ```
 $ for i in *.wav; do python Calign2textgrid.py $i $i.txt $i.TextGrid; done
