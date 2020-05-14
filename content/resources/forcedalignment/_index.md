@@ -41,7 +41,7 @@ A forced alignment system usually takes an audio file and its corresponding tran
 ## Post-alignment options
 5. Convert .Textgrid files into readable table format with temporal information
 
-Here I basically describe how I managed to acquire automatic time-aligned .Textgrids using open-source softwares and tools on my Mac (*Mojave 10.14.6*) in details. I will first introduce how to prepare input data including `.wav` files and transcript files and then how to work with the Penn Forced Aligner and Montreal Forced Aligner respectively. I'm trying my best to be clear and hope this is helpful for those who want to achieve similar goals, especially for non-programmers and linguistic students.
+Here I basically describe how I managed to acquire automatic time-aligned `.Textgrids` using open-source softwares and tools on my Mac (*Mojave 10.14.6*) in details. I will first introduce how to prepare input data including `.wav` files and transcript files and then how to work with the Penn Forced Aligner and the Montreal Forced Aligner respectively. Mandarin Chinese will be used as an example. I'm trying my best to be clear and hope this is helpful for those who want to achieve similar goals, especially for non-programmers and linguistic students.
 
 Click on the chapters in the Table of Contents to [**START**](https://chenzixu.rbind.io/resources/forcedalignment/fa1/).
 
