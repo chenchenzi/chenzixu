@@ -21,9 +21,9 @@ organizations:
 bio: My research interests include intonation, speech prosody, speech perception and sociophonetics.
 
 interests:
-- Neutral Tone
-- Tone and intonation
-- Focus and intonation
+- Voice quality
+- Prosody
+- Neutral tone
 - Speech perception
 - Plastic Mandarin
 

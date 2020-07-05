@@ -64,6 +64,8 @@ $ join -v 1 -1 2 -2 1 tmp1.txt tmp2.txt >missingwords.txt
 (`-v 1`: this flag displays the non-matching records of the file 1. The following `-1 2 -2 1`: file 1, second column or field; file 2, first column.)
 This `missingwords.txt` lists the missing Chinese characters and you can manually add them to the original `dict` file in the `/model`.
 
+Inspired by: [Corpus Phonetics Tutorial](https://eleanorchodroff.com/tutorial/index.html) by Eleanor Chodroff.
+
 ## 3.3 Running P2FA
 Running P2FA is easy when you have all the input files prepared as required. Here is a checklist:
 
