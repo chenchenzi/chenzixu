@@ -24,7 +24,9 @@ abstract: This paper presents an experimental investigation of pitch variations 
 summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.
 
 tags:
-- Source Themes
+- f0
+- Intonation
+- Plastic Mandarin
 featured: true
 
 links:
