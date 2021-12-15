@@ -1,17 +1,17 @@
 ---
-title: Phonetics and Phonology
+title: Experiment Design, Research Methods Seminar
 event: 
-event_url: https://example.org
+event_url: 
 
-location: Phonetics Lab
+location: Room207, Clarendon Institute
 address:
-  street: 41 Wellington Square
+  street: Walton street
   city: Oxford
   region: 
-  postcode: 'OX2 6LE'
+  postcode: 'OX1 2HG'
   country: United Kingdom
 
-summary: An introduction to articulatory and acoustic phonetics, and phonological theories at the undergraduate level.
+summary: An introduction to experiment design, at the postgraduate level.
 abstract: ""
 
 # Talk start and end times.
@@ -30,8 +30,8 @@ tags: []
 featured: false
 
 image:
-  caption: 'The Teaching Lab in the Phonetics Laboratory, Oxford'
-  focal_point: Right
+  caption: ''
+  focal_point: 
 
 links:
 - icon: twitter
