@@ -14,72 +14,86 @@ menu:
 weight: 2
 ---
 
-## Perl snippet 
-An ideal way to organise our speech corpus directory is demonstrated below. The plain transcript (`.txt`) and time-aligned transcription file (`.TextGrid`) share the same filename as the corresponding audio file (`.wav`). Designing a consistent, anonymous, interpretable, and information-dense filename system is always a good practice here.
+The second step is to search in the assembled text file we just created and to create subsets of the tabular data that only contains row of the desired speech units. There are many ways to search a text file, and here I present two methods.
+
+## Goal
+Suppose that I hope to find all Mandarin phrases in which the second syllable is the functional particle "*de*" 的, which is commonly used as a possessive modifiers or nominaliser, in the corpus.
+
+## Awk snippets
+
+The first method to achieve our goal is to utilise Awk command in Unix and to create a small snippet of search code.
+
+The Awk command enables us to define, search, and process text patterns. It scans a file line by line, splits each line into fields by whitespace character and stores them in the `$n` variables. It then compares the fields to pattern, and performs action(s) on matched lines.
+
+I created a text file `find_de.txt` containing the following snippet of code. `$0` represents the entire current line, while `$1` represents the first field, which is the first item in a line. From the previous sample output, we know that the Chinese characters are in the first column in the text file. This snippet searches through the first column of the text file and if the character is *de* 的, it prints out the previous line and the current line on a row.
 
 ```
-speech_corpus
-├── metadata.txt
-├── audios
-│   ├── b01_1_101q.wav
-│   ├── b01_2_101q.wav
-│   └── b01_3_101q.wav
-├── textgrids
-│   ├── b01_1_101q.TextGrid
-│   ├── b01_1_102a.TextGrid
-│   └── b01_1_103a.TextGrid
-└── transcripts
-    ├── b01_1_101q.txt
-    ├── b01_2_101q.txt
-    └── b01_3_101q.txt
+{if ($1 == "的") 
+	{print prev, $0
+	prev = $0}
+else
+prev = $0
+}
 ```
 
-The first step that enables us to search intended speech sequences from the corpus is to create a large text file assembling all time-aligned transcripts so that we have access to two key information for all audio files: temporal information and the corresponding symbol for the speech unit (it can be a segment, a syllable, or a word given the granularity of the segmentation.)
+Since Awk works with text files delimited by whitespace, we need to change our `.csv file` that is delimited by comma. This can be accomplished by using Sed command in Unix Shell replacing the comma with space. Then we execute the Awk command:
+
+```
+sed "s/,/ /g" words.csv > words.txt
+awk -f find_de.txt words.txt > de_phrases.txt
+```
+The flag `-f` indicates that the awk command reads from the program file instead of from the first command line argument. The output is a text file that contains all the targeted phrases, as shown below.
+
+```
+大 0.0125 0.1225 0.1100 b08_1_114a 的 0.1225 0.2060 0.0835 b08_1_114a
+搭 0.2351 0.3725 0.1374 b02_1_119q 的 0.3725 0.4638 0.0913 b02_1_119q
+回 0.1015 0.2397 0.1383 b03_3_118a 的 0.2397 0.3125 0.0728 b03_3_118a
+...
+```
+
+In the output text, we have the relevant syllables and their information on a line. This file will be our basis to create the trimming script for audio files.
 
 ## Python query script
 
-Usually a TextGrid file, as shown below, is not in its best format to work with. In the previous [tutorial](https://chenzixu.rbind.io/resources/1forcedalignment/fa5/), I provided Python scripts that convert a `.TextGrid` file into a plain text file with tabular format data. Again, they are available at my Github [repository](https://github.com/chenchenzi/textgrid2table). The `README.md` will take you from there.
-
-If you would like to convert multiple `.TextGrid` files all at once, you can consider a for loop in your command line and then concatenate individual `.txt` files into a large text file.
+We can achieve the same results by writing a Python script.
 
 ```
+# query.py C. Xu 2021.12.12
+# This script is for extracting 2 syllable phrases in a text file
+# in which we know the last syllable.
 
+# -------------------------------------------
+
+import sys
+
+# -------------------------------------------
+
+if len(sys.argv) < 2:
+    print("Usage:", sys.argv[0], '<string> <filename>')
+    exit()
+s = sys.argv[1]
+fname = sys.argv[2]
+
+# -------------------------------------------
+
+selection = ''
+# we want to put all syllables in a phrase on one line.
+# realines() retains the \n at the end for everyline;
+# hence we are using splitlines() here
+with open(fname, 'r') as f:
+    lines = f.read().splitlines()
+    for i, line in enumerate(lines):
+        if str(s) in line:
+            row = " ".join(lines[i-1:i+1]) + '\n'
+            selection += row
+
+with open(s + '.txt', 'w') as text:
+    text.write(selection)
+
+f.close()
+text.close()
+
+print("finished")
 ```
 
-Alternatively, I created another Python script `tg2csv.py` that loops round the `\textgrid\` directory and create one large text file in the output. It is also available at my Github [repository](https://github.com/chenchenzi/textgrid2table).
-
-```
-
-
-
-```
-
-The key to creating this assembling text file in the tabular format is **forward thinking**. What information will you need in the next steps? In order to cut speech segments out from a audio file, we will need the filename (path) of the audio file, and the times of the speech segments. The correspondence between the filenames of an audio file and a transcript does us a favor in accessing the path of the audio file when we have the transcript file. Therefore, a column of filename should be in the tabular data, and we might also want to remove the file extension, which would make it easier to work with different file extensions.
-
-### Demo task
-Suppose that I am interested in some Mandarin syllables and my `.TextGrid` files are time-aligned at both the segmental(tier name: phoneme) and syllabic level(tier name: word). I hope to convert all the `word` tiers into tabular format. 
-
-`tg2csv.py` should be placed in the project directory, i.e. `/speech_corpus` in above example. It takes three arguments: 1) the name of the directory where we put the `.TextGrid` files, in this case, `textgrids`; 2) the name of the tier that we are interested in, `word`; 3) the name of the desired output file. Let's call it `words.csv`.
-
-In the terminal or your Unix Shell, we can do:
-```
-$ python tg2csv.py textgrids word words.csv
-```
-The final tabular output of `tg2csv.py` is demonstrated below. You may delete the first row `0,1,2,3,4` in the output file, which is the unspecified column names.
-
-```
-妈,0.0125,0.3325,0.3200,b01_1_101q
-妈,0.3325,0.5125,0.1800,b01_1_101q
-们,0.5125,0.7925,0.2800,b01_1_101q
-正,0.7925,1.1125,0.3200,b01_1_101q
-看,1.1125,1.6725,0.5600,b01_1_101q
-```
-
-The `$` isn't part of the command. It indicates that this is a Shell script in the Terminal.
-
-## 1.2 SoX
-Alternatively, you can also use `SoX` (Sound eXchange) commands in the Terminal. SoX is a collection of handy sound processing utilities. It is also required by P2FA. You can download it [here](http://sox.sourceforge.net/). To reformat the input.wav, we can use the following command in the Terminal having installed SoX.
-```
-$ sox input.wav -r 16k -b 16 -c 1 output.wav
-```
-The `$` isn't part of the command. It indicates that this is a Shell script in the Terminal. The flags here: `-r` , `-b`, `-c` define the sampling rate, precision, and number of channel of the output.wav respectively.
+Both methods introduced above can be very flexible. You can modify them to make it suitable to your desired patterns. In my Github [repository](https://github.com/chenchenzi/textgrid2table), I included a few Python script that searches different text patterns. The `README.md` will take you from there.

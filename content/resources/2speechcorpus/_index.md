@@ -1,7 +1,7 @@
 ---
 # Course title, summary, and position.
-linktitle: 2. Speech Corpus Querying
-summary: A step-to-step guide to extract targeted speech intervals from your own speech corpus. #<i class="fas fa-terminal"></i> Unix Shell <i class="fab fa-python"></i> Python Sox
+linktitle: Speech Corpus Querying
+summary: A step-by-step guide to extract targeted speech intervals from your own speech corpus. #<i class="fas fa-terminal"></i> Unix Shell <i class="fab fa-python"></i> Python Sox
 weight: 1
 
 # Page metadata.
@@ -44,7 +44,6 @@ We prefer uncompressed audio formats such as WAV in research; sometimes you migh
 
 
 > **Forced-alignment tutorial**
->
 > If you don't know how to use a forced aligner, please check out my another [tutorial](https://chenzixu.rbind.io/resources/1forcedalignment/) about how to get time-aligned transcription files automatically.
 
 
@@ -67,4 +66,4 @@ Click on the chapters in the Table of Contents to [**START**](https://chenzixu.r
 >Feel free to leave a comment if you have a question or issue by emailing me, but I'm probably unable to offer personal assistance to your problems (I'm in the middle of my dissertation). In short, this website is not responsible for any troubles.
 >**Good luck!**
 
-Feel free to share this tutorial! {{< icon name="facebook" pack="fab" >}} {{< icon name="twitter" pack="fab" >}} {{< icon name="whatsapp" pack="fab" >}} {{< icon name="weibo" pack="fab" >}} {{< icon name="weixin" pack="fab" >}}
+Thank you for reading. Feel free to share this tutorial! {{< icon name="facebook" pack="fab" >}} {{< icon name="twitter" pack="fab" >}} {{< icon name="whatsapp" pack="fab" >}} {{< icon name="weibo" pack="fab" >}} {{< icon name="weixin" pack="fab" >}}

@@ -34,7 +34,7 @@ speech_corpus
     └── b01_3_101q.txt
 ```
 
-The first step that enables us to search intended speech sequences from the corpus is to create a large text file assembling all time-aligned transcripts so that we have access to two key information for all audio files: temporal information and the corresponding symbol for the speech unit (it can be a segment, a syllable, or a word given the granularity of the segmentation.)
+The first step that enables us to search intended speech sequences from the corpus is to create a large text file assembling all time-aligned transcripts so that we have access to three key information for all audio files: 1) temporal information; 2) the symbol for the speech unit (it can be a segment, a syllable, or a word given the granularity of the segmentation); 3) the filename/path.
 
 ## Assemble time-aligned transcripts
 
@@ -63,108 +63,17 @@ item []:
             text = "t" 
 ```
 
-Alternatively, I created another Python script `tg2csv.py` that loops round the `\textgrid\` directory and create one large text file in the output. It is also available at my Github [repository](https://github.com/chenchenzi/textgrid2table).
+**Alternatively**, I created another Python script `tg2csv.py` that loops round the `\textgrid\` directory and create one large text file in the output. It is also available at my Github [repository](https://github.com/chenchenzi/textgrid2table). You can download the script.
 
-```
-# !/usr/bin/python
-# tg2csv.py C. Xu 2021.10.10
-
-# Install Package: praat-textgrids 1.3.1
-# The package descrption says that it works with all three forms of textgrids
-# but there seems to be some errors when read/parse the short form textgrids
-# pwd: corpus directory where there is a sub-directory of textgrid files
-# Input: long form TextGrid
-# Output: txt/csv table with textgrid information
-# thinking forward: what information will be needed in what format when
-# creating a trim script?
-
-# ----------------------------------------------------------
-# Import standard modules
-
-import os
-import sys
-import textgrids
-import glob
-import pandas as pd
-import numpy as np
-
-# ----------------------------------------------------------
-# Input TextGrid from CLII
-if len(sys.argv) < 4:
-    print("Usage:", sys.argv[0], '<directoryname> <tiername> <outputname>')
-    exit()
-dname = sys.argv[1]
-tname = sys.argv[2]
-oname = sys.argv[3]
-
-if not os.path.exists(dname):
-    print("Directory", dname, "does not exist.")
-    exit()
-
-
-df_list = []
-
-
-def get_syl(grid):
-    fn = fname.split('.')[0].split('/')[1]
-    file = []
-    label_list = []
-    smin_list = []
-    smax_list = []
-    sdur_list = []
-
-    for syll in grid[tname]:
-        label = syll.text.transcode()
-        smin = '{:.4f}'.format(syll.xmin)
-        smax = '{:.4f}'.format(syll.xmax)
-        sdur = '{:.4f}'.format(syll.dur)
-        file.append(fn)
-        label_list.append(label)
-        smin_list.append(smin)
-        smax_list.append(smax)
-        sdur_list.append(sdur)
-
-    return label_list, smin_list, smax_list, sdur_list, file
-
-
-# load file in loops
-for fname in glob.glob(os.path.join(dname, '*.TextGrid')):
-
-    try:
-        grid = textgrids.TextGrid(fname)
-        print("Reading the Textgrid file..." + fname)
-
-    except (textgrids.ParseError, textgrids.BinaryError):
-        print(fname + " Not a recognised file format!", file=sys.stderr)
-        continue
-    except TypeError:
-        print(fname + " Type Error!")
-        continue
-    except IndexError:
-        print(fname + " Index Error!")
-        continue
-
-    (label_list, smin_list, smax_list, sdur_list, file) = get_syl(grid)
-    df = pd.DataFrame(np.column_stack([label_list, smin_list, smax_list, sdur_list, file]))
-    df_list.append(df)
-
-
-combine_df = pd.concat(df_list)
-combine_df.to_csv(oname, index=False)
-
-print("finished")
-# ----------------------------------------------------------
-
-```
-
-The key to creating this assembling text file in the tabular format is **forward thinking**. What information will you need in the next steps? In order to cut speech segments out from a audio file, we will need the filename (path) of the audio file, and the times of the speech segments. The correspondence between the filenames of an audio file and a transcript does us a favor in accessing the path of the audio file when we have the transcript file. Therefore, a column of filename should be in the tabular data, and we might also want to remove the file extension, which would make it easier to work with different file extensions.
+The key to creating this assembling text file in the tabular format is **forward thinking**. *What information will you need in the next steps?* In order to cut speech segments out from a audio file, we will need the filename (path) of the audio file, and the times of the targeted speech segments. 
+The correspondence between the filenames of an audio file and a transcript does us a favor in accessing the path of the audio file when we have the transcript file. Therefore, a column of filename should be in the tabular data, and we might also want to remove the file extension, which would make it easier to work with different file extensions later.
 
 ### Demo task
-Suppose that I am interested in some Mandarin syllables and my `.TextGrid` files are time-aligned at both the segmental(tier name: phoneme) and syllabic level(tier name: word). I hope to convert all the `word` tiers into tabular format. 
+Suppose that I am interested in some Mandarin syllables and my `.TextGrid` files are time-aligned at both the segmental (tier name: phoneme) and syllabic level (tier name: word). I hope to convert all the `word` tiers into tabular format. 
 
 `tg2csv.py` should be placed in the project directory, i.e. `/speech_corpus` in above example. It takes three arguments: 1) the name of the directory where we put the `.TextGrid` files, in this case, `textgrids`; 2) the name of the tier that we are interested in, `word`; 3) the name of the desired output file. Let's call it `words.csv`.
 
-In the terminal or your Unix Shell, we can do:
+In the Terminal or your Unix Shell, we can do:
 ```
 python tg2csv.py textgrids word words.csv
 ```
@@ -179,5 +88,5 @@ The final tabular output of `tg2csv.py` is demonstrated below. You may delete th
 ...
 ```
 
-Now that we have some information about all syllables in our own Mandarin corpus. 
+Now that we have some organised information about all syllables in our own Mandarin corpus.
 
