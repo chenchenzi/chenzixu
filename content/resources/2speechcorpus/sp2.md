@@ -14,9 +14,9 @@ menu:
 weight: 2
 ---
 
-The second step is to search in the assembled text file we just created and to create subsets of the tabular data that only contains row of the desired speech units. There are many ways to search a text file, and here I present two methods.
+The second step is to search in the assembled text file and to create subsets of the tabular data that only contains rows of desired speech units. There are many ways to search and filter a text file, and here I present two methods. They are illustrated through our demo task.
 
-## Goal
+## Goal of demo task
 Suppose that I hope to find all Mandarin phrases in which the second syllable is the functional particle "*de*" 的, which is commonly used as a possessive modifiers or nominaliser, in the corpus.
 
 ## Awk snippets
@@ -53,7 +53,7 @@ The flag `-f` indicates that the awk command reads from the program file instead
 
 In the output text, we have the relevant syllables and their information on a line. This file will be our basis to create the trimming script for audio files.
 
-## Python query script
+## Python snippets
 
 We can achieve the same results by writing a Python script.
 
