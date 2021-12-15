@@ -21,8 +21,8 @@ editable: true # does not work here?
 # - name: Declare this menu item as a parent with ID `name`.
 # - weight: Position of link in menu.
 menu:
-  forcedalignment:
-    name: Forced Alignment
+  speechcorpus:
+    name: Speech Corpus Query
     weight: 1
 ---
 
@@ -41,14 +41,14 @@ When we build our own corpus, we will need audio files, and prepare correspondin
 
 We prefer uncompressed audio formats such as WAV in research; sometimes you might encounter lossless compressed audio formats such as FLAC. Here I won't be covering how to record an audio file or how to get a transcription file (assuming that you already have them).
 
-### Forced-alignment tutorial
+> Forced-alignment tutorial
 If you don't know how to use a forced aligner, please check out another [tutorial](https://chenzixu.rbind.io/resources/1forcedalignment/) about how to get time-aligned transcription files automatically.
 
 
 ## General procedure for making a query
 1. Prepare a text file (`.txt` or `.csv`) containing all time-aligned transcripts
-2. Prepare a *query script* that search the text file for targeted sequences
-3. Prepare *trim script* for cutting the portions out of relevant audios
+2. Prepare a **query script** that search the text file for targeted sequences
+3. Prepare **trim script** for cutting the portions out of relevant audios
 
 In this tutorial, I'll briefly walk through how to extract syllables or phrases that are the focus or target of research from a speech corpus. My Mac Book (*Big Sur 11.5.1*) is used. Mandarin Chinese data will be used as an example. I'm trying my best to be clear and hope this is helpful for those who want to achieve similar goals, especially for non-programmers and linguistic students.
 

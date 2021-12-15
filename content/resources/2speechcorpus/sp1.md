@@ -1,13 +1,13 @@
 ---
 title: Prepare a time-aligned transcription file
-linktitle: 1. Prepare Audio Files
+linktitle: 1. Time-aligned transcription
 toc: true
 type: docs
 date: "2020-04-19T00:00:00+01:00"
 draft: false
 menu:
-  forcedalignment:
-    parent: Forced Alignment
+  speechcorpus:
+    parent: Speech Corpus Query
     weight: 1
 
 # Prev/next pager order (if `docs_section_pager` enabled in `params.toml`)
