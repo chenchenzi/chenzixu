@@ -17,7 +17,7 @@ In the course of my DPhil, I have accumulated a bunch of scripts that greatly sp
 * Basic familiarity with Praat.
 * **Googling** or **stackoverflowing** your problems!
 
-I mainly use {{< icon name="terminal" pack="fas" >}} Terminal,
-{{< icon name="python" pack="fab" >}} Python, {{< icon name="r-project" pack="fab" >}} R, and Praat in these posts. So it would make more sense to you if you have some very basic ideas about Shell scripts and Praat. 
+I mainly use {{< icon name="terminal" pack="fas" >}} Unix Shell,
+{{< icon name="python" pack="fab" >}} Python, {{< icon name="r-project" pack="fab" >}} R, and Praat in these posts. So it would make more sense to you if you have some very basic ideas about Unix Shell scripts and Praat. 
 
 {{< icon name="hand-point-down" pack="far" >}} **Click on the following topics to read more or have hands-on practices!**

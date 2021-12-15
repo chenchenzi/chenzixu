@@ -1,7 +1,7 @@
 ---
 # Course title, summary, and position.
-linktitle: Forced Alignment Using P2FA and MFA
-summary: A step-to-step guide to automatic forced alignment of your own corpus using P2FA and Montreal Forced Aligner. #<i class="fas fa-terminal"></i> Terminal <i class="fab fa-python"></i> Python
+linktitle: Forced Alignment Using P2FA and MFA for Mandarin data
+summary: A step-to-step guide to automatic forced alignment of your own corpus using P2FA and Montreal Forced Aligner. #<i class="fas fa-terminal"></i> Unix Shell <i class="fab fa-python"></i> Python
 weight: 1
 
 # Page metadata.
@@ -30,7 +30,7 @@ Acquiring a large amount of speech data can be 'cheap' and relatively easy today
 
 A forced alignment system usually takes an audio file and its corresponding transcript as input and returns a text file, which is time-aligned at the phone and word levels. I employed two forced alignment systems: the **Penn Forced Aligner (P2FA)** and the **Montreal Forced Aligner (MFA)**. The former is built with the HTK speech recognition toolkit, while the latter with a similar system Kaldi ASR toolkit. Many other aligners are based on one of these two toolkits. I'll briefly walk through how to use them from data preparation and installation to post-aligning processing, pooling relevant online resources (instead of reinventing the wheels) and adding in some of my own snippets of code. 
 
-`{{< icon name="terminal" pack="fas" >}} Terminal` `{{< icon name="python" pack="fab" >}} Python`
+`{{< icon name="terminal" pack="fas" >}} Unix Shell` `{{< icon name="python" pack="fab" >}} Python`
 
 ## General procedure
 1. Prepare the `.wav` files
@@ -43,7 +43,7 @@ A forced alignment system usually takes an audio file and its corresponding tran
 
 Here I basically describe how I managed to acquire automatic time-aligned `.Textgrids` using open-source softwares and tools on my Mac (*Mojave 10.14.6*) in details. I will first introduce how to prepare input data including `.wav` files and transcript files and then how to work with the Penn Forced Aligner and the Montreal Forced Aligner respectively. Mandarin Chinese will be used as an example. I'm trying my best to be clear and hope this is helpful for those who want to achieve similar goals, especially for non-programmers and linguistic students.
 
-Click on the chapters in the Table of Contents to [**START**](https://chenzixu.rbind.io/resources/forcedalignment/fa1/).
+Click on the chapters in the Table of Contents to [**START**](https://chenzixu.rbind.io/resources/1forcedalignment/fa1/).
 
 >**DISCLAIMER**
 >
