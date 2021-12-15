@@ -1,37 +1,37 @@
 ---
-title: Experiment Design, Research Methods Seminar
+title: Software Carpentry Workshop
 event: 
-event_url: 
+event_url: https://chenchenzi.github.io/2022-03-14-ling/
 
-location: Room207, Clarendon Institute
+location: Maplethrope Seminar Room, St Hugh's College
 address:
-  street: Walton street
+  street: St Margaret's road
   city: Oxford
   region: 
-  postcode: 'OX1 2HG'
+  postcode: 'OX2 6LE'
   country: United Kingdom
 
-summary: An introduction to experiment design, for postgraduate students.
+summary: Software Carpentry aims to help researchers get their work done in less time and with less pain by teaching them basic research computing skills. This hands-on workshop will cover basic concepts and tools, including program design, version control, data management, and task automation. Participants will be encouraged to help one another and to apply what they have learned to their own research problems.
 abstract: ""
 
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
-date: "2021-11-16T14:00:00Z"
-# date_end: "2030-06-01T15:00:00Z"
-all_day: false
+date: "2020-03-15T09:00:00Z"
+date_end: "2020-03-16T17:40:00Z"
+all_day: true
 
 # Schedule page publish date (NOT talk date).
 #publishDate: "2017-01-01T00:00:00Z"
 
 authors: []
-tags: []
+tags: [the Carpentries, software skill, workshop]
 
 # Is this a featured talk? (true/false)
 featured: false
 
 image:
-  caption: ''
-  focal_point: 
+  caption: 'Software Carpentry Workshop'
+  focal_point: Right
 
 links:
 - icon: twitter
