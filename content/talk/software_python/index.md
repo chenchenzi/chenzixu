@@ -34,10 +34,10 @@ image:
   focal_point: Right
 
 links:
-- icon: twitter
-  icon_pack: fab
-  name: Follow
-  url: https://twitter.com/ChenziAmy
+- icon: link
+  icon_pack: fas
+  name: Click
+  url: https://chenchenzi.github.io/2022-03-14-ling/
 url_code: ""
 url_pdf: ""
 url_slides: ""

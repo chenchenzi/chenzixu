@@ -19,14 +19,29 @@ date_format = "Jan 2006"
 #   Begin/end multi-line descriptions with 3 quotes `"""`.
 [[experience]]
   title = "Research Assistant"
-  company = "Language and Brain Lab"
+  company = "Language and Brain Lab, University of Oxford"
   company_url = ""
   location = "Oxford"
   date_start = "2019-10-01"
   date_end = ""
   description = """
-  *Processed Bengali speech corpus in a Bengali intonation research project  
-  *Assisted EEG Experiments of an MMN study
+  * Working for the MORPHON project supervised by Professor Aditi Lahiri;
+  * Examined the pre-attentive processing (MMN) of consonant length and differences in place of articulation in [CORONAL] fricatives in Mandarin using EEG.
+  * Processed over 1000 Bengali utterances for intonation research.
+  """
+  
+[[experience]]
+  title = "Research Assistant"
+  company = "Phonetics Laboratory, University of Oxford"
+  company_url = ""
+  location = "Oxford"
+  date_start = "2019-10-01"
+  date_end = "2021-10-01"
+  description = """
+  * Working for the English and Multilingualism project supervised by Dr Elinor Payne and Dr Olga Maxwell;
+  * Examined the pre-attentive processing (MMN) of consonant length and differences in place of articulation in [CORONAL] fricatives in Mandarin using EEG;
+  * Recruited participants, and collected audio recordings, perception experiment data, and questionnaire data online from 60 participants during lockdown;
+  * Cleaned, collated, and coded the data for further analysis.
   """
 
 [[experience]]
@@ -36,6 +51,9 @@ date_format = "Jan 2006"
   location = "Oxford"
   date_start = "2018-11-01"
   date_end = "2019-05-31"
-  description = """Prepared demo materials inluding videos and Android mobile apps."""
+  description = """
+  * Built user interface for Android apps using Android Studio;
+  * Prepared audio training data to improve machine learning algorithms of speaker identification
+  * Prepared demo materials including videos and Android mobile apps."""
 
 +++

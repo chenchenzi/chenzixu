@@ -32,7 +32,7 @@ Let's continue to work on the task of extracting all Mandarin phrases in which t
 ```
 cat de_phrases.txt | awk '{print "sox " $5 ".wav ../audios/" $5 $1 $6 "s" $7 "e" $8 ".wav trim " $2 " =" $8}' > de_trim.txt
 ```
-Here `$i` means the ith number of field in a line or the ith column in a line.They don't need quotation marks, while other strings need to be wrapped in quotation marks. `$5` is the filename in `de_phrases.txt`. Thus the input file path is `$5 ".wav"`. We adopted a rather complicated output filename (path), i.e. `../audios_de/" $5 $1 $6 "s" $7 "e" $8 ".wav"`, which contains the audio filename, the characters, the starting, and ending times of the syllable *de* 的. It is information-rich and easy to create. Of course, you can have many other options for naming the output audio intervals. `$2` is the starting time in second for the first syllable and `$8` is the ending time in second for the *de* syllable.
+Here `$i` means the i~th~ number of field in a line or the i~th~ column in a line.They don't need quotation marks, while other strings need to be wrapped in quotation marks. `$5` is the filename in `de_phrases.txt`. Thus the input file path is `$5 ".wav"`. We adopted a rather complicated output filename (path), i.e. `../audios_de/" $5 $1 $6 "s" $7 "e" $8 ".wav"`, which contains the audio filename, the characters, the starting, and ending times of the syllable *de* 的. It is information-rich and easy to create. Of course, you can have many other options for naming the output audio intervals. `$2` is the starting time in second for the first syllable and `$8` is the ending time in second for the *de* syllable.
 
 The output trim script `de_trim.txt` is shown below. Let's put it in the directory of audio files `/audios`.
 
