@@ -1,6 +1,6 @@
 ---
 # Course title, summary, and position.
-linktitle: Forced Alignment Using P2FA and MFA for Mandarin data
+linktitle: 1. Forced Alignment Using P2FA and MFA for Mandarin data
 summary: A step-to-step guide to automatic forced alignment of your own corpus using P2FA and Montreal Forced Aligner. #<i class="fas fa-terminal"></i> Unix Shell <i class="fab fa-python"></i> Python
 weight: 1
 

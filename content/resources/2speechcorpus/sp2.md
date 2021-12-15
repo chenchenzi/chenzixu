@@ -1,6 +1,6 @@
 ---
-title: Assemble time-aligned transcription files
-linktitle: 1. Assembling time-aligned transcripts
+title: Create query scripts
+linktitle: 2. Creating query scripts
 toc: true
 type: docs
 date: "2021-12-15T00:00:00+01:00"
@@ -8,13 +8,13 @@ draft: false
 menu:
   speechcorpus:
     parent: Speech Corpus Query
-    weight: 1
+    weight: 2
 
 # Prev/next pager order (if `docs_section_pager` enabled in `params.toml`)
-weight: 1
+weight: 2
 ---
 
-## Structure of a speech corpus
+## Perl snippet 
 An ideal way to organise our speech corpus directory is demonstrated below. The plain transcript (`.txt`) and time-aligned transcription file (`.TextGrid`) share the same filename as the corresponding audio file (`.wav`). Designing a consistent, anonymous, interpretable, and information-dense filename system is always a good practice here.
 
 ```
@@ -36,124 +36,21 @@ speech_corpus
 
 The first step that enables us to search intended speech sequences from the corpus is to create a large text file assembling all time-aligned transcripts so that we have access to two key information for all audio files: temporal information and the corresponding symbol for the speech unit (it can be a segment, a syllable, or a word given the granularity of the segmentation.)
 
-## Assemble time-aligned transcripts
+## Python query script
 
 Usually a TextGrid file, as shown below, is not in its best format to work with. In the previous [tutorial](https://chenzixu.rbind.io/resources/1forcedalignment/fa5/), I provided Python scripts that convert a `.TextGrid` file into a plain text file with tabular format data. Again, they are available at my Github [repository](https://github.com/chenchenzi/textgrid2table). The `README.md` will take you from there.
 
 If you would like to convert multiple `.TextGrid` files all at once, you can consider a for loop in your command line and then concatenate individual `.txt` files into a large text file.
 
 ```
-File type = "ooTextFile"
-Object class = "TextGrid"
 
-xmin = 0.0125 
-xmax = 1.8725 
-tiers? <exists> 
-size = 2 
-item []: 
-    item [1]:
-        class = "IntervalTier" 
-        name = "phone" 
-        xmin = 0.0125 
-        xmax = 1.8725 
-        intervals: size = 26 
-        intervals [1]:
-            xmin = 0.0125 
-            xmax = 0.0925 
-            text = "t" 
 ```
 
 Alternatively, I created another Python script `tg2csv.py` that loops round the `\textgrid\` directory and create one large text file in the output. It is also available at my Github [repository](https://github.com/chenchenzi/textgrid2table).
 
 ```
-# !/usr/bin/python
-# tg2csv.py C. Xu 2021.10.10
-
-# Install Package: praat-textgrids 1.3.1
-# The package descrption says that it works with all three forms of textgrids
-# but there seems to be some errors when read/parse the short form textgrids
-# pwd: corpus directory where there is a sub-directory of textgrid files
-# Input: long form TextGrid
-# Output: txt/csv table with textgrid information
-# thinking forward: what information will be needed in what format when
-# creating a trim script?
-
-# ----------------------------------------------------------
-# Import standard modules
-
-import os
-import sys
-import textgrids
-import glob
-import pandas as pd
-import numpy as np
-
-# ----------------------------------------------------------
-# Input TextGrid from CLII
-if len(sys.argv) < 4:
-    print("Usage:", sys.argv[0], '<directoryname> <tiername> <outputname>')
-    exit()
-dname = sys.argv[1]
-tname = sys.argv[2]
-oname = sys.argv[3]
-
-if not os.path.exists(dname):
-    print("Directory", dname, "does not exist.")
-    exit()
 
 
-df_list = []
-
-
-def get_syl(grid):
-    fn = fname.split('.')[0].split('/')[1]
-    file = []
-    label_list = []
-    smin_list = []
-    smax_list = []
-    sdur_list = []
-
-    for syll in grid[tname]:
-        label = syll.text.transcode()
-        smin = '{:.4f}'.format(syll.xmin)
-        smax = '{:.4f}'.format(syll.xmax)
-        sdur = '{:.4f}'.format(syll.dur)
-        file.append(fn)
-        label_list.append(label)
-        smin_list.append(smin)
-        smax_list.append(smax)
-        sdur_list.append(sdur)
-
-    return label_list, smin_list, smax_list, sdur_list, file
-
-
-# load file in loops
-for fname in glob.glob(os.path.join(dname, '*.TextGrid')):
-
-    try:
-        grid = textgrids.TextGrid(fname)
-        print("Reading the Textgrid file..." + fname)
-
-    except (textgrids.ParseError, textgrids.BinaryError):
-        print(fname + " Not a recognised file format!", file=sys.stderr)
-        continue
-    except TypeError:
-        print(fname + " Type Error!")
-        continue
-    except IndexError:
-        print(fname + " Index Error!")
-        continue
-
-    (label_list, smin_list, smax_list, sdur_list, file) = get_syl(grid)
-    df = pd.DataFrame(np.column_stack([label_list, smin_list, smax_list, sdur_list, file]))
-    df_list.append(df)
-
-
-combine_df = pd.concat(df_list)
-combine_df.to_csv(oname, index=False)
-
-print("finished")
-# ----------------------------------------------------------
 
 ```
 
@@ -166,7 +63,7 @@ Suppose that I am interested in some Mandarin syllables and my `.TextGrid` files
 
 In the terminal or your Unix Shell, we can do:
 ```
-python tg2csv.py textgrids word words.csv
+$ python tg2csv.py textgrids word words.csv
 ```
 The final tabular output of `tg2csv.py` is demonstrated below. You may delete the first row `0,1,2,3,4` in the output file, which is the unspecified column names.
 
@@ -176,8 +73,13 @@ The final tabular output of `tg2csv.py` is demonstrated below. You may delete th
 们,0.5125,0.7925,0.2800,b01_1_101q
 正,0.7925,1.1125,0.3200,b01_1_101q
 看,1.1125,1.6725,0.5600,b01_1_101q
-...
 ```
 
-Now that we have some information about all syllables in our own Mandarin corpus. 
+The `$` isn't part of the command. It indicates that this is a Shell script in the Terminal.
 
+## 1.2 SoX
+Alternatively, you can also use `SoX` (Sound eXchange) commands in the Terminal. SoX is a collection of handy sound processing utilities. It is also required by P2FA. You can download it [here](http://sox.sourceforge.net/). To reformat the input.wav, we can use the following command in the Terminal having installed SoX.
+```
+$ sox input.wav -r 16k -b 16 -c 1 output.wav
+```
+The `$` isn't part of the command. It indicates that this is a Shell script in the Terminal. The flags here: `-r` , `-b`, `-c` define the sampling rate, precision, and number of channel of the output.wav respectively.
