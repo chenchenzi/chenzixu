@@ -44,13 +44,15 @@ We prefer uncompressed audio formats such as WAV in research; sometimes you migh
 
 
 > **Forced-alignment tutorial**
+>
 > If you don't know how to use a forced aligner, please check out my another [tutorial](https://chenzixu.rbind.io/resources/1forcedalignment/) about how to get time-aligned transcription files automatically.
+>
 
 
 ## General procedure for making a query
 1. **Assemble** all time-aligned transcripts
 2. Prepare a **query script** that search the text file for targeted sequences
-3. Prepare **trim script** for cutting the portions out of relevant audios
+3. Prepare a **trim script** for cutting the portions out of relevant audios
 
 In this tutorial, I'll briefly walk through how to **search and extract** syllables or phrases that are the focus or target of research from a speech corpus. All demonstration was tested on My Mac Book (*Big Sur 11.5.1*). Mandarin Chinese data will be used as an example. I'm trying my best to be clear and hope this is helpful for those who want to achieve similar goals, especially for non-programmers and linguistic students.
 

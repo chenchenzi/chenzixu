@@ -14,7 +14,7 @@ menu:
 weight: 1
 ---
 
-## Structure of a speech corpus
+## The structure of a speech corpus
 An ideal way to organise our speech corpus directory is demonstrated below. The plain transcript (`.txt`) and time-aligned transcription file (`.TextGrid`) share the same filename as the corresponding audio file (`.wav`). Designing a consistent, anonymous, interpretable, and information-dense filename system is always a good practice here.
 
 ```
