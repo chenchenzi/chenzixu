@@ -39,7 +39,6 @@ date_format = "Jan 2006"
   date_end = "2021-10-01"
   description = """
   * Working for the English and Multilingualism project supervised by Dr Elinor Payne and Dr Olga Maxwell;
-  * Examined the pre-attentive processing (MMN) of consonant length and differences in place of articulation in [CORONAL] fricatives in Mandarin using EEG;
   * Recruited participants, and collected audio recordings, perception experiment data, and questionnaire data online from 60 participants during lockdown;
   * Cleaned, collated, and coded the data for further analysis.
   """
@@ -55,5 +54,17 @@ date_format = "Jan 2006"
   * Built user interface for Android apps using Android Studio;
   * Prepared audio training data to improve machine learning algorithms of speaker identification
   * Prepared demo materials including videos and Android mobile apps."""
+  
+[[experience]]
+  title = "Treasurer"
+  company = "St Edmund Hall Middle Common Room"
+  company_url = ""
+  location = "Oxford"
+  date_start = "2017-06-01"
+  date_end = "2018-06-31"
+  description = """
+  * Liaised with MCR committee members to set termly and event budgets, and with College for Battels
+  * Administered MCR Blues Fund, MCR Charity Fund, and MCR 50th Anniversary Academic Grant;
+  * Managed the MCR bank accounts including purchasing, reimbursements, and other financial matters, and recorded all expenditure."""
 
 +++
