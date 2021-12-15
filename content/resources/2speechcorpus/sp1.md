@@ -16,6 +16,22 @@ weight: 1
 
 Different aligners may have different requirements for audio input. Most work well with **16 KHz, 16-bit precision, and mono channel**, so it would be safe to format all the target `.wav` files like that. 
 
+```
+corpus
+├── audios
+│   ├── b01_1_101q.wav
+│   ├── b01_2_101q.wav
+│   └── b01_3_101q.wav
+├── textgrids
+│   ├── b01_1_101q.TextGrid
+│   ├── b01_1_102a.TextGrid
+│   └── b01_1_103a.TextGrid
+└── transcripts
+    ├── b01_1_101q.txt
+    ├── b01_2_101q.txt
+    └── b01_3_101q.txt
+```
+
 {{% alert warning %}}
 The Penn Forced Aligner doesn't work with 24-bit.wav files (I stumbled on this for quite a while trying to debug). 
 {{% /alert %}}

@@ -41,8 +41,10 @@ When we build our own corpus, we will need audio files, and prepare correspondin
 
 We prefer uncompressed audio formats such as WAV in research; sometimes you might encounter lossless compressed audio formats such as FLAC. Here I won't be covering how to record an audio file or how to get a transcription file (assuming that you already have them).
 
-> Forced-alignment tutorial
-If you don't know how to use a forced aligner, please check out another [tutorial](https://chenzixu.rbind.io/resources/1forcedalignment/) about how to get time-aligned transcription files automatically.
+
+> **Forced-alignment tutorial**
+
+> If you don't know how to use a forced aligner, please check out my another [tutorial](https://chenzixu.rbind.io/resources/1forcedalignment/) about how to get time-aligned transcription files automatically.
 
 
 ## General procedure for making a query
@@ -50,12 +52,12 @@ If you don't know how to use a forced aligner, please check out another [tutoria
 2. Prepare a **query script** that search the text file for targeted sequences
 3. Prepare **trim script** for cutting the portions out of relevant audios
 
-In this tutorial, I'll briefly walk through how to extract syllables or phrases that are the focus or target of research from a speech corpus. My Mac Book (*Big Sur 11.5.1*) is used. Mandarin Chinese data will be used as an example. I'm trying my best to be clear and hope this is helpful for those who want to achieve similar goals, especially for non-programmers and linguistic students.
+In this tutorial, I'll briefly walk through how to extract syllables or phrases that are the focus or target of research from a speech corpus. All demonstration was tested on My Mac Book (*Big Sur 11.5.1*). Mandarin Chinese data will be used as an example. I'm trying my best to be clear and hope this is helpful for those who want to achieve similar goals, especially for non-programmers and linguistic students.
 
 `{{< icon name="terminal" pack="fas" >}} Unix Shell` `{{< icon name="python" pack="fab" >}} Python`
 
 
-Click on the chapters in the Table of Contents to [**START**](https://chenzixu.rbind.io/resources/2speechcorpus/fa1/).
+Click on the chapters in the Table of Contents to [**START**](https://chenzixu.rbind.io/resources/2speechcorpus/sp1/).
 
 >**DISCLAIMER**
 >
