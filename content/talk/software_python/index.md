@@ -16,8 +16,8 @@ abstract: ""
 
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
-date: "2020-03-15T09:00:00Z"
-date_end: "2020-03-16T17:40:00Z"
+date: "2022-03-15T09:00:00Z"
+date_end: "2022-03-16T17:40:00Z"
 all_day: true
 
 # Schedule page publish date (NOT talk date).
@@ -36,7 +36,7 @@ image:
 links:
 - icon: link
   icon_pack: fas
-  name: Click
+  name: Register
   url: https://chenchenzi.github.io/2022-03-14-ling/
 url_code: ""
 url_pdf: ""
