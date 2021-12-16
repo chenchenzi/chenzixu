@@ -57,13 +57,13 @@ date_format = "Jan 2006"
   
 [[experience]]
   title = "Treasurer"
-  company = "St Edmund Hall Middle Common Room"
+  company = "St Edmund Hall, Middle Common Room"
   company_url = ""
   location = "Oxford"
   date_start = "2017-06-01"
   date_end = "2018-06-31"
   description = """
-  * Liaised with MCR committee members to set termly and event budgets, and with College for Battels
+  * Liaised with MCR committee members to set termly and event budgets, and with College for Battels;
   * Administered MCR Blues Fund, MCR Charity Fund, and MCR 50th Anniversary Academic Grant;
   * Managed the MCR bank accounts including purchasing, reimbursements, and other financial matters, and recorded all expenditure."""
 
