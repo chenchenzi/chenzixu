@@ -52,19 +52,21 @@ date_format = "Jan 2006"
   date_end = "2019-05-31"
   description = """
   * Built user interface for Android apps using Android Studio;
-  * Prepared audio training data to improve machine learning algorithms of speaker identification
-  * Prepared demo materials including videos and Android mobile apps."""
+  * Prepared audio training data to improve machine learning algorithms of speaker identification;
+  * Prepared demo materials including videos and Android mobile apps.
+  """
   
 [[experience]]
   title = "Treasurer"
-  company = "St Edmund Hall, Middle Common Room"
+  company = "St Edmund Hall, Middle Common Room (MCR)"
   company_url = ""
   location = "Oxford"
-  date_start = "2017-06-01"
-  date_end = "2018-06-31"
+  date_start = "2018-11-01"
+  date_end = "2019-05-31"
   description = """
-  * Liaised with MCR committee members to set termly and event budgets, and with College for Battels;
+  * Liaised with the MCR committee members to set termly and events budgets, and with college for battels;
   * Administered MCR Blues Fund, MCR Charity Fund, and MCR 50th Anniversary Academic Grant;
-  * Managed the MCR bank accounts including purchasing, reimbursements, and other financial matters, and recorded all expenditure."""
+  * Managed the MCR bank accounts and financial matters such as purchasing and reimbursements, and recorded all expenditure.
+  """
 
 +++
