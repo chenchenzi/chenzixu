@@ -21,7 +21,7 @@ date_end: "2022-03-16T17:40:00Z"
 all_day: true
 
 # Schedule page publish date (NOT talk date).
-#publishDate: "2017-01-01T00:00:00Z"
+publishDate: "2021-12-01T00:00:00Z"
 
 authors: []
 tags: [the Carpentries, software skill, workshop]
