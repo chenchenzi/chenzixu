@@ -1,43 +1,43 @@
 ---
-title: Software Carpentry Workshop
+title: Introduction to Praat, Lab Skillz Workshop
 event: 
-event_url: https://chenchenzi.github.io/2022-03-14-ling/
+event_url: 
 
-location: Maplethrope Seminar Room, St Hugh's College
+location: 
 address:
-  street: St Margaret's road
+  street: Walton street
   city: Oxford
   region: 
-  postcode: 'OX2 6LE'
+  postcode: 'OX1 2HG'
   country: United Kingdom
 
-summary: Software Carpentry aims to help researchers get their work done in less time and with less pain by teaching them basic research computing skills. This hands-on workshop will cover basic concepts and tools, including program design, version control, data management, and task automation. Participants will be encouraged to help one another and to apply what they have learned to their own research problems.
+summary: An introduction to Praat and Praat scripting, for linguistic students.
 abstract: ""
 
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
-date: "2022-03-15T09:00:00Z"
-date_end: "2022-03-16T17:40:00Z"
-all_day: true
+date: "2021-11-16T14:00:00Z"
+# date_end: "2030-06-01T15:00:00Z"
+all_day: false
 
 # Schedule page publish date (NOT talk date).
 #publishDate: "2017-01-01T00:00:00Z"
 
 authors: []
-tags: [the Carpentries, software skill, workshop]
+tags: []
 
 # Is this a featured talk? (true/false)
 featured: false
 
 image:
-  caption: 'Software Carpentry Workshop'
-  focal_point: Right
+  caption: ''
+  focal_point: 
 
 links:
-- icon: link
-  icon_pack: fas
-  name: Register
-  url: https://chenchenzi.github.io/2022-03-14-ling/
+- icon: twitter
+  icon_pack: fab
+  name: Follow
+  url: https://twitter.com/ChenziAmy
 url_code: ""
 url_pdf: ""
 url_slides: ""
@@ -48,7 +48,7 @@ url_video: ""
 #   Simply enter your slide deck's filename without extension.
 #   E.g. `slides = "example-slides"` references `content/slides/example-slides.md`.
 #   Otherwise, set `slides = ""`.
-# slides: example
+slides: example
 
 # Projects (optional).
 #   Associate this post with one or more of your projects.

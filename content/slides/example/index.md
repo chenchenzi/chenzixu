@@ -1,24 +1,27 @@
 ---
-title: Slides
-summary: An introduction to using Academic's Slides feature.
-authors: []
-tags: []
+title: An introduction to Praat and Praat Scripting
+summary: Slides for Lab Skillz.
+authors: [Chenzi Xu]
+tags: [Phonetics, Praat, skills]
 categories: []
-date: "2019-02-05T00:00:00Z"
+date: "2021-12-20T00:00:00Z"
 slides:
   # Choose a theme from https://github.com/hakimel/reveal.js#theming
-  theme: black
+  theme: beige
   # Choose a code highlighting style (if highlighting enabled in `params.toml`)
   #   Light style: github. Dark style: dracula (default).
-  highlight_style: dracula
+  highlight_style: github
 ---
 
-# Create slides in Markdown with Academic
+# An introduction to Praat and Praat Scripting
 
-[Academic](https://sourcethemes.com/academic/) | [Documentation](https://sourcethemes.com/academic/docs/managing-content/#create-slides)
+[Chenzi Xu](https://chenzixu.rbind.io/)
 
 ---
 
+![w:32 h:32](Praat_icon.png)
+
+---
 ## Features
 
 - Efficiently write slides in Markdown
