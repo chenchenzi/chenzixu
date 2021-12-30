@@ -8,9 +8,11 @@ header:
   image: ""
 ---
 
-Acoustic analysis programmes such as Praat, ESPS, and Matlab have enabled the large-scale processing and analysis of speech data. For phoneticians, we often work with a corpus of audio files and begin with the preparation of the speech data involving reformatting, transcription, and segmentation. Such pre-processing steps made it convenient for us to focus, retrieve, and extract the target units of our research. Many tools with strong computational power for relatively big data are available now, which automates some processes and greatly boost our efficiency.
+Open source software packages such as Praat and ESPS have enabled large-scale processing and analysis of speech data. For phoneticians, we often work with first-hand audio data or speech corpora, and begin with the preparation of speech data involving reformatting, transcription, and segmentation. Such pre-processing steps make the speech data searchable and convenient for us to retrieve and extract units of interest.
 
-In the course of my DPhil, I have accumulated a bunch of scripts that greatly speeded up some processing procedures. Some are directly downloaded online from those who kindly shared their efforts, others are either adapted from others to suit my own purposes or my nascent attempts in a few programming languages. Dipping my toes in scripting was a steep learning curve but worthwhile. Here I would also like to share some useful scripts I had (and brief tutorials of how to use them), to pay it forward to the community where their generous sharing helped me a lot. This also serves as an archive of some of my analyses procedure, making the research open and **reproducible**.
+In the course of my DPhil/PhD studies, I have established a few useful pipelines or workflows that automated some procedures and greatly boosted my efficiency, and accumulated a bunch of scripts. Some scripts are directly downloaded online from those who kindly shared their efforts, others are either adapted from others to suit my own purposes or my nascent attempts in a few programming languages. Dipping my toes in scripting was a steep learning curve (a process of trial and error!) but worthwhile. 
+
+Here I would also like to **share** some useful scripts of mine (and brief tutorials of how to use them), to pay it forward to the community where their generous sharing helped me a lot. This also serves as an archive of some of my analysis procedures, making the research **open** and **reproducible**.
 
 ## Prerequisites
 * Bash/Unix Shell Basics in the Terminal
@@ -18,6 +20,6 @@ In the course of my DPhil, I have accumulated a bunch of scripts that greatly sp
 * **Googling** or **stackoverflowing** your problems!
 
 I mainly use {{< icon name="terminal" pack="fas" >}} Unix Shell,
-{{< icon name="python" pack="fab" >}} Python, {{< icon name="r-project" pack="fab" >}} R, and Praat in these posts. So it would make more sense to you if you have some very basic ideas about Unix Shell scripts and Praat. 
+{{< icon name="python" pack="fab" >}} Python, {{< icon name="r-project" pack="fab" >}} R, and Praat in these posts. So it would make more sense to you if you have some very basic ideas about Unix Shell commands and Praat. 
 
-{{< icon name="hand-point-down" pack="far" >}} **Click on the following topics to read more or have hands-on practices!**
+# {{< icon name="hand-point-down" pack="far" >}} Click on the following topics to read more or have hands-on practices!
