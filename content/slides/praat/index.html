@@ -1,0 +1,649 @@
+---
+title: "Introduction to Praat and Praat Scripting"
+subtitle: "Lab Skillz Workshop"  
+author: 
+  - "Chenzi Xu"
+date: '2021-12-30'
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    nature:
+      slideNumberFormat: "%current%"
+      highlightStyle: github
+      highlightLines: true
+      ratio: 16:9
+      countIncrementalSlides: true
+      beforeInit: "macros.js"
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+<script src="{{< blogdown/postref >}}index_files/htmlwidgets/htmlwidgets.js"></script>
+<script src="{{< blogdown/postref >}}index_files/jquery/jquery.min.js"></script>
+<link href="{{< blogdown/postref >}}index_files/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+<script src="{{< blogdown/postref >}}index_files/datatables-binding/datatables.js"></script>
+<link href="{{< blogdown/postref >}}index_files/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="{{< blogdown/postref >}}index_files/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="{{< blogdown/postref >}}index_files/dt-core/js/jquery.dataTables.min.js"></script>
+<link href="{{< blogdown/postref >}}index_files/crosstalk/css/crosstalk.css" rel="stylesheet" />
+<script src="{{< blogdown/postref >}}index_files/crosstalk/js/crosstalk.min.js"></script>
+
+
+<div id="outline" class="section level2">
+<h2>Outline</h2>
+<p>.left-column[
+<img src="icon.png" alt="Praat Icon :scale" />]</p>
+<p>.right-column[
+1. ### <a href="#why">Why Praat?</a></p>
+<ol style="list-style-type: decimal">
+<li><h3 id="what-is-praat-capable-of"><a href="#functions">What is Praat capable of?</a></h3></li>
+<li><h3 id="praat-scripting">Praat scripting</h3></li>
+<li><h3 id="demos">Demos</h3>
+]</li>
+</ol>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>name: why</td>
+</tr>
+<tr class="even">
+<td>## Why Praat?</td>
+</tr>
+<tr class="odd">
+<td>- Open source, free of charge</td>
+</tr>
+<tr class="even">
+<td>- Available for major computer platforms (MacOS, Windows, Linux) and systems</td>
+</tr>
+<tr class="odd">
+<td>- Graphical User Interface</td>
+</tr>
+<tr class="even">
+<td>- A macro recording mechanism (Command History)</td>
+</tr>
+<tr class="odd">
+<td>- You can create your own Praat scripts!
+- Recurring tasks become less tedious and more efficient.</td>
+</tr>
+<tr class="even">
+<td>- You can create your own application with an autonomous GUI.
+- Python-praat package: <a href="https://parselmouth.readthedocs.io/en/stable/">Parselmouth</a>
+- R-praat package: <a href="https://fu.ff.cuni.cz/praat/rDemo.html">rPraat</a></td>
+</tr>
+</tbody>
+</table>
+<p>name: functions
+class: inverse center middle</p>
+</div>
+<div id="what-is-praat-capable-of-1" class="section level1">
+<h1>What is Praat capable of?</h1>
+<p>–</p>
+<p>Creating and manipulating sounds</p>
+<p>Annotating sounds (.TextGrid)</p>
+<p>Phonetic measurement and analysis</p>
+<p>Creating publication-quality plots</p>
+<p>Conducting phonetic experiment</p>
+<p>name: colors</p>
+<div id="praat-script" class="section level2">
+<h2>Praat Script</h2>
+<hr />
+</div>
+</div>
+<div id="big-topic-or-inverse-slides" class="section level1">
+<h1>Big Topic or Inverse Slides <code>#</code></h1>
+<div id="slide-headings" class="section level2">
+<h2>Slide Headings <code>##</code></h2>
+<div id="sub-slide-headings" class="section level3">
+<h3>Sub-slide Headings <code>###</code></h3>
+<div id="bold-call-out" class="section level4">
+<h4>Bold Call-Out <code>####</code></h4>
+<p>This is a normal paragraph text. Only use header levels 1-4.</p>
+<div id="possible-but-not-recommended" class="section level5">
+<h5>Possible, but not recommended <code>#####</code></h5>
+<div id="definitely-dont-use-h6" class="section level6">
+<h6>Definitely don’t use h6 <code>######</code></h6>
+<hr />
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="left-column-headings" class="section level1">
+<h1>Left-Column Headings</h1>
+<p>.left-column[
+## First</p>
+<div id="second" class="section level2">
+<h2>Second</h2>
+</div>
+<div id="third" class="section level2">
+<h2>Third</h2>
+<p>]</p>
+<p>.right-column[
+Dolor quis aptent mus a dictum ultricies egestas.</p>
+<p>Amet egestas neque tempor fermentum proin massa!</p>
+<p>Dolor elementum fermentum pharetra lectus arcu pulvinar.
+]</p>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>class: inverse center middle</td>
+</tr>
+<tr class="even">
+<td># Topic Changing Interstitial</td>
+</tr>
+</tbody>
+</table>
+<pre><code>class: inverse center middle</code></pre>
+<div id="blockquote" class="section level3">
+<h3>Blockquote</h3>
+<blockquote>
+<p>This is a blockquote following a header.</p>
+<p>When something is important enough, you do it even if the odds are not in your favor.</p>
+</blockquote>
+<hr />
+</div>
+<div id="code-blocks" class="section level3">
+<h3>Code Blocks</h3>
+<div id="r-code" class="section level4">
+<h4>R Code</h4>
+<pre class="r"><code>ggplot(gapminder) +
+  aes(x = gdpPercap, y = lifeExp, size = pop, color = country) +
+  geom_point() +
+  facet_wrap(~year)</code></pre>
+</div>
+<div id="javascript" class="section level4">
+<h4>JavaScript</h4>
+<pre class="js"><code>var fun = function lang(l) {
+  dateformat.i18n = require(&#39;./lang/&#39; + l)
+  return true;
+}</code></pre>
+<hr />
+</div>
+</div>
+<div id="more-r-code" class="section level3">
+<h3>More R Code</h3>
+<pre class="r"><code>dplyr::starwars %&gt;% dplyr::slice_sample(n = 4)</code></pre>
+<hr />
+<pre class="r"><code>cli::cli_alert_success(&quot;It worked!&quot;)</code></pre>
+<pre><code>## ✓ It worked!</code></pre>
+<p>–</p>
+<pre class="r"><code>message(&quot;Just a friendly message&quot;)</code></pre>
+<pre><code>## Just a friendly message</code></pre>
+<p>–</p>
+<pre class="r"><code>warning(&quot;This could be bad...&quot;)</code></pre>
+<pre><code>## Warning: This could be bad...</code></pre>
+<p>–</p>
+<pre class="r"><code>stop(&quot;I hope you&#39;re sitting down for this&quot;)</code></pre>
+<pre><code>## Error in eval(expr, envir, enclos): I hope you&#39;re sitting down for this</code></pre>
+<p>exclude: false</p>
+<pre class="r"><code>tibble::as_tibble(mtcars)</code></pre>
+<pre><code>## # A tibble: 32 × 11
+##      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1  21       6  160    110  3.9   2.62  16.5     0     1     4     4
+##  2  21       6  160    110  3.9   2.88  17.0     0     1     4     4
+##  3  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
+##  4  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
+##  5  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
+##  6  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
+##  7  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
+##  8  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
+##  9  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
+## 10  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
+## # … with 22 more rows</code></pre>
+<hr />
+<pre class="r"><code>knitr::kable(head(mtcars), format = &#39;html&#39;)</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+mpg
+</th>
+<th style="text-align:right;">
+cyl
+</th>
+<th style="text-align:right;">
+disp
+</th>
+<th style="text-align:right;">
+hp
+</th>
+<th style="text-align:right;">
+drat
+</th>
+<th style="text-align:right;">
+wt
+</th>
+<th style="text-align:right;">
+qsec
+</th>
+<th style="text-align:right;">
+vs
+</th>
+<th style="text-align:right;">
+am
+</th>
+<th style="text-align:right;">
+gear
+</th>
+<th style="text-align:right;">
+carb
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Mazda RX4
+</td>
+<td style="text-align:right;">
+21.0
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+160
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+3.90
+</td>
+<td style="text-align:right;">
+2.620
+</td>
+<td style="text-align:right;">
+16.46
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mazda RX4 Wag
+</td>
+<td style="text-align:right;">
+21.0
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+160
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+3.90
+</td>
+<td style="text-align:right;">
+2.875
+</td>
+<td style="text-align:right;">
+17.02
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Datsun 710
+</td>
+<td style="text-align:right;">
+22.8
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+108
+</td>
+<td style="text-align:right;">
+93
+</td>
+<td style="text-align:right;">
+3.85
+</td>
+<td style="text-align:right;">
+2.320
+</td>
+<td style="text-align:right;">
+18.61
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hornet 4 Drive
+</td>
+<td style="text-align:right;">
+21.4
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+258
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+3.08
+</td>
+<td style="text-align:right;">
+3.215
+</td>
+<td style="text-align:right;">
+19.44
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hornet Sportabout
+</td>
+<td style="text-align:right;">
+18.7
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+360
+</td>
+<td style="text-align:right;">
+175
+</td>
+<td style="text-align:right;">
+3.15
+</td>
+<td style="text-align:right;">
+3.440
+</td>
+<td style="text-align:right;">
+17.02
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Valiant
+</td>
+<td style="text-align:right;">
+18.1
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+225
+</td>
+<td style="text-align:right;">
+105
+</td>
+<td style="text-align:right;">
+2.76
+</td>
+<td style="text-align:right;">
+3.460
+</td>
+<td style="text-align:right;">
+20.22
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>exclude: false</td>
+</tr>
+<tr class="even">
+<td><code>r DT::datatable(head(mtcars), fillContainer = FALSE, options = list(pageLength = 4))</code></td>
+</tr>
+<tr class="odd">
+<td><code>{=html} &lt;div id="htmlwidget-1" style="width:100%;height:auto;" class="datatables html-widget"&gt;&lt;/div&gt; &lt;script type="application/json" data-for="htmlwidget-1"&gt;{"x":{"filter":"none","fillContainer":false,"data":[["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant"],[21,21,22.8,21.4,18.7,18.1],[6,6,4,6,8,6],[160,160,108,258,360,225],[110,110,93,110,175,105],[3.9,3.9,3.85,3.08,3.15,2.76],[2.62,2.875,2.32,3.215,3.44,3.46],[16.46,17.02,18.61,19.44,17.02,20.22],[0,0,1,1,0,1],[1,1,1,0,0,0],[4,4,4,3,3,3],[4,4,1,1,2,1]],"container":"&lt;table class=\"display\"&gt;\n  &lt;thead&gt;\n    &lt;tr&gt;\n      &lt;th&gt; &lt;\/th&gt;\n      &lt;th&gt;mpg&lt;\/th&gt;\n      &lt;th&gt;cyl&lt;\/th&gt;\n      &lt;th&gt;disp&lt;\/th&gt;\n      &lt;th&gt;hp&lt;\/th&gt;\n      &lt;th&gt;drat&lt;\/th&gt;\n      &lt;th&gt;wt&lt;\/th&gt;\n      &lt;th&gt;qsec&lt;\/th&gt;\n      &lt;th&gt;vs&lt;\/th&gt;\n      &lt;th&gt;am&lt;\/th&gt;\n      &lt;th&gt;gear&lt;\/th&gt;\n      &lt;th&gt;carb&lt;\/th&gt;\n    &lt;\/tr&gt;\n  &lt;\/thead&gt;\n&lt;\/table&gt;","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10,11]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}&lt;/script&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p>layout: true</p>
+</div>
+</div>
+<div id="lists" class="section level2">
+<h2>Lists</h2>
+<hr />
+<p>.pull-left[
+#### Here is an unordered list:</p>
+<ul>
+<li>Item foo</li>
+<li>Item bar</li>
+<li>Item baz</li>
+<li>Item zip
+]</li>
+</ul>
+<p>.pull-right[</p>
+<div id="and-an-ordered-list" class="section level4">
+<h4>And an ordered list:</h4>
+<ol style="list-style-type: decimal">
+<li>Item one</li>
+<li>Item two</li>
+<li>Item three</li>
+<li>Item four
+]</li>
+</ol>
+<hr />
+</div>
+<div id="and-a-nested-list" class="section level3">
+<h3>And a nested list:</h3>
+<ul>
+<li>level 1 item
+<ul>
+<li>level 2 item</li>
+<li>level 2 item
+<ul>
+<li>level 3 item</li>
+<li>level 3 item</li>
+</ul></li>
+</ul></li>
+<li>level 1 item
+<ul>
+<li>level 2 item</li>
+<li>level 2 item</li>
+<li>level 2 item</li>
+</ul></li>
+<li>level 1 item
+<ul>
+<li>level 2 item</li>
+<li>level 2 item</li>
+</ul></li>
+<li>level 1 item</li>
+</ul>
+<hr />
+</div>
+<div id="nesting-an-ol-in-ul-in-an-ol" class="section level3">
+<h3>Nesting an ol in ul in an ol</h3>
+<ul>
+<li>level 1 item (ul)
+<ol style="list-style-type: decimal">
+<li>level 2 item (ol)</li>
+<li>level 2 item (ol)</li>
+</ol>
+<ul>
+<li>level 3 item (ul)</li>
+<li>level 3 item (ul)</li>
+</ul></li>
+<li>level 1 item (ul)
+<ol style="list-style-type: decimal">
+<li>level 2 item (ol)</li>
+<li>level 2 item (ol)</li>
+</ol>
+<ul>
+<li>level 3 item (ul)</li>
+<li>level 3 item (ul)</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>level 4 item (ol)</li>
+<li>level 4 item (ol)</li>
+</ol>
+<ul>
+<li>level 3 item (ul)</li>
+<li>level 3 item (ul)</li>
+</ul></li>
+<li>level 1 item (ul)</li>
+</ul>
+<pre class="r"><code>library(ggplot2)
+(g &lt;- ggplot(mpg) + aes(hwy, cty, color = class) + geom_point())</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/plot-example-1.png" width="100%" /></p>
+<hr />
+<pre class="r"><code>g + xaringanthemer::theme_xaringan(text_font_size = 16, title_font_size = 18) +
+  ggtitle(&quot;A Plot About Cars&quot;)</code></pre>
+<p>.footnote[Requires <code>{showtext}</code>]</p>
+<hr />
+<p>layout: false</p>
+</div>
+</div>
+<div id="square-image" class="section level2">
+<h2>Square image</h2>
+<center>
+<img src="https://octodex.github.com/images/labtocat.png" alt="GithHub Octocat" height="400px" />
+</center>
+<p>.footnote[GitHub Octocat]</p>
+<hr />
+<div id="wide-image" class="section level3">
+<h3>Wide image</h3>
+<div class="figure">
+<img src="https://docs.github.com/assets/images/help/repository/branching.png" alt="" />
+<p class="caption">A wide image with a diagram of branching in git.</p>
+</div>
+<p>.footnote[Wide images scale to 100% slide width]</p>
+<hr />
+</div>
+</div>
+<div id="two-images" class="section level2">
+<h2>Two images</h2>
+<p>.pull-left[
+<img src="https://octodex.github.com/images/motherhubbertocat.png" alt="A GitHub Octocat, style “mother hubber”" />]</p>
+<p>.pull-right[
+<img src="https://octodex.github.com/images/dinotocat.png" alt="A GitHub Octocat, style “dinotcat”" />]</p>
+<hr />
+<div id="definition-lists-can-be-used-with-html-syntax." class="section level3">
+<h3>Definition lists can be used with HTML syntax.</h3>
+<dl>
+<dt>
+Name
+</dt>
+<dd>
+Godzilla
+</dd>
+<dt>
+Born
+</dt>
+<dd>
+1952
+</dd>
+<dt>
+Birthplace
+</dt>
+<dd>
+Japan
+</dd>
+<dt>
+Color
+</dt>
+<dd>
+Green
+</dd>
+</dl>
+<hr />
+<p>class: center, middle</p>
+</div>
+</div>
+</div>
+<div id="thanks" class="section level1">
+<h1>Thanks!</h1>
+<p>Slides created via the R packages:</p>
+<p>Theme design from <a href="https://www.katiejolly.io/blog/2021-03-16/designing-slides">Katie Jolly</a></p>
+<p><a href="https://github.com/yihui/xaringan"><strong>xaringan</strong></a><br>
+<a href="https://github.com/gadenbuie/xaringanthemer">gadenbuie/xaringanthemer</a></p>
+<p>The chakra comes from <a href="https://remarkjs.com">remark.js</a>, <a href="http://yihui.name/knitr"><strong>knitr</strong></a>, and <a href="https://rmarkdown.rstudio.com">R Markdown</a>.</p>
+</div>
