@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Praat"
+title: "Introduction to Praat and Praat Scripting"
 subtitle: "Lab Skillz Workshop"  
 author: 
   - "Chenzi Xu"
@@ -13,6 +13,7 @@ output:
       highlightLines: true
       ratio: 16:9
       countIncrementalSlides: true
+      beforeInit: "macros.js"
 ---
 
 ```{r setup, include=FALSE}
@@ -25,6 +26,7 @@ knitr::opts_chunk$set(
   message = FALSE, 
   warning = FALSE,
   hiline = TRUE
+  #eval = TRUE
 )
 ```
 
@@ -55,53 +57,75 @@ library(xaringanthemer)
 )
 ```
 
-## Typography
+## Outline
 
-Text can be **bold**, _italic_, ~~strikethrough~~, or `inline code`.
+.left-column[
+![Praat Icon :scale](icon.png)
+]
 
-[Link to another slide](#colors).
+.right-column[
+1. ### [Why Praat?](#why)
 
-### Lorem Ipsum
+1. ### [What is Praat capable of?](#functions)
 
-Dolor imperdiet nostra sapien scelerisque praesent curae metus facilisis dignissim tortor. 
-Lacinia neque mollis nascetur neque urna velit bibendum. 
-Himenaeos suspendisse leo varius mus risus sagittis aliquet venenatis duis nec.
+1. ### Praat scripting
 
-- Dolor cubilia nostra nunc sodales
+1. ### Demos
+]
 
-- Consectetur aliquet mauris blandit
+---
+name: why
 
-- Ipsum dis nec porttitor urna sed
+## Why Praat?
+
+- Open source, free of charge
+
+- Available for major computer platforms (MacOS, Windows, Linux) and systems
+
+- Graphical User Interface
+
+- A macro recording mechanism (Command History)
+
+- You can create your own Praat scripts! 
+  - Recurring tasks become less tedious and more efficient.
+
+- You can create your own application with an autonomous GUI.
+  - Python-praat package: [Parselmouth](https://parselmouth.readthedocs.io/en/stable/)
+  - R-praat package: [rPraat](https://fu.ff.cuni.cz/praat/rDemo.html)
+
+
+---
+name: functions
+class: inverse center middle
+
+# What is Praat capable of?
+
+--
+
+Creating and manipulating sounds
+
+Annotating sounds (.TextGrid)
+
+Phonetic measurement and analysis
+
+Creating publication-quality plots
+
+Conducting phonetic experiment
+
+---
+name: chart
+background-image: url('praat.png')
+background-size: contain
+background-position: middle right
+
 
 ---
 name: colors
 
-## Colors
+## Praat Script
 
-.left-column[
-Text color
 
-[Link Color](#3)
 
-**Bold Color**
-
-_Italic Color_
-
-`Inline Code`
-]
-
-.right-column[
-Lorem ipsum dolor sit amet, [consectetur adipiscing elit (link)](#3), 
-sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-Erat nam at lectus urna.
-Pellentesque elit ullamcorper **dignissim cras tincidunt (bold)** lobortis feugiat. 
-_Eros donec ac odio tempor_ orci dapibus ultrices. 
-Id porta nibh venenatis cras sed felis eget velit aliquet.
-Aliquam id diam maecenas ultricies mi.
-Enim sit amet 
-`code_color("inline")`
-venenatis urna cursus eget nunc scelerisque viverra.
-]
 
 ---
 
@@ -378,6 +402,8 @@ class: center, middle
 # Thanks!
 
 Slides created via the R packages:
+
+Theme design from [Katie Jolly](https://www.katiejolly.io/blog/2021-03-16/designing-slides)
 
 [**xaringan**](https://github.com/yihui/xaringan)<br>
 [gadenbuie/xaringanthemer](https://github.com/gadenbuie/xaringanthemer)
