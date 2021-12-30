@@ -115,9 +115,25 @@ Conducting phonetic experiment
 ---
 name: chart
 background-image: url('praat.png')
-background-size: contain
+background-size: cover
 background-position: middle right
 
+
+---
+
+## Are you familiar with these tasks?
+
+- Loading files
+
+- Managing objects (create, copy, rename, save, remove)
+
+- View objects and analyses
+
+- Setting analysis parameters
+
+- Querying objects (using buttons or menu commands starting with `Get`)
+
+- TextGrid annotation
 
 ---
 name: colors

@@ -34,10 +34,10 @@ image:
   focal_point: 
 
 links:
-- icon: twitter
-  icon_pack: fab
-  name: Follow
-  url: https://twitter.com/ChenziAmy
+- icon: desktop
+  icon_pack: fas
+  name: Slides
+  url: https://chenzixu.rbind.io/slides/praat/praat.html
 url_code: ""
 url_pdf: ""
 url_slides: ""
@@ -48,7 +48,8 @@ url_video: ""
 #   Simply enter your slide deck's filename without extension.
 #   E.g. `slides = "example-slides"` references `content/slides/example-slides.md`.
 #   Otherwise, set `slides = ""`.
-slides: "praat"
+# slides: "example"
+# slides: content/slides/praat/praat.html
 
 # Projects (optional).
 #   Associate this post with one or more of your projects.
