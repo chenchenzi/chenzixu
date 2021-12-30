@@ -12,7 +12,7 @@ Open source software packages such as Praat and ESPS have enabled large-scale pr
 
 In the course of my DPhil/PhD studies, I have established a few useful pipelines or workflows that automated some procedures and greatly boosted my efficiency, and accumulated a bunch of scripts. Some scripts are directly downloaded online from those who kindly shared their efforts, others are either adapted from others to suit my own purposes or my nascent attempts in a few programming languages. Dipping my toes in scripting was a steep learning curve (a process of trial and error!) but worthwhile. 
 
-Here I would also like to **share** some useful scripts of mine (and brief tutorials of how to use them), to pay it forward to the community where their generous sharing helped me a lot. This also serves as an archive of some of my analysis procedures, making the research **open** and **reproducible**.
+Here I would also like to **share** some scripts of mine (and brief tutorials of how to use them), to pay it forward to the community where their generous sharing helped me a lot. This also serves as an archive of some of my analysis procedures, making the research **open** and **reproducible**.
 
 ## Prerequisites
 * Bash/Unix Shell Basics in the Terminal
@@ -22,4 +22,4 @@ Here I would also like to **share** some useful scripts of mine (and brief tutor
 I mainly use {{< icon name="terminal" pack="fas" >}} Unix Shell,
 {{< icon name="python" pack="fab" >}} Python, {{< icon name="r-project" pack="fab" >}} R, and Praat in these posts. So it would make more sense to you if you have some very basic ideas about Unix Shell commands and Praat. 
 
-# {{< icon name="hand-point-down" pack="far" >}} Click on the following topics to read more or have hands-on practices!
+## {{< icon name="hand-point-down" pack="far" >}} Click on the following topics to start and have hands-on practices!

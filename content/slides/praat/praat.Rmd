@@ -1,9 +1,8 @@
 ---
-title: "Presentation Ninja"
-subtitle: "&#x2694;&#xFE0F; xaringan +<br/>&#x1F60E; xaringanthemer"  
+title: "Introduction to Praat"
+subtitle: "Lab Skillz Workshop"  
 author: 
-  - "Yihui Xie"
-  - "Garrick Aden-Buie"
+  - "Chenzi Xu"
 date: '`r Sys.Date()`'
 output:
   xaringan::moon_reader:
@@ -31,10 +30,28 @@ knitr::opts_chunk$set(
 
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
 library(xaringanthemer)
-style_duo_accent(
-  primary_color = "#1381B0",
-  secondary_color = "#FF961C",
-  inverse_header_color = "#FFFFFF"
+  dark_yellow <- "#EFBE43"
+  light_yellow <- "#FDF7E9"
+  gray <- "#333333"
+  blue <- "#4466B0"
+
+  style_duo(
+  # colors
+  primary_color = light_yellow,
+  secondary_color = dark_yellow,
+  #inverse_header_color = "#FFFFFF"
+  header_color = gray,
+  text_color = gray,
+  code_inline_color = colorspace::lighten(gray),
+  text_bold_color = colorspace::lighten(gray),
+  link_color = blue,
+  #title_slide_text_color = blue,
+
+  # fonts
+  header_font_google = google_font("Martel", "300", "400"),
+  text_font_google = google_font("Lato"),
+  code_font_google = google_font("Fira Mono")
+  
 )
 ```
 
