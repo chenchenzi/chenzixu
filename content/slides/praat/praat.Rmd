@@ -6,7 +6,7 @@ author:
 date: '`r Sys.Date()`'
 output:
   xaringan::moon_reader:
-    css: xaringan-themer.css
+    css: [xaringan-themer.css, custom.css]
     nature:
       slideNumberFormat: "%current%"
       highlightStyle: github
@@ -57,23 +57,45 @@ library(xaringanthemer)
 )
 ```
 
-## Outline
+# Our Goal
 
 .left-column[
-![Praat Icon :scale](icon.png)
+### First
+
+### Second
+
+### Third
 ]
 
+.right-column[
+.big[To know a full range of functions Praat can perform
+
+To master how to navigate and use Praat's GUI
+
+To learn scripting basics, parse praat script, and **start** praat scripting]
+
+]
+
+---
+## Outline
 .right-column[
 1. ### [Why Praat?](#why)
 
 1. ### [What is Praat capable of?](#functions)
 
-1. ### Praat scripting
+1. ### [Praat scripting](#script)
 
-1. ### Demos
+1. ### Demos and Practice
+
 ]
 
 ---
+class: inverse center middle
+
+# Why Praat? ![Praat Icon](icon.png)
+
+---
+
 name: why
 
 ## Why Praat?
@@ -86,7 +108,7 @@ name: why
 
 - A macro recording mechanism (Command History)
 
-- You can create your own Praat scripts! 
+- You can create your own Praat scripts to **automate** things! 
   - Recurring tasks become less tedious and more efficient.
 
 - You can create your own application with an autonomous GUI.
@@ -101,16 +123,19 @@ class: inverse center middle
 # What is Praat capable of?
 
 --
+**Creating and manipulating sounds**
 
-Creating and manipulating sounds
+--
+**Visualising and annotating sounds**
 
-Annotating sounds (.TextGrid)
+--
+**Phonetic measurement and analysis**
 
-Phonetic measurement and analysis
+--
+**Creating publication-quality plots**
 
-Creating publication-quality plots
-
-Conducting phonetic experiment
+--
+**Conducting phonetic experiment**
 
 ---
 name: chart
@@ -136,59 +161,44 @@ background-position: middle right
 - TextGrid annotation
 
 ---
-name: colors
 
-## Praat Script
-
-
-
+## What is a Praat object?
 
 ---
+name: script
+class: inverse center middle
 
-# Big Topic or Inverse Slides `#`
+# Praat Script
 
-## Slide Headings `##`
+--
+**String and numeric variables**
 
-### Sub-slide Headings `###`
+**For loops, if else statements, while loops**
 
-#### Bold Call-Out `####`
+**Regular expression matching**
 
-This is a normal paragraph text. Only use header levels 1-4.
+**Comments**
 
-##### Possible, but not recommended `#####`
+**Syntax**
 
-###### Definitely don't use h6 `######`
+---
+## Scripting Hacks
+
+
 
 ---
 
 # Left-Column Headings
 
-.left-column[
-## First
 
-## Second
-
-## Third
-]
-
-.right-column[
-Dolor quis aptent mus a dictum ultricies egestas.
-
-Amet egestas neque tempor fermentum proin massa!
-
-Dolor elementum fermentum pharetra lectus arcu pulvinar.
-]
 
 ---
 class: inverse center middle
 
-# Topic Changing Interstitial
+# Demos and Practice
+load files -> save files
+measure f0
 
---
-
-```
-class: inverse center middle
-```
 
 ---
 layout: true
