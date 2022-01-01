@@ -18,3 +18,19 @@ li::marker {
   line-height: 2em;
 }
 
+/* three column layout */
+.pull-l {
+  width: 30%;
+  position: absolute;
+  left: 5%;
+}
+.pull-m {
+  width: 30%;
+  position: absolute;
+  left: 37%;
+}
+.pull-r {
+  width: 30%;
+  position: absolute;
+  left: 65%;
+}
