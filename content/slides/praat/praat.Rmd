@@ -220,8 +220,7 @@ background-position: 10% 90%
 .pull-right[
 ![Arguments for "To Pitch"](pitch2.png)
 
-
-```
+```{r, eval=FALSE}
 To Pitch: 0.0, 75.0, 600.0
 ```
 
@@ -230,8 +229,7 @@ To Pitch: 0.0, 75.0, 600.0
 ---
 ## Scripting Hacks II
 ### Macro Recording Workflow (Command History)
-
-```
+```{r, eval=FALSE}
 1. New Praat Script
 2. Edit > Clear history (script editor)
 3. GUI actions
