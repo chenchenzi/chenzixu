@@ -3,8 +3,7 @@
   <head>
     <title>Introduction to Praat and Praat Scripting</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Chenzi Xu" />
-    <meta name="date" content="2022-01-02" />
+    <meta name="author" content="-  Chenzi Xu" />
     <script src="praat_files/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="custom.css" type="text/css" />
@@ -15,8 +14,8 @@ class: center, middle, inverse, title-slide
 
 # Introduction to Praat and Praat Scripting
 ## Lab Skillz Workshop
-### Chenzi Xu
-### 2022-01-02
+### -<svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"> <path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg> <a href="https://chenzixu.rbind.io/">Chenzi Xu</a>
+### 2021/12/30 (updated: 2022-01-02)
 
 ---
 
@@ -53,7 +52,7 @@ To learn scripting basics, parse praat script, and **start** praat scripting]
 
 1. ### [Praat scripting](#script)
 
-1. ### Demos and Practice
+1. ### [Demo and Practice](#demo)
 
 ]
 
@@ -198,6 +197,7 @@ background-position: 10% 90%
 ---
 ## Scripting Hacks II
 ### Macro Recording Workflow (Command History)
+
 ```
 1. New Praat Script
 2. Edit &gt; Clear history (script editor)
@@ -218,10 +218,13 @@ background-position: 90% 80%
 - Parse the script in chunks and see if they suit your needs. Sometimes no need to reinvent the wheels.
 
 - Learn from others' script.
-&gt; Be cautious when using others'script. 
+
+&gt; Be cautious when using others'script. The syntax of Praat was updated since 2014.
+
 &gt; **Test** it out first and remember to **cite** it!
 &gt;
 &gt; **Save frequently!**
+
 ]
 
 ---
@@ -262,7 +265,9 @@ endfor
 ### Boilerplate code
 Create list of all .wav files in the directory and save the number to a variable
 
-variable ends in `$`, strings wrapped in `""`
+String variable ends in **`$`**; strings wrapped in **`""`**
+
+Assignment operator **`=`**
 ]
 .right-column[
 
@@ -349,61 +354,209 @@ endfor
 ]
 
 ---
+name: demo
 class: inverse center middle
 
-# Demos and Practice
+# Demo and Practice
 Task 1: Get total duration of all .wav files
 
-Task 2: Measure f0 in specified interval
+Task 2*: Measure f0 in specified interval
 
 ---
-## Task 1
+# Task 1
+.pull-left[ ###Basics
+1.1 Get number of .wav files in a directory
 
-### Step 1: How to get duration of one .wav file
-1. Open one .wav file in Praat `Open &gt; Read from file`
-1. Select the Sound object, click `Query &gt; Query time domain &gt; Get total duration`
+1.2 Get duration of each .wav file
+
+1.3 Get total duration of all .wav files
+
+1.4 Print results in Praat Info window
+]
+.pull-right[ ###Level up
+1.5 Toggle option to "clean up" as you go
+
+1.6 Add a user input form
+
+1.7 Write results to a Text file]
+
+.footnote[Adapted from Thea Knowles's Praat Tutorial]
+---
+### Step 1: How to get duration of one .wav file?
+1. Open one .wav file in Praat **`Open &gt; Read from file`**
+1. Select the Sound object, click **`Query &gt; Query time domain &gt; Get total duration`**
 
 ![:scale 50%](duration.png)
 
+&gt; Avoid using `.` in the filename (except in the file extension)
 
 ---
-## Task 1
-
 ### Step 2: Print command history
 
 .pull-left[
-1. ```Praat &gt; New Praat script```
-1. In the script editor, click ```Edit &gt; Paste history```
-1. ```File &gt; Save``` and ```Run```
+1. At menu bar, **`Praat &gt; New Praat script`**
+1. In the script editor, click **`Edit &gt; Paste history`**
+1. **`File &gt; Save`**, type `"test.praat"`, and **`Run`**
 
 ![:scale 120%](history.png)
 ]
 
 .pull-right[
-&gt; Limitations: 
+&gt; #### Limitations: 
 &gt;
-&gt; Query commands may behave different in scripts than in the GUI (Praat scripting assumes that you want to handle the query result inside the script)
+&gt; Query commands may behave differently in scripts than in the GUI (Praat scripting assumes that you want to handle the query result inside the script)
 &gt;
 &gt; Changing scripting environments is not recorded
 
 ]
 
 ---
-## Task 1
-
 ### Step 3: Loop over all .wav files
+.left-column[ ### Update the boilerplate code
+
+#### Any problems?
+]
+.right-column[
+
+```r
+dir$ = "data/" 
+
+Create Strings as file list: "file_list", dir$ + "*.wav"
+nFiles = Get number of strings
+
+for i from 1 to nFiles
+    selectObject: "Strings file_list"
+    filename$ = Get string: i
+    basename$ = filename$ - ".wav"
+    Read from file: dir$ + filename$
+    
+*   selectObject: "Sound 'basename$'"
+*   Get total duration
+    
+endfor
+```
+]
+
+---
+### Step 4: Manage output
+.left-column[ ### Print out result
+**`printline`** prints the argument to the Praat Info window
+
+Contents of a variable enclosed in **`''`** 
+
+Numeric variable doesn't end in **`$`**
 
 
+]
+.right-column[
+
+```r
+dir$ = "data/" 
+
+Create Strings as file list: "file_list", dir$ + "*.wav"
+nFiles = Get number of strings
+*printline 'nFiles'
+
+for i from 1 to nFiles
+    selectObject: "Strings file_list"
+    filename$ = Get string: i
+    basename$ = filename$ - ".wav"
+    Read from file: dir$ + filename$
+*   printline 'basename$'
+    selectObject: "Sound 'basename$'"
+*   dur = Get total duration
+*   printline 'dur'
+    
+endfor
+```
+]
+
+---
+### Step 5: Calculation in a for loop
+.left-column[ ### Sum
+Set up a dummy numeric variable **`total_dur`** and update its value through each loop
+
+Numeric variables must start with a lower case letter, and be only letters, digits, and underscores
+
+**`:4`**: print with 4 decimal places
+
+]
+.right-column[
+
+```r
+dir$ = "data/" 
+Create Strings as file list: "file_list", dir$ + "*.wav"
+nFiles = Get number of strings
+*total_dur = 0
+
+for i from 1 to nFiles
+    selectObject: "Strings file_list"
+    filename$ = Get string: i
+    basename$ = filename$ - ".wav"
+    Read from file: dir$ + filename$
+    printline 'basename$'
+    selectObject: "Sound 'basename$'"
+    dur = Get total duration
+    printline 'dur' 
+*   total_dur = total_dur + dur
+    
+endfor
+*printline 'total_dur:4'
+```
+]
+
+---
+## Level up (optional)
+.left-column[ ### Clean up
+
+]
+.right-column[
+
+```r
+*clearinfo
+
+for i from 1 to nFiles
+
+    #### MORE CODE HERE ####
+    
+*   select all
+*   minus Strings file_list
+*   Remove
+endfor
+
+*select all
+*Remove
+*printline All finished!
+```
+]
+
+---
+## Level up (optional)
+.footnote[More info at [Praat manual](https://www.fon.hum.uva.nl/praat/manual/Scripting_6_1__Arguments_to_the_script.html) and [Phonetics on Speed](https://praatscripting.lingphon.net/simpleinput-1.html)]
+.left-column[ ### User input form
+User provide arguments to the script
+
+Put such code blocks at the top
+]
+.right-column[
+
+```r
+form Make selection
+    comment Enter directory of files
+    sentence Directory data/
+    boolean Clean_up 1
+endform
+
+#### MORE CODE HERE ####
+```
+
+![:scale 50%](form.png)
+]
 
 
 ---
-layout: false
+## Level up (optional)
 
-## Square image
-
-&lt;center&gt;&lt;img src="https://octodex.github.com/images/labtocat.png" alt="GithHub Octocat" height="400px" /&gt;&lt;/center&gt;
-
-.footnote[GitHub Octocat]
 
 ---
 
@@ -419,7 +572,19 @@ layout: false
 &lt;dt&gt;Color&lt;/dt&gt;
 &lt;dd&gt;Green&lt;/dd&gt;
 &lt;/dl&gt;
+---
 
+## Online resources
+
+Always check: [Praat Manual](https://www.fon.hum.uva.nl/praat/manual/Intro.html)
+
+References:
+
+[Praat Scripting Tutorial by Eleanor Chodroff](https://www.eleanorchodroff.com/tutorial/PraatScripting.pdf)
+
+[Praat Scripting Tutorial by CASA Lab, University at Buffalo](https://bookdown.org/thea_knowles/casa_coding_group/spring-2020.html)
+
+[Phonetics on Speed: Praat Scripting Tutorial](https://praatscripting.lingphon.net/)
 ---
 class: center, middle
 
@@ -427,12 +592,12 @@ class: center, middle
 
 Slides created via the R packages:
 
-Theme design from [Katie Jolly](https://www.katiejolly.io/blog/2021-03-16/designing-slides)
-
 [**xaringan**](https://github.com/yihui/xaringan)&lt;br&gt;
 [gadenbuie/xaringanthemer](https://github.com/gadenbuie/xaringanthemer)
 
 The chakra comes from [remark.js](https://remarkjs.com), [**knitr**](http://yihui.name/knitr), and [R Markdown](https://rmarkdown.rstudio.com).
+
+Theme design ideas from [Katie Jolly](https://www.katiejolly.io/blog/2021-03-16/designing-slides)
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
