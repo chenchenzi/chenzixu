@@ -184,15 +184,15 @@ background-position: middle right
 
 .pull-r[
 ###Praat Commands
-- SoundEditor
-- TextGridEditor
-- PitchEditor
-- PointEditor
-- SpectrumEditor
+- To Intensity...
+- To TextGrid...
+- Zoom in
+- Get Minimum
+- Convert to mono
 - ...
 ]
 
-> You must select the correct object to issue the right commands!
+> You must select the correct object/environment to issue the right commands!
 ---
 name: script
 class: inverse center middle
@@ -221,7 +221,7 @@ background-position: 10% 90%
 ![Arguments for "To Pitch"](pitch2.png)
 
 ```{r, eval=FALSE}
-To Pitch: 0.0, 75.0, 600.0
+To Pitch: 0.0, 75.0, 600.0 #<<
 ```
 
 ]
@@ -229,7 +229,7 @@ To Pitch: 0.0, 75.0, 600.0
 ---
 ## Scripting Hacks II
 ### Macro Recording Workflow (Command History)
-```{r, eval=FALSE}
+```
 1. New Praat Script
 2. Edit > Clear history (script editor)
 3. GUI actions
@@ -254,7 +254,6 @@ background-position: 90% 80%
 >
 > **Save frequently!**
 ]
-
 
 ---
 ## Scripting Hacks IV
@@ -380,187 +379,49 @@ endfor
 class: inverse center middle
 
 # Demos and Practice
-load files -> save files
-measure f0
+Task 1: Get total duration of all .wav files
+
+Task 2: Measure f0 in specified interval
+
+---
+## Task 1
+
+### Step 1: How to get duration of one .wav file
+1. Open one .wav file in Praat `Open > Read from file`
+1. Select the Sound object, click `Query > Query time domain > Get total duration`
+
+![:scale 50%](duration.png)
 
 
 ---
-layout: true
+## Task 1
 
-## Blocks
-
----
-
-### Blockquote
-
-> This is a blockquote following a header.
->
-> When something is important enough, you do it even if the odds are not in your favor.
-
----
-
-### Code Blocks
-
-#### R Code
-
-```{r eval=FALSE}
-ggplot(gapminder) +
-  aes(x = gdpPercap, y = lifeExp, size = pop, color = country) +
-  geom_point() +
-  facet_wrap(~year)
-```
-
-#### JavaScript
-
-```js
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
-}
-```
-
----
-
-### More R Code
-
-```{r eval=FALSE}
-dplyr::starwars %>% dplyr::slice_sample(n = 4)
-```
-
----
-
-```{r message=TRUE, eval=requireNamespace("cli", quietly = TRUE)}
-cli::cli_alert_success("It worked!")
-```
-
---
-
-```{r message=TRUE}
-message("Just a friendly message")
-```
-
---
-
-```{r warning=TRUE}
-warning("This could be bad...")
-```
-
---
-
-```{r error=TRUE}
-stop("I hope you're sitting down for this")
-```
-
-
----
-layout: true
-
-## Tables
-
----
-exclude: `r if (requireNamespace("tibble", quietly=TRUE)) "false" else "true"`
-
-```{r eval=requireNamespace("tibble", quietly=TRUE)}
-tibble::as_tibble(mtcars)
-```
-
----
-
-```{r}
-knitr::kable(head(mtcars), format = 'html')
-```
-
----
-exclude: `r if (requireNamespace("DT", quietly=TRUE)) "false" else "true"`
-
-```{r eval=requireNamespace("DT", quietly=TRUE)}
-DT::datatable(head(mtcars), fillContainer = FALSE, options = list(pageLength = 4))
-```
-
----
-layout: true
-
-## Lists
-
----
+### Step 2: Print command history
 
 .pull-left[
-#### Here is an unordered list:
+1. ```Praat > New Praat script```
+1. In the script editor, click ```Edit > Paste history```
+1. ```File > Save``` and ```Run```
 
-*   Item foo
-*   Item bar
-*   Item baz
-*   Item zip
+![:scale 120%](history.png)
 ]
 
 .pull-right[
+> Limitations: 
+>
+> Query commands may behave different in scripts than in the GUI (Praat scripting assumes that you want to handle the query result inside the script)
+>
+> Changing scripting environments is not recorded
 
-#### And an ordered list:
-
-1.  Item one
-1.  Item two
-1.  Item three
-1.  Item four
 ]
 
 ---
+## Task 1
 
-### And a nested list:
+### Step 3: Loop over all .wav files
 
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
 
----
 
-### Nesting an ol in ul in an ol
-
-- level 1 item (ul)
-  1. level 2 item (ol)
-  1. level 2 item (ol)
-    - level 3 item (ul)
-    - level 3 item (ul)
-- level 1 item (ul)
-  1. level 2 item (ol)
-  1. level 2 item (ol)
-    - level 3 item (ul)
-    - level 3 item (ul)
-  1. level 4 item (ol)
-  1. level 4 item (ol)
-    - level 3 item (ul)
-    - level 3 item (ul)
-- level 1 item (ul)
-
----
-layout: true
-
-## Plots
-
----
-
-```{r plot-example, eval=requireNamespace("ggplot2", quietly=TRUE)}
-library(ggplot2)
-(g <- ggplot(mpg) + aes(hwy, cty, color = class) + geom_point())
-```
-
----
-
-```{r plot-example-themed, eval=requireNamespace("showtext", quietly=TRUE) && requireNamespace("ggplot2", quietly=TRUE)}
-g + xaringanthemer::theme_xaringan(text_font_size = 16, title_font_size = 18) +
-  ggtitle("A Plot About Cars")
-```
-
-.footnote[Requires `{showtext}`]
 
 ---
 layout: false
@@ -570,26 +431,6 @@ layout: false
 <center><img src="https://octodex.github.com/images/labtocat.png" alt="GithHub Octocat" height="400px" /></center>
 
 .footnote[GitHub Octocat]
-
----
-
-### Wide image
-
-![A wide image with a diagram of branching in git.](https://docs.github.com/assets/images/help/repository/branching.png)
-
-.footnote[Wide images scale to 100% slide width]
-
----
-
-## Two images
-
-.pull-left[
-![A GitHub Octocat, style "mother hubber"](https://octodex.github.com/images/motherhubbertocat.png)
-]
-
-.pull-right[
-![A GitHub Octocat, style "dinotcat"](https://octodex.github.com/images/dinotocat.png)
-]
 
 ---
 

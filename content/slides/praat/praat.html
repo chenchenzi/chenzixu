@@ -4,17 +4,8 @@
     <title>Introduction to Praat and Praat Scripting</title>
     <meta charset="utf-8" />
     <meta name="author" content="Chenzi Xu" />
-    <meta name="date" content="2022-01-01" />
+    <meta name="date" content="2022-01-02" />
     <script src="praat_files/header-attrs/header-attrs.js"></script>
-    <script src="praat_files/htmlwidgets/htmlwidgets.js"></script>
-    <script src="praat_files/jquery/jquery.min.js"></script>
-    <link href="praat_files/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
-    <script src="praat_files/datatables-binding/datatables.js"></script>
-    <link href="praat_files/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="praat_files/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
-    <script src="praat_files/dt-core/js/jquery.dataTables.min.js"></script>
-    <link href="praat_files/crosstalk/css/crosstalk.css" rel="stylesheet" />
-    <script src="praat_files/crosstalk/js/crosstalk.min.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="custom.css" type="text/css" />
   </head>
@@ -25,7 +16,7 @@ class: center, middle, inverse, title-slide
 # Introduction to Praat and Praat Scripting
 ## Lab Skillz Workshop
 ### Chenzi Xu
-### 2022-01-01
+### 2022-01-02
 
 ---
 
@@ -161,15 +152,15 @@ background-position: middle right
 
 .pull-r[
 ###Praat Commands
-- SoundEditor
-- TextGridEditor
-- PitchEditor
-- PointEditor
-- SpectrumEditor
+- To Intensity...
+- To TextGrid...
+- Zoom in
+- Get Minimum
+- Convert to mono
 - ...
 ]
 
-&gt; You must select the correct object to issue the right commands!
+&gt; You must select the correct object/environment to issue the right commands!
 ---
 name: script
 class: inverse center middle
@@ -199,7 +190,7 @@ background-position: 10% 90%
 
 
 ```r
-To Pitch: 0.0, 75.0, 600.0
+*To Pitch: 0.0, 75.0, 600.0
 ```
 
 ]
@@ -207,8 +198,7 @@ To Pitch: 0.0, 75.0, 600.0
 ---
 ## Scripting Hacks II
 ### Macro Recording Workflow (Command History)
-
-```r
+```
 1. New Praat Script
 2. Edit &gt; Clear history (script editor)
 3. GUI actions
@@ -233,7 +223,6 @@ background-position: 90% 80%
 &gt;
 &gt; **Save frequently!**
 ]
-
 
 ---
 ## Scripting Hacks IV
@@ -363,341 +352,49 @@ endfor
 class: inverse center middle
 
 # Demos and Practice
-load files -&gt; save files
-measure f0
+Task 1: Get total duration of all .wav files
+
+Task 2: Measure f0 in specified interval
+
+---
+## Task 1
+
+### Step 1: How to get duration of one .wav file
+1. Open one .wav file in Praat `Open &gt; Read from file`
+1. Select the Sound object, click `Query &gt; Query time domain &gt; Get total duration`
+
+![:scale 50%](duration.png)
 
 
 ---
-layout: true
+## Task 1
 
-## Blocks
-
----
-
-### Blockquote
-
-&gt; This is a blockquote following a header.
-&gt;
-&gt; When something is important enough, you do it even if the odds are not in your favor.
-
----
-
-### Code Blocks
-
-#### R Code
-
-
-```r
-ggplot(gapminder) +
-  aes(x = gdpPercap, y = lifeExp, size = pop, color = country) +
-  geom_point() +
-  facet_wrap(~year)
-```
-
-#### JavaScript
-
-```js
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
-}
-```
-
----
-
-### More R Code
-
-
-```r
-dplyr::starwars %&gt;% dplyr::slice_sample(n = 4)
-```
-
----
-
-
-```r
-cli::cli_alert_success("It worked!")
-```
-
-```
-## ✓ It worked!
-```
-
---
-
-
-```r
-message("Just a friendly message")
-```
-
-```
-## Just a friendly message
-```
-
---
-
-
-```r
-warning("This could be bad...")
-```
-
-```
-## Warning: This could be bad...
-```
-
---
-
-
-```r
-stop("I hope you're sitting down for this")
-```
-
-```
-## Error in eval(expr, envir, enclos): I hope you're sitting down for this
-```
-
-
----
-layout: true
-
-## Tables
-
----
-exclude: false
-
-
-```r
-tibble::as_tibble(mtcars)
-```
-
-```
-## # A tibble: 32 × 11
-##      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1  21       6  160    110  3.9   2.62  16.5     0     1     4     4
-##  2  21       6  160    110  3.9   2.88  17.0     0     1     4     4
-##  3  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
-##  4  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
-##  5  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
-##  6  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
-##  7  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
-##  8  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
-##  9  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
-## 10  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
-## # … with 22 more rows
-```
-
----
-
-
-```r
-knitr::kable(head(mtcars), format = 'html')
-```
-
-&lt;table&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; mpg &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; cyl &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; disp &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; hp &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; drat &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; wt &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; qsec &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; vs &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; am &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; gear &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; carb &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Mazda RX4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 21.0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 160 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 110 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.90 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.620 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 16.46 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Mazda RX4 Wag &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 21.0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 160 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 110 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.90 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.875 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 17.02 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Datsun 710 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 22.8 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 108 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 93 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.85 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.320 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 18.61 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Hornet 4 Drive &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 21.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 258 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 110 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.08 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.215 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 19.44 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Hornet Sportabout &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 18.7 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 8 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 360 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 175 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.15 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.440 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 17.02 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Valiant &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 18.1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 225 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 105 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.76 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.460 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 20.22 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
----
-exclude: false
-
-
-```r
-DT::datatable(head(mtcars), fillContainer = FALSE, options = list(pageLength = 4))
-```
-
-<div id="htmlwidget-520e9f7c062e6f68e8df" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-520e9f7c062e6f68e8df">{"x":{"filter":"none","fillContainer":false,"data":[["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant"],[21,21,22.8,21.4,18.7,18.1],[6,6,4,6,8,6],[160,160,108,258,360,225],[110,110,93,110,175,105],[3.9,3.9,3.85,3.08,3.15,2.76],[2.62,2.875,2.32,3.215,3.44,3.46],[16.46,17.02,18.61,19.44,17.02,20.22],[0,0,1,1,0,1],[1,1,1,0,0,0],[4,4,4,3,3,3],[4,4,1,1,2,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>mpg<\/th>\n      <th>cyl<\/th>\n      <th>disp<\/th>\n      <th>hp<\/th>\n      <th>drat<\/th>\n      <th>wt<\/th>\n      <th>qsec<\/th>\n      <th>vs<\/th>\n      <th>am<\/th>\n      <th>gear<\/th>\n      <th>carb<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10,11]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
-
----
-layout: true
-
-## Lists
-
----
+### Step 2: Print command history
 
 .pull-left[
-#### Here is an unordered list:
+1. ```Praat &gt; New Praat script```
+1. In the script editor, click ```Edit &gt; Paste history```
+1. ```File &gt; Save``` and ```Run```
 
-*   Item foo
-*   Item bar
-*   Item baz
-*   Item zip
+![:scale 120%](history.png)
 ]
 
 .pull-right[
+&gt; Limitations: 
+&gt;
+&gt; Query commands may behave different in scripts than in the GUI (Praat scripting assumes that you want to handle the query result inside the script)
+&gt;
+&gt; Changing scripting environments is not recorded
 
-#### And an ordered list:
-
-1.  Item one
-1.  Item two
-1.  Item three
-1.  Item four
 ]
 
 ---
+## Task 1
 
-### And a nested list:
-
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-
----
-
-### Nesting an ol in ul in an ol
-
-- level 1 item (ul)
-  1. level 2 item (ol)
-  1. level 2 item (ol)
-    - level 3 item (ul)
-    - level 3 item (ul)
-- level 1 item (ul)
-  1. level 2 item (ol)
-  1. level 2 item (ol)
-    - level 3 item (ul)
-    - level 3 item (ul)
-  1. level 4 item (ol)
-  1. level 4 item (ol)
-    - level 3 item (ul)
-    - level 3 item (ul)
-- level 1 item (ul)
-
----
-layout: true
-
-## Plots
-
----
+### Step 3: Loop over all .wav files
 
 
-```r
-library(ggplot2)
-(g &lt;- ggplot(mpg) + aes(hwy, cty, color = class) + geom_point())
-```
 
-&lt;img src="praat_files/figure-html/plot-example-1.png" width="100%" /&gt;
-
----
-
-
-```r
-g + xaringanthemer::theme_xaringan(text_font_size = 16, title_font_size = 18) +
-  ggtitle("A Plot About Cars")
-```
-
-.footnote[Requires `{showtext}`]
 
 ---
 layout: false
@@ -707,26 +404,6 @@ layout: false
 &lt;center&gt;&lt;img src="https://octodex.github.com/images/labtocat.png" alt="GithHub Octocat" height="400px" /&gt;&lt;/center&gt;
 
 .footnote[GitHub Octocat]
-
----
-
-### Wide image
-
-![A wide image with a diagram of branching in git.](https://docs.github.com/assets/images/help/repository/branching.png)
-
-.footnote[Wide images scale to 100% slide width]
-
----
-
-## Two images
-
-.pull-left[
-![A GitHub Octocat, style "mother hubber"](https://octodex.github.com/images/motherhubbertocat.png)
-]
-
-.pull-right[
-![A GitHub Octocat, style "dinotcat"](https://octodex.github.com/images/dinotocat.png)
-]
 
 ---
 
