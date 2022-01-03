@@ -23,8 +23,8 @@ all_day: false
 # Schedule page publish date (NOT talk date).
 #publishDate: "2017-01-01T00:00:00Z"
 
-authors: []
-tags: []
+authors: [Chenzi Xu]
+tags: [Praat, Phonetics, lab skills, academic]
 
 # Is this a featured talk? (true/false)
 featured: false
@@ -63,3 +63,8 @@ url_video: ""
 math: false
 ---
 
+## Pre-workshop Setup
+
+- Install [Praat](https://www.fon.hum.uva.nl/praat/) 
+
+Feel free to use your own audio files.
