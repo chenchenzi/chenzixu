@@ -50,3 +50,19 @@ li::marker {
   width: 62%;
   float: right;
 }
+
+/* New two column layout1 */
+.left-co {
+  width: 30%;
+  height: 92%;
+  float: left;
+}
+
+.left-co h2, .left-co h3 {
+  color: #EFBE43;
+}
+
+.right-co {
+  width: 66%;
+  float: right;
+}
