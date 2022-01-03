@@ -666,7 +666,19 @@ endfor
 ]
 ### Could you do it yourself now?
 ---
+## Our Goal
 
+.big[To know a full range of functions Praat can perform `r icon_style(fontawesome("check-square", style = "solid"), scale = 2, fill = "#EFBE43")`
+
+To master how to navigate and use Praat's GUI `r icon_style(fontawesome("check-square", style = "solid"), scale = 2,fill = "#EFBE43")`
+
+To learn scripting basics, parse praat script, and **start** praat scripting `r icon_style(fontawesome("flag", style = "regular"),scale = 2, fill = "#EFBE43")`
+]
+
+--
+### We've found a way around Praat scripts?
+
+---
 ## Online resources
 
 > Always check: [Praat Manual](https://www.fon.hum.uva.nl/praat/manual/Intro.html)!
