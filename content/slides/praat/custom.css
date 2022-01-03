@@ -6,16 +6,23 @@ li::marker {
   color: #EFBE43;
 }
  * ----------------------*/
- 
+
+/* slightly bigger Fonts */
+ /* ---------------------
 :root {
-  /* slightly bigger Fonts */
   --base-font-size: 22px;
 }
+ * ----------------------*/
 
 /* Extra CSS */
 .big {
   font-size: 150%;
   line-height: 2em;
+}
+
+.medium {
+  font-size: 120%;
+  line-height: 1.5em;
 }
 
 /* three column layout */
@@ -65,4 +72,11 @@ li::marker {
 .right-co {
   width: 66%;
   float: right;
+}
+
+.fancy{
+  font-family: 'Martel';
+  color: #EFBE43;
+  font-weight: 800;
+  font-size: 2.25rem;
 }

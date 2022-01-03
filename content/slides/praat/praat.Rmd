@@ -1,7 +1,8 @@
 ---
 title: "Introduction to Praat and Praat Scripting"
 subtitle: "Lab Skillz Workshop"  
-author: -`r icons::fontawesome("link", style = "solid")` [Chenzi Xu](https://chenzixu.rbind.io/)
+author: 
+- "Chenzi Xu"
 date: '2021/12/30 (updated: `r Sys.Date()`)'
 output:
   xaringan::moon_reader:
@@ -13,6 +14,7 @@ output:
       ratio: 16:9
       countIncrementalSlides: true
       beforeInit: "macros.js"
+    seal: false
 ---
 
 ```{r setup, include=FALSE}
@@ -30,6 +32,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(icons)
 library(xaringanthemer)
   dark_yellow <- "#EFBE43"
   light_yellow <- "#FDF7E9"
@@ -55,7 +58,32 @@ library(xaringanthemer)
   
 )
 ```
+name: title
+class: left, middle
 
+.fancy[Introduction to Praat and Praat Scripting]
+
+.big[Lab Skillz Workshop, Phonetics Laboratory, University of Oxford]
+
+<br />
+
+###Chenzi Xu
+
+.big[DPhil Candidate | 2021/12/30 (updated: `r Sys.Date()`)]
+
+---
+class: right, middle
+
+
+![:scale 20%](me.png)
+
+## Find me at...
+
+[`r fontawesome("twitter")` @ChenziAmy](http://twitter.com/ChenziAmy)  
+[`r fontawesome("github")` @chenchenzi](https://github.com/chenchenzi)  
+[`r fontawesome("link", style = "solid")` chenzixu.rbind.io](https://alison.rbind.io)  
+
+---
 # Our Goal
 
 .left-column[
@@ -66,7 +94,7 @@ library(xaringanthemer)
 ### Third
 ]
 
-.right-column[
+.right-co[
 .big[To know a full range of functions Praat can perform
 
 To master how to navigate and use Praat's GUI
@@ -99,7 +127,7 @@ name: why
 
 ## Why Praat?
 
-- Open source, free of charge
+- Open source, **free** of charge
 
 - Available for major computer platforms (MacOS, Windows, Linux) and systems
 
@@ -110,12 +138,11 @@ name: why
 - You can create your own Praat scripts to **automate** things! 
   - Recurring tasks become less tedious and more efficient.
   - Consistent and Replicable measurement
-  - Minimise human error
+  - Minimising human error
 
 - You can create your own application with an autonomous GUI.
   - Python-praat package: [Parselmouth](https://parselmouth.readthedocs.io/en/stable/)
   - R-praat package: [rPraat](https://fu.ff.cuni.cz/praat/rDemo.html)
-
 
 ---
 name: functions
@@ -124,6 +151,7 @@ class: inverse center middle
 # What is Praat capable of?
 
 --
+.medium[
 **Creating and manipulating sounds**
 
 **Visualizing and annotating sounds**
@@ -133,7 +161,7 @@ class: inverse center middle
 **Creating publication-quality plots**
 
 **Conducting phonetic experiment**
-
+]
 ---
 name: chart
 background-image: url('praat.png')
@@ -144,7 +172,7 @@ background-position: middle right
 ---
 
 ## Are you familiar with these tasks?
-
+.medium[
 - Loading files
 
 - Managing objects (create, copy, rename, save, remove)
@@ -156,6 +184,25 @@ background-position: middle right
 - Querying objects (using buttons or menu commands)
 
 - TextGrid annotation
+]
+
+---
+background-image: url('spectrogram.png')
+background-position: 90% 70%
+
+## Are you familiar with these tasks?
+.left-co[
+**` Spectrum > Show spectrogram`**
+
+**` Pulses > Show pulses`**
+
+**` Pitch > Show pitch`**
+
+**` Intensity > Show intensity`**
+
+**`Formant > Show formants`**
+]
+
 
 ---
 
@@ -224,7 +271,7 @@ background-position: 10% 90%
 ![Arguments for "To Pitch"](pitch2.png)
 
 ```{r, eval=FALSE}
-To Pitch: 0.0, 75.0, 600.0 #<<
+* To Pitch: 0.0, 75.0, 600.0
 ```
 
 ]
@@ -356,14 +403,14 @@ endfor #<<
 
 ---
 ## Scripting Hacks IV
-.left-column[
+.left-co[
 ### Boilerplate code
 Read in each .wav file.
 
 `Get string` : get the nth row of the list of filenames
 
 ]
-.right-column[
+.right-co[
 ```{r, eval=FALSE}
 dir$ = "/Users/Chenzi/mydir/data/" 
 
@@ -414,40 +461,36 @@ Task 2*: Measure f0 in specified interval
 .footnote[Adapted from Thea Knowles's Praat Tutorial]
 ---
 ### Step 1: How to get duration of one .wav file?
-1. Open one .wav file in Praat **`Open > Read from file`**
+.medium[1. Open one .wav file in Praat **`Open > Read from file`**
 1. Select the Sound object, click **`Query > Query time domain > Get total duration`**
-
-![:scale 50%](duration.png)
+]
+![:scale 55%](duration.png)
 
 > Avoid using `.` in the filename (except in the file extension)
 
 ---
 ### Step 2: Print command history
 
-.pull-left[
+.medium[
 1. At menu bar, **`Praat > New Praat script`**
 1. In the script editor, click **`Edit > Paste history`**
 1. **`File > Save`**, type `"test.praat"`, and **`Run`**
-
-![:scale 120%](history.png)
 ]
 
-.pull-right[
+![:scale 55%](history.png)
 > #### Limitations: 
 >
-> Query commands may behave differently in scripts than in the GUI (Praat scripting assumes that you want to handle the query result inside the script)
+> Query commands may behave differently in scripts than in the GUI (e.g. Praat scripting assumes that you want to handle the query result inside the script)
 >
 > Changing scripting environments is not recorded
 
-]
-
 ---
 ### Step 3: Loop over all .wav files
-.left-column[ ### Update the boilerplate code
+.left-co[ ### Update the boilerplate code
 
-#### Any problems?
+### Any problems?
 ]
-.right-column[
+.right-co[
 ```{r, eval=FALSE}
 dir$ = "data/" 
 
@@ -469,7 +512,7 @@ endfor
 
 ---
 ### Step 4: Manage output
-.left-column[ ### Print out result
+.left-co[ ### Print out result
 **`printline`** prints the argument to the Praat Info window
 
 Contents of a variable enclosed in **`''`** 
@@ -478,7 +521,7 @@ Numeric variable doesn't end in **`$`**
 
 
 ]
-.right-column[
+.right-co[
 ```{r, eval=FALSE}
 dir$ = "data/" 
 
@@ -503,7 +546,7 @@ endfor
 
 ---
 ### Step 5: Calculation in a for loop
-.left-column[ ### Sum
+.left-co[ ### Sum
 Set up a dummy numeric variable **`total_dur`** and update its value through each loop
 
 Numeric variables must start with a lower case letter, and be only letters, digits, and underscores
@@ -511,7 +554,7 @@ Numeric variables must start with a lower case letter, and be only letters, digi
 **`:4`**: print with 4 decimal places
 
 ]
-.right-column[
+.right-co[
 ```{r, eval=FALSE}
 dir$ = "data/" 
 Create Strings as file list: "file_list", dir$ + "*.wav"
@@ -669,13 +712,17 @@ endfor
 ## Our Goal
 
 .big[To know a full range of functions Praat can perform `r icon_style(fontawesome("check-square", style = "solid"), scale = 2, fill = "#EFBE43")`
+]
+--
 
-To master how to navigate and use Praat's GUI `r icon_style(fontawesome("check-square", style = "solid"), scale = 2,fill = "#EFBE43")`
+.big[To master how to navigate and use Praat's GUI `r icon_style(fontawesome("check-square", style = "solid"), scale = 2,fill = "#EFBE43")`]
+--
 
-To learn scripting basics, parse praat script, and **start** praat scripting `r icon_style(fontawesome("flag", style = "regular"),scale = 2, fill = "#EFBE43")`
+.big[To learn scripting basics, parse praat script, and **start** praat scripting `r icon_style(fontawesome("flag", style = "regular"),scale = 2, fill = "#EFBE43")`
 ]
 
 --
+
 > ### We've found a way around Praat scripts?
 
 ---
@@ -683,6 +730,7 @@ To learn scripting basics, parse praat script, and **start** praat scripting `r 
 
 > ### Always check: [Praat Manual](https://www.fon.hum.uva.nl/praat/manual/Intro.html)!
 
+<br />
 #### References and good resources:
 
 If you want to have more solid understanding and more practices, check out:
@@ -697,7 +745,9 @@ Recorded tutorial about Praat script by CASA Lab:
 ---
 class: center, middle
 
-# Thanks!
+# Thank you!
+
+> ### Would you like a step-up tutorial about R scripting?
 
 Slides created via the R packages:
 
