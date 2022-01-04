@@ -726,6 +726,11 @@ endfor
 > ### We've found a way around Praat scripts?
 
 ---
+class: middle, center
+
+> ## Would you like a step-up tutorial about Praat scripting?
+
+---
 ## Online resources
 
 > ### Always check: [Praat Manual](https://www.fon.hum.uva.nl/praat/manual/Intro.html)!
@@ -746,8 +751,6 @@ Recorded tutorial about Praat script by CASA Lab:
 class: center, middle
 
 # Thank you!
-
-> ### Would you like a step-up tutorial about R scripting?
 
 Slides created via the R packages:
 
