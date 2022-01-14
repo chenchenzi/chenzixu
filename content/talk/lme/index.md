@@ -1,30 +1,30 @@
 ---
-title: Introduction to Praat
+title: Linear Mixed Effects Models in R
 event: Lab Skillz Workshop
 event_url: 
 
 location: First Floor Lecture Room 1
-address:
+address: 
   street: 47 Wellington square street
   city: Oxford
   region: 
   postcode: 'OX1 2ER'
   country: United Kingdom
 
-summary: Lab Skillz Workshop Week 3 Hilary Term. An introduction to Praat and Praat scripting, for linguistic students.
-abstract: "This workshop serves as a boot camp guiding you to start your phonetic analyses using Praat. Instead of listing out how to perform a specific function, it focuses on introducing a sustainable workflow that bootstraps our knowledge to start our own analyses as quickly as possible."
+summary: Lab Skillz Workshop Week 5 Hilary Term. An introduction to Linear Mixed Effects Models in R, for linguistic students.
+abstract: ""
 
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
-date: "2021-12-16T14:00:00Z"
+date: "2022-02-18T11:30:00Z"
 # date_end: "2030-06-01T15:00:00Z"
 all_day: false
 
 # Schedule page publish date (NOT talk date).
-#publishDate: "2017-01-01T00:00:00Z"
+publishDate: "2022-01-14T00:00:00Z"
 
 authors: [Chenzi Xu]
-tags: [Praat, Phonetics, lab skills, academic]
+tags: [Stats, Phonetics, lab skills, academic, mixed models]
 
 # Is this a featured talk? (true/false)
 featured: false
@@ -37,7 +37,7 @@ links:
 - icon: desktop
   icon_pack: fas
   name: Slides
-  url: https://chenzixu.rbind.io/slides/praat/praat.html
+  url: https://chenzixu.rbind.io/slides/lme/lmer.html
 url_code: ""
 url_pdf: ""
 url_slides: ""
@@ -65,8 +65,12 @@ math: false
 
 ## Pre-workshop Setup
 
-- Download and install the latest version of [Praat](https://www.fon.hum.uva.nl/praat/)
+- Download and install the latest version of [R](https://www.r-project.org/).
+- Download and install [RStudio](https://www.rstudio.com/). RStudio is an application (an integrated development environment or IDE) that facilitates the use of R and offers a number of nice additional features. You will need the free Desktop version for your computer.
+- Install the following packages. Copy the following line of code and paste it in the Rstudio Console, and press `return` to run the code. 
+```
+install.packages(c("tidyverse", "lme4", "lmerTest"))
+```
 
-- Download the sample audio files from my [Github repository](https://github.com/chenchenzi/praat_tut/tree/main)
-
-Feel free to use your own audio files!
+## Recommended Reading
+Winter, B. (2019). Statistics for Linguists: An Introduction Using R (1st ed.). Routledge. https://doi.org/10.4324/9781315165547

@@ -79,6 +79,22 @@ a, a > code {
   clear: both;
 }
 
+/* New two column layout */
+.left-col {
+  width: 33%;
+  height: 92%;
+  float: left;
+}
+
+.left-col h2, .left-col h3 {
+  color: #EFBE43;
+}
+
+.right-col {
+  width: 62%;
+  float: right;
+}
+
 img, video, iframe {
   max-width: 100%;
 }

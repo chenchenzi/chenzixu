@@ -13,8 +13,22 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
+      beforeInit: "macros.js"
 ---
+```{r packages, include=FALSE}
+library(icons)
+library(tidyverse)
+```
+class: right, middle
 
+## Find me at...
+![:scale 20%](me.png)
+
+[`r fontawesome("twitter")` @ChenziAmy](http://twitter.com/ChenziAmy)  
+[`r fontawesome("github")` @chenchenzi](https://github.com/chenchenzi)  
+[`r fontawesome("link", style = "solid")` chenzixu.rbind.io](https://alison.rbind.io)
+
+---
 ## Did you do the **pre-workshop setup**?
 
 `r icons::fontawesome("link", style = "solid")` [https://chenzixu.rbind.io/](https://chenzixu.rbind.io/)
@@ -24,7 +38,7 @@ output:
 
 `r icons::fontawesome$solid$'chart-bar'` You have basic inferential statistical knowledge.
 
-**You want to know more about linear mixed models**
+###You want to know more about linear mixed models
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 ```
@@ -56,43 +70,111 @@ high school arithmetic and algebra. Elementary concepts of probability theory ar
 
 
 ---
-class: inverse, center, middle
+class: center, middle
 
-# Get Started
-[](`r icons::fontawesome$solid$'chart-bar'`)
+# Inferential Stats Recap
+--
 
+Central limit theorem (~~magic~~)
+
+Hypothesis testing: the (humble) t-test
+
+linear regression**
 ---
+# Central limit theorem (~~magic~~)
+.left-column[
+###Definition and Significance]
+.right-column[The **sampling distribution of means** is **normal**, provided two conditions are met: 
+(a) the sample size should be **large** enough
+(b) $\mu$ and $\sigma$ are defined for the probability density or mass function that generated the data. 
 
-# Hello World
 
-Install the **xaringan** package from [Github](https://github.com/yihui/xaringan):
+We can derive an estimate of the distribution of (hypothetical) sample means from a single sample of n independent data points
 
-```{r eval=FALSE, tidy=FALSE}
-remotes::install_github("yihui/xaringan")
-```
-
---
-
-You are recommended to use the [RStudio IDE](https://www.rstudio.com/products/rstudio/), but you do not have to.
-
-- Create a new R Markdown document from the menu `File -> New File -> R Markdown -> From Template -> Ninja Presentation`;<sup>1</sup>
-
---
-
-- Click the `Knit` button to compile it;
-
---
-
-- or use the [RStudio Addin](https://rstudio.github.io/rstudioaddins/)<sup>2</sup> "Infinite Moon Reader" to live preview the slides (every time you update and save the Rmd document, the slides will be automatically reloaded in RStudio Viewer.
-
-.footnote[
-[1] 中文用户请看[这份教程](https://slides.yihui.org/xaringan/zh-CN.html)
-
-[2] See [#2](https://github.com/yihui/xaringan/issues/2) if you do not see the template or addin in RStudio.
+CLT is NOT the distribution that generated the data, but the sampling distribution of the sample means under **repeated sampling**.
+![:scale 70%](ct.png)
 ]
 
----
 
+---
+# Hypothesis testing: the (humble) t-test
+.left-column[
+### NHST procedure
+
+]
+.right-column[1. Define the null hypothesis $\mu_0$
+1. Given data of size $n$, estimate $\bar{y}$, standard deviation $s$, estimate the standard error $SE = s/{\sqrt{n}}$.
+1. The distance between the sample mean and the hypothesized mean can be written in SE units as follows.$$ t \times SE = \bar{y} -\mu$$
+Thus the sample mean is **t** standard errors away from the hypothesized mean: $$t= \dfrac{\bar{y}-\mu_0}{s/\sqrt{n}}$$
+1. Reject null hypothesis if the observed t-value is “large”.
+1. Fail to reject the null hypothesis, if the observed t-value is “small”.
+]
+???
+One of the simplest statistical tests that one can do with continuous data: the t-test.
+the logic of these more complex tests will essentially be more of the same
+---
+# Hypothesis testing: the (humble) t-test
+.pull-left[Under repeated sampling, the observed t-value is seen as an instance from a random variable T.
+$$ T \sim t(n-1)$$
+The PDF of T, the t-distribution, is defined in terms of of n with n-1 degrees of freedom.
+![:scale 70%](t-dis.png)
+
+**Critical t-value**: the t-value such that $P(T>|t|)=0.05$
+]
+.pull-right[
+**Type I error**: Reject the null when it’s true
+**Type II error**: Fail to reject the null when it’s false
+![:scale 70%](h0.png)
+
+**p-value**: the probability of obtaining the observed t-value, or some value more extreme than that, under the assumption that the null is true. 
+
+The p-value is always interpreted with reference to the pre-defined Type I error. Conventionally, we reject the null if $p < 0.05$
+]
+???
+Two possible decisions: **reject the null** or **fail to reject the null**.
+Two possible worlds: the null is **true** or **false**.
+---
+# Linear Regression
+
+A simple example of linear model is
+$$Y_i = \beta_0 + \beta_1X_i + e_i$$
+Where $Y_i$ is the measured value of the dependent variable for observation i; $X_i$ is the explanatory variable or predictor; $Y_i$ is modelled in terms of an intercept $\beta_0$ plus the effect of predictor $X_i$ weighted by coefficient $\beta_1$ and error term $e_i$.
+.left-col[
+```{r, fig.width=4, fig.height=4, echo=FALSE}
+set.seed(62)
+
+dat <- tibble(X = runif(100, -3, 3),
+              Y = 3 + 2 * X + rnorm(100))
+
+ggplot(dat, aes(X, Y)) +
+  geom_point() +
+  geom_abline(intercept = 3, slope = 2, color = "#b682a0")
+
+```
+]
+.right-col[
+Simulated data illustrating linear model $Y_i = 3+2X_i+e_i$.
+The most common method for fitting a regression line is **least-squares**.
+
+A linear model is a model that is **linear in the coefficients**; each coefficient is only allowed to be set to the power of one.
+
+Non-linear relationships can be analysed using a linear model.]
+
+???
+LME an extension of the General Linear Model that underlies simpler approaches such as ANOVA, t-test, and classical regression.
+Many people assume that 'linear models' can only capture linear relationships, i.e., relationships that can be described by a straight line (or a plane). This is false.
+A linear model is a weighted sum of various terms, and each term has a single predictor (or a constant) that is multiplied by a coefficient. 
+---
+class: center, middle
+
+# Data
+
+```{r comment='#'}
+data = read.csv("http://www.bodowinter.com/tutorial/politeness_data.csv")
+head(data)
+which(!complete.cases(data))
+```
+---
 
 ---
 
@@ -638,14 +720,14 @@ The **xaringan** package borrowed a few terms from Naruto, such as
 You can click the links to know more about them if you want. The jutsu "Moon Reader" may seem a little evil, but that does not mean your slides are evil.
 
 ---
+# References
 
-class: center
+Winter, B. (2013). Linear models and linear mixed effects models in R with linguistic applications. arXiv:1308.5499. [http://arxiv.org/pdf/1308.5499.pdf]
 
-# Hand seals (印)
+Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl. (on going) Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction. [https://vasishth.github.io/Freq_CogSci/]
 
-Press `h` or `?` to see the possible ninjutsu you can use in remark.js.
+Barr, Dale J. (2021). Learning statistical models through simulation in R: An interactive textbook. Version 1.0.0. Retrieved from https://psyteachr.github.io/stat-models-v1.
 
-![](https://upload.wikimedia.org/wikipedia/commons/7/7e/Mudra-Naruto-KageBunshin.svg)
 
 ---
 
