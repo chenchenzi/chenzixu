@@ -70,7 +70,7 @@ high school arithmetic and algebra. Elementary concepts of probability theory ar
 
 
 ---
-class: center, middle
+class: inverse, center, middle
 
 # Inferential Stats Recap
 --
@@ -164,6 +164,46 @@ Non-linear relationships can be analysed using a linear model.]
 LME an extension of the General Linear Model that underlies simpler approaches such as ANOVA, t-test, and classical regression.
 Many people assume that 'linear models' can only capture linear relationships, i.e., relationships that can be described by a straight line (or a plane). This is false.
 A linear model is a weighted sum of various terms, and each term has a single predictor (or a constant) that is multiplied by a coefficient. 
+---
+# Linear Regression
+.pull-left[ #### Research question
+Assume you were interested in whether the voice pitch of males and females differs, and if so, by how much
+#### Data
+```{r comment='#'}
+pitch = c(233,204,242,130,112,142)
+sex = c(rep("female",3), rep("male",3))
+my.df = data.frame(sex,pitch)
+my.df
+```
+]
+.pull-right[ #### Formula
+Relationship of interest: $pitch \sim sex$ 
+
+"Pitch predicted by / as a function of sex"
+
+$pitch \sim sex + \epsilon$
+
+$\epsilon$ stands for all other things that affect pitch, random or controllable in our experiment.
+
+**Structural or systematic** + **random or probabilistic**
+```{r}
+model = lm(pitch ~ sex, my.df)
+```
+]
+---
+# Linear Regression
+.pull-left[
+```{r, comment='#'}
+summary(model)
+```
+]
+.pull-right[ $R^2$: "variance accounted for or explained by"
+
+Multiple R-Squared: 
+Adjusted R-Squared:how much variance is “explained” by 
+
+]
+
 ---
 class: center, middle
 
@@ -337,10 +377,7 @@ See the next page for two HTML widgets.
 
 ---
 
-```{r out.width='100%', fig.height=6, eval=require('leaflet')}
-library(leaflet)
-leaflet() %>% addTiles() %>% setView(-93.65, 42.0285, zoom = 17)
-```
+
 
 ---
 
@@ -353,39 +390,13 @@ DT::datatable(
 
 ---
 
-# Some Tips
 
-- Do not forget to try the `yolo` option of `xaringan::moon_reader`.
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        yolo: true
-    ```
 
 ---
 
 # Some Tips
 
-- Slides can be automatically played if you set the `autoplay` option under `nature`, e.g. go to the next slide every 30 seconds in a lightning talk:
 
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          autoplay: 30000
-    ```
-
-- If you want to restart the play after it reaches the last slide, you may set the sub-option `loop` to TRUE, e.g.,
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          autoplay:
-            interval: 30000
-            loop: true
-    ```
 
 ---
 
