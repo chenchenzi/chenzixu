@@ -52,13 +52,9 @@ high school arithmetic and algebra. Elementary concepts of probability theory ar
 
 1. Inferential Stats Recap
 
-1. the Data
+1. Linear Regression
 
 1. Linear Mixed Effects Model
-
-1. Checking Model Assumptions
-
-1. Understanding the output
 
 1. Different Model designs
 
@@ -75,11 +71,9 @@ class: inverse, center, middle
 # Inferential Stats Recap
 --
 
-Central limit theorem (~~magic~~)
+(~~magic~~) Central limit theorem
 
 Hypothesis testing: the (humble) t-test
-
-linear regression**
 ---
 # Central limit theorem (~~magic~~)
 .left-column[
@@ -134,7 +128,21 @@ The p-value is always interpreted with reference to the pre-defined Type I error
 Two possible decisions: **reject the null** or **fail to reject the null**.
 Two possible worlds: the null is **true** or **false**.
 ---
+class: inverse, center, middle
+
 # Linear Regression
+
+--
+
+Formal forms
+
+A (too) simple case study
+
+Understanding output
+
+Assumptions check
+---
+# Formal Forms
 
 A simple example of linear model is
 $$Y_i = \beta_0 + \beta_1X_i + e_i$$
@@ -165,9 +173,9 @@ LME an extension of the General Linear Model that underlies simpler approaches s
 Many people assume that 'linear models' can only capture linear relationships, i.e., relationships that can be described by a straight line (or a plane). This is false.
 A linear model is a weighted sum of various terms, and each term has a single predictor (or a constant) that is multiplied by a coefficient. 
 ---
-# Linear Regression
+# A Simple Case Study
 .pull-left[ #### Research question
-Assume you were interested in whether the voice pitch of males and females differs, and if so, by how much
+Assume you were interested in whether the voice pitch of males and females differs, and if so, by how much.
 #### Data
 ```{r comment='#'}
 pitch = c(233,204,242,130,112,142)
@@ -176,6 +184,7 @@ my.df = data.frame(sex,pitch)
 my.df
 ```
 ]
+
 .pull-right[ #### Formula
 Relationship of interest: $pitch \sim sex$ 
 
@@ -190,8 +199,9 @@ $\epsilon$ stands for all other things that affect pitch, random or controllable
 model = lm(pitch ~ sex, my.df)
 ```
 ]
+.footnote[This example is taken from Bodo Winter's tutorial.]
 ---
-# Linear Regression
+# Understanding Output
 .pull-left[
 ```{r, comment='#'}
 summary(model)
@@ -199,10 +209,58 @@ summary(model)
 ]
 .pull-right[ $R^2$: "variance accounted for or explained by"
 
-Multiple R-Squared: 
-Adjusted R-Squared:how much variance is “explained” by 
+Multiple R-Squared: how much variance in our data is accounted for by our model
 
+Adjusted R-Squared: how much variance is “explained” and how many fixed effects are used
+
+**p-value**: The probability of our data, given that our null hypothesis "sex has no effect on pitch" is true.
+
+#### Reporting: 
+We constructed a linear model of pitch as a function of sex. This model was significant $(F(1,4)=46.61,	p<0.01)$.
 ]
+
+---
+# Understanding Output
+.pull-left[
+```{r, comment='#'}
+summary(model)
+```
+]
+.pull-right[
+```{r, comment='#'}
+mean(my.df[my.df$sex=="female",]$pitch)
+mean(my.df[my.df$sex=="male",]$pitch)
+```
+![:scale 80%](lm.png)
+]
+---
+# Assumptions Check
+
+### (1) Linearity
+The fitted values (line) are the predicted means, and residuals are the **vertical deviations** from this line.
+
+When the residual plot shows a **curvy** or non-linear patterns, it indicates a violation of the linearity assumption.
+
+.pull-left[ 
+![:scale 90%](curve.png)
+]
+.pull-right[ What to do if your residual plot indicates nonlinearity?
+- reconsider the fixed effects
+- perform non-linear transformation of your variables
+- turn to different class of models such as logistic models
+]
+
+???
+conditions that have to be satisfied in order for the linear model to be meaningful.
+
+---
+# Assumptions Check: 
+### (2) Absence of collinearity
+
+### (3)
+
+
+---
 
 ---
 class: center, middle
