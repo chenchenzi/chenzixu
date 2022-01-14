@@ -71,6 +71,11 @@ math: false
 ```
 install.packages(c("tidyverse", "lme4", "lmerTest"))
 ```
+- Import the shortened version of dataset in Winter and Grawunder (2012). Copy the following line of code and paste it in the Rstudio Console, and press `return` to run the code. 
+```
+data=
+read.csv("http://www.bodowinter.com/tutorial/politeness_data.csv")
+```
 
 ## Recommended Reading
 Winter, B. (2019). Statistics for Linguists: An Introduction Using R (1st ed.). Routledge. https://doi.org/10.4324/9781315165547

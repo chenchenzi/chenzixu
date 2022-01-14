@@ -56,8 +56,6 @@ high school arithmetic and algebra. Elementary concepts of probability theory ar
 
 1. Linear Mixed Effects Model
 
-1. Different Model designs
-
 1. More on Fixed VS Random effects
 
 1. Limitations
@@ -142,7 +140,7 @@ Understanding output
 
 Assumptions check
 ---
-# Formal Forms
+# Formal forms
 
 A simple example of linear model is
 $$Y_i = \beta_0 + \beta_1X_i + e_i$$
@@ -173,7 +171,7 @@ LME an extension of the General Linear Model that underlies simpler approaches s
 Many people assume that 'linear models' can only capture linear relationships, i.e., relationships that can be described by a straight line (or a plane). This is false.
 A linear model is a weighted sum of various terms, and each term has a single predictor (or a constant) that is multiplied by a coefficient. 
 ---
-# A Simple Case Study
+# A simple case study
 .pull-left[ #### Research question
 Assume you were interested in whether the voice pitch of males and females differs, and if so, by how much.
 #### Data
@@ -198,10 +196,11 @@ $\epsilon$ stands for all other things that affect pitch, random or controllable
 ```{r}
 model = lm(pitch ~ sex, my.df)
 ```
+#### Dummy coding for categorical factors
 ]
 .footnote[This example is taken from Bodo Winter's tutorial.]
 ---
-# Understanding Output
+# Understanding output
 .pull-left[
 ```{r, comment='#'}
 summary(model)
@@ -220,7 +219,7 @@ We constructed a linear model of pitch as a function of sex. This model was sign
 ]
 
 ---
-# Understanding Output
+# Understanding output
 .pull-left[
 ```{r, comment='#'}
 summary(model)
@@ -234,7 +233,7 @@ mean(my.df[my.df$sex=="male",]$pitch)
 ![:scale 80%](lm.png)
 ]
 ---
-# Assumptions Check
+# Assumptions check
 
 ### (1) Linearity
 The fitted values (line) are the predicted means, and residuals are the **vertical deviations** from this line.
@@ -242,74 +241,113 @@ The fitted values (line) are the predicted means, and residuals are the **vertic
 When the residual plot shows a **curvy** or non-linear patterns, it indicates a violation of the linearity assumption.
 
 .pull-left[ 
-![:scale 90%](curve.png)
+```{r eval=FALSE}
+plot(fitted(model),residuals(model))
+```
+![:scale 75%](curve.png)
 ]
 .pull-right[ What to do if your residual plot indicates nonlinearity?
-- reconsider the fixed effects
-- perform non-linear transformation of your variables
-- turn to different class of models such as logistic models
+- Reconsider the fixed effects
+- Perform non-linear transformation of your variables
+- Turn to different class of models such as logistic models
 ]
 
 ???
 conditions that have to be satisfied in order for the linear model to be meaningful.
 
 ---
-# Assumptions Check: 
-### (2) Absence of collinearity
+# Assumptions check: 
+.pull-left[### (2) Absence of collinearity
+When two predictors are **correlated** with each other, they are **collinear**.
 
-### (3)
-
+- Preempt the problem in the design stage
+- Use dimension reduction techniques such as Principal Component Analysis that transform correlated variables into a smaller set of variables
+]
+.pull-right[### (3) Homoskedasticity
+The variance of your data should be approximately equal across the range of the predicted values.
+- Transform your data
+![:scale 65%](hetero.png)
+]
 
 ---
+# Assumptions check:
+.pull-left[### (4) Normality of residuals
+- a histogram or a Q-Q plot of the residuals
+```{r eval=FALSE}
+hist(residuals(model))
+qqnorm(residuals(model))
+```
+
+### (6) Independence
+- Preempt the problem in the design stage
+- Resolve non-independencies at the analysis stage. $\rightarrow$ **Mixed models**
+]
+.pull-right[### (5) Absence of influential data points
+```{r comment='#'}
+dfbeta(model)
+```
+**DFbeta** values: the coefficients to be adjusted if a particular data point is excluded (“leave-one-out diagnostics”).
+- Eyeball the DFbeta values: any sign changed? different by half of the absolute value?
+- Run the analysis **with** influential data and then again **without** them
+]
 
 ---
-class: center, middle
+class: inverse, center, middle
 
+# Linear Mixed Effects Model
+
+--
+Data
+
+Model
+
+Assumption
+
+Understanding the output
+
+Random slopes VS intercepts
+---
 # Data
 
+#### Research Question
+We're interested in the relationship between pitch and politeness (Winter & Grawunder, 2012).
+
+- Politeness: formal/polite and informal register (categorical factor)
+- multiple measures per subject (**inter-dependent!**)
 ```{r comment='#'}
 data = read.csv("http://www.bodowinter.com/tutorial/politeness_data.csv")
 head(data)
 which(!complete.cases(data))
 ```
+???
+a few missing values provide no problems for our mixed model analyses
 ---
-
+# Model
+Multiple regression (fixed effects only)
+$$pitch \sim politeness + sex + \epsilon$$
+Add a **random** effect for subject: assume a different "baseline" pitch value for each subject. We can assume different random intercepts for each subject.
+$$pitch \sim politeness + sex + (1|subject) + \epsilon$$
+```{r eval=FALSE}
+boxplot(frequency~subject, data)
+```
+By-item variation: different scenarios for formal and informal speech
+$$pitch \sim politeness + sex + (1|subject) + (1|item) + \epsilon$$
 ---
+# Model in R
+```{r comment='#'}
+library(lme4)
 
-# Hello Ninja
-
-As a presentation ninja, you certainly should not be satisfied by the "Hello World" example. You need to understand more about two things:
-
-1. The [remark.js](https://remarkjs.com) library;
-
-1. The **xaringan** package;
-
-Basically **xaringan** injected the chakra of R Markdown (minus Pandoc) into **remark.js**. The slides are rendered by remark.js in the web browser, and the Markdown source needed by remark.js is generated from R Markdown (**knitr**).
-
----
-
-# remark.js
-
-You can see an introduction of remark.js from [its homepage](https://remarkjs.com). You should read the [remark.js Wiki](https://github.com/gnab/remark/wiki) at least once to know how to
-
-- create a new slide (Markdown syntax<sup>*</sup> and slide properties);
-
-- format a slide (e.g. text alignment);
-
-- configure the slideshow;
-
-- and use the presentation (keyboard shortcuts).
-
-It is important to be familiar with remark.js before you can understand the options in **xaringan**.
-
-.footnote[[*] It is different with Pandoc's Markdown! It is limited but should be enough for presentation purposes. Come on... You do not need a slide for the Table of Contents! Well, the Markdown support in remark.js [may be improved](https://github.com/gnab/remark/issues/142) in the future.]
+politeness.model = lmer(frequency ~ attitude +gender +(1|subject) + (1|scenario), data=data)
+summary(politeness.model)
+```
 
 ---
-background-image: url(`r xaringan:::karl`)
-background-size: cover
-class: center, bottom, inverse
+# Understanding the output of a LME model
 
-# I was so happy to have discovered remark.js!
+
+
+
+---
 
 ---
 class: inverse, middle, center
@@ -383,25 +421,13 @@ $$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
 
 $$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
 
-Limitations:
 
-1. The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting `$$` must appear in the very beginning of a line, followed immediately by a non-space character, and the ending `$$` must be at the end of a line, led by a non-space character;
-
-1. There should not be spaces after the opening `$` or before the closing `$`.
-
-1. Math does not work on the title slide (see [#61](https://github.com/yihui/xaringan/issues/61) for a workaround).
 
 ---
 
 # R Code
 
-```{r comment='#'}
-# a boring regression
-fit = lm(dist ~ 1 + speed, data = cars)
-coef(summary(fit))
-dojutsu = c('地爆天星', '天照', '加具土命', '神威', '須佐能乎', '無限月読')
-grep('天', dojutsu, value = TRUE)
-```
+
 
 ---
 
@@ -622,43 +648,12 @@ Question: what does `highlight.output = c(TRUE, FALSE)` mean? (Hint: think about
 
 # Macros
 
-- remark.js [allows users to define custom macros](https://github.com/yihui/xaringan/issues/80) (JS functions) that can be applied to Markdown text using the syntax `![:macroName arg1, arg2, ...]` or `![:macroName arg1, arg2, ...](this)`. For example, before remark.js initializes the slides, you can define a macro named `scale`:
-
-    ```js
-    remark.macros.scale = function (percentage) {
-      var url = this;
-      return '<img src="' + url + '" style="width: ' + percentage + '" />';
-    };
-    ```
-
-    Then the Markdown text
-
-    ```markdown
-    ![:scale 50%](image.jpg)
-    ```
-
-    will be translated to
-    
-    ```html
-    <img src="image.jpg" style="width: 50%" />
-    ```
 
 ---
 
 # Macros (continued)
 
-- To insert macros in **xaringan** slides, you can use the option `beforeInit` under the option `nature`, e.g.,
 
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          beforeInit: "macros.js"
-    ```
-
-    You save your remark.js macros in the file `macros.js`.
-
-- The `beforeInit` option can be used to insert arbitrary JS code before `remark.create()`. Inserting macros is just one of its possible applications.
 
 ---
 
