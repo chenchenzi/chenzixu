@@ -1,1002 +1,748 @@
-<!DOCTYPE html>
-<html lang="" xml:lang="">
-  <head>
-    <title>Linear Mixed Effects Models in R</title>
-    <meta charset="utf-8" />
-    <meta name="author" content="Chenzi Xu" />
-    <script src="libs/header-attrs/header-attrs.js"></script>
-    <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
-    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
-    <script src="libs/jquery/jquery.min.js"></script>
-    <link href="libs/leaflet/leaflet.css" rel="stylesheet" />
-    <script src="libs/leaflet/leaflet.js"></script>
-    <link href="libs/leafletfix/leafletfix.css" rel="stylesheet" />
-    <script src="libs/proj4/proj4.min.js"></script>
-    <script src="libs/Proj4Leaflet/proj4leaflet.js"></script>
-    <link href="libs/rstudio_leaflet/rstudio_leaflet.css" rel="stylesheet" />
-    <script src="libs/leaflet-binding/leaflet.js"></script>
-    <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
-    <script src="libs/datatables-binding/datatables.js"></script>
-    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
-    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
-    <link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
-    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
-    <link rel="stylesheet" href="middlebury1.css" type="text/css" />
-  </head>
-  <body>
-    <textarea id="source">
-class: center, middle, inverse, title-slide
-
-# Linear Mixed Effects Models in R
-## An introduction for linguistic students
-### Chenzi Xu
-### University of Oxford
-### 2021/12/12 (updated: 2022-01-13)<br><br><svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"> <path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg><a href="https://chenzixu.rbind.io/">chenzi.xu@rbind.io</a>
-
+---
+title: "Linear Mixed Effects Models in R"
+subtitle: "An introduction for linguistic students"
+author: "Chenzi Xu"
+institute: "University of Oxford"
+date: '2021/12/12 (updated: 2022-01-14)<br><br>[chenzi.xu@rbind.io](https://chenzixu.rbind.io/)'
+output:
+  xaringan::moon_reader:
+    css: ["middlebury1.css", metropolis-fonts]
+    lib_dir: libs
+    nature:
+      ratio: '16:9'
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: "macros.js"
 ---
 
-
-class: right, middle
-
-## Find me at...
-![:scale 20%](me.png)
-
-[&lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"&gt;&lt;/path&gt;&lt;/svg&gt; @ChenziAmy](http://twitter.com/ChenziAmy)  
-[&lt;svg viewBox="0 0 496 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;&lt;/svg&gt; @chenchenzi](https://github.com/chenchenzi)  
-[&lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"&gt;&lt;/path&gt;&lt;/svg&gt; chenzixu.rbind.io](https://alison.rbind.io)
-
----
-## Did you do the **pre-workshop setup**?
-
-&lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"&gt;&lt;/path&gt;&lt;/svg&gt; [https://chenzixu.rbind.io/](https://chenzixu.rbind.io/)
-
-## We assume:
-&lt;svg viewBox="0 0 581 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"&gt;&lt;/path&gt;&lt;/svg&gt; You have basic knowledge about R and R studio.
-
-&lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M332.8 320h38.4c6.4 0 12.8-6.4 12.8-12.8V172.8c0-6.4-6.4-12.8-12.8-12.8h-38.4c-6.4 0-12.8 6.4-12.8 12.8v134.4c0 6.4 6.4 12.8 12.8 12.8zm96 0h38.4c6.4 0 12.8-6.4 12.8-12.8V76.8c0-6.4-6.4-12.8-12.8-12.8h-38.4c-6.4 0-12.8 6.4-12.8 12.8v230.4c0 6.4 6.4 12.8 12.8 12.8zm-288 0h38.4c6.4 0 12.8-6.4 12.8-12.8v-70.4c0-6.4-6.4-12.8-12.8-12.8h-38.4c-6.4 0-12.8 6.4-12.8 12.8v70.4c0 6.4 6.4 12.8 12.8 12.8zm96 0h38.4c6.4 0 12.8-6.4 12.8-12.8V108.8c0-6.4-6.4-12.8-12.8-12.8h-38.4c-6.4 0-12.8 6.4-12.8 12.8v198.4c0 6.4 6.4 12.8 12.8 12.8zM496 384H64V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v336c0 17.67 14.33 32 32 32h464c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"&gt;&lt;/path&gt;&lt;/svg&gt; You have basic inferential statistical knowledge.
-
-###You want to know more about linear mixed models
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
+<link href="/rmarkdown-libs/leaflet/leaflet.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/leaflet/leaflet.js"></script>
+<link href="/rmarkdown-libs/leafletfix/leafletfix.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/proj4/proj4.min.js"></script>
+<script src="/rmarkdown-libs/Proj4Leaflet/proj4leaflet.js"></script>
+<link href="/rmarkdown-libs/rstudio_leaflet/rstudio_leaflet.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/leaflet-binding/leaflet.js"></script>
+<link href="/rmarkdown-libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/datatables-binding/datatables.js"></script>
+<link href="/rmarkdown-libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="/rmarkdown-libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/dt-core/js/jquery.dataTables.min.js"></script>
+<link href="/rmarkdown-libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/crosstalk/js/crosstalk.min.js"></script>
 
 
-???
-high school arithmetic and algebra. Elementary concepts of probability theory are assumed; the sum and the product rules, and the fact that the probabilities of all possible events must sum to 1, are the extent of the knowledge assumed. 
-
----
-
-# Outline
-
-1. Inferential Stats Recap
-
-1. the Data
-
-1. Linear Mixed Effects Model
-
-1. Checking Model Assumptions
-
-1. Understanding the output
-
-1. Different Model designs
-
-1. More on Fixed VS Random effects
-
-1. Limitations
-
-1. Report Writing
-
-
----
-class: center, middle
-
-# Inferential Stats Recap
---
-
-Central limit theorem (~~magic~~)
-
-Hypothesis testing: the (humble) t-test
-
-linear regression**
----
-# Central limit theorem (~~magic~~)
-.left-column[
+<p>class: right, middle</p>
+<div id="find-me-at" class="section level2">
+<h2>Find me at…</h2>
+<div class="figure">
+<img src="me.png" alt="" />
+<p class="caption">:scale 20%</p>
+</div>
+<p><span class="citation">[&lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt; &lt;path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"&gt;&lt;/path&gt;&lt;/svg&gt; @ChenziAmy]</span>(<a href="http://twitter.com/ChenziAmy" class="uri">http://twitter.com/ChenziAmy</a>)<br />
+<span class="citation">[&lt;svg viewBox="0 0 496 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt; &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;&lt;/svg&gt; @chenchenzi]</span>(<a href="https://github.com/chenchenzi" class="uri">https://github.com/chenchenzi</a>)<br />
+<a href="https://alison.rbind.io"><svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"> <path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg> chenzixu.rbind.io</a></p>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>## Did you do the <strong>pre-workshop setup</strong>?</td>
+</tr>
+<tr class="even">
+<td><svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"> <path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg> <a href="https://chenzixu.rbind.io/talk/lme/">https://chenzixu.rbind.io/talk/lme/</a></td>
+</tr>
+<tr class="odd">
+<td>## We assume:
+<svg viewBox="0 0 581 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"> <path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> You have basic knowledge about R and R studio.</td>
+</tr>
+<tr class="even">
+<td><svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"> <path d="M332.8 320h38.4c6.4 0 12.8-6.4 12.8-12.8V172.8c0-6.4-6.4-12.8-12.8-12.8h-38.4c-6.4 0-12.8 6.4-12.8 12.8v134.4c0 6.4 6.4 12.8 12.8 12.8zm96 0h38.4c6.4 0 12.8-6.4 12.8-12.8V76.8c0-6.4-6.4-12.8-12.8-12.8h-38.4c-6.4 0-12.8 6.4-12.8 12.8v230.4c0 6.4 6.4 12.8 12.8 12.8zm-288 0h38.4c6.4 0 12.8-6.4 12.8-12.8v-70.4c0-6.4-6.4-12.8-12.8-12.8h-38.4c-6.4 0-12.8 6.4-12.8 12.8v70.4c0 6.4 6.4 12.8 12.8 12.8zm96 0h38.4c6.4 0 12.8-6.4 12.8-12.8V108.8c0-6.4-6.4-12.8-12.8-12.8h-38.4c-6.4 0-12.8 6.4-12.8 12.8v198.4c0 6.4 6.4 12.8 12.8 12.8zM496 384H64V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v336c0 17.67 14.33 32 32 32h464c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path></svg> You have basic inferential statistical knowledge.</td>
+</tr>
+<tr class="odd">
+<td>###You want to know more about linear mixed models</td>
+</tr>
+<tr class="even">
+<td>???
+high school arithmetic and algebra. Elementary concepts of probability theory are assumed; the sum and the product rules, and the fact that the probabilities of all possible events must sum to 1, are the extent of the knowledge assumed.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="outline" class="section level1">
+<h1>Outline</h1>
+<ol style="list-style-type: decimal">
+<li><p>Inferential Stats Recap</p></li>
+<li><p>the Data</p></li>
+<li><p>Linear Mixed Effects Model</p></li>
+<li><p>Checking Model Assumptions</p></li>
+<li><p>Understanding the output</p></li>
+<li><p>Different Model designs</p></li>
+<li><p>More on Fixed VS Random effects</p></li>
+<li><p>Limitations</p></li>
+<li><p>Report Writing</p></li>
+</ol>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>class: center, middle</td>
+</tr>
+<tr class="even">
+<td># Inferential Stats Recap</td>
+</tr>
+</tbody>
+</table>
+<p>Central limit theorem (<del>magic</del>)</p>
+<p>Hypothesis testing: the (humble) t-test</p>
+<div id="linear-regression" class="section level2">
+<h2>linear regression**</h2>
+</div>
+</div>
+<div id="central-limit-theorem-magic" class="section level1">
+<h1>Central limit theorem (<del>magic</del>)</h1>
+<p>.left-column[
 ###Definition and Significance]
-.right-column[The **sampling distribution of means** is **normal**, provided two conditions are met: 
-(a) the sample size should be **large** enough
-(b) `\(\mu\)` and `\(\sigma\)` are defined for the probability density or mass function that generated the data. 
-
-
-We can derive an estimate of the distribution of (hypothetical) sample means from a single sample of n independent data points
-
-CLT is NOT the distribution that generated the data, but the sampling distribution of the sample means under **repeated sampling**.
-![:scale 70%](ct.png)
-]
-
-
----
-# Hypothesis testing: the (humble) t-test
+.right-column[The <strong>sampling distribution of means</strong> is <strong>normal</strong>, provided two conditions are met:
+(a) the sample size should be <strong>large</strong> enough
+(b) <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> are defined for the probability density or mass function that generated the data.</p>
+<p>We can derive an estimate of the distribution of (hypothetical) sample means from a single sample of n independent data points</p>
+<p>CLT is NOT the distribution that generated the data, but the sampling distribution of the sample means under <strong>repeated sampling</strong>.
+<img src="ct.png" alt=":scale 70%" />
+]</p>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"># Hypothesis testing: the (humble) t-test
 .left-column[
-### NHST procedure
-
-]
-.right-column[1. Define the null hypothesis `\(\mu_0\)`
-1. Given data of size `\(n\)`, estimate `\(\bar{y}\)`, standard deviation `\(s\)`, estimate the standard error `\(SE = s/{\sqrt{n}}\)`.
-1. The distance between the sample mean and the hypothesized mean can be written in SE units as follows.$$ t \times SE = \bar{y} -\mu$$
-Thus the sample mean is **t** standard errors away from the hypothesized mean: `$$t= \dfrac{\bar{y}-\mu_0}{s/\sqrt{n}}$$`
+### NHST procedure]
+.right-column[1. Define the null hypothesis <span class="math inline">\(\mu_0\)</span>
+1. Given data of size <span class="math inline">\(n\)</span>, estimate <span class="math inline">\(\bar{y}\)</span>, standard deviation <span class="math inline">\(s\)</span>, estimate the standard error <span class="math inline">\(SE = s/{\sqrt{n}}\)</span>.
+1. The distance between the sample mean and the hypothesized mean can be written in SE units as follows.<span class="math display">\[ t \times SE = \bar{y} -\mu\]</span>
+Thus the sample mean is <strong>t</strong> standard errors away from the hypothesized mean: <span class="math display">\[t= \dfrac{\bar{y}-\mu_0}{s/\sqrt{n}}\]</span>
 1. Reject null hypothesis if the observed t-value is “large”.
-1. Fail to reject the null hypothesis, if the observed t-value is “small”.
-]
+1. Fail to reject the null hypothesis, if the observed t-value is “small”.]
 ???
 One of the simplest statistical tests that one can do with continuous data: the t-test.
-the logic of these more complex tests will essentially be more of the same
----
-# Hypothesis testing: the (humble) t-test
+the logic of these more complex tests will essentially be more of the same</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"># Hypothesis testing: the (humble) t-test
 .pull-left[Under repeated sampling, the observed t-value is seen as an instance from a random variable T.
-$$ T \sim t(n-1)$$
+<span class="math display">\[ T \sim t(n-1)\]</span>
 The PDF of T, the t-distribution, is defined in terms of of n with n-1 degrees of freedom.
-![:scale 70%](t-dis.png)
-
-**Critical t-value**: the t-value such that `\(P(T&gt;|t|)=0.05\)`
+<img src="t-dis.png" alt=":scale 70%" /></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Critical t-value</strong>: the t-value such that <span class="math inline">\(P(T&gt;|t|)=0.05\)</span>
 ]
 .pull-right[
-**Type I error**: Reject the null when it’s true
-**Type II error**: Fail to reject the null when it’s false
-![:scale 70%](h0.png)
-
-**p-value**: the probability of obtaining the observed t-value, or some value more extreme than that, under the assumption that the null is true. 
-
-The p-value is always interpreted with reference to the pre-defined Type I error. Conventionally, we reject the null if `\(p &lt; 0.05\)`
+<strong>Type I error</strong>: Reject the null when it’s true
+<strong>Type II error</strong>: Fail to reject the null when it’s false
+<img src="h0.png" alt=":scale 70%" /></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>p-value</strong>: the probability of obtaining the observed t-value, or some value more extreme than that, under the assumption that the null is true.</td>
+</tr>
+<tr class="even">
+<td align="left">The p-value is always interpreted with reference to the pre-defined Type I error. Conventionally, we reject the null if <span class="math inline">\(p &lt; 0.05\)</span>
 ]
 ???
-Two possible decisions: **reject the null** or **fail to reject the null**.
-Two possible worlds: the null is **true** or **false**.
----
-# Linear Regression
-
-A simple example of linear model is
-`$$Y_i = \beta_0 + \beta_1X_i + e_i$$`
-Where `\(Y_i\)` is the measured value of the dependent variable for observation i; `\(X_i\)` is the explanatory variable or predictor; `\(Y_i\)` is modelled in terms of an intercept `\(\beta_0\)` plus the effect of predictor `\(X_i\)` weighted by coefficient `\(\beta_1\)` and error term `\(e_i\)`.
+Two possible decisions: <strong>reject the null</strong> or <strong>fail to reject the null</strong>.
+Two possible worlds: the null is <strong>true</strong> or <strong>false</strong>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="linear-regression-1" class="section level1">
+<h1>Linear Regression</h1>
+<p>A simple example of linear model is
+<span class="math display">\[Y_i = \beta_0 + \beta_1X_i + e_i\]</span>
+Where <span class="math inline">\(Y_i\)</span> is the measured value of the dependent variable for observation i; <span class="math inline">\(X_i\)</span> is the explanatory variable or predictor; <span class="math inline">\(Y_i\)</span> is modelled in terms of an intercept <span class="math inline">\(\beta_0\)</span> plus the effect of predictor <span class="math inline">\(X_i\)</span> weighted by coefficient <span class="math inline">\(\beta_1\)</span> and error term <span class="math inline">\(e_i\)</span>.
 .left-col[
-![](lmer_files/figure-html/unnamed-chunk-1-1.png)&lt;!-- --&gt;
-]
+<img src="/slides/lme/lmer_files/figure-html/unnamed-chunk-1-1.png" width="384" />]
 .right-col[
-Simulated data illustrating linear model `\(Y_i = 3+2X_i+e_i\)`.
-The most common method for fitting a regression line is **least-squares**.
-
-A linear model is a model that is **linear in the coefficients**; each coefficient is only allowed to be set to the power of one.
-
-Non-linear relationships can be analysed using a linear model.]
-
-???
+Simulated data illustrating linear model <span class="math inline">\(Y_i = 3+2X_i+e_i\)</span>.
+The most common method for fitting a regression line is <strong>least-squares</strong>.</p>
+<p>A linear model is a model that is <strong>linear in the coefficients</strong>; each coefficient is only allowed to be set to the power of one.</p>
+<p>Non-linear relationships can be analysed using a linear model.]</p>
+<p>???
 LME an extension of the General Linear Model that underlies simpler approaches such as ANOVA, t-test, and classical regression.
-Many people assume that 'linear models' can only capture linear relationships, i.e., relationships that can be described by a straight line (or a plane). This is false.
-A linear model is a weighted sum of various terms, and each term has a single predictor (or a constant) that is multiplied by a coefficient. 
----
-class: center, middle
-
-# Data
-
-
-```r
-data = read.csv("http://www.bodowinter.com/tutorial/politeness_data.csv")
-head(data)
-```
-
-```
-#   subject gender scenario attitude frequency
+Many people assume that ‘linear models’ can only capture linear relationships, i.e., relationships that can be described by a straight line (or a plane). This is false.
+A linear model is a weighted sum of various terms, and each term has a single predictor (or a constant) that is multiplied by a coefficient.
+—
+class: center, middle</p>
+</div>
+<div id="data" class="section level1">
+<h1>Data</h1>
+<pre class="r"><code>data = read.csv(&quot;http://www.bodowinter.com/tutorial/politeness_data.csv&quot;)
+head(data)</code></pre>
+<pre><code>#   subject gender scenario attitude frequency
 # 1      F1      F        1      pol     213.3
 # 2      F1      F        1      inf     204.5
 # 3      F1      F        2      pol     285.1
 # 4      F1      F        2      inf     259.7
 # 5      F1      F        3      pol     203.9
-# 6      F1      F        3      inf     286.9
-```
-
-```r
-which(!complete.cases(data))
-```
-
-```
-# [1] 39
-```
----
-
----
-
-# Hello Ninja
-
-As a presentation ninja, you certainly should not be satisfied by the "Hello World" example. You need to understand more about two things:
-
-1. The [remark.js](https://remarkjs.com) library;
-
-1. The **xaringan** package;
-
-Basically **xaringan** injected the chakra of R Markdown (minus Pandoc) into **remark.js**. The slides are rendered by remark.js in the web browser, and the Markdown source needed by remark.js is generated from R Markdown (**knitr**).
-
----
-
-# remark.js
-
-You can see an introduction of remark.js from [its homepage](https://remarkjs.com). You should read the [remark.js Wiki](https://github.com/gnab/remark/wiki) at least once to know how to
-
-- create a new slide (Markdown syntax&lt;sup&gt;*&lt;/sup&gt; and slide properties);
-
-- format a slide (e.g. text alignment);
-
-- configure the slideshow;
-
-- and use the presentation (keyboard shortcuts).
-
-It is important to be familiar with remark.js before you can understand the options in **xaringan**.
-
-.footnote[[*] It is different with Pandoc's Markdown! It is limited but should be enough for presentation purposes. Come on... You do not need a slide for the Table of Contents! Well, the Markdown support in remark.js [may be improved](https://github.com/gnab/remark/issues/142) in the future.]
-
----
-background-image: url(https://github.com/yihui/xaringan/releases/download/v0.0.2/karl-moustache.jpg)
-background-size: cover
-class: center, bottom, inverse
-
-# I was so happy to have discovered remark.js!
-
----
-class: inverse, middle, center
-
-# Using xaringan
-
----
-
-# xaringan
-
-Provides an R Markdown output format `xaringan::moon_reader` as a wrapper for remark.js, and you can use it in the YAML metadata, e.g.
-
-```yaml
----
-title: "A Cool Presentation"
+# 6      F1      F        3      inf     286.9</code></pre>
+<pre class="r"><code>which(!complete.cases(data))</code></pre>
+<pre><code># [1] 39</code></pre>
+<hr />
+<hr />
+</div>
+<div id="hello-ninja" class="section level1">
+<h1>Hello Ninja</h1>
+<p>As a presentation ninja, you certainly should not be satisfied by the “Hello World” example. You need to understand more about two things:</p>
+<ol style="list-style-type: decimal">
+<li><p>The <a href="https://remarkjs.com">remark.js</a> library;</p></li>
+<li><p>The <strong>xaringan</strong> package;</p></li>
+</ol>
+<p>Basically <strong>xaringan</strong> injected the chakra of R Markdown (minus Pandoc) into <strong>remark.js</strong>. The slides are rendered by remark.js in the web browser, and the Markdown source needed by remark.js is generated from R Markdown (<strong>knitr</strong>).</p>
+<hr />
+</div>
+<div id="remark.js" class="section level1">
+<h1>remark.js</h1>
+<p>You can see an introduction of remark.js from <a href="https://remarkjs.com">its homepage</a>. You should read the <a href="https://github.com/gnab/remark/wiki">remark.js Wiki</a> at least once to know how to</p>
+<ul>
+<li><p>create a new slide (Markdown syntax<sup>*</sup> and slide properties);</p></li>
+<li><p>format a slide (e.g. text alignment);</p></li>
+<li><p>configure the slideshow;</p></li>
+<li><p>and use the presentation (keyboard shortcuts).</p></li>
+</ul>
+<p>It is important to be familiar with remark.js before you can understand the options in <strong>xaringan</strong>.</p>
+<p>.footnote[[*] It is different with Pandoc’s Markdown! It is limited but should be enough for presentation purposes. Come on… You do not need a slide for the Table of Contents! Well, the Markdown support in remark.js <a href="https://github.com/gnab/remark/issues/142">may be improved</a> in the future.]</p>
+<p>class: inverse, middle, center</p>
+</div>
+<div id="using-xaringan" class="section level1">
+<h1>Using xaringan</h1>
+<hr />
+</div>
+<div id="xaringan" class="section level1">
+<h1>xaringan</h1>
+<p>Provides an R Markdown output format <code>xaringan::moon_reader</code> as a wrapper for remark.js, and you can use it in the YAML metadata, e.g.</p>
+<pre class="yaml"><code>---
+title: &quot;A Cool Presentation&quot;
 output:
   xaringan::moon_reader:
     yolo: true
     nature:
       autoplay: 30000
----
-```
-
-See the help page `?xaringan::moon_reader` for all possible options that you can use.
-
----
-
-# remark.js vs xaringan
-
-Some differences between using remark.js (left) and using **xaringan** (right):
-
-.pull-left[
-1. Start with a boilerplate HTML file;
-
-1. Plain Markdown;
-
-1. Write JavaScript to autoplay slides;
-
-1. Manually configure MathJax;
-
-1. Highlight code with `*`;
-
-1. Edit Markdown source and refresh browser to see updated slides;
-]
-
-.pull-right[
-1. Start with an R Markdown document;
-
-1. R Markdown (can embed R/other code chunks);
-
-1. Provide an option `autoplay`;
-
-1. MathJax just works;&lt;sup&gt;*&lt;/sup&gt;
-
-1. Highlight code with `{{}}`;
-
-1. The RStudio addin "Infinite Moon Reader" automatically refreshes slides on changes;
-]
-
-.footnote[[*] Not really. See next page.]
-
----
-
-# Math Expressions
-
-You can write LaTeX math expressions inside a pair of dollar signs, e.g. &amp;#36;\alpha+\beta$ renders `\(\alpha+\beta\)`. You can use the display style with double dollar signs:
-
-```
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-```
-
-`$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$`
-
-Limitations:
-
-1. The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting `$$` must appear in the very beginning of a line, followed immediately by a non-space character, and the ending `$$` must be at the end of a line, led by a non-space character;
-
-1. There should not be spaces after the opening `$` or before the closing `$`.
-
-1. Math does not work on the title slide (see [#61](https://github.com/yihui/xaringan/issues/61) for a workaround).
-
----
-
-# R Code
-
-
-```r
-# a boring regression
+---</code></pre>
+<p>See the help page <code>?xaringan::moon_reader</code> for all possible options that you can use.</p>
+<hr />
+</div>
+<div id="remark.js-vs-xaringan" class="section level1">
+<h1>remark.js vs xaringan</h1>
+<p>Some differences between using remark.js (left) and using <strong>xaringan</strong> (right):</p>
+<p>.pull-left[
+1. Start with a boilerplate HTML file;</p>
+<ol style="list-style-type: decimal">
+<li><p>Plain Markdown;</p></li>
+<li><p>Write JavaScript to autoplay slides;</p></li>
+<li><p>Manually configure MathJax;</p></li>
+<li><p>Highlight code with <code>*</code>;</p></li>
+<li><p>Edit Markdown source and refresh browser to see updated slides;
+]</p></li>
+</ol>
+<p>.pull-right[
+1. Start with an R Markdown document;</p>
+<ol style="list-style-type: decimal">
+<li><p>R Markdown (can embed R/other code chunks);</p></li>
+<li><p>Provide an option <code>autoplay</code>;</p></li>
+<li><p>MathJax just works;<sup>*</sup></p></li>
+<li><p>Highlight code with <code>{{}}</code>;</p></li>
+<li><p>The RStudio addin “Infinite Moon Reader” automatically refreshes slides on changes;
+]</p></li>
+</ol>
+<p>.footnote[[*] Not really. See next page.]</p>
+<hr />
+</div>
+<div id="math-expressions" class="section level1">
+<h1>Math Expressions</h1>
+<p>You can write LaTeX math expressions inside a pair of dollar signs, e.g. $+$ renders <span class="math inline">\(\alpha+\beta\)</span>. You can use the display style with double dollar signs:</p>
+<pre><code>$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$</code></pre>
+<p><span class="math display">\[\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i\]</span></p>
+<p>Limitations:</p>
+<ol style="list-style-type: decimal">
+<li><p>The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting <code>$$</code> must appear in the very beginning of a line, followed immediately by a non-space character, and the ending <code>$$</code> must be at the end of a line, led by a non-space character;</p></li>
+<li><p>There should not be spaces after the opening <code>$</code> or before the closing <code>$</code>.</p></li>
+<li><p>Math does not work on the title slide (see <a href="https://github.com/yihui/xaringan/issues/61">#61</a> for a workaround).</p></li>
+</ol>
+<hr />
+</div>
+<div id="r-code" class="section level1">
+<h1>R Code</h1>
+<pre class="r"><code># a boring regression
 fit = lm(dist ~ 1 + speed, data = cars)
-coef(summary(fit))
-```
-
-```
-#               Estimate Std. Error   t value     Pr(&gt;|t|)
+coef(summary(fit))</code></pre>
+<pre><code>#               Estimate Std. Error   t value     Pr(&gt;|t|)
 # (Intercept) -17.579095  6.7584402 -2.601058 1.231882e-02
-# speed         3.932409  0.4155128  9.463990 1.489836e-12
-```
-
-```r
-dojutsu = c('地爆天星', '天照', '加具土命', '神威', '須佐能乎', '無限月読')
-grep('天', dojutsu, value = TRUE)
-```
-
-```
-# [1] "地爆天星" "天照"
-```
-
----
-
-# R Plots
-
-
-```r
-par(mar = c(4, 4, 1, .1))
-plot(cars, pch = 19, col = 'darkgray', las = 1)
-abline(fit, lwd = 2)
-```
-
-![](lmer_files/figure-html/cars-1.svg)&lt;!-- --&gt;
-
----
-
-# Tables
-
-If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
-
-
-```r
-knitr::kable(head(iris), format = 'html')
-```
-
-&lt;table&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:right;"&gt; Sepal.Length &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Sepal.Width &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Petal.Length &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Petal.Width &lt;/th&gt;
-   &lt;th style="text-align:left;"&gt; Species &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 5.1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 4.9 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 4.7 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.3 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 4.6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 5.0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 5.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.9 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.7 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.4 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
----
-
-# HTML Widgets
-
-I have not thoroughly tested HTML widgets against **xaringan**. Some may work well, and some may not. It is a little tricky.
-
-Similarly, the Shiny mode (`runtime: shiny`) does not work. I might get these issues fixed in the future, but these are not of high priority to me. I never turn my presentation into a Shiny app. When I need to demonstrate more complicated examples, I just launch them separately. It is convenient to share slides with other people when they are plain HTML/JS applications.
-
-See the next page for two HTML widgets.
-
----
-
-
-```r
-library(leaflet)
-leaflet() %&gt;% addTiles() %&gt;% setView(-93.65, 42.0285, zoom = 17)
-```
-
-<div id="htmlwidget-d3ead8cd17428590972f" style="width:100%;height:432px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d3ead8cd17428590972f">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]}],"setView":[[42.0285,-93.65],17,[]]},"evals":[],"jsHooks":[]}</script>
-
----
-
-
-```r
-DT::datatable(
+# speed         3.932409  0.4155128  9.463990 1.489836e-12</code></pre>
+<pre class="r"><code>dojutsu = c(&#39;地爆天星&#39;, &#39;天照&#39;, &#39;加具土命&#39;, &#39;神威&#39;, &#39;須佐能乎&#39;, &#39;無限月読&#39;)
+grep(&#39;天&#39;, dojutsu, value = TRUE)</code></pre>
+<pre><code># [1] &quot;地爆天星&quot; &quot;天照&quot;</code></pre>
+<hr />
+</div>
+<div id="r-plots" class="section level1">
+<h1>R Plots</h1>
+<pre class="r"><code>par(mar = c(4, 4, 1, .1))
+plot(cars, pch = 19, col = &#39;darkgray&#39;, las = 1)
+abline(fit, lwd = 2)</code></pre>
+<p><img src="/slides/lme/lmer_files/figure-html/cars-1.svg" width="672" /></p>
+<hr />
+</div>
+<div id="tables" class="section level1">
+<h1>Tables</h1>
+<p>If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,</p>
+<pre class="r"><code>knitr::kable(head(iris), format = &#39;html&#39;)</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+Sepal.Length
+</th>
+<th style="text-align:right;">
+Sepal.Width
+</th>
+<th style="text-align:right;">
+Petal.Length
+</th>
+<th style="text-align:right;">
+Petal.Width
+</th>
+<th style="text-align:left;">
+Species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.7
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.6
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+3.6
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.4
+</td>
+<td style="text-align:right;">
+3.9
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="html-widgets" class="section level1">
+<h1>HTML Widgets</h1>
+<p>I have not thoroughly tested HTML widgets against <strong>xaringan</strong>. Some may work well, and some may not. It is a little tricky.</p>
+<p>Similarly, the Shiny mode (<code>runtime: shiny</code>) does not work. I might get these issues fixed in the future, but these are not of high priority to me. I never turn my presentation into a Shiny app. When I need to demonstrate more complicated examples, I just launch them separately. It is convenient to share slides with other people when they are plain HTML/JS applications.</p>
+<p>See the next page for two HTML widgets.</p>
+<hr />
+<pre class="r"><code>library(leaflet)
+leaflet() %&gt;% addTiles() %&gt;% setView(-93.65, 42.0285, zoom = 17)</code></pre>
+<div id="htmlwidget-1" style="width:100%;height:576px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]}],"setView":[[42.0285,-93.65],17,[]]},"evals":[],"jsHooks":[]}</script>
+<hr />
+<pre class="r"><code>DT::datatable(
   head(iris, 10),
   fillContainer = FALSE, options = list(pageLength = 8)
-)
-```
-
-<div id="htmlwidget-6221b835006794800675" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6221b835006794800675">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":8,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
-
----
-
-# Some Tips
-
-- Do not forget to try the `yolo` option of `xaringan::moon_reader`.
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        yolo: true
-    ```
-
----
-
-# Some Tips
-
-- Slides can be automatically played if you set the `autoplay` option under `nature`, e.g. go to the next slide every 30 seconds in a lightning talk:
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          autoplay: 30000
-    ```
-
-- If you want to restart the play after it reaches the last slide, you may set the sub-option `loop` to TRUE, e.g.,
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          autoplay:
-            interval: 30000
-            loop: true
-    ```
-
----
-
-# Some Tips
-
-- A countdown timer can be added to every page of the slides using the `countdown` option under `nature`, e.g. if you want to spend one minute on every page when you give the talk, you can set:
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          countdown: 60000
-    ```
-
-    Then you will see a timer counting down from `01:00`, to `00:59`, `00:58`, ... When the time is out, the timer will continue but the time turns red.
-    
----
-
-# Some Tips
-
-- The title slide is created automatically by **xaringan**, but it is just another remark.js slide added before your other slides.
-
-    The title slide is set to `class: center, middle, inverse, title-slide` by default. You can change the classes applied to the title slide with the `titleSlideClass` option of `nature` (`title-slide` is always applied).
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          titleSlideClass: [top, left, inverse]
-    ```
-    
---
-
-- If you'd like to create your own title slide, disable **xaringan**'s title slide with the `seal = FALSE` option of `moon_reader`.
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        seal: false
-    ```
-
----
-
-# Some Tips
-
-- There are several ways to build incremental slides. See [this presentation](https://slides.yihui.org/xaringan/incremental.html) for examples.
-
-- The option `highlightLines: true` of `nature` will highlight code lines that start with `*`, or are wrapped in `{{ }}`, or have trailing comments `#&lt;&lt;`;
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          highlightLines: true
-    ```
-
-    See examples on the next page.
-
----
-
-# Some Tips
-
-
-.pull-left[
-An example using a leading `*`:
-
-    ```r
-    if (TRUE) {
-    ** message("Very important!")
-    }
-    ```
-Output:
-```r
+)</code></pre>
+<div id="htmlwidget-2" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":8,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<hr />
+</div>
+<div id="some-tips" class="section level1">
+<h1>Some Tips</h1>
+<ul>
+<li><p>Do not forget to try the <code>yolo</code> option of <code>xaringan::moon_reader</code>.</p>
+<pre class="yaml"><code>output:
+  xaringan::moon_reader:
+    yolo: true</code></pre></li>
+</ul>
+<hr />
+</div>
+<div id="some-tips-1" class="section level1">
+<h1>Some Tips</h1>
+<ul>
+<li><p>Slides can be automatically played if you set the <code>autoplay</code> option under <code>nature</code>, e.g. go to the next slide every 30 seconds in a lightning talk:</p>
+<pre class="yaml"><code>output:
+  xaringan::moon_reader:
+    nature:
+      autoplay: 30000</code></pre></li>
+<li><p>If you want to restart the play after it reaches the last slide, you may set the sub-option <code>loop</code> to TRUE, e.g.,</p>
+<pre class="yaml"><code>output:
+  xaringan::moon_reader:
+    nature:
+      autoplay:
+        interval: 30000
+        loop: true</code></pre></li>
+</ul>
+<hr />
+</div>
+<div id="some-tips-2" class="section level1">
+<h1>Some Tips</h1>
+<ul>
+<li><p>A countdown timer can be added to every page of the slides using the <code>countdown</code> option under <code>nature</code>, e.g. if you want to spend one minute on every page when you give the talk, you can set:</p>
+<pre class="yaml"><code>output:
+  xaringan::moon_reader:
+    nature:
+      countdown: 60000</code></pre>
+<p>Then you will see a timer counting down from <code>01:00</code>, to <code>00:59</code>, <code>00:58</code>, … When the time is out, the timer will continue but the time turns red.</p></li>
+</ul>
+<hr />
+</div>
+<div id="some-tips-3" class="section level1">
+<h1>Some Tips</h1>
+<ul>
+<li><p>The title slide is created automatically by <strong>xaringan</strong>, but it is just another remark.js slide added before your other slides.</p>
+<p>The title slide is set to <code>class: center, middle, inverse, title-slide</code> by default. You can change the classes applied to the title slide with the <code>titleSlideClass</code> option of <code>nature</code> (<code>title-slide</code> is always applied).</p>
+<pre class="yaml"><code>output:
+  xaringan::moon_reader:
+    nature:
+      titleSlideClass: [top, left, inverse]</code></pre></li>
+</ul>
+<p>–</p>
+<ul>
+<li><p>If you’d like to create your own title slide, disable <strong>xaringan</strong>’s title slide with the <code>seal = FALSE</code> option of <code>moon_reader</code>.</p>
+<pre class="yaml"><code>output:
+  xaringan::moon_reader:
+    seal: false</code></pre></li>
+</ul>
+<hr />
+</div>
+<div id="some-tips-4" class="section level1">
+<h1>Some Tips</h1>
+<ul>
+<li><p>There are several ways to build incremental slides. See <a href="https://slides.yihui.org/xaringan/incremental.html">this presentation</a> for examples.</p></li>
+<li><p>The option <code>highlightLines: true</code> of <code>nature</code> will highlight code lines that start with <code>*</code>, or are wrapped in <code>{{ }}</code>, or have trailing comments <code>#&lt;&lt;</code>;</p>
+<pre class="yaml"><code>output:
+  xaringan::moon_reader:
+    nature:
+      highlightLines: true</code></pre>
+<p>See examples on the next page.</p></li>
+</ul>
+<hr />
+</div>
+<div id="some-tips-5" class="section level1">
+<h1>Some Tips</h1>
+<p>.pull-left[
+An example using a leading <code>*</code>:</p>
+<pre><code>```r
 if (TRUE) {
-* message("Very important!")
+** message(&quot;Very important!&quot;)
 }
-```
-
-This is invalid R code, so it is a plain fenced code block that is not executed.
-]
-
-.pull-right[
-An example using `{{}}`:
-
-````
-```{r tidy=FALSE}
+```</code></pre>
+<p>Output:</p>
+<pre class="r"><code>if (TRUE) {
+* message(&quot;Very important!&quot;)
+}</code></pre>
+<p>This is invalid R code, so it is a plain fenced code block that is not executed.
+]</p>
+<p>.pull-right[
+An example using <code>{{}}</code>:</p>
+<pre><code>```{r tidy=FALSE}
 if (TRUE) {
-*{{ message("Very important!") }}
+*{{ message(&quot;Very important!&quot;) }}
 }
-```
-````
-Output:
-
-```r
-if (TRUE) {
-* message("Very important!") 
-}
-```
-
-```
-## Very important!
-```
-
-It is valid R code so you can run it. Note that `{{}}` can wrap an R expression of multiple lines.
-]
-
----
-
-# Some Tips
-
-An example of using the trailing comment `#&lt;&lt;` to highlight lines:
-
-````markdown
-```{r tidy=FALSE}
+```</code></pre>
+<p>Output:</p>
+<pre class="r"><code>if (TRUE) {
+{{ message(&quot;Very important!&quot;) }}
+}</code></pre>
+<pre><code>## Very important!</code></pre>
+<p>It is valid R code so you can run it. Note that <code>{{}}</code> can wrap an R expression of multiple lines.
+]</p>
+<hr />
+</div>
+<div id="some-tips-6" class="section level1">
+<h1>Some Tips</h1>
+<p>An example of using the trailing comment <code>#&lt;&lt;</code> to highlight lines:</p>
+<pre class="markdown"><code>```{r tidy=FALSE}
 library(ggplot2)
 ggplot(mtcars) + 
   aes(mpg, disp) + 
   geom_point() +   #&lt;&lt;
   geom_smooth()    #&lt;&lt;
-```
-````
-
-Output:
-
-
-```r
-library(ggplot2)
+```</code></pre>
+<p>Output:</p>
+<pre class="r"><code>library(ggplot2)
 ggplot(mtcars) + 
   aes(mpg, disp) + 
-* geom_point() +
-* geom_smooth()
-```
-
----
-
-# Some Tips
-
-When you enable line-highlighting, you can also use the chunk option `highlight.output` to highlight specific lines of the text output from a code chunk. For example, `highlight.output = TRUE` means highlighting all lines, and `highlight.output = c(1, 3)` means highlighting the first and third line.
-
-````md
-```{r, highlight.output=c(1, 3)}
+  geom_point() +   #&lt;&lt;
+  geom_smooth()    #&lt;&lt;</code></pre>
+<hr />
+</div>
+<div id="some-tips-7" class="section level1">
+<h1>Some Tips</h1>
+<p>When you enable line-highlighting, you can also use the chunk option <code>highlight.output</code> to highlight specific lines of the text output from a code chunk. For example, <code>highlight.output = TRUE</code> means highlighting all lines, and <code>highlight.output = c(1, 3)</code> means highlighting the first and third line.</p>
+<pre class="md"><code>```{r, highlight.output=c(1, 3)}
 head(iris)
-```
-````
-
-
-```
-*##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+```</code></pre>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ## 1          5.1         3.5          1.4         0.2  setosa
-*## 2          4.9         3.0          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
 ## 3          4.7         3.2          1.3         0.2  setosa
 ## 4          4.6         3.1          1.5         0.2  setosa
 ## 5          5.0         3.6          1.4         0.2  setosa
-## 6          5.4         3.9          1.7         0.4  setosa
-```
-
-Question: what does `highlight.output = c(TRUE, FALSE)` mean? (Hint: think about R's recycling of vectors)
-
----
-
-# Some Tips
-
-- To make slides work offline, you need to download a copy of remark.js in advance, because **xaringan** uses the online version by default (see the help page `?xaringan::moon_reader`).
-
-- You can use `xaringan::summon_remark()` to download the latest or a specified version of remark.js. By default, it is downloaded to `libs/remark-latest.min.js`.
-
-- Then change the `chakra` option in YAML to point to this file, e.g.
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        chakra: libs/remark-latest.min.js
-    ```
-
-- If you used Google fonts in slides (the default theme uses _Yanone Kaffeesatz_, _Droid Serif_, and _Source Code Pro_), they won't work offline unless you download or install them locally. The Heroku app [google-webfonts-helper](https://google-webfonts-helper.herokuapp.com/fonts) can help you download fonts and generate the necessary CSS.
-
----
-
-# Macros
-
-- remark.js [allows users to define custom macros](https://github.com/yihui/xaringan/issues/80) (JS functions) that can be applied to Markdown text using the syntax `![:macroName arg1, arg2, ...]` or `![:macroName arg1, arg2, ...](this)`. For example, before remark.js initializes the slides, you can define a macro named `scale`:
-
-    ```js
-    remark.macros.scale = function (percentage) {
-      var url = this;
-      return '&lt;img src="' + url + '" style="width: ' + percentage + '" /&gt;';
-    };
-    ```
-
-    Then the Markdown text
-
-    ```markdown
-    ![:scale 50%](image.jpg)
-    ```
-
-    will be translated to
-    
-    ```html
-    &lt;img src="image.jpg" style="width: 50%" /&gt;
-    ```
-
----
-
-# Macros (continued)
-
-- To insert macros in **xaringan** slides, you can use the option `beforeInit` under the option `nature`, e.g.,
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          beforeInit: "macros.js"
-    ```
-
-    You save your remark.js macros in the file `macros.js`.
-
-- The `beforeInit` option can be used to insert arbitrary JS code before `remark.create()`. Inserting macros is just one of its possible applications.
-
----
-
-# CSS
-
-Among all options in `xaringan::moon_reader`, the most challenging but perhaps also the most rewarding one is `css`, because it allows you to customize the appearance of your slides using any CSS rules or hacks you know.
-
-You can see the default CSS file [here](https://github.com/yihui/xaringan/blob/master/inst/rmarkdown/templates/xaringan/resources/default.css). You can completely replace it with your own CSS files, or define new rules to override the default. See the help page `?xaringan::moon_reader` for more information.
-
----
-
-# CSS
-
-For example, suppose you want to change the font for code from the default "Source Code Pro" to "Ubuntu Mono". You can create a CSS file named, say, `ubuntu-mono.css`:
-
-```css
-@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
-
-.remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
-```
-
-Then set the `css` option in the YAML metadata:
-
-```yaml
-output:
+## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<p>Question: what does <code>highlight.output = c(TRUE, FALSE)</code> mean? (Hint: think about R’s recycling of vectors)</p>
+<hr />
+</div>
+<div id="some-tips-8" class="section level1">
+<h1>Some Tips</h1>
+<ul>
+<li><p>To make slides work offline, you need to download a copy of remark.js in advance, because <strong>xaringan</strong> uses the online version by default (see the help page <code>?xaringan::moon_reader</code>).</p></li>
+<li><p>You can use <code>xaringan::summon_remark()</code> to download the latest or a specified version of remark.js. By default, it is downloaded to <code>libs/remark-latest.min.js</code>.</p></li>
+<li><p>Then change the <code>chakra</code> option in YAML to point to this file, e.g.</p>
+<pre class="yaml"><code>output:
   xaringan::moon_reader:
-    css: ["default", "ubuntu-mono.css"]
-```
+    chakra: libs/remark-latest.min.js</code></pre></li>
+<li><p>If you used Google fonts in slides (the default theme uses <em>Yanone Kaffeesatz</em>, <em>Droid Serif</em>, and <em>Source Code Pro</em>), they won’t work offline unless you download or install them locally. The Heroku app <a href="https://google-webfonts-helper.herokuapp.com/fonts">google-webfonts-helper</a> can help you download fonts and generate the necessary CSS.</p></li>
+</ul>
+<hr />
+</div>
+<div id="macros" class="section level1">
+<h1>Macros</h1>
+<ul>
+<li><p>remark.js <a href="https://github.com/yihui/xaringan/issues/80">allows users to define custom macros</a> (JS functions) that can be applied to Markdown text using the syntax <code>![:macroName arg1, arg2, ...]</code> or <code>![:macroName arg1, arg2, ...](this)</code>. For example, before remark.js initializes the slides, you can define a macro named <code>scale</code>:</p>
+<pre class="js"><code>remark.macros.scale = function (percentage) {
+  var url = this;
+  return &#39;&lt;img src=&quot;&#39; + url + &#39;&quot; style=&quot;width: &#39; + percentage + &#39;&quot; /&gt;&#39;;
+};</code></pre>
+<p>Then the Markdown text</p>
+<pre class="markdown"><code>![:scale 50%](image.jpg)</code></pre>
+<p>will be translated to</p>
+<pre class="html"><code>&lt;img src=&quot;image.jpg&quot; style=&quot;width: 50%&quot; /&gt;</code></pre></li>
+</ul>
+<hr />
+</div>
+<div id="macros-continued" class="section level1">
+<h1>Macros (continued)</h1>
+<ul>
+<li><p>To insert macros in <strong>xaringan</strong> slides, you can use the option <code>beforeInit</code> under the option <code>nature</code>, e.g.,</p>
+<pre class="yaml"><code>output:
+  xaringan::moon_reader:
+    nature:
+      beforeInit: &quot;macros.js&quot;</code></pre>
+<p>You save your remark.js macros in the file <code>macros.js</code>.</p></li>
+<li><p>The <code>beforeInit</code> option can be used to insert arbitrary JS code before <code>remark.create()</code>. Inserting macros is just one of its possible applications.</p></li>
+</ul>
+<hr />
+</div>
+<div id="css" class="section level1">
+<h1>CSS</h1>
+<p>Among all options in <code>xaringan::moon_reader</code>, the most challenging but perhaps also the most rewarding one is <code>css</code>, because it allows you to customize the appearance of your slides using any CSS rules or hacks you know.</p>
+<p>You can see the default CSS file <a href="https://github.com/yihui/xaringan/blob/master/inst/rmarkdown/templates/xaringan/resources/default.css">here</a>. You can completely replace it with your own CSS files, or define new rules to override the default. See the help page <code>?xaringan::moon_reader</code> for more information.</p>
+<hr />
+</div>
+<div id="css-1" class="section level1">
+<h1>CSS</h1>
+<p>For example, suppose you want to change the font for code from the default “Source Code Pro” to “Ubuntu Mono”. You can create a CSS file named, say, <code>ubuntu-mono.css</code>:</p>
+<pre class="css"><code>@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
 
-Here I assume `ubuntu-mono.css` is under the same directory as your Rmd.
-
-See [yihui/xaringan#83](https://github.com/yihui/xaringan/issues/83) for an example of using the [Fira Code](https://github.com/tonsky/FiraCode) font, which supports ligatures in program code.
-
----
-
-# CSS (with Sass)
-
-**xaringan** also supports Sass support via **rmarkdown**. Suppose you want to use the same color for different elements, e.g., first heading and bold text. You can create a `.scss` file, say `mytheme.scss`, using the [sass](https://sass-lang.com/) syntax with variables:
-
-```scss
-$mycolor: #ff0000; 
+.remark-code, .remark-inline-code { font-family: &#39;Ubuntu Mono&#39;; }</code></pre>
+<p>Then set the <code>css</code> option in the YAML metadata:</p>
+<pre class="yaml"><code>output:
+  xaringan::moon_reader:
+    css: [&quot;default&quot;, &quot;ubuntu-mono.css&quot;]</code></pre>
+<p>Here I assume <code>ubuntu-mono.css</code> is under the same directory as your Rmd.</p>
+<p>See <a href="https://github.com/yihui/xaringan/issues/83">yihui/xaringan#83</a> for an example of using the <a href="https://github.com/tonsky/FiraCode">Fira Code</a> font, which supports ligatures in program code.</p>
+<hr />
+</div>
+<div id="css-with-sass" class="section level1">
+<h1>CSS (with Sass)</h1>
+<p><strong>xaringan</strong> also supports Sass support via <strong>rmarkdown</strong>. Suppose you want to use the same color for different elements, e.g., first heading and bold text. You can create a <code>.scss</code> file, say <code>mytheme.scss</code>, using the <a href="https://sass-lang.com/">sass</a> syntax with variables:</p>
+<pre class="scss"><code>$mycolor: #ff0000; 
 .remark-slide-content &gt; h1 { color: $mycolor; }
-.remark-slide-content strong { color: $mycolor; }
-```
-
-Then set the `css` option in the YAML metadata using this file placed under the same directory as your Rmd:
-
-```yaml
-output:
+.remark-slide-content strong { color: $mycolor; }</code></pre>
+<p>Then set the <code>css</code> option in the YAML metadata using this file placed under the same directory as your Rmd:</p>
+<pre class="yaml"><code>output:
   xaringan::moon_reader:
-    css: ["default", "mytheme.scss"]
-```
-
-This requires **rmarkdown** &gt;= 2.8 and the [**sass**](https://rstudio.github.io/sass/) package. You can learn more about **rmarkdown** and **sass** support in [this blog post](https://blog.rstudio.com/2021/04/15/2021-spring-rmd-news/#sass-and-scss-support-for-html-based-output) and in [**sass** overview vignette](https://rstudio.github.io/sass/articles/sass.html).
-
----
-
-# Themes
-
-Don't want to learn CSS? Okay, you can use some user-contributed themes. A theme typically consists of two CSS files `foo.css` and `foo-fonts.css`, where `foo` is the theme name. Below are some existing themes:
-
-
-```r
-names(xaringan:::list_css())
-```
-
-```
-##  [1] "chocolate-fonts"  "chocolate"        "default-fonts"   
-##  [4] "default"          "duke-blue"        "fc-fonts"        
-##  [7] "fc"               "glasgow_template" "hygge-duke"      
-## [10] "hygge"            "ki-fonts"         "ki"              
-## [13] "kunoichi"         "lucy-fonts"       "lucy"            
-## [16] "metropolis-fonts" "metropolis"       "middlebury-fonts"
-## [19] "middlebury"       "nhsr-fonts"       "nhsr"            
-## [22] "ninjutsu"         "rladies-fonts"    "rladies"         
-## [25] "robot-fonts"      "robot"            "rutgers-fonts"   
-## [28] "rutgers"          "shinobi"          "tamu-fonts"      
-## [31] "tamu"             "uio-fonts"        "uio"             
-## [34] "uo-fonts"         "uo"               "uol-fonts"       
-## [37] "uol"              "useR-fonts"       "useR"            
-## [40] "uwm-fonts"        "uwm"
-```
-
----
-
-# Themes
-
-To use a theme, you can specify the `css` option as an array of CSS filenames (without the `.css` extensions), e.g.,
-
-```yaml
-output:
+    css: [&quot;default&quot;, &quot;mytheme.scss&quot;]</code></pre>
+<p>This requires <strong>rmarkdown</strong> &gt;= 2.8 and the <a href="https://rstudio.github.io/sass/"><strong>sass</strong></a> package. You can learn more about <strong>rmarkdown</strong> and <strong>sass</strong> support in <a href="https://blog.rstudio.com/2021/04/15/2021-spring-rmd-news/#sass-and-scss-support-for-html-based-output">this blog post</a> and in <a href="https://rstudio.github.io/sass/articles/sass.html"><strong>sass</strong> overview vignette</a>.</p>
+<hr />
+</div>
+<div id="themes" class="section level1">
+<h1>Themes</h1>
+<p>Don’t want to learn CSS? Okay, you can use some user-contributed themes. A theme typically consists of two CSS files <code>foo.css</code> and <code>foo-fonts.css</code>, where <code>foo</code> is the theme name. Below are some existing themes:</p>
+<pre class="r"><code>names(xaringan:::list_css())</code></pre>
+<pre><code>##  [1] &quot;chocolate-fonts&quot;  &quot;chocolate&quot;        &quot;default-fonts&quot;   
+##  [4] &quot;default&quot;          &quot;duke-blue&quot;        &quot;fc-fonts&quot;        
+##  [7] &quot;fc&quot;               &quot;glasgow_template&quot; &quot;hygge-duke&quot;      
+## [10] &quot;hygge&quot;            &quot;ki-fonts&quot;         &quot;ki&quot;              
+## [13] &quot;kunoichi&quot;         &quot;lucy-fonts&quot;       &quot;lucy&quot;            
+## [16] &quot;metropolis-fonts&quot; &quot;metropolis&quot;       &quot;middlebury-fonts&quot;
+## [19] &quot;middlebury&quot;       &quot;nhsr-fonts&quot;       &quot;nhsr&quot;            
+## [22] &quot;ninjutsu&quot;         &quot;rladies-fonts&quot;    &quot;rladies&quot;         
+## [25] &quot;robot-fonts&quot;      &quot;robot&quot;            &quot;rutgers-fonts&quot;   
+## [28] &quot;rutgers&quot;          &quot;shinobi&quot;          &quot;tamu-fonts&quot;      
+## [31] &quot;tamu&quot;             &quot;uio-fonts&quot;        &quot;uio&quot;             
+## [34] &quot;uo-fonts&quot;         &quot;uo&quot;               &quot;uol-fonts&quot;       
+## [37] &quot;uol&quot;              &quot;useR-fonts&quot;       &quot;useR&quot;            
+## [40] &quot;uwm-fonts&quot;        &quot;uwm&quot;</code></pre>
+<hr />
+</div>
+<div id="themes-1" class="section level1">
+<h1>Themes</h1>
+<p>To use a theme, you can specify the <code>css</code> option as an array of CSS filenames (without the <code>.css</code> extensions), e.g.,</p>
+<pre class="yaml"><code>output:
   xaringan::moon_reader:
-    css: [default, metropolis, metropolis-fonts]
-```
-
-If you want to contribute a theme to **xaringan**, please read [this blog post](https://yihui.org/en/2017/10/xaringan-themes).
-
----
-class: inverse, middle, center
-background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/39/Naruto_Shiki_Fujin.svg)
-background-size: contain
-
-# Naruto
-
----
-background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
+    css: [default, metropolis, metropolis-fonts]</code></pre>
+<p>If you want to contribute a theme to <strong>xaringan</strong>, please read <a href="https://yihui.org/en/2017/10/xaringan-themes">this blog post</a>.</p>
+<p>background-image: url(<a href="https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg" class="uri">https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg</a>)
 background-size: 100px
-background-position: 90% 8%
-
-# Sharingan
-
-The R package name **xaringan** was derived&lt;sup&gt;1&lt;/sup&gt; from **Sharingan**, a dōjutsu in the Japanese anime _Naruto_ with two abilities:
-
-- the "Eye of Insight"
-
-- the "Eye of Hypnotism"
-
-I think a presentation is basically a way to communicate insights to the audience, and a great presentation may even "hypnotize" the audience.&lt;sup&gt;2,3&lt;/sup&gt;
-
-.footnote[
-[1] In Chinese, the pronounciation of _X_ is _Sh_ /ʃ/ (as in _shrimp_). Now you should have a better idea of how to pronounce my last name _Xie_.
-
-[2] By comparison, bad presentations only put the audience to sleep.
-
-[3] Personally I find that setting background images for slides is a killer feature of remark.js. It is an effective way to bring visual impact into your presentations.
-]
-
----
-
-# Naruto terminology
-
-The **xaringan** package borrowed a few terms from Naruto, such as
-
-- [Sharingan](https://naruto.fandom.com/wiki/Sharingan) (写輪眼; the package name)
-
-- The [moon reader](https://naruto.fandom.com/wiki/Moon_Reader) (月読; an attractive R Markdown output format)
-
-- [Chakra](https://naruto.fandom.com/wiki/Chakra) (查克拉; the path to the remark.js library, which is the power to drive the presentation)
-
-- [Nature transformation](https://naruto.fandom.com/wiki/Nature_Transformation) (性質変化; transform the chakra by setting different options)
-
-- The [infinite moon reader](https://naruto.fandom.com/wiki/Infinite_Tsukuyomi) (無限月読; start a local web server to continuously serve your slides)
-
-- The [summoning technique](https://naruto.fandom.com/wiki/Summoning_Technique) (download remark.js from the web)
-
-You can click the links to know more about them if you want. The jutsu "Moon Reader" may seem a little evil, but that does not mean your slides are evil.
-
----
-# References
-
-Winter, B. (2013). Linear models and linear mixed effects models in R with linguistic applications. arXiv:1308.5499. [http://arxiv.org/pdf/1308.5499.pdf]
-
-Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl. (on going) Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction. [https://vasishth.github.io/Freq_CogSci/]
-
-Barr, Dale J. (2021). Learning statistical models through simulation in R: An interactive textbook. Version 1.0.0. Retrieved from https://psyteachr.github.io/stat-models-v1.
-
-
----
-
-class: center, middle
-
-# Thanks!
-
-Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
-
-The chakra comes from [remark.js](https://remarkjs.com), [**knitr**](https://yihui.org/knitr/), and [R Markdown](https://rmarkdown.rstudio.com).
-    </textarea>
-<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
-<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
-<script src="macros.js"></script>
-<script>var slideshow = remark.create({
-"ratio": "16:9",
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": false
-});
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
-  window.dispatchEvent(new Event('resize'));
-});
-(function(d) {
-  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
-  if (!r) return;
-  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
-  d.head.appendChild(s);
-})(document);
-
-(function(d) {
-  var el = d.getElementsByClassName("remark-slides-area");
-  if (!el) return;
-  var slide, slides = slideshow.getSlides(), els = el[0].children;
-  for (var i = 1; i < slides.length; i++) {
-    slide = slides[i];
-    if (slide.properties.continued === "true" || slide.properties.count === "false") {
-      els[i - 1].className += ' has-continuation';
-    }
-  }
-  var s = d.createElement("style");
-  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
-  d.head.appendChild(s);
-})(document);
-// delete the temporary CSS (for displaying all slides initially) when the user
-// starts to view slides
-(function() {
-  var deleted = false;
-  slideshow.on('beforeShowSlide', function(slide) {
-    if (deleted) return;
-    var sheets = document.styleSheets, node;
-    for (var i = 0; i < sheets.length; i++) {
-      node = sheets[i].ownerNode;
-      if (node.dataset["target"] !== "print-only") continue;
-      node.parentNode.removeChild(node);
-    }
-    deleted = true;
-  });
-})();
-(function() {
-  "use strict"
-  // Replace <script> tags in slides area to make them executable
-  var scripts = document.querySelectorAll(
-    '.remark-slides-area .remark-slide-container script'
-  );
-  if (!scripts.length) return;
-  for (var i = 0; i < scripts.length; i++) {
-    var s = document.createElement('script');
-    var code = document.createTextNode(scripts[i].textContent);
-    s.appendChild(code);
-    var scriptAttrs = scripts[i].attributes;
-    for (var j = 0; j < scriptAttrs.length; j++) {
-      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
-    }
-    scripts[i].parentElement.replaceChild(s, scripts[i]);
-  }
-})();
-(function() {
-  var links = document.getElementsByTagName('a');
-  for (var i = 0; i < links.length; i++) {
-    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
-      links[i].target = '_blank';
-    }
-  }
-})();
-// adds .remark-code-has-line-highlighted class to <pre> parent elements
-// of code chunks containing highlighted lines with class .remark-code-line-highlighted
-(function(d) {
-  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
-  const preParents = [];
-  const findPreParent = function(line, p = 0) {
-    if (p > 1) return null; // traverse up no further than grandparent
-    const el = line.parentElement;
-    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
-  };
-
-  for (let line of hlines) {
-    let pre = findPreParent(line);
-    if (pre && !preParents.includes(pre)) preParents.push(pre);
-  }
-  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
-})(document);</script>
-
-<script>
-slideshow._releaseMath = function(el) {
-  var i, text, code, codes = el.getElementsByTagName('code');
-  for (i = 0; i < codes.length;) {
-    code = codes[i];
-    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
-      text = code.textContent;
-      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
-          /^\$\$(.|\s)+\$\$$/.test(text) ||
-          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
-        code.outerHTML = code.innerHTML;  // remove <code></code>
-        continue;
-      }
-    }
-    i++;
-  }
-};
-slideshow._releaseMath(document);
-</script>
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-(function () {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
-  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
-    script.src  = script.src.replace(/^https?:/, '');
-  document.getElementsByTagName('head')[0].appendChild(script);
-})();
-</script>
-  </body>
-</html>
+background-position: 90% 8%</p>
+</div>
+<div id="sharingan" class="section level1">
+<h1>Sharingan</h1>
+<p>The R package name <strong>xaringan</strong> was derived<sup>1</sup> from <strong>Sharingan</strong>, a dōjutsu in the Japanese anime <em>Naruto</em> with two abilities:</p>
+<ul>
+<li><p>the “Eye of Insight”</p></li>
+<li><p>the “Eye of Hypnotism”</p></li>
+</ul>
+<p>I think a presentation is basically a way to communicate insights to the audience, and a great presentation may even “hypnotize” the audience.<sup>2,3</sup></p>
+<p>.footnote[
+[1] In Chinese, the pronounciation of <em>X</em> is <em>Sh</em> /ʃ/ (as in <em>shrimp</em>). Now you should have a better idea of how to pronounce my last name <em>Xie</em>.</p>
+<p>[2] By comparison, bad presentations only put the audience to sleep.</p>
+<p>[3] Personally I find that setting background images for slides is a killer feature of remark.js. It is an effective way to bring visual impact into your presentations.
+]</p>
+<hr />
+</div>
+<div id="naruto-terminology" class="section level1">
+<h1>Naruto terminology</h1>
+<p>The <strong>xaringan</strong> package borrowed a few terms from Naruto, such as</p>
+<ul>
+<li><p><a href="https://naruto.fandom.com/wiki/Sharingan">Sharingan</a> (写輪眼; the package name)</p></li>
+<li><p>The <a href="https://naruto.fandom.com/wiki/Moon_Reader">moon reader</a> (月読; an attractive R Markdown output format)</p></li>
+<li><p><a href="https://naruto.fandom.com/wiki/Chakra">Chakra</a> (查克拉; the path to the remark.js library, which is the power to drive the presentation)</p></li>
+<li><p><a href="https://naruto.fandom.com/wiki/Nature_Transformation">Nature transformation</a> (性質変化; transform the chakra by setting different options)</p></li>
+<li><p>The <a href="https://naruto.fandom.com/wiki/Infinite_Tsukuyomi">infinite moon reader</a> (無限月読; start a local web server to continuously serve your slides)</p></li>
+<li><p>The <a href="https://naruto.fandom.com/wiki/Summoning_Technique">summoning technique</a> (download remark.js from the web)</p></li>
+</ul>
+<p>You can click the links to know more about them if you want. The jutsu “Moon Reader” may seem a little evil, but that does not mean your slides are evil.</p>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td># References</td>
+</tr>
+<tr class="even">
+<td>Winter, B. (2013). Linear models and linear mixed effects models in R with linguistic applications. arXiv:1308.5499. [<a href="http://arxiv.org/pdf/1308.5499.pdf" class="uri">http://arxiv.org/pdf/1308.5499.pdf</a>]</td>
+</tr>
+<tr class="odd">
+<td>Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl. (on going) Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction. [<a href="https://vasishth.github.io/Freq_CogSci/" class="uri">https://vasishth.github.io/Freq_CogSci/</a>]</td>
+</tr>
+<tr class="even">
+<td>Barr, Dale J. (2021). Learning statistical models through simulation in R: An interactive textbook. Version 1.0.0. Retrieved from <a href="https://psyteachr.github.io/stat-models-v1" class="uri">https://psyteachr.github.io/stat-models-v1</a>.</td>
+</tr>
+</tbody>
+</table>
+<p>class: center, middle</p>
+</div>
+<div id="thanks" class="section level1">
+<h1>Thanks!</h1>
+<p>Slides created via the R package <a href="https://github.com/yihui/xaringan"><strong>xaringan</strong></a>.</p>
+<p>The chakra comes from <a href="https://remarkjs.com">remark.js</a>, <a href="https://yihui.org/knitr/"><strong>knitr</strong></a>, and <a href="https://rmarkdown.rstudio.com">R Markdown</a>.</p>
+</div>

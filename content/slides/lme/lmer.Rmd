@@ -31,7 +31,7 @@ class: right, middle
 ---
 ## Did you do the **pre-workshop setup**?
 
-`r icons::fontawesome("link", style = "solid")` [https://chenzixu.rbind.io/](https://chenzixu.rbind.io/)
+`r icons::fontawesome("link", style = "solid")` [https://chenzixu.rbind.io/talk/lme/](https://chenzixu.rbind.io/talk/lme/)
 
 ## We assume:
 `r icons::fontawesome$brands$'r-project'` You have basic knowledge about R and R studio.
