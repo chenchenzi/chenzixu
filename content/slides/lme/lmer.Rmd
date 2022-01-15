@@ -58,10 +58,9 @@ high school arithmetic and algebra. Elementary concepts of probability theory ar
 
 1. More on Fixed VS Random effects
 
-1. Limitations
-
 1. Report Writing
 
+1. Limitations
 
 ---
 class: inverse, center, middle
@@ -202,7 +201,7 @@ model = lm(pitch ~ sex, my.df)
 ---
 # Understanding output
 .pull-left[
-```{r, comment='#'}
+```{r, comment='#', highlight.output=c(17, 18)}
 summary(model)
 ```
 ]
@@ -256,11 +255,12 @@ plot(fitted(model),residuals(model))
 conditions that have to be satisfied in order for the linear model to be meaningful.
 
 ---
-# Assumptions check: 
+# Assumptions check
 .pull-left[### (2) Absence of collinearity
 When two predictors are **correlated** with each other, they are **collinear**.
 
 - Preempt the problem in the design stage
+
 - Use dimension reduction techniques such as Principal Component Analysis that transform correlated variables into a smaller set of variables
 ]
 .pull-right[### (3) Homoskedasticity
@@ -270,8 +270,26 @@ The variance of your data should be approximately equal across the range of the 
 ]
 
 ---
-# Assumptions check:
-.pull-left[### (4) Normality of residuals
+# Assumptions check
+.pull-left[### (4) Absence of influential data points
+
+```{r comment='#'}
+dfbeta(model)
+```
+
+]
+.pull-right[
+**DFbeta** values: the coefficients to be adjusted if a particular data point is excluded (“leave-one-out diagnostics”).
+- Eyeball the DFbeta values: any sign changed? different by half of the absolute value?
+
+- Run the analysis **with** influential data and then again **without** them. Compare and discuss the results.
+
+`dfbeta()` for linear models doesn’t work for mixed models. You can check out the package **influence.ME** (Nieuwenhuis, te Grotenhuis, & Pelzer, 2012), or program a for loop that does the leave-one-out diagnostics by hand.
+]
+
+---
+# Assumptions check
+### (5) Normality of residuals
 - a histogram or a Q-Q plot of the residuals
 ```{r eval=FALSE}
 hist(residuals(model))
@@ -281,16 +299,6 @@ qqnorm(residuals(model))
 ### (6) Independence
 - Preempt the problem in the design stage
 - Resolve non-independencies at the analysis stage. $\rightarrow$ **Mixed models**
-]
-.pull-right[### (5) Absence of influential data points
-```{r comment='#'}
-dfbeta(model)
-```
-**DFbeta** values: the coefficients to be adjusted if a particular data point is excluded (“leave-one-out diagnostics”).
-- Eyeball the DFbeta values: any sign changed? different by half of the absolute value?
-- Run the analysis **with** influential data and then again **without** them
-]
-
 ---
 class: inverse, center, middle
 
@@ -305,7 +313,7 @@ Assumption
 
 Understanding the output
 
-Random slopes VS intercepts
+Model selection
 ---
 # Data
 
@@ -323,6 +331,8 @@ which(!complete.cases(data))
 a few missing values provide no problems for our mixed model analyses
 ---
 # Model
+Linear regression
+$$pitch \sim politeness + \epsilon$$
 Multiple regression (fixed effects only)
 $$pitch \sim politeness + sex + \epsilon$$
 Add a **random** effect for subject: assume a different "baseline" pitch value for each subject. We can assume different random intercepts for each subject.
@@ -336,96 +346,233 @@ $$pitch \sim politeness + sex + (1|subject) + (1|item) + \epsilon$$
 # Model in R
 ```{r comment='#'}
 library(lme4)
+data = data %>% mutate(attitude=as.factor(attitude), gender=as.factor(gender), subject=as.factor(subject))
 
-politeness.model = lmer(frequency ~ attitude +gender +(1|subject) + (1|scenario), data=data)
+politeness.model0 = lmer(frequency ~ attitude + (1|subject) + (1|scenario), data=data)
+politeness.model = lmer(frequency ~ attitude + gender + (1|subject) + (1|scenario), data=data)
 summary(politeness.model)
 ```
 
 ---
-# Understanding the output of a LME model
+# Understanding the output
+.left-column[#### politeness.model0 (top) politeness.model (bottom)
 
+Scenario (item) has much less variability than subject.
 
+Residual: The “random” deviations from the predicted values that are not due to subjects and items, $\epsilon$.
 
+The variation that’s associated with the random effect “subject” dropped considerably $\rightarrow$ gender was confounded with the variation that is due to subject.
+]
+.right-column[#### Random effects
+```{r eval=FALSE}
+Random effects:
+  Groups   Name        Variance Std.Dev.
+  scenario (Intercept)  219     14.80   
+* subject  (Intercept) 4015     63.36   
+* Residual              646     25.42   
+Number of obs: 83, groups:  scenario, 7; subject, 6
+
+```
+
+```{r eval=FALSE}
+Random effects:
+  Groups   Name        Variance Std.Dev.
+  scenario (Intercept) 219.5    14.81   
+* subject  (Intercept) 615.6    24.81   
+* Residual             645.9    25.41   
+Number of obs: 83, groups:  scenario, 7; subject, 6
+```
+]
+???
+shifted a considerable amount of the variance that was previously in the random effects component(differences between male and female individuals) to the fixed effects component
+---
+# Understanding the output
+.left-column[#### politeness.model0 (top) politeness.model (bottom)
+`attitudepol` is the slope for the categorical effect of politeness.
+
+Pitch is lower in polite speech than in informal speech, by about 20 Hz.
+
+`lmer()` took whatever comes first in the alphabet to be the reference level.
+
+The second `Intercept` represents the female for the informal condition.
+]
+.right-column[#### Fixed effects
+```{r eval=FALSE}
+Fixed effects:
+              Estimate Std. Error t value
+* (Intercept)  202.588     26.754   7.572
+  attitudepol  -19.695      5.585  -3.527
+```
+
+```{r eval=FALSE}
+Fixed effects:
+              Estimate Std. Error t value
+* (Intercept)  256.846     16.116  15.938
+  attitudepol  -19.721      5.584  -3.532
+  genderM     -108.516     21.013  -5.164
+```
+]
+---
+# Understanding the output
+#### Coding schemes
+A categorical variable of $n$ levels is entered into a regression analysis as a sequence of $n-1$ variables. Generally or by default in R, we use dummy coding for them.
+
+```{r comment='#'}
+contrasts(data$attitude)
+
+# change the reference level
+contrasts(data$attitude) = contr.treatment(2, base = 2)
+contrasts(data$attitude)
+```
+
+There are also other coding schemes such as **effects coding** including **contrast coding**, **sum coding** and **Helmert coding**. Different coding system may help answer different research questions. It also greatly changes the way you interpret your output.
 
 ---
+# Understanding the output
+#### Statistical significance
+Unfortunately, p-values for mixed models aren’t as straightforward as they are for the linear model. There are multiple approaches, and there’s a discussion surrounding these, with sometimes wildly differing opinions about which approach is the best.
+
+There is a package `lmerTest` that provides $p$ values in type I, II or III anova and summery tables for `lmer` model fits via Satterthwaite's degrees of freedom method or Kenward-Roger method.
+
+```{r comment='#'}
+library(lmerTest)
+politeness.model = lmer(frequency ~ attitude + gender + (1|subject) + (1|scenario), data=data)
+anova(politeness.model)
+```
+
+---
+# Understanding the output
+#### Statistical significance
+Likelihood Ratio Test as a means to attain $p$ values. Likelihood is the probability of seeing the data you collected given your model. 
+```{r comment='#'}
+politeness.null = lmer(frequency ~ gender + (1|subject) + (1|scenario), data=data, REML=FALSE)
+politeness.full = lmer(frequency ~ attitude + gender + (1|subject) + (1|scenario), data=data, REML=FALSE)
+
+anova(politeness.null, politeness.full)
+```
+
+“… politeness affected pitch ($ \chi^2(1)=11.62, p=0.00065)$ , lowering it by about 19.7 Hz ± 5.6 (standard errors) …”
+---
+# Model selection
+.pull-left[
+```{r comment='#'}
+coef(politeness.model)
+```
+]
+.pull-right[ #### Random intercept model
+We accounted for baseline-differences in pitch, but the effect of politeness is the same for all subjects and items.
+
+What if the **effect of politeness** might be different for different subjects?
+]
+
+---
+# Model selection
+#### Random slope model
+```{r eval=FALSE}
+politeness.model1 = lmer(frequency~attitude + gender + (1+attitude|subject) + (1+attitude|scenario), data = data)
+coef(politeness.model1)
+```
+.pull-left[Random intercept model
+```{r eval=FALSE}
+$subject
+   (Intercept) attitude2   genderM
+F1    242.9386 -19.72111 -108.5163
+F2    267.2654 -19.72111 -108.5163
+F3    260.3348 -19.72111 -108.5163
+M3    285.2283 -19.72111 -108.5163
+M4    262.2248 -19.72111 -108.5163
+M7    223.0858 -19.72111 -108.5163
+```
+]
+.pull-right[Random slope model
+```{r eval=FALSE}
+$subject
+   (Intercept) attitude2   genderM
+F1    243.2804 -20.49940 -111.1058
+F2    267.1173 -19.30447 -111.1058
+F3    260.2849 -19.64697 -111.1058
+M3    287.1024 -18.30263 -111.1058
+M4    264.6698 -19.42716 -111.1058
+M7    226.3911 -21.34605 -111.1058
+```
+]
+
+Despite individual variation, there is also consistency in how politeness affects the voice: for all of our speakers, the voice tends to go
+down when speaking politely, but for some people it goes down slightly more so than for others.
+???
+The effect of politeness (`attitudepol`) is different for each subject and item. It’s always negative and many of the values are quite similar to each
+other.
+---
+# Model selection
+
+#### Interaction terms
+An interaction occurs when one variable changes how another variable affects the response variable.
+
+#### Overfitting
+overfitting occurs when your model has too small a sample size and too many predictor variables. You may get a warning that your model wouldn’t converge.
+
+#### How to choose your model?
+- **Depend on your research question and data structure**
+- Some prefer to proceed incrementally, taking time to examine data. 
+- One should always be cautious of creating a model that is too complex.
+- Some researchers have shown via simulations that mixed models without random slopes have a relatively high Type I error rate (Schielzeth & Forstmeier, 2009; Barr, Levy, Scheepers, & Tilly, 2013)
+- Barr et al.(2013) recommend that you should “keep it maximal” with respect to your random effects structure, at least for controlled experiments.
+
+???
+We were not interested in gender differences, but they are well worth
+controlling for. This is why we had random slopes for the effect of attitude (by subjects and item) but not gender. 
 
 ---
 class: inverse, middle, center
 
-# Using xaringan
+# More on Fixed VS Random effects
+--
+Data
+
+Complete pooling
+
+No pooling
+
+Partial pooling
 
 ---
+# Data
+#### Research question
+The effects of sleep deprivation on psychomotor performance (Belenky et al., 2003)
 
-# xaringan
+Documentation for the dataset `?sleepstudy` $\rightarrow$ Multilevel data with continuous predictor
 
-Provides an R Markdown output format `xaringan::moon_reader` as a wrapper for remark.js, and you can use it in the YAML metadata, e.g.
+#### Plot the data
+```{r}
+sleep2 <- sleepstudy %>%
+  filter(Days >= 2) %>%
+  mutate(days_deprived = Days - 2)
 
-```yaml
----
-title: "A Cool Presentation"
-output:
-  xaringan::moon_reader:
-    yolo: true
-    nature:
-      autoplay: 30000
----
+ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
+  geom_point() +
+  scale_x_continuous(breaks = 0:7) +
+  facet_wrap(~Subject) +
+  labs(y = "Reaction Time", 
+       x = "Days deprived of sleep (0 = baseline)")
 ```
 
-See the help page `?xaringan::moon_reader` for all possible options that you can use.
+---
+
+# Complete pooling
+
+
 
 ---
 
-# remark.js vs xaringan
-
-Some differences between using remark.js (left) and using **xaringan** (right):
-
-.pull-left[
-1. Start with a boilerplate HTML file;
-
-1. Plain Markdown;
-
-1. Write JavaScript to autoplay slides;
-
-1. Manually configure MathJax;
-
-1. Highlight code with `*`;
-
-1. Edit Markdown source and refresh browser to see updated slides;
-]
-
-.pull-right[
-1. Start with an R Markdown document;
-
-1. R Markdown (can embed R/other code chunks);
-
-1. Provide an option `autoplay`;
-
-1. MathJax just works;<sup>*</sup>
-
-1. Highlight code with `{{}}`;
-
-1. The RStudio addin "Infinite Moon Reader" automatically refreshes slides on changes;
-]
-
-.footnote[[*] Not really. See next page.]
-
----
-
-# Math Expressions
+# No pooling
 
 You can write LaTeX math expressions inside a pair of dollar signs, e.g. &#36;\alpha+\beta$ renders $\alpha+\beta$. You can use the display style with double dollar signs:
 
-```
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-```
-
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-
 
 
 ---
 
-# R Code
+# Partial pooling
 
 
 
@@ -451,13 +598,7 @@ knitr::kable(head(iris), format = 'html')
 
 ---
 
-# HTML Widgets
 
-I have not thoroughly tested HTML widgets against **xaringan**. Some may work well, and some may not. It is a little tricky.
-
-Similarly, the Shiny mode (`runtime: shiny`) does not work. I might get these issues fixed in the future, but these are not of high priority to me. I never turn my presentation into a Shiny app. When I need to demonstrate more complicated examples, I just launch them separately. It is convenient to share slides with other people when they are plain HTML/JS applications.
-
-See the next page for two HTML widgets.
 
 ---
 
@@ -486,31 +627,10 @@ DT::datatable(
 
 # Some Tips
 
-- A countdown timer can be added to every page of the slides using the `countdown` option under `nature`, e.g. if you want to spend one minute on every page when you give the talk, you can set:
 
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          countdown: 60000
-    ```
-
-    Then you will see a timer counting down from `01:00`, to `00:59`, `00:58`, ... When the time is out, the timer will continue but the time turns red.
     
 ---
 
-# Some Tips
-
-- The title slide is created automatically by **xaringan**, but it is just another remark.js slide added before your other slides.
-
-    The title slide is set to `class: center, middle, inverse, title-slide` by default. You can change the classes applied to the title slide with the `titleSlideClass` option of `nature` (`title-slide` is always applied).
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          titleSlideClass: [top, left, inverse]
-    ```
     
 --
 
@@ -541,46 +661,6 @@ DT::datatable(
 
 ---
 
-# Some Tips
-
-
-.pull-left[
-An example using a leading `*`:
-
-    ```r
-    if (TRUE) {
-    ** message("Very important!")
-    }
-    ```
-Output:
-```r
-if (TRUE) {
-* message("Very important!")
-}
-```
-
-This is invalid R code, so it is a plain fenced code block that is not executed.
-]
-
-.pull-right[
-An example using `{{}}`:
-
-````
-`r ''````{r tidy=FALSE}
-if (TRUE) {
-*{{ message("Very important!") }}
-}
-```
-````
-Output:
-```{r tidy=FALSE}
-if (TRUE) {
-{{ message("Very important!") }}
-}
-```
-
-It is valid R code so you can run it. Note that `{{}}` can wrap an R expression of multiple lines.
-]
 
 ---
 
