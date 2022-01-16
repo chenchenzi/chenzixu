@@ -146,7 +146,7 @@ A simple example of linear model is
 $$Y_i = \beta_0 + \beta_1X_i + e_i$$
 Where $Y_i$ is the measured value of the dependent variable for observation i; $X_i$ is the explanatory variable or predictor; $Y_i$ is modelled in terms of an intercept $\beta_0$ plus the effect of predictor $X_i$ weighted by coefficient $\beta_1$ and error term $e_i$.
 .left-col[
-```{r, fig.width=3.5, fig.height=3.5, echo=FALSE}
+```{r, fig.width=4, fig.height=4, echo=FALSE}
 set.seed(62)
 
 dat <- tibble(X = runif(100, -3, 3),
@@ -617,7 +617,7 @@ cp_model <- lm(Reaction ~ days_deprived, sleep2)  #<<
 summary(cp_model)
 ```
 
-```{r cp-plot, dev='png', fig.width=9, fig.height=6, fig.show='hide'}
+```{r cp-plot, dev='png', fig.width=9, fig.height=6, fig.show='hide', cache=TRUE}
 ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
   geom_abline(intercept = coef(cp_model)[1],
               slope = coef(cp_model)[2],
