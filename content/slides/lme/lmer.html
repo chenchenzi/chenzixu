@@ -40,6 +40,7 @@ class: right, middle
 [&lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"&gt;&lt;/path&gt;&lt;/svg&gt; chenzixu.rbind.io](https://alison.rbind.io)
 
 ---
+
 ## Did you do the **pre-workshop setup**?
 
 &lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"&gt;&lt;/path&gt;&lt;/svg&gt; [https://chenzixu.rbind.io/talk/lme/](https://chenzixu.rbind.io/talk/lme/)
@@ -69,7 +70,7 @@ high school arithmetic and algebra. Elementary concepts of probability theory ar
 
 1. Report Writing
 
-1. Limitations
+1. Why LME model?
 
 ---
 class: inverse, center, middle
@@ -270,7 +271,7 @@ summary(model)
 # Coefficients:
 #             Estimate Std. Error t value Pr(&gt;|t|)    
 # (Intercept)   226.33      10.18  22.224 2.43e-05 ***
-# sexmale       -98.33      14.40  -6.827  0.00241 ** 
+*# sexmale       -98.33      14.40  -6.827  0.00241 ** 
 # ---
 # Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 # 
@@ -439,7 +440,7 @@ Add a **random** effect for subject: assume a different "baseline" pitch value f
 ```r
 boxplot(frequency~subject, data)
 ```
-By-item variation: different scenarios for formal and informal speech
+**Crossed random effects** for subjects and for items. Different scenarios for formal and informal speech (by-item variation)
 `$$pitch \sim politeness + sex + (1|subject) + (1|item) + \epsilon$$`
 ---
 # Model in R
@@ -688,7 +689,7 @@ M4    262.2248 -19.72111 -108.5163
 M7    223.0858 -19.72111 -108.5163
 ```
 ]
-.pull-right[Random slope model
+.pull-right[Random slope model (correlated)
 
 ```r
 $subject
@@ -711,22 +712,59 @@ other.
 # Model selection
 
 #### Interaction terms
-An interaction occurs when one variable changes how another variable affects the response variable.
+An interaction, **`attitude:sex`**, occurs when one variable changes how another variable affects the response variable. Alternative notation: **`attitude*sex`** `= attitude + sex + attitude:sex`
+
+#### Correlation between intercepts and slopes
+Using **`||`** in `(1 + attitude || subject)` for example, you are forcing the correlation between the random slopes and the intercepts to be zero. 
+
 
 #### Overfitting
-overfitting occurs when your model has too small a sample size and too many predictor variables. You may get a warning that your model wouldn’t converge.
+overfitting occurs when your model has too small a sample size and too many predictor variables. You may get a warning / error that your model wouldn’t converge.
 
-#### How to choose your model?
-- **Depend on your research question and data structure**
-- Some prefer to proceed incrementally, taking time to examine data. 
+---
+# Model selection
+
+### How to choose your model?
+**Depend on your research question and data structure**
+
+.left-col[
+- Exploratory VS confirmatory context
+
+- Design variables (theoretical interests) VS control variables
+
+- Data-driven (e.g. improve the model fit) VS Design-driven
+
+- Top-down and Bottom-up
+]
+.right-col[
+- Some prefer to proceed incrementally, taking time to examine data.
+
 - One should always be cautious of creating a model that is too complex.
-- Some researchers have shown via simulations that mixed models without random slopes have a relatively high Type I error rate (Schielzeth &amp; Forstmeier, 2009; Barr, Levy, Scheepers, &amp; Tilly, 2013)
-- Barr et al.(2013) recommend that you should “keep it maximal” with respect to your random effects structure, at least for controlled experiments.
 
+- Some researchers have shown via simulations that mixed models without random slopes have a relatively high Type I error rate (Schielzeth &amp; Forstmeier, 2009; Barr, Levy, Scheepers, &amp; Tilly, 2013)
+
+- Barr et al. (2013) recommend that you should “keep it maximal” with respect to your random effects structure, at least for controlled experiments.
+]
 ???
 We were not interested in gender differences, but they are well worth
 controlling for. This is why we had random slopes for the effect of attitude (by subjects and item) but not gender. 
 
+If you have predictors that represent control variables, over which you do not intend to perform statistical tests, it is unlikely that random slopes are needed.
+---
+# Model selection
+
+### Limitations
+
+#### "Singular fit" warning or "not converging" error
+
+- We need to simplify our model and remove the random slopes or insignificant terms
+( `step()` does it automatically for you).
+
+
+But what if we believe there might be some merit to having subject-specific slopes?
+
+#### Bayes to the rescue
+**Bayesian mixed effects method** are powerful alternatives to more commonly used Frequentist approaches.
 ---
 class: inverse, middle, center
 
@@ -744,34 +782,28 @@ Partial pooling
 #### Research question
 The effects of **sleep deprivation** on psychomotor performance / reaction time (Belenky et al., 2003)
 
-Documentation for the dataset `?sleepstudy` `\(\rightarrow\)` Multilevel data with continuous predictor
-
-#### Plot the data
+.pull-left[#### Multilevel data with continuous predictor
+<div id="htmlwidget-eb8c178c5e254791b272" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-eb8c178c5e254791b272">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[249.56,258.7047,250.8006,321.4398,356.8519,414.6901,382.2038,290.1486,430.5853,466.3535],[0,1,2,3,4,5,6,7,8,9],["308","308","308","308","308","308","308","308","308","308"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Reaction<\/th>\n      <th>Days<\/th>\n      <th>Subject<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+]
+.pull-right[#### Plot the data
 
 ```r
 sleep2 &lt;- sleepstudy %&gt;%
   filter(Days &gt;= 2) %&gt;%
   mutate(days_deprived = Days - 2)
 
-ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
+ggplot(sleep2, aes(x = days_deprived, 
+                   y = Reaction)) +
   geom_point() +
   scale_x_continuous(breaks = 0:7) +
   facet_wrap(~Subject) +
   labs(y = "Reaction Time", 
        x = "Days deprived of sleep (0 = baseline)")
 ```
----
+.footnote[Documentation for the dataset `?sleepstudy`]
+]
 
-
-```r
-DT::datatable(
-  head(sleepstudy, 10),
-  fillContainer = FALSE, options = list(pageLength = 8)
-)
-```
-
-<div id="htmlwidget-798682f11b5b7cb9993e" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-798682f11b5b7cb9993e">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[249.56,258.7047,250.8006,321.4398,356.8519,414.6901,382.2038,290.1486,430.5853,466.3535],[0,1,2,3,4,5,6,7,8,9],["308","308","308","308","308","308","308","308","308","308"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Reaction<\/th>\n      <th>Days<\/th>\n      <th>Subject<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":8,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 ---
 # Complete pooling
 .left-column[
@@ -784,7 +816,7 @@ $$ RT = \beta_0 + \beta_1 Days + e$$
 .right-column[
 
 ```r
-cp_model &lt;- lm(Reaction ~ days_deprived, sleep2)
+*cp_model &lt;- lm(Reaction ~ days_deprived, sleep2)
 ```
 
 
@@ -826,15 +858,16 @@ There is no overall population intercept and slope that is being estimated.
 
 (1) Run separate regressions for each participant
 
-(2) Run multiple regression
+(2) Run **multiple regression**
 ]
 .right-column[
 
 ```r
 sleep2 %&gt;% pull(Subject) %&gt;% is.factor()
-np_model &lt;- lm(Reaction ~ days_deprived + Subject + days_deprived:Subject,
-               data = sleep2)
-summary(np_model)
+*np_model &lt;- lm(Reaction ~ days_deprived + Subject + days_deprived:Subject,
+*              data = sleep2)
+
+  summary(np_model)
 all_intercepts &lt;- c(coef(np_model)["(Intercept)"],
                     coef(np_model)[3:19] + coef(np_model)["(Intercept)"])
 
@@ -856,9 +889,7 @@ This approach fits separate lines for each participant. The estimate for each pa
 
 There is no overall population intercept and slope that is being estimated.
 
-(1) Run separate regressions for each participant
-
-(2) Run multiple regression
+**multiple regression**
 ]
 .right-column[
 
@@ -883,9 +914,7 @@ This approach fits separate lines for each participant. The estimate for each pa
 
 There is no overall population intercept and slope that is being estimated.
 
-(1) Run separate regressions for each participant
-
-(2) Run multiple regression
+**multiple regression**
 ]
 .right-column[
 ![](lmer_files/figure-html/unnamed-chunk-31-1.png)&lt;!-- --&gt;
@@ -898,9 +927,7 @@ This approach fits separate lines for each participant. The estimate for each pa
 
 There is no overall population intercept and slope that is being estimated.
 
-(1) Run separate regressions for each participant
-
-(2) Run multiple regression
+**multiple regression**
 ]
 .right-column[ #### A one-sample t-test:
 
@@ -989,304 +1016,52 @@ We are interested in the 18 subjects as examples drawn from a larger population 
 ]
 ---
 # Partial Pooling
-.pull-left[The estimates are pulled or "**shrunk**" closer to the overall population average.
-
-**When partial-pooling goes wrong...**
+.pull-left[**When partial-pooling goes wrong...**
 1. Vanishing confidence intervals (the model is too complex for the data to support).
 
-1. Unintended Shrinkage.
+1. Unintended Shrinkage.&lt;sup&gt;1&lt;/sup&gt;
 
  - In 2016, George et al. showed that partial pooling can lead to artificially low predicted mortality rates for smaller hospitals. 
 
-1. The number of random effect levels has a strong impact on the uncertainty of the estimate variance.&lt;sup&gt;1&lt;/sup&gt;
+1. The number of random effect levels has a strong impact on the uncertainty of the estimate variance.&lt;sup&gt;2&lt;/sup&gt;
 ]
-.pull-right[
+.pull-right[The estimates are pulled or "**shrunk**" closer to the overall population average.
 &lt;img src="animated.gif" style="display: block; margin: auto 0 auto auto;" /&gt;
 The animated GIF is from Isabella R. Ghement. Twitter: @IsabellaGhement
 ]
 
-.footnote[1 https://www.muscardinus.be/2018/09/number-random-effect-levels/]
+.footnote[&lt;sup&gt;1&lt;/sup&gt; https://towardsdatascience.com/when-mixed-effects-hierarchical-models-fail-pooling-and-uncertainty-77e667823ae8
+&lt;sup&gt;2&lt;/sup&gt; https://www.muscardinus.be/2018/09/number-random-effect-levels/]
 ---
+class: inverse
 
-# Tables
+# Report Writing
 
-If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
+### Goal: Reproducible
 
+- Describe your model (i.e. specify all fixed and random effects, interactions, intercepts, and slopes).
 
-```r
-knitr::kable(head(iris), format = 'html')
-```
+- Mention that you checked assumptions, and that the assumptions are satisfied.
 
-&lt;table&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:right;"&gt; Sepal.Length &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Sepal.Width &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Petal.Length &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Petal.Width &lt;/th&gt;
-   &lt;th style="text-align:left;"&gt; Species &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 5.1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 4.9 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 4.7 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.3 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 4.6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 5.0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 5.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.9 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.7 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.4 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
+- Report significance and actual estimates for coefficients.
+
+- Cite the relevant packages.
 
 ---
+class: inverse
 
+# Why LME Model?
 
+### Multilevel / Hierarchical / Nested data
 
----
+- Within-subject factor? Repeated measures?
 
+- Psedoreplications (multiple measurements within the same condition)?
 
+- Multiple stimulus items?
 
----
-
-
-```r
-DT::datatable(
-  head(iris, 10),
-  fillContainer = FALSE, options = list(pageLength = 8)
-)
-```
-
-<div id="htmlwidget-25ccad806e1881ef661d" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-25ccad806e1881ef661d">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":8,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
-
----
-
-
-
----
-
-# Some Tips
-
-
-
----
-
-# Some Tips
-
-
-
-
-
-
----
-
-# Some Tips
-
-- There are several ways to build incremental slides. See [this presentation](https://slides.yihui.org/xaringan/incremental.html) for examples.
-
-- The option `highlightLines: true` of `nature` will highlight code lines that start with `*`, or are wrapped in `{{ }}`, or have trailing comments `#&lt;&lt;`;
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          highlightLines: true
-    ```
-
-    See examples on the next page.
-
----
-
-
----
-
-# Some Tips
-
-An example of using the trailing comment `#&lt;&lt;` to highlight lines:
-
-````markdown
-```{r tidy=FALSE}
-library(ggplot2)
-ggplot(mtcars) + 
-  aes(mpg, disp) + 
-  geom_point() +   #&lt;&lt;
-  geom_smooth()    #&lt;&lt;
-```
-````
-
-Output:
-
-
-```r
-library(ggplot2)
-ggplot(mtcars) + 
-  aes(mpg, disp) + 
-* geom_point() +
-* geom_smooth()
-```
-
----
-
-# Some Tips
-
-When you enable line-highlighting, you can also use the chunk option `highlight.output` to highlight specific lines of the text output from a code chunk. For example, `highlight.output = TRUE` means highlighting all lines, and `highlight.output = c(1, 3)` means highlighting the first and third line.
-
-````md
-```{r, highlight.output=c(1, 3)}
-head(iris)
-```
-````
-
-
-```
-*##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## 1          5.1         3.5          1.4         0.2  setosa
-*## 2          4.9         3.0          1.4         0.2  setosa
-## 3          4.7         3.2          1.3         0.2  setosa
-## 4          4.6         3.1          1.5         0.2  setosa
-## 5          5.0         3.6          1.4         0.2  setosa
-## 6          5.4         3.9          1.7         0.4  setosa
-```
-
-Question: what does `highlight.output = c(TRUE, FALSE)` mean? (Hint: think about R's recycling of vectors)
-
----
-
-# Some Tips
-
-- To make slides work offline, you need to download a copy of remark.js in advance, because **xaringan** uses the online version by default (see the help page `?xaringan::moon_reader`).
-
-- You can use `xaringan::summon_remark()` to download the latest or a specified version of remark.js. By default, it is downloaded to `libs/remark-latest.min.js`.
-
-- Then change the `chakra` option in YAML to point to this file, e.g.
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        chakra: libs/remark-latest.min.js
-    ```
-
-- If you used Google fonts in slides (the default theme uses _Yanone Kaffeesatz_, _Droid Serif_, and _Source Code Pro_), they won't work offline unless you download or install them locally. The Heroku app [google-webfonts-helper](https://google-webfonts-helper.herokuapp.com/fonts) can help you download fonts and generate the necessary CSS.
-
----
-
-# Macros
-
-
----
-
-# Macros (continued)
-
-
-
----
-
-# CSS
-
-Among all options in `xaringan::moon_reader`, the most challenging but perhaps also the most rewarding one is `css`, because it allows you to customize the appearance of your slides using any CSS rules or hacks you know.
-
-You can see the default CSS file [here](https://github.com/yihui/xaringan/blob/master/inst/rmarkdown/templates/xaringan/resources/default.css). You can completely replace it with your own CSS files, or define new rules to override the default. See the help page `?xaringan::moon_reader` for more information.
-
----
-
-# CSS
-
-For example, suppose you want to change the font for code from the default "Source Code Pro" to "Ubuntu Mono". You can create a CSS file named, say, `ubuntu-mono.css`:
-
-```css
-@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
-
-.remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
-```
-
-Then set the `css` option in the YAML metadata:
-
-```yaml
-output:
-  xaringan::moon_reader:
-    css: ["default", "ubuntu-mono.css"]
-```
-
-Here I assume `ubuntu-mono.css` is under the same directory as your Rmd.
-
-See [yihui/xaringan#83](https://github.com/yihui/xaringan/issues/83) for an example of using the [Fira Code](https://github.com/tonsky/FiraCode) font, which supports ligatures in program code.
-
----
-
-# CSS (with Sass)
-
-**xaringan** also supports Sass support via **rmarkdown**. Suppose you want to use the same color for different elements, e.g., first heading and bold text. You can create a `.scss` file, say `mytheme.scss`, using the [sass](https://sass-lang.com/) syntax with variables:
-
-```scss
-$mycolor: #ff0000; 
-.remark-slide-content &gt; h1 { color: $mycolor; }
-.remark-slide-content strong { color: $mycolor; }
-```
-
-Then set the `css` option in the YAML metadata using this file placed under the same directory as your Rmd:
-
-```yaml
-output:
-  xaringan::moon_reader:
-    css: ["default", "mytheme.scss"]
-```
-
-This requires **rmarkdown** &gt;= 2.8 and the [**sass**](https://rstudio.github.io/sass/) package. You can learn more about **rmarkdown** and **sass** support in [this blog post](https://blog.rstudio.com/2021/04/15/2021-spring-rmd-news/#sass-and-scss-support-for-html-based-output) and in [**sass** overview vignette](https://rstudio.github.io/sass/articles/sass.html).
-
----
-
-
-
-
----
-class: inverse, middle, center
-
-# Naruto
-
----
-
-
-
----
-
-# Naruto terminology
-
-
+???
+In the sleepstudy data, you had the within-subject factor of Day (which is more a numeric variable, actually, than a factor; but it has multiple values varying within each participant).
 
 ---
 # References
@@ -1309,12 +1084,11 @@ Barr, Dale J, Roger Levy, Christoph Scheepers, and Harry J Tily. 2013. “Random
 
 Bates, Douglas M., Reinhold Kliegl, Shravan Vasishth, and Harald Baayen. 2015. “Parsimonious Mixed Models.”
 
-
 ---
-
 class: center, middle
 
 # Thanks!
+### Q &amp; A
 
 Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
 

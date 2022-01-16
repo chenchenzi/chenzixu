@@ -31,7 +31,7 @@ a, a > code {
   font-size: 95%;
 }
 
-/* important code slightly blue #97BBD5*/
+/* important code slightly blue #97BBD5 -> pink*/
 .remark-code-line-highlighted {
   background-color: #fdeaf3 !important;
 }
@@ -258,9 +258,9 @@ thead, tfoot, tr:nth-child(even) { background: none; }
 
 /* Color adjustments for text */
 
-/* Make bold syntax compile to midd-blue */
+/* Make bold syntax compile to midd-blue #0D395F*/
 strong {
-  color: #0D395F;
+  color: #dd6164;
 }
 
 .RUred {
@@ -293,9 +293,9 @@ strong {
   color: white;
 }
 
-/* Color adjustments to headers */
+/* Color adjustments to headers #0D395F */
 h1 {
-  color: #0D395F;
+  color: #f4cae2 ;
 }
 
 h3 {

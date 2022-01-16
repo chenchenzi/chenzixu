@@ -29,6 +29,7 @@ class: right, middle
 [`r fontawesome("link", style = "solid")` chenzixu.rbind.io](https://alison.rbind.io)
 
 ---
+
 ## Did you do the **pre-workshop setup**?
 
 `r icons::fontawesome("link", style = "solid")` [https://chenzixu.rbind.io/talk/lme/](https://chenzixu.rbind.io/talk/lme/)
@@ -60,7 +61,7 @@ high school arithmetic and algebra. Elementary concepts of probability theory ar
 
 1. Report Writing
 
-1. Limitations
+1. Why LME model?
 
 ---
 class: inverse, center, middle
@@ -220,7 +221,7 @@ We constructed a linear model of pitch as a function of sex. This model was sign
 ---
 # Understanding output
 .pull-left[
-```{r, comment='#'}
+```{r, comment='#', highlight.output=c(12)}
 summary(model)
 ```
 ]
@@ -340,7 +341,7 @@ $$pitch \sim politeness + sex + (1|subject) + \epsilon$$
 ```{r eval=FALSE}
 boxplot(frequency~subject, data)
 ```
-By-item variation: different scenarios for formal and informal speech
+**Crossed random effects** for subjects and for items. Different scenarios for formal and informal speech (by-item variation)
 $$pitch \sim politeness + sex + (1|subject) + (1|item) + \epsilon$$
 ---
 # Model in R
@@ -484,7 +485,7 @@ M4    262.2248 -19.72111 -108.5163
 M7    223.0858 -19.72111 -108.5163
 ```
 ]
-.pull-right[Random slope model
+.pull-right[Random slope model (correlated)
 ```{r eval=FALSE}
 $subject
    (Intercept) attitude2   genderM
@@ -506,22 +507,59 @@ other.
 # Model selection
 
 #### Interaction terms
-An interaction occurs when one variable changes how another variable affects the response variable.
+An interaction, **`attitude:sex`**, occurs when one variable changes how another variable affects the response variable. Alternative notation: **`attitude*sex`** `= attitude + sex + attitude:sex`
+
+#### Correlation between intercepts and slopes
+Using **`||`** in `(1 + attitude || subject)` for example, you are forcing the correlation between the random slopes and the intercepts to be zero. 
+
 
 #### Overfitting
-overfitting occurs when your model has too small a sample size and too many predictor variables. You may get a warning that your model wouldn’t converge.
+overfitting occurs when your model has too small a sample size and too many predictor variables. You may get a warning / error that your model wouldn’t converge.
 
-#### How to choose your model?
-- **Depend on your research question and data structure**
-- Some prefer to proceed incrementally, taking time to examine data. 
+---
+# Model selection
+
+### How to choose your model?
+**Depend on your research question and data structure**
+
+.left-col[
+- Exploratory VS confirmatory context
+
+- Design variables (theoretical interests) VS control variables
+
+- Data-driven (e.g. improve the model fit) VS Design-driven
+
+- Top-down and Bottom-up
+]
+.right-col[
+- Some prefer to proceed incrementally, taking time to examine data.
+
 - One should always be cautious of creating a model that is too complex.
-- Some researchers have shown via simulations that mixed models without random slopes have a relatively high Type I error rate (Schielzeth & Forstmeier, 2009; Barr, Levy, Scheepers, & Tilly, 2013)
-- Barr et al.(2013) recommend that you should “keep it maximal” with respect to your random effects structure, at least for controlled experiments.
 
+- Some researchers have shown via simulations that mixed models without random slopes have a relatively high Type I error rate (Schielzeth & Forstmeier, 2009; Barr, Levy, Scheepers, & Tilly, 2013)
+
+- Barr et al. (2013) recommend that you should “keep it maximal” with respect to your random effects structure, at least for controlled experiments.
+]
 ???
 We were not interested in gender differences, but they are well worth
 controlling for. This is why we had random slopes for the effect of attitude (by subjects and item) but not gender. 
 
+If you have predictors that represent control variables, over which you do not intend to perform statistical tests, it is unlikely that random slopes are needed.
+---
+# Model selection
+
+### Limitations
+
+#### "Singular fit" warning or "not converging" error
+
+- We need to simplify our model and remove the random slopes or insignificant terms
+( `step()` does it automatically for you).
+
+
+But what if we believe there might be some merit to having subject-specific slopes?
+
+#### Bayes to the rescue
+**Bayesian mixed effects method** are powerful alternatives to more commonly used Frequentist approaches.
 ---
 class: inverse, middle, center
 
@@ -539,29 +577,31 @@ Partial pooling
 #### Research question
 The effects of **sleep deprivation** on psychomotor performance / reaction time (Belenky et al., 2003)
 
-Documentation for the dataset `?sleepstudy` $\rightarrow$ Multilevel data with continuous predictor
-
-#### Plot the data
+.pull-left[#### Multilevel data with continuous predictor
+```{r eval=require('DT'), tidy=FALSE, echo=FALSE}
+DT::datatable(
+  head(sleepstudy, 10),
+  fillContainer = FALSE, options = list(pageLength = 4)
+)
+```
+]
+.pull-right[#### Plot the data
 ```{r, fig.show='hide'}
 sleep2 <- sleepstudy %>%
   filter(Days >= 2) %>%
   mutate(days_deprived = Days - 2)
 
-ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
+ggplot(sleep2, aes(x = days_deprived, 
+                   y = Reaction)) +
   geom_point() +
   scale_x_continuous(breaks = 0:7) +
   facet_wrap(~Subject) +
   labs(y = "Reaction Time", 
        x = "Days deprived of sleep (0 = baseline)")
 ```
----
+.footnote[Documentation for the dataset `?sleepstudy`]
+]
 
-```{r eval=require('DT'), tidy=FALSE}
-DT::datatable(
-  head(sleepstudy, 10),
-  fillContainer = FALSE, options = list(pageLength = 8)
-)
-```
 ---
 # Complete pooling
 .left-column[
@@ -573,7 +613,7 @@ $$ RT = \beta_0 + \beta_1 Days + e$$
 ]
 .right-column[
 ```{r}
-cp_model <- lm(Reaction ~ days_deprived, sleep2)
+cp_model <- lm(Reaction ~ days_deprived, sleep2)  #<<
 ```
 
 ```{r eval=FALSE}
@@ -606,7 +646,7 @@ $$ RT = \beta_0 + \beta_1 Day + e$$
 ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
   geom_abline(intercept = coef(cp_model)[1],
               slope = coef(cp_model)[2],
-              color = 'blue') +
+              color = '#f4cae2', size = 1.5) +
   geom_point() +
   scale_x_continuous(breaks = 0:7) +
   facet_wrap(~Subject, nrow = 3) +
@@ -623,14 +663,15 @@ There is no overall population intercept and slope that is being estimated.
 
 (1) Run separate regressions for each participant
 
-(2) Run multiple regression
+(2) Run **multiple regression**
 ]
 .right-column[
 ```{r, results='hide'}
 sleep2 %>% pull(Subject) %>% is.factor()
-np_model <- lm(Reaction ~ days_deprived + Subject + days_deprived:Subject,
-               data = sleep2)
-summary(np_model)
+np_model <- lm(Reaction ~ days_deprived + Subject + days_deprived:Subject, #<<
+               data = sleep2) #<<
+
+  summary(np_model)
 all_intercepts <- c(coef(np_model)["(Intercept)"],
                     coef(np_model)[3:19] + coef(np_model)["(Intercept)"])
 
@@ -652,9 +693,7 @@ This approach fits separate lines for each participant. The estimate for each pa
 
 There is no overall population intercept and slope that is being estimated.
 
-(1) Run separate regressions for each participant
-
-(2) Run multiple regression
+**multiple regression**
 ]
 .right-column[
 ```{r eval=FALSE}
@@ -678,9 +717,7 @@ This approach fits separate lines for each participant. The estimate for each pa
 
 There is no overall population intercept and slope that is being estimated.
 
-(1) Run separate regressions for each participant
-
-(2) Run multiple regression
+**multiple regression**
 ]
 .right-column[
 ```{r, fig.width=9, fig.height=6, echo=FALSE}
@@ -705,9 +742,7 @@ This approach fits separate lines for each participant. The estimate for each pa
 
 There is no overall population intercept and slope that is being estimated.
 
-(1) Run separate regressions for each participant
-
-(2) Run multiple regression
+**multiple regression**
 ]
 .right-column[ #### A one-sample t-test:
 ```{r comment='#', highlight.output = c(5,6)}
@@ -788,237 +823,54 @@ ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
 ]
 ---
 # Partial Pooling
-.pull-left[The estimates are pulled or "**shrunk**" closer to the overall population average.
-
-**When partial-pooling goes wrong...**
+.pull-left[**When partial-pooling goes wrong...**
 1. Vanishing confidence intervals (the model is too complex for the data to support).
 
-1. Unintended Shrinkage.
+1. Unintended Shrinkage.<sup>1</sup>
 
  - In 2016, George et al. showed that partial pooling can lead to artificially low predicted mortality rates for smaller hospitals. 
 
-1. The number of random effect levels has a strong impact on the uncertainty of the estimate variance.<sup>1</sup>
+1. The number of random effect levels has a strong impact on the uncertainty of the estimate variance.<sup>2</sup>
 ]
-.pull-right[
+.pull-right[The estimates are pulled or "**shrunk**" closer to the overall population average.
 ```{r, echo=FALSE, fig.align='right'}
 knitr::include_graphics("animated.gif")
 ```
 The animated GIF is from Isabella R. Ghement. Twitter: @IsabellaGhement
 ]
 
-.footnote[1 https://www.muscardinus.be/2018/09/number-random-effect-levels/]
+.footnote[<sup>1</sup> https://towardsdatascience.com/when-mixed-effects-hierarchical-models-fail-pooling-and-uncertainty-77e667823ae8
+<sup>2</sup> https://www.muscardinus.be/2018/09/number-random-effect-levels/]
 ---
+class: inverse
 
-# Tables
+# Report Writing
 
-If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
+### Goal: Reproducible
 
-```{r}
-knitr::kable(head(iris), format = 'html')
-```
+- Describe your model (i.e. specify all fixed and random effects, interactions, intercepts, and slopes).
 
----
+- Mention that you checked assumptions, and that the assumptions are satisfied.
 
+- Report significance and actual estimates for coefficients.
 
-
----
-
-
+- Cite the relevant packages.
 
 ---
+class: inverse
 
-```{r eval=require('DT'), tidy=FALSE}
-DT::datatable(
-  head(iris, 10),
-  fillContainer = FALSE, options = list(pageLength = 8)
-)
-```
+# Why LME Model?
 
----
+### Multilevel / Hierarchical / Nested data
 
+- Within-subject factor? Repeated measures?
 
+- Psedoreplications (multiple measurements within the same condition)?
 
----
+- Multiple stimulus items?
 
-# Some Tips
-
-
-
----
-
-# Some Tips
-
-
-
-
-
-
----
-
-# Some Tips
-
-- There are several ways to build incremental slides. See [this presentation](https://slides.yihui.org/xaringan/incremental.html) for examples.
-
-- The option `highlightLines: true` of `nature` will highlight code lines that start with `*`, or are wrapped in `{{ }}`, or have trailing comments `#<<`;
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          highlightLines: true
-    ```
-
-    See examples on the next page.
-
----
-
-
----
-
-# Some Tips
-
-An example of using the trailing comment `#<<` to highlight lines:
-
-````markdown
-`r ''````{r tidy=FALSE}
-library(ggplot2)
-ggplot(mtcars) + 
-  aes(mpg, disp) + 
-  geom_point() +   #<<
-  geom_smooth()    #<<
-```
-````
-
-Output:
-
-```{r tidy=FALSE, eval=FALSE}
-library(ggplot2)
-ggplot(mtcars) + 
-  aes(mpg, disp) + 
-  geom_point() +   #<<
-  geom_smooth()    #<<
-```
-
----
-
-# Some Tips
-
-When you enable line-highlighting, you can also use the chunk option `highlight.output` to highlight specific lines of the text output from a code chunk. For example, `highlight.output = TRUE` means highlighting all lines, and `highlight.output = c(1, 3)` means highlighting the first and third line.
-
-````md
-`r ''````{r, highlight.output=c(1, 3)}
-head(iris)
-```
-````
-
-```{r, highlight.output=c(1, 3), echo=FALSE}
-head(iris)
-```
-
-Question: what does `highlight.output = c(TRUE, FALSE)` mean? (Hint: think about R's recycling of vectors)
-
----
-
-# Some Tips
-
-- To make slides work offline, you need to download a copy of remark.js in advance, because **xaringan** uses the online version by default (see the help page `?xaringan::moon_reader`).
-
-- You can use `xaringan::summon_remark()` to download the latest or a specified version of remark.js. By default, it is downloaded to `libs/remark-latest.min.js`.
-
-- Then change the `chakra` option in YAML to point to this file, e.g.
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        chakra: libs/remark-latest.min.js
-    ```
-
-- If you used Google fonts in slides (the default theme uses _Yanone Kaffeesatz_, _Droid Serif_, and _Source Code Pro_), they won't work offline unless you download or install them locally. The Heroku app [google-webfonts-helper](https://google-webfonts-helper.herokuapp.com/fonts) can help you download fonts and generate the necessary CSS.
-
----
-
-# Macros
-
-
----
-
-# Macros (continued)
-
-
-
----
-
-# CSS
-
-Among all options in `xaringan::moon_reader`, the most challenging but perhaps also the most rewarding one is `css`, because it allows you to customize the appearance of your slides using any CSS rules or hacks you know.
-
-You can see the default CSS file [here](https://github.com/yihui/xaringan/blob/master/inst/rmarkdown/templates/xaringan/resources/default.css). You can completely replace it with your own CSS files, or define new rules to override the default. See the help page `?xaringan::moon_reader` for more information.
-
----
-
-# CSS
-
-For example, suppose you want to change the font for code from the default "Source Code Pro" to "Ubuntu Mono". You can create a CSS file named, say, `ubuntu-mono.css`:
-
-```css
-@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
-
-.remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
-```
-
-Then set the `css` option in the YAML metadata:
-
-```yaml
-output:
-  xaringan::moon_reader:
-    css: ["default", "ubuntu-mono.css"]
-```
-
-Here I assume `ubuntu-mono.css` is under the same directory as your Rmd.
-
-See [yihui/xaringan#83](https://github.com/yihui/xaringan/issues/83) for an example of using the [Fira Code](https://github.com/tonsky/FiraCode) font, which supports ligatures in program code.
-
----
-
-# CSS (with Sass)
-
-**xaringan** also supports Sass support via **rmarkdown**. Suppose you want to use the same color for different elements, e.g., first heading and bold text. You can create a `.scss` file, say `mytheme.scss`, using the [sass](https://sass-lang.com/) syntax with variables:
-
-```scss
-$mycolor: #ff0000; 
-.remark-slide-content > h1 { color: $mycolor; }
-.remark-slide-content strong { color: $mycolor; }
-```
-
-Then set the `css` option in the YAML metadata using this file placed under the same directory as your Rmd:
-
-```yaml
-output:
-  xaringan::moon_reader:
-    css: ["default", "mytheme.scss"]
-```
-
-This requires **rmarkdown** >= 2.8 and the [**sass**](https://rstudio.github.io/sass/) package. You can learn more about **rmarkdown** and **sass** support in [this blog post](https://blog.rstudio.com/2021/04/15/2021-spring-rmd-news/#sass-and-scss-support-for-html-based-output) and in [**sass** overview vignette](https://rstudio.github.io/sass/articles/sass.html).
-
----
-
-
-
-
----
-class: inverse, middle, center
-
-# Naruto
-
----
-
-
-
----
-
-# Naruto terminology
-
-
+???
+In the sleepstudy data, you had the within-subject factor of Day (which is more a numeric variable, actually, than a factor; but it has multiple values varying within each participant).
 
 ---
 # References
@@ -1041,12 +893,11 @@ Barr, Dale J, Roger Levy, Christoph Scheepers, and Harry J Tily. 2013. “Random
 
 Bates, Douglas M., Reinhold Kliegl, Shravan Vasishth, and Harald Baayen. 2015. “Parsimonious Mixed Models.”
 
-
 ---
-
 class: center, middle
 
 # Thanks!
+### Q & A
 
 Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
 
