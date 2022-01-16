@@ -842,7 +842,6 @@ The animated GIF is from Isabella R. Ghement. Twitter: @IsabellaGhement
 .footnote[<sup>1</sup> https://towardsdatascience.com/when-mixed-effects-hierarchical-models-fail-pooling-and-uncertainty-77e667823ae8
 <sup>2</sup> https://www.muscardinus.be/2018/09/number-random-effect-levels/]
 ---
-class: inverse
 
 # Report writing
 
