@@ -779,8 +779,8 @@ Partial pooling
 The effects of **sleep deprivation** on psychomotor performance / reaction time (Belenky et al., 2003)
 
 .pull-left[#### Multilevel data with continuous predictor
-<div id="htmlwidget-26042e83b45d6c31a44d" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-26042e83b45d6c31a44d">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[249.56,258.7047,250.8006,321.4398,356.8519,414.6901,382.2038,290.1486,430.5853,466.3535],[0,1,2,3,4,5,6,7,8,9],["308","308","308","308","308","308","308","308","308","308"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Reaction<\/th>\n      <th>Days<\/th>\n      <th>Subject<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-ee38aacdcfd4c70afd69" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ee38aacdcfd4c70afd69">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[249.56,258.7047,250.8006,321.4398,356.8519,414.6901,382.2038,290.1486,430.5853,466.3535],[0,1,2,3,4,5,6,7,8,9],["308","308","308","308","308","308","308","308","308","308"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Reaction<\/th>\n      <th>Days<\/th>\n      <th>Subject<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 ]
 .pull-right[#### Plot the data
 
@@ -896,7 +896,7 @@ ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
               color = '#f4cae2', size = 1.5) +
   geom_point() + theme_bw() +
   scale_x_continuous(breaks = 0:7) +
-  facet_wrap(~Subject) +
+  facet_wrap(~Subject, nrow=3) +
   labs(y = "Reaction Time", 
        x = "Days deprived of sleep (0 = baseline)")
 ```
@@ -912,7 +912,7 @@ There is no overall population intercept and slope that is being estimated.
 **multiple regression**
 ]
 .right-column[
-![](lmer_files/figure-html/unnamed-chunk-29-1.png)&lt;!-- --&gt;
+![](np-plot.png)
 ]
 
 ---
@@ -1007,7 +1007,8 @@ It would improve generalization to the population.
 We are interested in the 18 subjects as examples drawn from a larger population of potential subjects. 
 ]
 .right-column[
-![](lmer_files/figure-html/unnamed-chunk-33-1.png)&lt;!-- --&gt;
+![](pp-plot.png)
+
 ]
 ---
 # Partial pooling

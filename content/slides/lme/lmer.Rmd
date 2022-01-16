@@ -686,7 +686,7 @@ There is no overall population intercept and slope that is being estimated.
 **multiple regression**
 ]
 .right-column[
-```{r, fig.width=9, fig.height=6,eval=FALSE}
+```{r np-plot, dev='png', fig.width=9, fig.height=6,fig.show='hide'}
 ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
   geom_abline(data = np_coef,
               mapping = aes(intercept = intercept,
@@ -694,7 +694,7 @@ ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
               color = '#f4cae2', size = 1.5) +
   geom_point() + theme_bw() +
   scale_x_continuous(breaks = 0:7) +
-  facet_wrap(~Subject) +
+  facet_wrap(~Subject, nrow=3) +
   labs(y = "Reaction Time", 
        x = "Days deprived of sleep (0 = baseline)")
 ```
@@ -710,19 +710,7 @@ There is no overall population intercept and slope that is being estimated.
 **multiple regression**
 ]
 .right-column[
-```{r, fig.width=9, fig.height=6, echo=FALSE}
-ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
-  geom_abline(data = np_coef,
-              mapping = aes(intercept = intercept,
-                            slope = slope),
-              color = '#f4cae2', size = 1.5) +
-  geom_point() + theme_bw() +
-  scale_x_continuous(breaks = 0:7) +
-  facet_wrap(~Subject) +
-  labs(y = "Reaction Time", 
-       x = "Days deprived of sleep (0 = baseline)")
-
-```
+![](np-plot.png)
 ]
 
 ---
@@ -779,7 +767,7 @@ newdata2 <- newdata %>%
   mutate(Reaction = predict(pp_mod, newdata))
 ```
 
-```{r, eval=FALSE}
+```{r pp-plot, eval=FALSE}
 ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
   geom_line(data = newdata2,
             color = '#f4cae2', size = 1.5) +
@@ -800,16 +788,8 @@ It would improve generalization to the population.
 We are interested in the 18 subjects as examples drawn from a larger population of potential subjects. 
 ]
 .right-column[
-```{r, echo=FALSE}
-ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
-  geom_line(data = newdata2,
-            color = '#f4cae2', size = 1.5) +
-  geom_point() + theme_bw() +
-  scale_x_continuous(breaks = 0:7) +
-  facet_wrap(~Subject, nrow = 3) +
-  labs(y = "Reaction Time", 
-       x = "Days deprived of sleep (0 = baseline)")
-```
+![](pp-plot.png)
+
 ]
 ---
 # Partial pooling
