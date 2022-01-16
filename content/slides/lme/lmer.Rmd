@@ -26,7 +26,7 @@ class: right, middle
 
 [`r fontawesome("twitter")` @ChenziAmy](http://twitter.com/ChenziAmy)  
 [`r fontawesome("github")` @chenchenzi](https://github.com/chenchenzi)  
-[`r fontawesome("link", style = "solid")` chenzixu.rbind.io](https://alison.rbind.io)
+[`r fontawesome("link", style = "solid")` chenzixu.rbind.io](https://chenzixu.rbind.io)
 
 ---
 
@@ -609,7 +609,7 @@ ggplot(sleep2, aes(x = days_deprived,
 
 It assumes that all observations are independent.
 
-$$ RT = \beta_0 + \beta_1 Days + e$$
+$$ RT = \beta_0 + \beta_1 Day + e$$
 ]
 .right-column[
 ```{r}
@@ -822,7 +822,7 @@ ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
 ```
 ]
 ---
-# Partial Pooling
+# Partial pooling
 .pull-left[**When partial-pooling goes wrong...**
 1. Vanishing confidence intervals (the model is too complex for the data to support).
 
@@ -844,7 +844,7 @@ The animated GIF is from Isabella R. Ghement. Twitter: @IsabellaGhement
 ---
 class: inverse
 
-# Report Writing
+# Report writing
 
 ### Goal: Reproducible
 
@@ -859,7 +859,7 @@ class: inverse
 ---
 class: inverse
 
-# Why LME Model?
+# Why LME model?
 
 ### Multilevel / Hierarchical / Nested data
 

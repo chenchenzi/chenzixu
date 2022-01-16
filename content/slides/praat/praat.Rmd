@@ -81,7 +81,7 @@ class: right, middle
 
 [`r fontawesome("twitter")` @ChenziAmy](http://twitter.com/ChenziAmy)  
 [`r fontawesome("github")` @chenchenzi](https://github.com/chenchenzi)  
-[`r fontawesome("link", style = "solid")` chenzixu.rbind.io](https://alison.rbind.io)  
+[`r fontawesome("link", style = "solid")` chenzixu.rbind.io](https://chenzixu.rbind.io)  
 
 ---
 # Our Goal
