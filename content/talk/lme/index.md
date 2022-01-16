@@ -77,7 +77,7 @@ data=
 read.csv("http://www.bodowinter.com/tutorial/politeness_data.csv")
 ```
 
-## Prerequites
+## Prerequisites
 
 {{< icon name="r-project" pack="fab" >}} You have basic knowledge about R and R studio.
 {{< icon name="chart-bar" pack="fas" >}} You have basic inferential statistical knowledge.
