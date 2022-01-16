@@ -625,7 +625,7 @@ ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
               color = 'blue') +
   geom_point() +
   scale_x_continuous(breaks = 0:7) +
-  facet_wrap(~Subject) +
+  facet_wrap(~Subject, nrow = 3) +
   labs(y = "Reaction Time", 
        x = "Days deprived of sleep (0 = baseline)")
 ```
@@ -795,7 +795,7 @@ ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
             color = '#f4cae2', size = 1.5) +
   geom_point() + theme_bw() +
   scale_x_continuous(breaks = 0:7) +
-  facet_wrap(~Subject) +
+  facet_wrap(~Subject, nrow = 3) +
   labs(y = "Reaction Time", 
        x = "Days deprived of sleep (0 = baseline)")
 ```
@@ -810,13 +810,13 @@ It would improve generalization to the population.
 We are interested in the 18 subjects as examples drawn from a larger population of potential subjects. 
 ]
 .right-column[
-```{r, fig.width=9, fig.height=6, echo=FALSE}
+```{r, echo=FALSE}
 ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
   geom_line(data = newdata2,
             color = '#f4cae2', size = 1.5) +
   geom_point() + theme_bw() +
   scale_x_continuous(breaks = 0:7) +
-  facet_wrap(~Subject) +
+  facet_wrap(~Subject, nrow = 3) +
   labs(y = "Reaction Time", 
        x = "Days deprived of sleep (0 = baseline)")
 ```
