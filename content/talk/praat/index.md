@@ -1,5 +1,5 @@
 ---
-title: Introduction to Praat
+title: Introduction to Praat and Praat scripting
 event: Lab Skillz Workshop
 event_url: 
 
@@ -11,12 +11,12 @@ address:
   postcode: 'OX1 2ER'
   country: United Kingdom
 
-summary: Lab Skillz Workshop Week 3 Hilary Term. An introduction to Praat and Praat scripting, for linguistic students.
+summary: Lab Skillz Workshop Week 3 Hilary Term. This workshop serves as a boot camp guiding you to start your phonetic analyses using Praat. Instead of listing out how to perform a specific function, it focuses on introducing a sustainable workflow that bootstraps our knowledge to start our own analyses as quickly as possible.
 abstract: "This workshop serves as a boot camp guiding you to start your phonetic analyses using Praat. Instead of listing out how to perform a specific function, it focuses on introducing a sustainable workflow that bootstraps our knowledge to start our own analyses as quickly as possible."
 
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
-date: "2022-02-04T11:30:00Z"
+date: "2022-02-04T11:00:00Z"
 # date_end: "2030-06-01T15:00:00Z"
 all_day: false
 

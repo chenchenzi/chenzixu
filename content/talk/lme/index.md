@@ -11,12 +11,12 @@ address:
   postcode: 'OX1 2ER'
   country: United Kingdom
 
-summary: Lab Skillz Workshop Week 5 Hilary Term. An introduction to Linear Mixed Effects Models in R, for linguistic students.
-abstract: ""
+summary: Lab Skillz Workshop Week 5 Hilary Term. This workshop introduces you to linear mixed effects models in R. It is decidedly conceptual without too much mathematical proofs or equations involved. We will focus on understanding the model through analysing two datasets and building up linear modeling workflow in R.
+abstract: "This workshop introduces you to linear mixed effects models in R. It is decidedly conceptual without too much mathematical proofs or equations involved. We will focus on understanding the model through analysing two datasets and building up linear modeling workflow in R."
 
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
-date: "2022-02-18T11:30:00Z"
+date: "2022-02-18T11:00:00Z"
 # date_end: "2030-06-01T15:00:00Z"
 all_day: false
 
