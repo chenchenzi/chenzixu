@@ -77,5 +77,11 @@ data=
 read.csv("http://www.bodowinter.com/tutorial/politeness_data.csv")
 ```
 
+## Prerequites
+
+{{< icon name="r-project" pack="fab" >}} You have basic knowledge about R and R studio.
+{{< icon name="chart-bar" pack="fas" >}} You have basic inferential statistical knowledge.
+
 ## Recommended Reading
+
 Winter, B. (2019). Statistics for Linguists: An Introduction Using R (1st ed.). Routledge. https://doi.org/10.4324/9781315165547
