@@ -617,7 +617,7 @@ cp_model <- lm(Reaction ~ days_deprived, sleep2)  #<<
 summary(cp_model)
 ```
 
-```{r cp-plot, dev='png', fig.width=9, fig.height=6, fig.show='hide', cache=TRUE}
+```{r cp-plot, dev='png', fig.width=9, fig.height=6, fig.show='hide'}
 ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
   geom_abline(intercept = coef(cp_model)[1],
               slope = coef(cp_model)[2],
@@ -630,7 +630,6 @@ ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
 ```
 ]
 
-
 ---
 # Complete pooling
 .left-column[
@@ -641,9 +640,10 @@ It assumes that all observations are independent.
 $$ RT = \beta_0 + \beta_1 Day + e$$
 ]
 .right-column[
-![](`r knitr::fig_chunk('cp-plot', 'png')`)
+![](cp-plot.png)
 ]
-
+???
+![](`r knitr::fig_chunk('cp-plot', 'png')`)
 ---
 # No pooling
 .left-column[

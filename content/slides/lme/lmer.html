@@ -455,8 +455,7 @@ summary(politeness.model)
 ```
 
 ```
-# Linear mixed model fit by REML. t-tests use Satterthwaite's method [
-# lmerModLmerTest]
+# Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
 # Formula: frequency ~ attitude + gender + (1 | subject) + (1 | scenario)
 #    Data: data
 # 
@@ -619,12 +618,9 @@ anova(politeness.null, politeness.full)
 # Models:
 # politeness.null: frequency ~ gender + (1 | subject) + (1 | scenario)
 # politeness.full: frequency ~ attitude + gender + (1 | subject) + (1 | scenario)
-#                 npar    AIC    BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)
-# politeness.null    5 816.72 828.81 -403.36   806.72                     
-# politeness.full    6 807.10 821.61 -397.55   795.10 11.618  1  0.0006532
-#                    
-# politeness.null    
-# politeness.full ***
+#                 npar    AIC    BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)    
+# politeness.null    5 816.72 828.81 -403.36   806.72                         
+# politeness.full    6 807.10 821.61 -397.55   795.10 11.618  1  0.0006532 ***
 # ---
 # Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -783,8 +779,8 @@ Partial pooling
 The effects of **sleep deprivation** on psychomotor performance / reaction time (Belenky et al., 2003)
 
 .pull-left[#### Multilevel data with continuous predictor
-<div id="htmlwidget-2223d8a758eab36c81a5" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2223d8a758eab36c81a5">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[249.56,258.7047,250.8006,321.4398,356.8519,414.6901,382.2038,290.1486,430.5853,466.3535],[0,1,2,3,4,5,6,7,8,9],["308","308","308","308","308","308","308","308","308","308"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Reaction<\/th>\n      <th>Days<\/th>\n      <th>Subject<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-26042e83b45d6c31a44d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-26042e83b45d6c31a44d">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[249.56,258.7047,250.8006,321.4398,356.8519,414.6901,382.2038,290.1486,430.5853,466.3535],[0,1,2,3,4,5,6,7,8,9],["308","308","308","308","308","308","308","308","308","308"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Reaction<\/th>\n      <th>Days<\/th>\n      <th>Subject<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 ]
 .pull-right[#### Plot the data
 
@@ -834,7 +830,6 @@ ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
 ```
 ]
 
-
 ---
 # Complete pooling
 .left-column[
@@ -845,9 +840,10 @@ It assumes that all observations are independent.
 $$ RT = \beta_0 + \beta_1 Day + e$$
 ]
 .right-column[
-![](lmer_files/figure-html/cp-plot-1.png)
+![](cp-plot.png)
 ]
-
+???
+![](lmer_files/figure-html/cp-plot-1.png)
 ---
 # No pooling
 .left-column[
