@@ -171,7 +171,7 @@ Many people assume that 'linear models' can only capture linear relationships, i
 A linear model is a weighted sum of various terms, and each term has a single predictor (or a constant) that is multiplied by a coefficient. 
 ---
 # A simple case study
-.pull-left[ #### Research question
+.pull-left[#### Research question
 Assume you were interested in whether the voice pitch of males and females differs, and if so, by how much.
 #### Data
 
@@ -193,13 +193,11 @@ my.df
 ```
 ]
 
-.pull-right[ #### Formula
-Relationship of interest: `\(pitch \sim sex\)` 
+.pull-right[#### Formula
+Relationship of interest: `$$pitch \sim sex$$` 
 
 "Pitch predicted by / as a function of sex"
-
-`\(pitch \sim sex + \epsilon\)`
-
+`$$pitch \sim sex + \epsilon$$`
 `\(\epsilon\)` stands for all other things that affect pitch, random or controllable in our experiment.
 
 **Structural or systematic** + **random or probabilistic**
@@ -210,6 +208,8 @@ model = lm(pitch ~ sex, my.df)
 #### Dummy coding for categorical factors
 ]
 .footnote[This example is taken from Bodo Winter's tutorial.]
+???
+contrasts(as.factor(my.df$sex))
 ---
 # Understanding output
 .pull-left[
@@ -625,7 +625,7 @@ anova(politeness.null, politeness.full)
 # Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-“… politeness affected pitch ($ \chi^2(1)=11.62, p=0.00065)$ , lowering it by about 19.7 Hz ± 5.6 (standard errors) …”
+“… politeness affected pitch ( `\(\chi^2(1)=11.62, p=0.00065\)` ) , lowering it by about 19.7 Hz ± 5.6 (standard errors) …”
 ---
 # Model selection
 .pull-left[
@@ -779,8 +779,8 @@ Partial pooling
 The effects of **sleep deprivation** on psychomotor performance / reaction time (Belenky et al., 2003)
 
 .pull-left[#### Multilevel data with continuous predictor
-<div id="htmlwidget-ee38aacdcfd4c70afd69" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ee38aacdcfd4c70afd69">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[249.56,258.7047,250.8006,321.4398,356.8519,414.6901,382.2038,290.1486,430.5853,466.3535],[0,1,2,3,4,5,6,7,8,9],["308","308","308","308","308","308","308","308","308","308"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Reaction<\/th>\n      <th>Days<\/th>\n      <th>Subject<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d45ea82f56e012cccae5" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d45ea82f56e012cccae5">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[249.56,258.7047,250.8006,321.4398,356.8519,414.6901,382.2038,290.1486,430.5853,466.3535],[0,1,2,3,4,5,6,7,8,9],["308","308","308","308","308","308","308","308","308","308"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Reaction<\/th>\n      <th>Days<\/th>\n      <th>Subject<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 ]
 .pull-right[#### Plot the data
 

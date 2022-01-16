@@ -172,7 +172,7 @@ Many people assume that 'linear models' can only capture linear relationships, i
 A linear model is a weighted sum of various terms, and each term has a single predictor (or a constant) that is multiplied by a coefficient. 
 ---
 # A simple case study
-.pull-left[ #### Research question
+.pull-left[#### Research question
 Assume you were interested in whether the voice pitch of males and females differs, and if so, by how much.
 #### Data
 ```{r comment='#'}
@@ -183,13 +183,11 @@ my.df
 ```
 ]
 
-.pull-right[ #### Formula
-Relationship of interest: $pitch \sim sex$ 
+.pull-right[#### Formula
+Relationship of interest: $$pitch \sim sex$$ 
 
 "Pitch predicted by / as a function of sex"
-
-$pitch \sim sex + \epsilon$
-
+$$pitch \sim sex + \epsilon$$
 $\epsilon$ stands for all other things that affect pitch, random or controllable in our experiment.
 
 **Structural or systematic** + **random or probabilistic**
@@ -199,6 +197,8 @@ model = lm(pitch ~ sex, my.df)
 #### Dummy coding for categorical factors
 ]
 .footnote[This example is taken from Bodo Winter's tutorial.]
+???
+contrasts(as.factor(my.df$sex))
 ---
 # Understanding output
 .pull-left[
@@ -452,7 +452,7 @@ politeness.full = lmer(frequency ~ attitude + gender + (1|subject) + (1|scenario
 anova(politeness.null, politeness.full)
 ```
 
-“… politeness affected pitch ($ \chi^2(1)=11.62, p=0.00065)$ , lowering it by about 19.7 Hz ± 5.6 (standard errors) …”
+“… politeness affected pitch ( $\chi^2(1)=11.62, p=0.00065$ ) , lowering it by about 19.7 Hz ± 5.6 (standard errors) …”
 ---
 # Model selection
 .pull-left[
