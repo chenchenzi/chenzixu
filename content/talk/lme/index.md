@@ -73,13 +73,13 @@ install.packages(c("tidyverse", "lme4", "lmerTest"))
 ```
 - Import the shortened version of dataset in Winter and Grawunder (2012). Copy the following line of code and paste it in the Rstudio Console, and press `return` to run the code. 
 ```
-data=
-read.csv("http://www.bodowinter.com/tutorial/politeness_data.csv")
+data = read.csv("http://www.bodowinter.com/tutorial/politeness_data.csv")
 ```
 
 ## Prerequisites
 
 {{< icon name="r-project" pack="fab" >}} You have basic knowledge about R and R studio.
+
 {{< icon name="chart-bar" pack="fas" >}} You have basic inferential statistical knowledge.
 
 ## Recommended Reading
