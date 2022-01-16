@@ -54,9 +54,9 @@ high school arithmetic and algebra. Elementary concepts of probability theory ar
 
 1. Linear Regression
 
-1. Linear Mixed Effects Model
+1. Linear Mixed Effects Models
 
-1. More on Fixed VS Random effects
+1. Shrinkage in linear mixed models
 
 1. Report Writing
 
@@ -525,7 +525,7 @@ controlling for. This is why we had random slopes for the effect of attitude (by
 ---
 class: inverse, middle, center
 
-# More on Fixed VS Random effects
+# Shrinkage in linear mixed models
 --
 Data
 
@@ -534,16 +534,15 @@ Complete pooling
 No pooling
 
 Partial pooling
-
 ---
 # Data
 #### Research question
-The effects of sleep deprivation on psychomotor performance (Belenky et al., 2003)
+The effects of **sleep deprivation** on psychomotor performance / reaction time (Belenky et al., 2003)
 
 Documentation for the dataset `?sleepstudy` $\rightarrow$ Multilevel data with continuous predictor
 
 #### Plot the data
-```{r}
+```{r, fig.show='hide'}
 sleep2 <- sleepstudy %>%
   filter(Days >= 2) %>%
   mutate(days_deprived = Days - 2)
@@ -555,37 +554,259 @@ ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
   labs(y = "Reaction Time", 
        x = "Days deprived of sleep (0 = baseline)")
 ```
-
 ---
 
+```{r eval=require('DT'), tidy=FALSE}
+DT::datatable(
+  head(sleepstudy, 10),
+  fillContainer = FALSE, options = list(pageLength = 8)
+)
+```
+---
 # Complete pooling
+.left-column[
+**One-size-fit-all**: this approach estimates a single intercept and slope for the entire dataset, ignoring the fact that different subjects might vary in their intercepts or slopes.
 
+It assumes that all observations are independent.
 
-
----
-
-# No pooling
-
-You can write LaTeX math expressions inside a pair of dollar signs, e.g. &#36;\alpha+\beta$ renders $\alpha+\beta$. You can use the display style with double dollar signs:
-
-
-
----
-
-# Partial pooling
-
-
-
----
-
-# R Plots
-
-```{r cars, fig.height=4, dev='svg'}
-par(mar = c(4, 4, 1, .1))
-plot(cars, pch = 19, col = 'darkgray', las = 1)
-abline(fit, lwd = 2)
+$$ RT = \beta_0 + \beta_1 Days + e$$
+]
+.right-column[
+```{r}
+cp_model <- lm(Reaction ~ days_deprived, sleep2)
 ```
 
+```{r eval=FALSE}
+summary(cp_model)
+
+ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
+  geom_abline(intercept = coef(cp_model)[1],
+              slope = coef(cp_model)[2],
+              color = 'blue') +
+  geom_point() +
+  scale_x_continuous(breaks = 0:7) +
+  facet_wrap(~Subject) +
+  labs(y = "Reaction Time", 
+       x = "Days deprived of sleep (0 = baseline)")
+```
+]
+
+
+---
+# Complete pooling
+.left-column[
+**One-size-fit-all**: this approach estimates a single intercept and slope for the entire dataset, ignoring the fact that different subjects might vary in their intercepts or slopes.
+
+It assumes that all observations are independent.
+
+$$ RT = \beta_0 + \beta_1 Day + e$$
+]
+.right-column[
+```{r, fig.width=9, fig.height=6, echo=FALSE}
+ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
+  geom_abline(intercept = coef(cp_model)[1],
+              slope = coef(cp_model)[2],
+              color = 'blue') +
+  geom_point() +
+  scale_x_continuous(breaks = 0:7) +
+  facet_wrap(~Subject, nrow = 3) +
+  labs(y = "Reaction Time", x = "Days deprived of sleep (0 = baseline)")
+```
+]
+
+---
+# No pooling
+.left-column[
+This approach fits separate lines for each participant. The estimate for each participant will be completely uninformed by the estimates for the other participants.
+
+There is no overall population intercept and slope that is being estimated.
+
+(1) Run separate regressions for each participant
+
+(2) Run multiple regression
+]
+.right-column[
+```{r, results='hide'}
+sleep2 %>% pull(Subject) %>% is.factor()
+np_model <- lm(Reaction ~ days_deprived + Subject + days_deprived:Subject,
+               data = sleep2)
+summary(np_model)
+all_intercepts <- c(coef(np_model)["(Intercept)"],
+                    coef(np_model)[3:19] + coef(np_model)["(Intercept)"])
+
+all_slopes  <- c(coef(np_model)["days_deprived"],
+                 coef(np_model)[20:36] + coef(np_model)["days_deprived"])
+
+ids <- sleep2 %>% pull(Subject) %>% levels() %>% factor()
+
+np_coef <- tibble(Subject = ids,
+                  intercept = all_intercepts,
+                  slope = all_slopes)
+```
+
+]
+---
+# No pooling
+.left-column[
+This approach fits separate lines for each participant. The estimate for each participant will be completely uninformed by the estimates for the other participants.
+
+There is no overall population intercept and slope that is being estimated.
+
+(1) Run separate regressions for each participant
+
+(2) Run multiple regression
+]
+.right-column[
+```{r eval=FALSE}
+ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
+  geom_abline(data = np_coef,
+              mapping = aes(intercept = intercept,
+                            slope = slope),
+              color = '#f4cae2', size = 1.5) +
+  geom_point() + theme_bw() +
+  scale_x_continuous(breaks = 0:7) +
+  facet_wrap(~Subject) +
+  labs(y = "Reaction Time", 
+       x = "Days deprived of sleep (0 = baseline)")
+```
+]
+
+---
+# No pooling
+.left-column[
+This approach fits separate lines for each participant. The estimate for each participant will be completely uninformed by the estimates for the other participants.
+
+There is no overall population intercept and slope that is being estimated.
+
+(1) Run separate regressions for each participant
+
+(2) Run multiple regression
+]
+.right-column[
+```{r, fig.width=9, fig.height=6, echo=FALSE}
+ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
+  geom_abline(data = np_coef,
+              mapping = aes(intercept = intercept,
+                            slope = slope),
+              color = '#f4cae2', size = 1.5) +
+  geom_point() + theme_bw() +
+  scale_x_continuous(breaks = 0:7) +
+  facet_wrap(~Subject) +
+  labs(y = "Reaction Time", 
+       x = "Days deprived of sleep (0 = baseline)")
+
+```
+]
+
+---
+# No pooling
+.left-column[
+This approach fits separate lines for each participant. The estimate for each participant will be completely uninformed by the estimates for the other participants.
+
+There is no overall population intercept and slope that is being estimated.
+
+(1) Run separate regressions for each participant
+
+(2) Run multiple regression
+]
+.right-column[ #### A one-sample t-test:
+```{r comment='#', highlight.output = c(5,6)}
+np_coef %>% pull(slope) %>% t.test()
+```
+The mean slope of 11.435 is significantly different from zero, 
+$t(17) = 6.197, p <.001$.
+]
+---
+# Partial pooling
+.left-column[It would be desirable to improve our estimates for individual participants by taking advantage of what we know about the other participants.
+
+It would improve generalization to the population.
+
+We are interested in the 18 subjects as examples drawn from a larger population of potential subjects. 
+]
+.right-column[LME model estimates values for the population, and pulls the estimates for individual subjects toward those values, a statistical phenomenon known as `shrinkage`.
+#### Level 1 (for subject $i$): 
+$$RT_i = \beta_{0i} + \beta_{1i} Day_i +e_i$$
+#### Level 2 (for subject $i$): 
+$$\beta_{0i} = \gamma_0 + Subject_{0i}$$
+$$\beta_{1i} = \gamma_1 + Subject_{1i}$$
+]
+???
+Partial pooling happens when you treat a factor as a random instead of fixed in your analysis.
+---
+# Partial pooling
+.left-column[It would be desirable to improve our estimates for individual participants by taking advantage of what we know about the other participants.
+
+It would improve generalization to the population.
+
+We are interested in the 18 subjects as examples drawn from a larger population of potential subjects. 
+]
+.right-column[
+```{r, results='hide'}
+pp_mod <- lmer(Reaction ~ days_deprived + (days_deprived | Subject), sleep2)
+summary(pp_mod)
+
+newdata <- crossing(
+  Subject = sleep2 %>% pull(Subject) %>% levels() %>% factor(),
+  days_deprived = 0:7)
+
+newdata2 <- newdata %>%
+  mutate(Reaction = predict(pp_mod, newdata))
+```
+
+```{r, eval=FALSE}
+ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
+  geom_line(data = newdata2,
+            color = '#f4cae2', size = 1.5) +
+  geom_point() + theme_bw() +
+  scale_x_continuous(breaks = 0:7) +
+  facet_wrap(~Subject) +
+  labs(y = "Reaction Time", 
+       x = "Days deprived of sleep (0 = baseline)")
+```
+]
+
+---
+# Partial pooling
+.left-column[It would be desirable to improve our estimates for individual participants by taking advantage of what we know about the other participants.
+
+It would improve generalization to the population.
+
+We are interested in the 18 subjects as examples drawn from a larger population of potential subjects. 
+]
+.right-column[
+```{r, fig.width=9, fig.height=6, echo=FALSE}
+ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
+  geom_line(data = newdata2,
+            color = '#f4cae2', size = 1.5) +
+  geom_point() + theme_bw() +
+  scale_x_continuous(breaks = 0:7) +
+  facet_wrap(~Subject) +
+  labs(y = "Reaction Time", 
+       x = "Days deprived of sleep (0 = baseline)")
+```
+]
+---
+# Partial Pooling
+.pull-left[The estimates are pulled or "**shrunk**" closer to the overall population average.
+
+**When partial-pooling goes wrong...**
+1. Vanishing confidence intervals (the model is too complex for the data to support).
+
+1. Unintended Shrinkage.
+
+ - In 2016, George et al. showed that partial pooling can lead to artificially low predicted mortality rates for smaller hospitals. 
+
+1. The number of random effect levels has a strong impact on the uncertainty of the estimate variance.<sup>1</sup>
+]
+.pull-right[
+```{r, echo=FALSE, fig.align='right'}
+knitr::include_graphics("animated.gif")
+```
+The animated GIF is from Isabella R. Ghement. Twitter: @IsabellaGhement
+]
+
+.footnote[1 https://www.muscardinus.be/2018/09/number-random-effect-levels/]
 ---
 
 # Tables
@@ -628,19 +849,9 @@ DT::datatable(
 # Some Tips
 
 
-    
----
 
-    
---
 
-- If you'd like to create your own title slide, disable **xaringan**'s title slide with the `seal = FALSE` option of `moon_reader`.
 
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        seal: false
-    ```
 
 ---
 
@@ -791,77 +1002,23 @@ This requires **rmarkdown** >= 2.8 and the [**sass**](https://rstudio.github.io/
 
 ---
 
-# Themes
 
-Don't want to learn CSS? Okay, you can use some user-contributed themes. A theme typically consists of two CSS files `foo.css` and `foo-fonts.css`, where `foo` is the theme name. Below are some existing themes:
 
-```{r, R.options=list(width = 70)}
-names(xaringan:::list_css())
-```
-
----
-
-# Themes
-
-To use a theme, you can specify the `css` option as an array of CSS filenames (without the `.css` extensions), e.g.,
-
-```yaml
-output:
-  xaringan::moon_reader:
-    css: [default, metropolis, metropolis-fonts]
-```
-
-If you want to contribute a theme to **xaringan**, please read [this blog post](https://yihui.org/en/2017/10/xaringan-themes).
 
 ---
 class: inverse, middle, center
-background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/39/Naruto_Shiki_Fujin.svg)
-background-size: contain
 
 # Naruto
 
 ---
-background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
-background-size: 100px
-background-position: 90% 8%
 
-# Sharingan
 
-The R package name **xaringan** was derived<sup>1</sup> from **Sharingan**, a dōjutsu in the Japanese anime _Naruto_ with two abilities:
-
-- the "Eye of Insight"
-
-- the "Eye of Hypnotism"
-
-I think a presentation is basically a way to communicate insights to the audience, and a great presentation may even "hypnotize" the audience.<sup>2,3</sup>
-
-.footnote[
-[1] In Chinese, the pronounciation of _X_ is _Sh_ /ʃ/ (as in _shrimp_). Now you should have a better idea of how to pronounce my last name _Xie_.
-
-[2] By comparison, bad presentations only put the audience to sleep.
-
-[3] Personally I find that setting background images for slides is a killer feature of remark.js. It is an effective way to bring visual impact into your presentations.
-]
 
 ---
 
 # Naruto terminology
 
-The **xaringan** package borrowed a few terms from Naruto, such as
 
-- [Sharingan](https://naruto.fandom.com/wiki/Sharingan) (写輪眼; the package name)
-
-- The [moon reader](https://naruto.fandom.com/wiki/Moon_Reader) (月読; an attractive R Markdown output format)
-
-- [Chakra](https://naruto.fandom.com/wiki/Chakra) (查克拉; the path to the remark.js library, which is the power to drive the presentation)
-
-- [Nature transformation](https://naruto.fandom.com/wiki/Nature_Transformation) (性質変化; transform the chakra by setting different options)
-
-- The [infinite moon reader](https://naruto.fandom.com/wiki/Infinite_Tsukuyomi) (無限月読; start a local web server to continuously serve your slides)
-
-- The [summoning technique](https://naruto.fandom.com/wiki/Summoning_Technique) (download remark.js from the web)
-
-You can click the links to know more about them if you want. The jutsu "Moon Reader" may seem a little evil, but that does not mean your slides are evil.
 
 ---
 # References
@@ -871,6 +1028,18 @@ Winter, B. (2013). Linear models and linear mixed effects models in R with lingu
 Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl. (on going) Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction. [https://vasishth.github.io/Freq_CogSci/]
 
 Barr, Dale J. (2021). Learning statistical models through simulation in R: An interactive textbook. Version 1.0.0. Retrieved from https://psyteachr.github.io/stat-models-v1.
+
+McElreath, R. (2020). Statistical Rethinking: A Bayesian course with examples in R and STAN. CRC Press.
+
+#### Further Readings:
+
+Casella, George, and Roger L Berger. 2002. Statistical Inference. Second Edition. Cengage Learning.
+
+Miller, I., and M. Miller. 2004. John e. Freund’s Mathematical Statistics with Applications. Prentice Hall.
+
+Barr, Dale J, Roger Levy, Christoph Scheepers, and Harry J Tily. 2013. “Random Effects Structure for Confirmatory Hypothesis Testing: Keep It Maximal.” Journal of Memory and Language 68 (3): 255–78.
+
+Bates, Douglas M., Reinhold Kliegl, Shravan Vasishth, and Harald Baayen. 2015. “Parsimonious Mixed Models.”
 
 
 ---

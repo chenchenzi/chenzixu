@@ -31,9 +31,9 @@ a, a > code {
   font-size: 95%;
 }
 
-/* important code slightly blue */
+/* important code slightly blue #97BBD5*/
 .remark-code-line-highlighted {
-  background-color: #97BBD5 !important;
+  background-color: #fdeaf3 !important;
 }
 
 /* color tweak */

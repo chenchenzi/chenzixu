@@ -25,7 +25,7 @@ class: center, middle, inverse, title-slide
 ## An introduction for linguistic students
 ### Chenzi Xu
 ### University of Oxford
-### 2021/12/12 (updated: 2022-01-15)<br><br><svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"> <path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg><a href="https://chenzixu.rbind.io/">chenzi.xu@rbind.io</a>
+### 2021/12/12 (updated: 2022-01-16)<br><br><svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"> <path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg><a href="https://chenzixu.rbind.io/">chenzi.xu@rbind.io</a>
 
 ---
 
@@ -63,9 +63,9 @@ high school arithmetic and algebra. Elementary concepts of probability theory ar
 
 1. Linear Regression
 
-1. Linear Mixed Effects Model
+1. Linear Mixed Effects Models
 
-1. More on Fixed VS Random effects
+1. Shrinkage in linear mixed models
 
 1. Report Writing
 
@@ -454,7 +454,8 @@ summary(politeness.model)
 ```
 
 ```
-# Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
+# Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+# lmerModLmerTest]
 # Formula: frequency ~ attitude + gender + (1 | subject) + (1 | scenario)
 #    Data: data
 # 
@@ -617,9 +618,12 @@ anova(politeness.null, politeness.full)
 # Models:
 # politeness.null: frequency ~ gender + (1 | subject) + (1 | scenario)
 # politeness.full: frequency ~ attitude + gender + (1 | subject) + (1 | scenario)
-#                 npar    AIC    BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)    
-# politeness.null    5 816.72 828.81 -403.36   806.72                         
-# politeness.full    6 807.10 821.61 -397.55   795.10 11.618  1  0.0006532 ***
+#                 npar    AIC    BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)
+# politeness.null    5 816.72 828.81 -403.36   806.72                     
+# politeness.full    6 807.10 821.61 -397.55   795.10 11.618  1  0.0006532
+#                    
+# politeness.null    
+# politeness.full ***
 # ---
 # Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -726,7 +730,7 @@ controlling for. This is why we had random slopes for the effect of attitude (by
 ---
 class: inverse, middle, center
 
-# More on Fixed VS Random effects
+# Shrinkage in linear mixed models
 --
 Data
 
@@ -735,11 +739,10 @@ Complete pooling
 No pooling
 
 Partial pooling
-
 ---
 # Data
 #### Research question
-The effects of sleep deprivation on psychomotor performance (Belenky et al., 2003)
+The effects of **sleep deprivation** on psychomotor performance / reaction time (Belenky et al., 2003)
 
 Documentation for the dataset `?sleepstudy` `\(\rightarrow\)` Multilevel data with continuous predictor
 
@@ -757,42 +760,252 @@ ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
   labs(y = "Reaction Time", 
        x = "Days deprived of sleep (0 = baseline)")
 ```
-
-![](lmer_files/figure-html/unnamed-chunk-24-1.png)&lt;!-- --&gt;
-
 ---
-
-# Complete pooling
-
-
-
----
-
-# No pooling
-
-You can write LaTeX math expressions inside a pair of dollar signs, e.g. &amp;#36;\alpha+\beta$ renders `\(\alpha+\beta\)`. You can use the display style with double dollar signs:
-
-
-
----
-
-# Partial pooling
-
-
-
----
-
-# R Plots
 
 
 ```r
-par(mar = c(4, 4, 1, .1))
-plot(cars, pch = 19, col = 'darkgray', las = 1)
-abline(fit, lwd = 2)
+DT::datatable(
+  head(sleepstudy, 10),
+  fillContainer = FALSE, options = list(pageLength = 8)
+)
 ```
 
-![](lmer_files/figure-html/cars-1.svg)&lt;!-- --&gt;
+<div id="htmlwidget-798682f11b5b7cb9993e" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-798682f11b5b7cb9993e">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[249.56,258.7047,250.8006,321.4398,356.8519,414.6901,382.2038,290.1486,430.5853,466.3535],[0,1,2,3,4,5,6,7,8,9],["308","308","308","308","308","308","308","308","308","308"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Reaction<\/th>\n      <th>Days<\/th>\n      <th>Subject<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":8,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+---
+# Complete pooling
+.left-column[
+**One-size-fit-all**: this approach estimates a single intercept and slope for the entire dataset, ignoring the fact that different subjects might vary in their intercepts or slopes.
 
+It assumes that all observations are independent.
+
+$$ RT = \beta_0 + \beta_1 Days + e$$
+]
+.right-column[
+
+```r
+cp_model &lt;- lm(Reaction ~ days_deprived, sleep2)
+```
+
+
+```r
+summary(cp_model)
+
+ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
+  geom_abline(intercept = coef(cp_model)[1],
+              slope = coef(cp_model)[2],
+              color = 'blue') +
+  geom_point() +
+  scale_x_continuous(breaks = 0:7) +
+  facet_wrap(~Subject) +
+  labs(y = "Reaction Time", 
+       x = "Days deprived of sleep (0 = baseline)")
+```
+]
+
+
+---
+# Complete pooling
+.left-column[
+**One-size-fit-all**: this approach estimates a single intercept and slope for the entire dataset, ignoring the fact that different subjects might vary in their intercepts or slopes.
+
+It assumes that all observations are independent.
+
+$$ RT = \beta_0 + \beta_1 Day + e$$
+]
+.right-column[
+![](lmer_files/figure-html/unnamed-chunk-28-1.png)&lt;!-- --&gt;
+]
+
+---
+# No pooling
+.left-column[
+This approach fits separate lines for each participant. The estimate for each participant will be completely uninformed by the estimates for the other participants.
+
+There is no overall population intercept and slope that is being estimated.
+
+(1) Run separate regressions for each participant
+
+(2) Run multiple regression
+]
+.right-column[
+
+```r
+sleep2 %&gt;% pull(Subject) %&gt;% is.factor()
+np_model &lt;- lm(Reaction ~ days_deprived + Subject + days_deprived:Subject,
+               data = sleep2)
+summary(np_model)
+all_intercepts &lt;- c(coef(np_model)["(Intercept)"],
+                    coef(np_model)[3:19] + coef(np_model)["(Intercept)"])
+
+all_slopes  &lt;- c(coef(np_model)["days_deprived"],
+                 coef(np_model)[20:36] + coef(np_model)["days_deprived"])
+
+ids &lt;- sleep2 %&gt;% pull(Subject) %&gt;% levels() %&gt;% factor()
+
+np_coef &lt;- tibble(Subject = ids,
+                  intercept = all_intercepts,
+                  slope = all_slopes)
+```
+
+]
+---
+# No pooling
+.left-column[
+This approach fits separate lines for each participant. The estimate for each participant will be completely uninformed by the estimates for the other participants.
+
+There is no overall population intercept and slope that is being estimated.
+
+(1) Run separate regressions for each participant
+
+(2) Run multiple regression
+]
+.right-column[
+
+```r
+ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
+  geom_abline(data = np_coef,
+              mapping = aes(intercept = intercept,
+                            slope = slope),
+              color = '#f4cae2', size = 1.5) +
+  geom_point() + theme_bw() +
+  scale_x_continuous(breaks = 0:7) +
+  facet_wrap(~Subject) +
+  labs(y = "Reaction Time", 
+       x = "Days deprived of sleep (0 = baseline)")
+```
+]
+
+---
+# No pooling
+.left-column[
+This approach fits separate lines for each participant. The estimate for each participant will be completely uninformed by the estimates for the other participants.
+
+There is no overall population intercept and slope that is being estimated.
+
+(1) Run separate regressions for each participant
+
+(2) Run multiple regression
+]
+.right-column[
+![](lmer_files/figure-html/unnamed-chunk-31-1.png)&lt;!-- --&gt;
+]
+
+---
+# No pooling
+.left-column[
+This approach fits separate lines for each participant. The estimate for each participant will be completely uninformed by the estimates for the other participants.
+
+There is no overall population intercept and slope that is being estimated.
+
+(1) Run separate regressions for each participant
+
+(2) Run multiple regression
+]
+.right-column[ #### A one-sample t-test:
+
+```r
+np_coef %&gt;% pull(slope) %&gt;% t.test()
+```
+
+```
+# 
+# 	One Sample t-test
+# 
+# data:  .
+*# t = 6.1971, df = 17, p-value = 9.749e-06
+*# alternative hypothesis: true mean is not equal to 0
+# 95 percent confidence interval:
+#   7.542244 15.328613
+# sample estimates:
+# mean of x 
+#  11.43543
+```
+The mean slope of 11.435 is significantly different from zero, 
+`\(t(17) = 6.197, p &lt;.001\)`.
+]
+---
+# Partial pooling
+.left-column[It would be desirable to improve our estimates for individual participants by taking advantage of what we know about the other participants.
+
+It would improve generalization to the population.
+
+We are interested in the 18 subjects as examples drawn from a larger population of potential subjects. 
+]
+.right-column[LME model estimates values for the population, and pulls the estimates for individual subjects toward those values, a statistical phenomenon known as `shrinkage`.
+#### Level 1 (for subject `\(i\)`): 
+`$$RT_i = \beta_{0i} + \beta_{1i} Day_i +e_i$$`
+#### Level 2 (for subject `\(i\)`): 
+`$$\beta_{0i} = \gamma_0 + Subject_{0i}$$`
+`$$\beta_{1i} = \gamma_1 + Subject_{1i}$$`
+]
+???
+Partial pooling happens when you treat a factor as a random instead of fixed in your analysis.
+---
+# Partial pooling
+.left-column[It would be desirable to improve our estimates for individual participants by taking advantage of what we know about the other participants.
+
+It would improve generalization to the population.
+
+We are interested in the 18 subjects as examples drawn from a larger population of potential subjects. 
+]
+.right-column[
+
+```r
+pp_mod &lt;- lmer(Reaction ~ days_deprived + (days_deprived | Subject), sleep2)
+summary(pp_mod)
+
+newdata &lt;- crossing(
+  Subject = sleep2 %&gt;% pull(Subject) %&gt;% levels() %&gt;% factor(),
+  days_deprived = 0:7)
+
+newdata2 &lt;- newdata %&gt;%
+  mutate(Reaction = predict(pp_mod, newdata))
+```
+
+
+```r
+ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
+  geom_line(data = newdata2,
+            color = '#f4cae2', size = 1.5) +
+  geom_point() + theme_bw() +
+  scale_x_continuous(breaks = 0:7) +
+  facet_wrap(~Subject) +
+  labs(y = "Reaction Time", 
+       x = "Days deprived of sleep (0 = baseline)")
+```
+]
+
+---
+# Partial pooling
+.left-column[It would be desirable to improve our estimates for individual participants by taking advantage of what we know about the other participants.
+
+It would improve generalization to the population.
+
+We are interested in the 18 subjects as examples drawn from a larger population of potential subjects. 
+]
+.right-column[
+![](lmer_files/figure-html/unnamed-chunk-35-1.png)&lt;!-- --&gt;
+]
+---
+# Partial Pooling
+.pull-left[The estimates are pulled or "**shrunk**" closer to the overall population average.
+
+**When partial-pooling goes wrong...**
+1. Vanishing confidence intervals (the model is too complex for the data to support).
+
+1. Unintended Shrinkage.
+
+ - In 2016, George et al. showed that partial pooling can lead to artificially low predicted mortality rates for smaller hospitals. 
+
+1. The number of random effect levels has a strong impact on the uncertainty of the estimate variance.&lt;sup&gt;1&lt;/sup&gt;
+]
+.pull-right[
+&lt;img src="animated.gif" style="display: block; margin: auto 0 auto auto;" /&gt;
+The animated GIF is from Isabella R. Ghement. Twitter: @IsabellaGhement
+]
+
+.footnote[1 https://www.muscardinus.be/2018/09/number-random-effect-levels/]
 ---
 
 # Tables
@@ -878,8 +1091,8 @@ DT::datatable(
 )
 ```
 
-<div id="htmlwidget-50f3fb100c1000fe800f" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-50f3fb100c1000fe800f">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":8,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-25ccad806e1881ef661d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-25ccad806e1881ef661d">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":8,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 ---
 
@@ -896,19 +1109,9 @@ DT::datatable(
 # Some Tips
 
 
-    
----
 
-    
---
 
-- If you'd like to create your own title slide, disable **xaringan**'s title slide with the `seal = FALSE` option of `moon_reader`.
 
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        seal: false
-    ```
 
 ---
 
@@ -1067,95 +1270,23 @@ This requires **rmarkdown** &gt;= 2.8 and the [**sass**](https://rstudio.github.
 
 ---
 
-# Themes
-
-Don't want to learn CSS? Okay, you can use some user-contributed themes. A theme typically consists of two CSS files `foo.css` and `foo-fonts.css`, where `foo` is the theme name. Below are some existing themes:
 
 
-```r
-names(xaringan:::list_css())
-```
-
-```
-##  [1] "chocolate-fonts"  "chocolate"        "default-fonts"   
-##  [4] "default"          "duke-blue"        "fc-fonts"        
-##  [7] "fc"               "glasgow_template" "hygge-duke"      
-## [10] "hygge"            "ki-fonts"         "ki"              
-## [13] "kunoichi"         "lucy-fonts"       "lucy"            
-## [16] "metropolis-fonts" "metropolis"       "middlebury-fonts"
-## [19] "middlebury"       "nhsr-fonts"       "nhsr"            
-## [22] "ninjutsu"         "rladies-fonts"    "rladies"         
-## [25] "robot-fonts"      "robot"            "rutgers-fonts"   
-## [28] "rutgers"          "shinobi"          "tamu-fonts"      
-## [31] "tamu"             "uio-fonts"        "uio"             
-## [34] "uo-fonts"         "uo"               "uol-fonts"       
-## [37] "uol"              "useR-fonts"       "useR"            
-## [40] "uwm-fonts"        "uwm"
-```
-
----
-
-# Themes
-
-To use a theme, you can specify the `css` option as an array of CSS filenames (without the `.css` extensions), e.g.,
-
-```yaml
-output:
-  xaringan::moon_reader:
-    css: [default, metropolis, metropolis-fonts]
-```
-
-If you want to contribute a theme to **xaringan**, please read [this blog post](https://yihui.org/en/2017/10/xaringan-themes).
 
 ---
 class: inverse, middle, center
-background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/39/Naruto_Shiki_Fujin.svg)
-background-size: contain
 
 # Naruto
 
 ---
-background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
-background-size: 100px
-background-position: 90% 8%
 
-# Sharingan
 
-The R package name **xaringan** was derived&lt;sup&gt;1&lt;/sup&gt; from **Sharingan**, a dōjutsu in the Japanese anime _Naruto_ with two abilities:
-
-- the "Eye of Insight"
-
-- the "Eye of Hypnotism"
-
-I think a presentation is basically a way to communicate insights to the audience, and a great presentation may even "hypnotize" the audience.&lt;sup&gt;2,3&lt;/sup&gt;
-
-.footnote[
-[1] In Chinese, the pronounciation of _X_ is _Sh_ /ʃ/ (as in _shrimp_). Now you should have a better idea of how to pronounce my last name _Xie_.
-
-[2] By comparison, bad presentations only put the audience to sleep.
-
-[3] Personally I find that setting background images for slides is a killer feature of remark.js. It is an effective way to bring visual impact into your presentations.
-]
 
 ---
 
 # Naruto terminology
 
-The **xaringan** package borrowed a few terms from Naruto, such as
 
-- [Sharingan](https://naruto.fandom.com/wiki/Sharingan) (写輪眼; the package name)
-
-- The [moon reader](https://naruto.fandom.com/wiki/Moon_Reader) (月読; an attractive R Markdown output format)
-
-- [Chakra](https://naruto.fandom.com/wiki/Chakra) (查克拉; the path to the remark.js library, which is the power to drive the presentation)
-
-- [Nature transformation](https://naruto.fandom.com/wiki/Nature_Transformation) (性質変化; transform the chakra by setting different options)
-
-- The [infinite moon reader](https://naruto.fandom.com/wiki/Infinite_Tsukuyomi) (無限月読; start a local web server to continuously serve your slides)
-
-- The [summoning technique](https://naruto.fandom.com/wiki/Summoning_Technique) (download remark.js from the web)
-
-You can click the links to know more about them if you want. The jutsu "Moon Reader" may seem a little evil, but that does not mean your slides are evil.
 
 ---
 # References
@@ -1165,6 +1296,18 @@ Winter, B. (2013). Linear models and linear mixed effects models in R with lingu
 Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl. (on going) Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction. [https://vasishth.github.io/Freq_CogSci/]
 
 Barr, Dale J. (2021). Learning statistical models through simulation in R: An interactive textbook. Version 1.0.0. Retrieved from https://psyteachr.github.io/stat-models-v1.
+
+McElreath, R. (2020). Statistical Rethinking: A Bayesian course with examples in R and STAN. CRC Press.
+
+#### Further Readings:
+
+Casella, George, and Roger L Berger. 2002. Statistical Inference. Second Edition. Cengage Learning.
+
+Miller, I., and M. Miller. 2004. John e. Freund’s Mathematical Statistics with Applications. Prentice Hall.
+
+Barr, Dale J, Roger Levy, Christoph Scheepers, and Harry J Tily. 2013. “Random Effects Structure for Confirmatory Hypothesis Testing: Keep It Maximal.” Journal of Memory and Language 68 (3): 255–78.
+
+Bates, Douglas M., Reinhold Kliegl, Shravan Vasishth, and Harald Baayen. 2015. “Parsimonious Mixed Models.”
 
 
 ---
