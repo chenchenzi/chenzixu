@@ -78,13 +78,15 @@ class: inverse, center, middle
 # Inferential Stats Recap
 --
 
-(~~magic~~) Central limit theorem
+Central limit theorem (~~magic~~) 
 
 Hypothesis testing: the (humble) t-test
 ---
 # Central limit theorem (~~magic~~)
 .left-column[
-###Definition and Significance]
+###Definition and Significance
+.footnote[The picture is from Wikipedia.]
+]
 .right-column[The **sampling distribution of means** is **normal**, provided two conditions are met: 
 (a) the sample size should be **large** enough
 (b) `\(\mu\)` and `\(\sigma\)` are defined for the probability density or mass function that generated the data. 
@@ -93,7 +95,8 @@ Hypothesis testing: the (humble) t-test
 We can derive an estimate of the distribution of (hypothetical) sample means from a single sample of n independent data points
 
 CLT is NOT the distribution that generated the data, but the sampling distribution of the sample means under **repeated sampling**.
-![:scale 70%](ct.png)
+
+![:scale 65%](ct.png)
 ]
 
 
@@ -708,7 +711,7 @@ M7    226.3911 -21.34605 -111.1058
 ```
 ]
 
-Despite individual variation, there is also consistency in how politeness affects the voice: for all of our speakers, the voice tends to go
+Despite **individual variation**, there is also **consistency** in how politeness affects the voice: for all of our speakers, the voice tends to go
 down when speaking politely, but for some people it goes down slightly more so than for others.
 ???
 The effect of politeness (`attitudepol`) is different for each subject and item. It’s always negative and many of the values are quite similar to each
@@ -739,7 +742,7 @@ overfitting occurs when your model has too small a sample size and too many pred
 
 - Data-driven (e.g. improve the model fit) VS Design-driven
 
-- Top-down and Bottom-up
+- Top-down VS Bottom-up
 ]
 .right-col[
 - Some prefer to proceed incrementally, taking time to examine data.
@@ -788,8 +791,8 @@ Partial pooling
 The effects of **sleep deprivation** on psychomotor performance / reaction time (Belenky et al., 2003)
 
 .pull-left[#### Multilevel data with continuous predictor
-<div id="htmlwidget-230aabc97471297bd26e" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-230aabc97471297bd26e">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[249.56,258.7047,250.8006,321.4398,356.8519,414.6901,382.2038,290.1486,430.5853,466.3535],[0,1,2,3,4,5,6,7,8,9],["308","308","308","308","308","308","308","308","308","308"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Reaction<\/th>\n      <th>Days<\/th>\n      <th>Subject<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-e58670e5646fbea9ac47" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e58670e5646fbea9ac47">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[249.56,258.7047,250.8006,321.4398,356.8519,414.6901,382.2038,290.1486,430.5853,466.3535],[0,1,2,3,4,5,6,7,8,9],["308","308","308","308","308","308","308","308","308","308"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Reaction<\/th>\n      <th>Days<\/th>\n      <th>Subject<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 ]
 .pull-right[#### Plot the data
 

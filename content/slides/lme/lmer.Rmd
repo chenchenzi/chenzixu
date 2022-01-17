@@ -69,13 +69,15 @@ class: inverse, center, middle
 # Inferential Stats Recap
 --
 
-(~~magic~~) Central limit theorem
+Central limit theorem (~~magic~~) 
 
 Hypothesis testing: the (humble) t-test
 ---
 # Central limit theorem (~~magic~~)
 .left-column[
-###Definition and Significance]
+###Definition and Significance
+.footnote[The picture is from Wikipedia.]
+]
 .right-column[The **sampling distribution of means** is **normal**, provided two conditions are met: 
 (a) the sample size should be **large** enough
 (b) $\mu$ and $\sigma$ are defined for the probability density or mass function that generated the data. 
@@ -84,7 +86,8 @@ Hypothesis testing: the (humble) t-test
 We can derive an estimate of the distribution of (hypothetical) sample means from a single sample of n independent data points
 
 CLT is NOT the distribution that generated the data, but the sampling distribution of the sample means under **repeated sampling**.
-![:scale 70%](ct.png)
+
+![:scale 65%](ct.png)
 ]
 
 
@@ -501,7 +504,7 @@ M7    226.3911 -21.34605 -111.1058
 ```
 ]
 
-Despite individual variation, there is also consistency in how politeness affects the voice: for all of our speakers, the voice tends to go
+Despite **individual variation**, there is also **consistency** in how politeness affects the voice: for all of our speakers, the voice tends to go
 down when speaking politely, but for some people it goes down slightly more so than for others.
 ???
 The effect of politeness (`attitudepol`) is different for each subject and item. It’s always negative and many of the values are quite similar to each
@@ -532,7 +535,7 @@ overfitting occurs when your model has too small a sample size and too many pred
 
 - Data-driven (e.g. improve the model fit) VS Design-driven
 
-- Top-down and Bottom-up
+- Top-down VS Bottom-up
 ]
 .right-col[
 - Some prefer to proceed incrementally, taking time to examine data.
