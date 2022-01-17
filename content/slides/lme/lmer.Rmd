@@ -146,7 +146,7 @@ A simple example of linear model is
 $$Y_i = \beta_0 + \beta_1X_i + e_i$$
 Where $Y_i$ is the measured value of the dependent variable for observation i; $X_i$ is the explanatory variable or predictor; $Y_i$ is modelled in terms of an intercept $\beta_0$ plus the effect of predictor $X_i$ weighted by coefficient $\beta_1$ and error term $e_i$.
 .left-col[
-```{r, fig.width=4, fig.height=4, echo=FALSE}
+```{r, fig.width=4, fig.height=4, out.width='90%', echo=FALSE}
 set.seed(62)
 
 dat <- tibble(X = runif(100, -3, 3),
@@ -182,23 +182,26 @@ my.df = data.frame(sex,pitch)
 my.df
 ```
 ]
-
 .pull-right[#### Formula
-Relationship of interest: $$pitch \sim sex$$ 
+Relationship of interest $pitch \sim sex$
 
 "Pitch predicted by / as a function of sex"
 $$pitch \sim sex + \epsilon$$
 $\epsilon$ stands for all other things that affect pitch, random or controllable in our experiment.
-
 **Structural or systematic** + **random or probabilistic**
 ```{r}
-model = lm(pitch ~ sex, my.df)
-```
-#### Dummy coding for categorical factors
-]
-.footnote[This example is taken from Bodo Winter's tutorial.]
-???
+model = lm(pitch ~ sex, my.df) #<<
 contrasts(as.factor(my.df$sex))
+```
+**Dummy coding** for categorical factors
+
+.footnote[This example is taken from Bodo Winter's tutorial.]
+]
+
+???
+Dummy coding for categorical factors
+contrasts(as.factor(my.df$sex))
+
 ---
 # Understanding output
 .pull-left[
