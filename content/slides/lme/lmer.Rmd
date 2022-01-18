@@ -128,6 +128,8 @@ The p-value is always interpreted with reference to the pre-defined Type I error
 ???
 Two possible decisions: **reject the null** or **fail to reject the null**.
 Two possible worlds: the null is **true** or **false**.
+The first picture is from Vasishth's book;
+The second picture is from https://vwo.com/blog/errors-in-ab-testing/
 ---
 class: inverse, center, middle
 
@@ -451,14 +453,14 @@ anova(politeness.model)
 # Understanding the output
 #### Statistical significance
 Likelihood Ratio Test as a means to attain $p$ values. Likelihood is the probability of seeing the data you collected given your model. 
-```{r comment='#'}
+```{r comment='#', highlight.output=c(7)}
 politeness.null = lmer(frequency ~ gender + (1|subject) + (1|scenario), data=data, REML=FALSE)
 politeness.full = lmer(frequency ~ attitude + gender + (1|subject) + (1|scenario), data=data, REML=FALSE)
 
 anova(politeness.null, politeness.full)
 ```
 
-“… politeness affected pitch ( $\chi^2(1)=11.62, p=0.00065$ ) , lowering it by about 19.7 Hz ± 5.6 (standard errors) …”
+“… politeness affected pitch ( $\chi^2(1)=11.62, p=0.00065$ ), lowering it by about $19.7 Hz ± 5.6$ (standard errors)...”
 ---
 # Model selection
 .pull-left[
@@ -684,12 +686,11 @@ np_coef <- tibble(Subject = ids,
 ]
 ---
 # No pooling
-.left-column[
+.left-column[ **multiple regression**
+
 This approach fits separate lines for each participant. The estimate for each participant will be completely uninformed by the estimates for the other participants.
 
 There is no overall population intercept and slope that is being estimated.
-
-**multiple regression**
 ]
 .right-column[
 ```{r np-plot, dev='png', fig.width=9, fig.height=6,fig.show='hide'}
@@ -709,11 +710,11 @@ ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
 ---
 # No pooling
 .left-column[
+**multiple regression**
+
 This approach fits separate lines for each participant. The estimate for each participant will be completely uninformed by the estimates for the other participants.
 
 There is no overall population intercept and slope that is being estimated.
-
-**multiple regression**
 ]
 .right-column[
 ![](np-plot.png)
@@ -722,13 +723,13 @@ There is no overall population intercept and slope that is being estimated.
 ---
 # No pooling
 .left-column[
+#### multiple regression
 This approach fits separate lines for each participant. The estimate for each participant will be completely uninformed by the estimates for the other participants.
 
 There is no overall population intercept and slope that is being estimated.
 
-**multiple regression**
 ]
-.right-column[ #### A one-sample t-test:
+.right-column[ **A one-sample t-test:**
 ```{r comment='#', highlight.output = c(5,6)}
 np_coef %>% pull(slope) %>% t.test()
 ```
@@ -787,7 +788,8 @@ ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
 
 ---
 # Partial pooling
-.left-column[It would be desirable to improve our estimates for individual participants by taking advantage of what we know about the other participants.
+.left-column[
+It would be desirable to improve our estimates for individual participants by taking advantage of what we know about the other participants.
 
 It would improve generalization to the population.
 
