@@ -353,12 +353,12 @@ boxplot(frequency~subject, data)
 $$pitch \sim politeness + sex + (1|subject) + (1|item) + \epsilon$$
 ---
 # Model in R
-```{r comment='#'}
+```{r comment='#', highlight.output=c(2)}
 library(lme4)
 data = data %>% mutate(attitude=as.factor(attitude), gender=as.factor(gender), subject=as.factor(subject))
 
-politeness.model0 = lmer(frequency ~ attitude + (1|subject) + (1|scenario), data=data)
-politeness.model = lmer(frequency ~ attitude + gender + (1|subject) + (1|scenario), data=data)
+politeness.model0 = lmer(frequency ~ attitude + (1|subject) + (1|scenario), data=data) #<<
+politeness.model = lmer(frequency ~ attitude + gender + (1|subject) + (1|scenario), data=data) #<<
 summary(politeness.model)
 ```
 
