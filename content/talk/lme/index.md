@@ -1,6 +1,6 @@
 ---
 title: Linear Mixed Effects Models in R
-event: Lab Skillz Workshop
+event: Lab Skills Workshop
 event_url: 
 
 location: First Floor Lecture Room 1
@@ -11,7 +11,7 @@ address:
   postcode: 'OX1 2ER'
   country: United Kingdom
 
-summary: Lab Skillz Workshop Week 5 Hilary Term. This workshop introduces you to linear mixed effects models in R. It is decidedly conceptual without too much mathematical proofs or equations involved. We will focus on understanding the model through analysing two datasets and building up linear modeling workflow in R.
+summary: Lab Skills Workshop Week 5 Hilary Term. This workshop introduces you to linear mixed effects models in R. It is decidedly conceptual without too much mathematical proofs or equations involved. We will focus on understanding the model through analysing two datasets and building up linear modeling workflow in R.
 abstract: "This workshop introduces you to linear mixed effects models in R. It is decidedly conceptual without too much mathematical proofs or equations involved. We will focus on understanding the model through analysing two datasets and building up linear modeling workflow in R."
 
 # Talk start and end times.
@@ -24,7 +24,7 @@ all_day: false
 publishDate: "2022-01-14T00:00:00Z"
 
 authors: [Chenzi Xu]
-tags: [Stats, Phonetics, lab skills, academic, mixed models]
+tags: [stats, Phonetics, lab skills, academic, mixed models, R, statistics, Phonlab]
 
 # Is this a featured talk? (true/false)
 featured: false

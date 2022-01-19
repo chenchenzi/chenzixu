@@ -1,6 +1,6 @@
 ---
 title: Introduction to Praat and Praat scripting
-event: Lab Skillz Workshop
+event: Lab Skills Workshop
 event_url: 
 
 location: First Floor Lecture Room 1
@@ -11,7 +11,7 @@ address:
   postcode: 'OX1 2ER'
   country: United Kingdom
 
-summary: Lab Skillz Workshop Week 3 Hilary Term. This workshop serves as a boot camp guiding you to start your phonetic analyses using Praat. Instead of listing out how to perform specific functions, it focuses on introducing a sustainable workflow that bootstraps our knowledge to start our own analyses as quickly as possible.
+summary: Lab Skills Workshop Week 3 Hilary Term. This workshop serves as a boot camp guiding you to start your phonetic analyses using Praat. Instead of listing out how to perform specific functions, it focuses on introducing a sustainable workflow that bootstraps our knowledge to start our own analyses as quickly as possible.
 abstract: "This workshop serves as a boot camp guiding you to start your phonetic analyses using Praat. Instead of listing out how to perform specific functions, it focuses on introducing a sustainable workflow that bootstraps our knowledge to start our own analyses as quickly as possible."
 
 # Talk start and end times.
@@ -24,7 +24,7 @@ all_day: false
 publishDate: "2021-12-01T00:00:00Z"
 
 authors: [Chenzi Xu]
-tags: [Praat, Phonetics, lab skills, academic]
+tags: [Praat, Phonetics, lab skills, academic, Phonlab]
 
 # Is this a featured talk? (true/false)
 featured: false
