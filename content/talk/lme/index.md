@@ -75,6 +75,7 @@ install.packages(c("tidyverse", "lme4", "lmerTest"))
 ```
 data = read.csv("http://www.bodowinter.com/tutorial/politeness_data.csv")
 ```
+<br/>
 
 ## Prerequisites
 
@@ -84,11 +85,13 @@ The workshop will be easier for you if...
 
 {{< icon name="chart-bar" pack="fas" >}} You have basic inferential statistical knowledge.
 
+<br/>
+
 ## Recommended Reading
 
 Winter, B. (2019). Statistics for Linguists: An Introduction Using R (1st ed.). Routledge. https://doi.org/10.4324/9781315165547
 
-Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl. (on going) Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction. [https://vasishth.github.io/Freq_CogSci/]
+Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl. (on going) Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction. [https://vasishth.github.io/Freq_CogSci/](https://vasishth.github.io/Freq_CogSci/)
 
 Barr, Dale J. (2021). Learning statistical models through simulation in R: An interactive textbook. Version 1.0.0. Retrieved from https://psyteachr.github.io/stat-models-v1.
 

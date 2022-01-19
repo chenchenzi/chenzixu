@@ -12,7 +12,7 @@ address:
   country: United Kingdom
 
 summary: Software Carpentry aims to help researchers get their work done in less time and with less pain by teaching them basic research computing skills. This hands-on workshop will cover basic concepts and tools, including program design, version control, data management, and task automation. Participants will be encouraged to help one another and to apply what they have learned to their own research problems.
-abstract: ""
+abstract: "Software Carpentry aims to help researchers get their work done in less time and with less pain by teaching them basic research computing skills. This hands-on workshop will cover basic concepts and tools, including program design, version control, data management, and task automation. Participants will be encouraged to help one another and to apply what they have learned to their own research problems."
 
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
@@ -24,7 +24,7 @@ all_day: true
 publishDate: "2021-12-01T00:00:00Z"
 
 authors: []
-tags: [the Carpentries, software skill, workshop]
+tags: [the Carpentries, software skill, workshop, python, git, unix shell]
 
 # Is this a featured talk? (true/false)
 featured: false
