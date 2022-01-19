@@ -78,6 +78,8 @@ data = read.csv("http://www.bodowinter.com/tutorial/politeness_data.csv")
 
 ## Prerequisites
 
+The workshop will be easier for you if...
+
 {{< icon name="r-project" pack="fab" >}} You have basic knowledge about R and R studio.
 
 {{< icon name="chart-bar" pack="fas" >}} You have basic inferential statistical knowledge.
