@@ -63,7 +63,7 @@ class: left, middle
 
 .fancy[Introduction to Praat and Praat Scripting]
 
-.big[Lab Skillz Workshop, Phonetics Laboratory, University of Oxford]
+.big[Lab Skills Workshop, Phonetics Laboratory, University of Oxford]
 
 <br />
 
@@ -135,7 +135,7 @@ name: why
 
 - A macro recording mechanism (Command History)
 
-- You can create your own Praat scripts to **automate** things! 
+- You can create your own Praat scripts to .fancysmall[automate] things! 
   - Recurring tasks become less tedious and more efficient.
   - **Consistent** and **Replicable** measurement
   - Minimising human error
@@ -240,7 +240,7 @@ background-position: 90% 70%
 - ...
 ]
 
-.footnote[You must select the correct object/environment to issue the right commands!]
+.footnote[You must select the **correct** object/environment to **issue** the right commands!]
 ---
 name: script
 class: inverse center middle
@@ -260,7 +260,7 @@ class: inverse center middle
 
 --
 
-### OR ...
+### OR ... Fast track?
 
 ---
 background-image: url('pitch1.png')
@@ -281,6 +281,7 @@ background-position: 10% 90%
 ---
 ## Scripting Hacks II
 ### Macro Recording Workflow (Command History)
+- Obtain a sequence of instructions
 
 ```
 1. New Praat Script
@@ -351,6 +352,8 @@ Create list of all .wav files in the directory and save the number to a variable
 String variable ends in **`$`**; strings wrapped in **`""`**
 
 Assignment operator **`=`**
+
+Variable names in Praat must begin with a lowercase ASCII letter
 ]
 .right-co[
 ```{r, eval=FALSE}
@@ -411,6 +414,13 @@ Read in each .wav file.
 
 `Get string` : get the nth row of the list of filenames
 
+There are different ways to get the basename.
+
+```
+Read from file: dir$ + filename$
+basename$ = selected$ ("Sound")
+```
+
 ]
 .right-co[
 ```{r, eval=FALSE}
@@ -431,6 +441,23 @@ for i from 1 to nFiles
     
 endfor
 ```
+]
+
+---
+## Scripting Hacks V
+.left-col[
+![:scale 85%](error.png)
+]
+.right-co[### Errors are stepping stones
+#### How to debug?
+- In script editor: `Search > Go to line`
+- Use `printline` statements regularly when testing
+
+#### Types of errors
+- Syntactic errors: typos, use of quotes, etc.
+- Runtime errors: file doesn't exist, command doesn't exist etc.
+- Semantic errors: output doesn't match your goal...
+
 ]
 
 ---
@@ -486,6 +513,8 @@ Task 2*: Measure f0 in specified interval
 >
 > Changing scripting environments is not recorded
 
+???
+my first praat script
 ---
 ### Step 3: Loop over all .wav files
 .left-co[ ### Update the boilerplate code
@@ -517,7 +546,8 @@ endfor
 .left-co[ ### Print out result
 **`printline`** prints the argument to the Praat Info window
 
-Contents of a variable enclosed in **`''`** 
+Contents of a variable enclosed in **`''`** in built-in Praat functions
+(force Praat to substitute a string value for its variable name)
 
 Numeric variable doesn't end in **`$`**
 
@@ -710,7 +740,7 @@ endfor
 1.6 Save f0 results of each .wav file to a text file
 ]
 
-**Advanced**: If we manually corrected some pitch points in the PitchTier of a sound file, how do we extract and save the updated pitch track? 
+.fancysmall[Advanced] If we manually corrected some pitch points in the PitchTier of a sound file, or we're only interested in a part of a pitch track, how do we extract and save the desired pitch track? 
 > ### Could you do it yourself now?
 
 ---

@@ -78,5 +78,11 @@ li::marker {
   font-family: 'Martel';
   color: #EFBE43;
   font-weight: 800;
-  font-size: 2.25rem;
+  font-size: 2.25rem;}
+  
+.fancysmall{
+  font-family: 'Martel';
+  color: #EFBE43;
+  font-weight: 700;
+  font-size: 110%;
 }
