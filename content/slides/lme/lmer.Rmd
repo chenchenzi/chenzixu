@@ -465,8 +465,8 @@ The p-value then just gives a number to how likely a particular F-value is going
 #### Statistical significance
 Likelihood Ratio Test as a means to attain $p$ values. Likelihood is the probability of seeing the data you collected given your model. 
 ```{r comment='#', highlight.output=c(7)}
-politeness.null = lmer(frequency ~ gender + (1|subject) + (1|scenario), data=data, REML=FALSE)
-politeness.full = lmer(frequency ~ attitude + gender + (1|subject) + (1|scenario), data=data, REML=FALSE)
+politeness.null = lmer(frequency ~ gender + (1|subject) + (1|scenario), data=data, REML=FALSE) #<<
+politeness.full = lmer(frequency ~ attitude + gender + (1|subject) + (1|scenario), data=data, REML=FALSE) #<<
 
 anova(politeness.null, politeness.full)
 ```
@@ -843,13 +843,13 @@ The animated GIF is from Isabella R. Ghement. Twitter: @IsabellaGhement
 
 ### Goal: Reproducible
 
-- Describe your model (i.e. specify all fixed and random effects, interactions, intercepts, and slopes).
+- Describe and **justify** your model (i.e. specify all fixed and random effects, interactions, intercepts, and slopes).
 
-- Mention that you checked assumptions, and that the assumptions are satisfied.
+- Mention that you checked assumptions, and that the **assumptions are satisfied**.
 
-- Report significance and actual estimates for coefficients.
+- Report significance and **actual estimates** for coefficients.
 
-- Cite the relevant packages.
+- **Cite** the relevant packages.
 
 ---
 class: inverse
