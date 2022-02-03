@@ -99,9 +99,13 @@ class: right, middle
 
 To master how to navigate and use Praat's GUI
 
-To learn scripting basics, parse praat script, and **start** praat scripting]
+To learn scripting basics, parse praat script, and .fancysmall[start] praat scripting]
 
 ]
+
+???
+Q: 1. how many have used Praat? 2. how many have used praat scripts?
+3. how many have learnt other scripting/programming languages?
 
 ---
 ## Outline
@@ -145,6 +149,7 @@ name: why
   - R-praat package: [rPraat](https://fu.ff.cuni.cz/praat/rDemo.html)
 
 ???
+commercial software
 countless hours of soul-crushing repetitions
 ---
 name: functions
@@ -188,6 +193,8 @@ background-position: middle right
 - TextGrid annotation
 ]
 
+???
+Demonstrate load file,view, textgrid, draw a pic.
 ---
 background-image: url('spectrogram.png')
 background-position: 90% 70%
@@ -262,6 +269,15 @@ class: inverse center middle
 
 ### OR ... Fast track?
 
+???
+teach fishing
+
+Sequentially ordered set of instructions that are given to a program that can interpret & execute them
+
+editor type in instructions/commands
+
+In programming, a variable is a place in the computer’s memory where something is stored, containers.name = value
+
 ---
 background-image: url('pitch1.png')
 background-size: 32% 56%
@@ -277,6 +293,10 @@ background-position: 10% 90%
 ```
 
 ]
+???
+We're all linguist. Transitive Verbs take direct object otherwise ungrammatical.
+
+command: arguments/components too! otherwise not running
 
 ---
 ## Scripting Hacks II
@@ -322,6 +342,10 @@ Place all paths, input/output files, and global variables at the top
 Paths must end with a backslash /
 
 Paths can be **relative** or **absolute**
+
+Windows: `"C:\Users\Chenzi\mydir\data\"`
+
+Avoid "special" characters in file/path names.
 ]
 .right-co[
 ```{r, eval=FALSE}
@@ -343,6 +367,10 @@ for i from 1 to nFiles
 endfor
 ```
 ]
+
+???
+formulaic, wrapper code
+Underscore/lowercase is a good combo.
 ---
 ## Scripting Hacks IV
 .left-co[
@@ -376,6 +404,10 @@ endfor
 ```
 ]
 
+???
+In Praat, Names must start with lowercase letters, and
+have only letters, digits, and underscores.
+Informative names help your future self to understand your script!
 ---
 ## Scripting Hacks IV
 .left-co[
@@ -383,6 +415,10 @@ endfor
 Set up a for loop to iterate over all files on the list
 
 `1` is the starting point. It `+1` each time through the loop
+
+Comments (Praat will ignore) must start with "`#`" or "`;`"
+
+Comments are good for reproducibility (and your future self)! 
 ]
 .right-co[
 ```{r, eval=FALSE}
@@ -391,6 +427,7 @@ dir$ = "/Users/Chenzi/mydir/data/"
 Create Strings as file list: "file_list", dir$ + "*.wav"
 nFiles = Get number of strings
 
+# for-loop to iterate over all files on the list #<<
 for i from 1 to nFiles #<<
     selectObject: "Strings file_list"
     filename$ = Get string: i
@@ -788,6 +825,7 @@ Recorded tutorial about Praat script by CASA Lab:
 class: center, middle
 
 # Thank you!
+## Q & A
 
 Slides created via the R packages:
 
