@@ -65,8 +65,8 @@ math: false
 
 ## Pre-workshop Setup
 
-- Download and install the latest version of [Praat](https://www.fon.hum.uva.nl/praat/)
+- Download and install the latest version of [Praat](https://www.fon.hum.uva.nl/praat/).
 
-- Download the sample audio files from my [Github repository](https://github.com/chenchenzi/praat_tut/tree/main)
+- Download the sample audio files from my [Github repository](https://github.com/chenchenzi/praat_tut/tree/main). One way is to click `Code`, then `Download ZIP`.
 
 Feel free to use your own audio files!
