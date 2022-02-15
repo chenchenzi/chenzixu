@@ -920,7 +920,8 @@ Bates, Douglas M., Reinhold Kliegl, Shravan Vasishth, and Harald Baayen. 2015. â
 class: center, middle
 
 # Thanks!
-### Q & A
+
+![](feedback.png)
 
 Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
 
