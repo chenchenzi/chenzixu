@@ -25,7 +25,7 @@ class: center, middle, inverse, title-slide
 ## An introduction for linguistic students
 ### Chenzi Xu
 ### University of Oxford
-### 2021/12/12 (updated: 2022-01-29)<br><br><svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"> <path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg><a href="https://chenzixu.rbind.io/">chenzi.xu@rbind.io</a>
+### 2021/12/12 (updated: 2022-02-15)<br><br><svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"> <path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg><a href="https://chenzixu.rbind.io/">chenzi.xu@rbind.io</a>
 
 ---
 
@@ -98,7 +98,9 @@ CLT is NOT the distribution that generated the data, but the sampling distributi
 
 ![:scale 65%](ct.png)
 ]
-
+???
+SE estimates how much error there is, across repeated sampling, in our estimate of the population mean using sample mean.
+Our estimation will be more precise for larger sample size or lower variability.
 
 ---
 # Hypothesis testing: the (humble) t-test
@@ -116,6 +118,8 @@ Thus the sample mean is **t** standard errors away from the hypothesized mean: `
 ???
 One of the simplest statistical tests that one can do with continuous data: the t-test.
 the logic of these more complex tests will essentially be more of the same
+
+uncertainty in the estimates of the values as the scale on which distances are measured.
 ---
 # Hypothesis testing: the (humble) t-test
 .pull-left[Under repeated sampling, the observed t-value is seen as an instance from a random variable T.
@@ -143,6 +147,10 @@ The second picture is from https://vwo.com/blog/errors-in-ab-testing/
 The t-test is just a special, limited example of a general linear model.
 ANOVA is also a special, limited version of the linear model.(categorical predictors. more than two levels.)
 general linear model: A mathematical model comparing how one or more independent variables affect a continuous dependent variable.
+
+df measures number of pieces of **independent** information that go into estimateing some parameters.
+
+p-values are NOT the probability the null hypothesis is true, and does not measure strength of an effect.
 ---
 class: inverse, center, middle
 
@@ -811,8 +819,8 @@ Partial pooling
 The effects of **sleep deprivation** on psychomotor performance / reaction time (Belenky et al., 2003)
 
 .pull-left[#### Multilevel data with continuous predictor
-<div id="htmlwidget-cd8ffa5dae9753cc8e2d" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-cd8ffa5dae9753cc8e2d">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[249.56,258.7047,250.8006,321.4398,356.8519,414.6901,382.2038,290.1486,430.5853,466.3535],[0,1,2,3,4,5,6,7,8,9],["308","308","308","308","308","308","308","308","308","308"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Reaction<\/th>\n      <th>Days<\/th>\n      <th>Subject<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-f18e7815698dbce38934" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f18e7815698dbce38934">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[249.56,258.7047,250.8006,321.4398,356.8519,414.6901,382.2038,290.1486,430.5853,466.3535],[0,1,2,3,4,5,6,7,8,9],["308","308","308","308","308","308","308","308","308","308"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Reaction<\/th>\n      <th>Days<\/th>\n      <th>Subject<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 ]
 .pull-right[#### Plot the data
 
@@ -1066,13 +1074,21 @@ The animated GIF is from Isabella R. Ghement. Twitter: @IsabellaGhement
 
 ### Goal: Reproducible
 
-- Describe and **justify** your model (i.e. specify all fixed and random effects, interactions, intercepts, and slopes).
+1. Describe and **justify** your model (summarize the model fit).
+  - Specify all fixed and random effects, interactions, intercepts, and slopes
+  - Specify **sample size**: number of observations, and number of levels for each grouping factor
 
-- Mention that you checked assumptions, and that the **assumptions are satisfied**.
+1. Mention that you checked assumptions, and that the **assumptions are satisfied**.
 
-- Report significance and **actual estimates** for coefficients.
+1. Fixed effects: Report **significance** (test statistic, degrees of freedom, `\(p\)`-value) and **actual estimates** for coefficients (effect size: magnitude and direction, standard errors, and confidence intervals).
 
-- **Cite** the relevant packages.
+1. Random effects: Report the variances, standard deviations, and any correlations for each component 
+
+1. **Cite** the relevant packages.
+
+- (recommended) Basic descriptive statistics (e.g. mean and standard deviation of each group)
+
+- (recommended) Plot showing distribution of the data
 
 ---
 class: inverse
@@ -1087,6 +1103,12 @@ class: inverse
 
 - Multiple stimulus items?
 
+### Science (causal) model before statistical model
+
+- Data types: numerical continuous data or categorical data?
+
+- Operational hypothesis?
+
 ???
 In the sleepstudy data, you had the within-subject factor of Day (which is more a numeric variable, actually, than a factor; but it has multiple values varying within each participant).
 
@@ -1094,6 +1116,8 @@ generalized linear model (GLM)
 η determines the predicted mean μ of Y (link function)
 The predicted mean is just the linear predictor (linear regression)
 
+take a step back
+ (McElreath, 2022)
 ---
 # References
 

@@ -89,7 +89,9 @@ CLT is NOT the distribution that generated the data, but the sampling distributi
 
 ![:scale 65%](ct.png)
 ]
-
+???
+SE estimates how much error there is, across repeated sampling, in our estimate of the population mean using sample mean.
+Our estimation will be more precise for larger sample size or lower variability.
 
 ---
 # Hypothesis testing: the (humble) t-test
@@ -107,6 +109,8 @@ Thus the sample mean is **t** standard errors away from the hypothesized mean: $
 ???
 One of the simplest statistical tests that one can do with continuous data: the t-test.
 the logic of these more complex tests will essentially be more of the same
+
+uncertainty in the estimates of the values as the scale on which distances are measured.
 ---
 # Hypothesis testing: the (humble) t-test
 .pull-left[Under repeated sampling, the observed t-value is seen as an instance from a random variable T.
@@ -134,6 +138,10 @@ The second picture is from https://vwo.com/blog/errors-in-ab-testing/
 The t-test is just a special, limited example of a general linear model.
 ANOVA is also a special, limited version of the linear model.(categorical predictors. more than two levels.)
 general linear model: A mathematical model comparing how one or more independent variables affect a continuous dependent variable.
+
+df measures number of pieces of **independent** information that go into estimateing some parameters.
+
+p-values are NOT the probability the null hypothesis is true, and does not measure strength of an effect.
 ---
 class: inverse, center, middle
 
@@ -843,13 +851,21 @@ The animated GIF is from Isabella R. Ghement. Twitter: @IsabellaGhement
 
 ### Goal: Reproducible
 
-- Describe and **justify** your model (i.e. specify all fixed and random effects, interactions, intercepts, and slopes).
+1. Describe and **justify** your model (summarize the model fit).
+  - Specify all fixed and random effects, interactions, intercepts, and slopes
+  - Specify **sample size**: number of observations, and number of levels for each grouping factor
 
-- Mention that you checked assumptions, and that the **assumptions are satisfied**.
+1. Mention that you checked assumptions, and that the **assumptions are satisfied**.
 
-- Report significance and **actual estimates** for coefficients.
+1. Fixed effects: Report **significance** (test statistic, degrees of freedom, $p$-value) and **actual estimates** for coefficients (effect size: magnitude and direction, standard errors, and confidence intervals).
 
-- **Cite** the relevant packages.
+1. Random effects: Report the variances, standard deviations, and any correlations for each component 
+
+1. **Cite** the relevant packages.
+
+- (recommended) Basic descriptive statistics (e.g. mean and standard deviation of each group)
+
+- (recommended) Plot showing distribution of the data
 
 ---
 class: inverse
@@ -864,6 +880,12 @@ class: inverse
 
 - Multiple stimulus items?
 
+### Science (causal) model before statistical model
+
+- Data types: numerical continuous data or categorical data?
+
+- Operational hypothesis?
+
 ???
 In the sleepstudy data, you had the within-subject factor of Day (which is more a numeric variable, actually, than a factor; but it has multiple values varying within each participant).
 
@@ -871,6 +893,8 @@ generalized linear model (GLM)
 η determines the predicted mean μ of Y (link function)
 The predicted mean is just the linear predictor (linear regression)
 
+take a step back
+ (McElreath, 2022)
 ---
 # References
 
