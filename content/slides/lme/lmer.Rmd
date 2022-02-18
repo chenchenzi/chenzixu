@@ -857,7 +857,7 @@ The animated GIF is from Isabella R. Ghement. Twitter: @IsabellaGhement
 
 1. Mention that you checked assumptions, and that the **assumptions are satisfied**.
 
-1. Fixed effects: Report **significance** (test statistic, degrees of freedom, $p$-value) and **actual estimates** for coefficients (effect size: magnitude and direction, standard errors, and confidence intervals).
+1. Fixed effects: Report **significance** (test statistic, degrees of freedom, $p$-value) and **actual estimates** for coefficients (effect size: magnitude and direction, standard errors, and confidence intervals). Report Post-hoc tests (`emmeans()`).
 
 1. Random effects: Report the variances, standard deviations, and any correlations for each component 
 
@@ -867,6 +867,8 @@ The animated GIF is from Isabella R. Ghement. Twitter: @IsabellaGhement
 
 - (recommended) Plot showing distribution of the data
 
+???
+Post-hoc tests test for differences between (combinations of) levels of a factor x, after fitting the model.
 ---
 class: inverse
 
@@ -895,6 +897,7 @@ The predicted mean is just the linear predictor (linear regression)
 
 take a step back
  (McElreath, 2022)
+
 ---
 # References
 
