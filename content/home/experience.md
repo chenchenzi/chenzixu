@@ -44,7 +44,7 @@ date_format = "Jan 2006"
   """
 
 [[experience]]
-  title = "Programmer"
+  title = "Soft Engineer"
   company = "Mo Intelligence Ltd"
   company_url = ""
   location = "Oxford"
