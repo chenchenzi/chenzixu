@@ -2,7 +2,7 @@
 title: "Characterising intonation in Platic Mandarin using polynomial modelling"
 authors:
 - admin
-date: "2020-04-19T23:22:00Z"
+date: "2019-04-19T23:22:00Z"
 doi: ""
 
 # Schedule page publish date (NOT publication's date).
