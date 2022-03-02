@@ -53,8 +53,7 @@ image:
 #   Simply enter your project's folder or file name without extension.
 #   E.g. `internal-project` references `content/project/internal-project/index.md`.
 #   Otherwise, set `projects: []`.
-projects:
-[content/projects/internal-project/index.md]
+projects: [content/projects/internal-project/index.md]
 
 # Slides (optional).
 #   Associate this publication with Markdown slides.
