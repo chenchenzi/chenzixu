@@ -38,17 +38,17 @@ url_pdf: https://www.isca-speech.org/archive/speechprosody_2020/xu20_speechproso
 # url_code: '#'
 # url_dataset: '#'
 # url_poster: '#'
-url_project: ''
-url_slides: ''
+# url_project: ''
+# url_slides: ''
 # url_source: '#'
  url_video: 'https://www.youtube.com/watch?v=SV-HAv95pIE&t=3s'
 
 # Featured image
 # To use, add an image named `featured.jpg/png` to your page's folder. 
-image:
-  caption: ''
-  focal_point: ""
-  preview_only: false
+#image:
+#  caption: ''
+#  focal_point: ""
+#  preview_only: false
 
 # Associated Projects (optional).
 #   Associate this publication with one or more of your projects.
