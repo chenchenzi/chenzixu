@@ -1,6 +1,6 @@
 ---
 title: Revisiting Neutral Tone in Mandarin Broadcast News Speech
-summary: Presentation at Speech Prosody 2020.
+summary: Presentation at Speech Prosody 2020
 
 tags:
 - Mandarin
