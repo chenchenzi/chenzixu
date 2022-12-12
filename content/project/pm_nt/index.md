@@ -12,7 +12,7 @@ date: "2022-10-24T00:00:00Z"
 external_link: ""
 
 image:
-  caption: 'Normalised F0 curves of disyllabic phrases in Plastic Mandarin'
+  caption: Normalised F0 curves of disyllabic phrases in Plastic Mandarin
   focal_point: Smart
 
 links:
