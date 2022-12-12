@@ -1,17 +1,18 @@
 ---
 title: Cross-dialectal perspective on Mandarin neutral tone
-summary: Phonetics & Phonology Presentation, University of Cambridge
+summary: Phonetics & Phonology Seminar, University of Cambridge
 tags:
 - Plastic Mandarin
 - Neutral tone
-
+- Fundamental frequency
+- Tone and Intonation
 date: "2022-10-24T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).
 external_link: ""
 
 image:
-  caption: ''
+  caption: 'Normalised F0 curves of disyllabic phrases in Plastic Mandarin'
   focal_point: Smart
 
 links:
