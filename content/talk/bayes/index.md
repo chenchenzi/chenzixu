@@ -37,7 +37,7 @@ links:
 - icon: desktop
   icon_pack: fas
   name: Slides
-  url: https://chenzixu.rbind.io/slides/bayes/bayes.html
+  url: https://chenzixu.rbind.io/slides/bayes/talk_bayes.html
 url_code: ""
 url_pdf: ""
 url_slides: ""
