@@ -18,14 +18,26 @@ date_format = "Jan 2006"
 #   Leave `date_end` empty if it's your current employer.
 #   Begin/end multi-line descriptions with 3 quotes `"""`.
 [[experience]]
+  title = "Postdoctoral Research Associate"
+  company = "Department of Language and Linguistic Science, University of York"
+  company_url = "https://sites.google.com/york.ac.uk/pasr/home"
+  location = "York, UK"
+  date_start = "2022-08-01"
+  date_end = ""
+  description = """
+  * Working for the ESRC-funded project 'Person-specific automatic speaker recognition: understanding the behaviour of individuals for applications of ASR'
+  * Teaching Research Training Seminar module
+  """
+  
+[[experience]]
   title = "Research Assistant"
   company = "Language and Brain Lab, University of Oxford"
   company_url = ""
   location = "Oxford"
   date_start = "2019-10-01"
-  date_end = ""
+  date_end = "2021-10-01"
   description = """
-  * Working for the MORPHON project supervised by Professor Aditi Lahiri;
+  * Worked for the MORPHON project supervised by Professor Aditi Lahiri;
   * Examined the pre-attentive processing (MMN) of consonant length and differences in place of articulation in [CORONAL] fricatives in Mandarin using EEG.
   * Processed over 1000 Bengali utterances for intonation research.
   """
