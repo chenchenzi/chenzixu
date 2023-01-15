@@ -2,10 +2,10 @@
 name = "Orange"
 
 # Optional Google font URL
-google_fonts = "Fira+Code|Lora:400,700|Roboto:400,700"
+google_fonts = "Fira+Code|Lora:400,700|Roboto:400,700|Petrona:400,700"
 
 # Font families
-heading_font = "Lora"
+heading_font = "Petrona"  #"Lora"
 body_font = "Roboto"
-nav_font = "Lora"
+nav_font = "Petrona" #"Lora"
 mono_font = "Fira Code"

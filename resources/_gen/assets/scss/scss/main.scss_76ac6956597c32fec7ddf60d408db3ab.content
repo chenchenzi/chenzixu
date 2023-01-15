@@ -7201,14 +7201,14 @@ ul.task-list li input[type="checkbox"] {
 
 /* Navigation bar text */
 .navbar-light {
-  font-family: "Lora", sans-serif;
+  font-family: "Petrona", sans-serif;
   font-weight: 400;
   line-height: 1.25;
   text-rendering: optimizeLegibility; }
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Lora", sans-serif;
+  font-family: "Petrona", sans-serif;
   font-weight: 400;
   margin-top: 1rem;
   margin-bottom: .5rem;
@@ -7650,7 +7650,7 @@ div.alert a {
  **************************************************/
 .navbar {
   height: 70px;
-  background: #f7f7f7;
+  background: #fef1e5;
   box-shadow: 0 0.125rem 0.25rem 0 rgba(0, 0, 0, 0.11);
   font-size: 13.86px;
   position: fixed;
@@ -7757,7 +7757,7 @@ div.alert a {
     left: 0;
     top: 50px;
     width: 100%;
-    background-color: #f7f7f7;
+    background-color: #fef1e5;
     text-align: center !important; }
   #navbar-main .main-menu-item .nav-item {
     padding: 10px 15px !important; }
@@ -7781,12 +7781,12 @@ ul.nav-icons li.nav-item a.nav-link {
   padding: 0; }
 
 .dropdown-menu {
-  background-color: #f7f7f7 !important;
+  background-color: #fef1e5 !important;
   color: #000 !important;
   z-index: 1032; }
 
 .dropdown-item {
-  background-color: #f7f7f7 !important;
+  background-color: #fef1e5 !important;
   color: #000 !important; }
 
 /*************************************************
@@ -8394,7 +8394,7 @@ ul.share li:hover i {
   padding-top: 50px; }
 
 .home-section:nth-of-type(even) {
-  background-color: #eaf2fa; }
+  background-color: #fef1e5; }
 
 .dark .home-section {
   background-color: #272935; }

@@ -5,14 +5,14 @@ name = "Orange"
 light = true
 
 # Primary
-primary = "rgb(255, 134, 34)"
+primary = "rgb(255, 134, 34)" #orange
 
 # Menu
-menu_primary = "rgb(247, 247, 247)"
+menu_primary = "rgb(254,241,229)" #light yellow #whitergb(247, 247, 247)
 menu_text = "#000"
-menu_text_active = "rgb(25, 25, 25)"
+menu_text_active = "rgb(25, 25, 25)" #black
 menu_title = "#000"
 
 # Home sections
 home_section_odd = "#FFF"
-home_section_even = "rgb(234, 242, 250)"
+home_section_even = "rgb(254,241,229)" #light yellow #lightblue rgb(234, 242, 250)
