@@ -10,7 +10,7 @@ authors:
 superuser: true
 
 # Role/position
-role: DPhil Student in Linguistics
+role: DPhil (PhD) in Linguistics
 
 # Organizations/Affiliations
 organizations:
@@ -31,7 +31,7 @@ education:
   courses:
   - course: DPhil in General Linguistics and Comparative Philology
     institution: University of Oxford
-    year: 2018-present
+    year: 2018-2022
   - course: MPhil (Distinction) in General Linguistics and Comparative Philology
     institution: University of Oxford
     year: 2016-2018
@@ -61,9 +61,12 @@ social:
   link: https://github.com/chenchenzi
 # Link to a PDF of your resume/CV from the About widget.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
-- icon: cv
-  icon_pack: ai
-  link: files/cv.pdf
+#- icon: cv
+#  icon_pack: ai
+#  link: files/cv.pdf
+- icon: linkedin-in
+  icon_pack: fab
+  link: https://www.linkedin.com/in/chenzi-xu-59b6016b/  
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email: ""

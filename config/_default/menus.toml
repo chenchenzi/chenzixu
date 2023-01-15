@@ -22,6 +22,18 @@
   name = "Resources"
   url = "resources/"
   weight = 40
+  identifier = "resources"
+  
+[[main]]
+  name = "Forced Alignment"
+  url = "resources/1forcedalignment"
+  weight = 10
+  parent = "resources"
+[[main]]
+  name = "Speech Corpus Querying"
+  url = "resources/2speechcorpus"
+  weight = 20
+  parent = "resources"
 
 [[main]]
   name = "Teaching"

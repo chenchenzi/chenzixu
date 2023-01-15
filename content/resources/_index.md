@@ -1,11 +1,14 @@
 ---
 title: Resources
-layout: docs  # Do not modify.
+#layout: docs  # Do not modify.
+type: page
+view: 2
 
 # Optional header image (relative to `static/img/` folder).
 header:
   caption: ""
   image: ""
+
 ---
 
 Open source software packages such as Praat and ESPS have enabled large-scale processing and analysis of speech data. For phoneticians, we often work with first-hand audio data or speech corpora, and begin with the preparation of speech data involving reformatting, transcription, and segmentation. Such pre-processing steps make the speech data searchable and convenient for us to retrieve and extract units of interest.
