@@ -44,7 +44,7 @@ local_business_type = ""
 org_name = ""
 
 # Description for social sharing and search engines. If undefined, superuser role is used in place.
-description = ""
+description = "Personal website for Chenzi Xu, PhD"
 
 ############################
 ## Site Features
@@ -53,7 +53,7 @@ description = ""
 # Enable source code highlighting? true/false
 # Documentation: https://sourcethemes.com/academic/docs/writing-markdown-latex/#highlighting-options
 highlight = true
-highlight_languages = ["r", "python", "bash", "shell"]  # Add support for highlighting additional languages
+highlight_languages = ["r", "python", "bash", "shell", "unix"]  # Add support for highlighting additional languages
 # highlight_style = "github"  # For supported styles, see https://cdnjs.com/libraries/highlight.js/
 
 # Enable LaTeX math rendering? true/false
@@ -81,7 +81,7 @@ privacy_pack = false
 ############################
 
 # Enter contact details (optional). To hide a field, clear it to "".
-email = "chenzi.xu@ling-phil.com"
+email = "chenzi.xu@ling-phil.ox.ac.uk"
 phone = ""
 
 # Address

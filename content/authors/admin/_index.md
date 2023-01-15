@@ -18,7 +18,7 @@ organizations:
   url: "https://www.ling-phil.ox.ac.uk/"
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interests include intonation, speech prosody, speech perception and sociophonetics.
+bio: My research interests include speech prosody, speech perception, and speech technology.
 
 interests:
 - Voice quality
@@ -26,6 +26,7 @@ interests:
 - Neutral tone
 - Speech perception
 - Plastic Mandarin
+- Speech technology
 
 education:
   courses:

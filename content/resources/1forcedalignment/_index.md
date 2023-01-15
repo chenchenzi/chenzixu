@@ -15,7 +15,7 @@ type: docs  # Do not modify.
 reading_time: true # does not work here?
 share: true # does not work here?
 profile: true # does not work here?
-editable: true # does not work here?
+editable: false # does not work here?
 
 # Add menu entry to sidebar.
 # - name: Declare this menu item as a parent with ID `name`.
