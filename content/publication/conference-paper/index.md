@@ -1,5 +1,5 @@
 ---
-title: "Characterising intonation in Platic Mandarin using polynomial modelling"
+title: "Characterising intonation in Plastic Mandarin using polynomial modelling"
 authors:
 - admin
 date: "2019-04-19T23:22:00Z"
