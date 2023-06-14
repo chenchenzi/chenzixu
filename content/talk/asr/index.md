@@ -16,12 +16,12 @@ abstract: "This workshop introduces the inner workings of Automatic Speech Recog
 
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
-date: "2023-6-12T16:00:00Z"
+date: "2023-06-12T16:00:00Z"
 # date_end: "2040-06-01T15:00:00Z"
 all_day: false
 
 # Schedule page publish date (NOT talk date).
-#publishDate: "2022-12-01T00:00:00Z"
+publishDate: "2023-6-11T00:00:00Z"
 
 authors: []
 tags: [ASR, Speech technology,research skills]
