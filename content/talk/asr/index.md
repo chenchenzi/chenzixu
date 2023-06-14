@@ -1,5 +1,5 @@
 ---
-title: Training your first ASR model: Introduction to ASR in linguistic research
+title: "Training your first ASR model: Introduction to ASR in linguistic research"
 event: The Phonetics and Phonology Research Group Workshop, Newcastle University
 event_url: 
 
@@ -11,7 +11,7 @@ address:
   postcode: 
   country: 
 
-summary: Introduction to Automatic Speech Recognition (ASR) in linguistic research
+summary: Introduction to Automatic Speech Recognition (ASR) in linguistic research.
 abstract: "This workshop introduces the inner workings of Automatic Speech Recognition (ASR) and the classical ASR architecture. It focuses on ASR practices that facilitate linguistic research and provides a flexible workflow of automatic forced alignment, demonstrated through various research scenarios. The workshop aims to help you understand the basic concepts in ASR and guide you to utilise ASR in your own linguistic research."
 
 # Talk start and end times.
