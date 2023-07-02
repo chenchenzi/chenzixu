@@ -34,6 +34,11 @@
   url = "resources/2speechcorpus"
   weight = 20
   parent = "resources"
+[[main]]
+  name = "ASR in Linguistic Research"
+  url = "resources/3asr"
+  weight = 30
+  parent = "resources"
 
 [[main]]
   name = "Teaching"
