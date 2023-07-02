@@ -30,8 +30,9 @@ Automatic Speech Recognition (ASR), or Speech-to-text (TTS), maps a sequence of 
 
 There are many open-source resources that can empower us to integrate ASR into our linguistic research workflows. This tutorial aims to help you understand the basic concepts in ASR and guide you step-by-step to utilise ASR in your own linguistic research. 
 
-The tutorial starts with employing state-of-the-art pre-trained ASR models to generate transcripts for audio recordings. The subsequent chapters will release soon and cover how to fine tune and train ASR models from scratch using PyTorch. Please stay tuned!
+The tutorial starts with employing state-of-the-art pre-trained ASR models to generate transcripts for audio recordings: [1. Applying large pre-trained models](https://chenzixu.rbind.io/resources/3asr/sr1/). The subsequent chapters will release soon and cover how to fine tune and train ASR models from scratch using PyTorch. Please stay tuned!
 
+<!---
 ## Classical ASR architecture
 1. Feature Extraction
 2. Acoustic Model
@@ -43,6 +44,7 @@ The tutorial starts with employing state-of-the-art pre-trained ASR models to ge
 2. Feature Extraction
 3. Speech Recognizer
 4. Beamsearch
+--->
 
 > **Forced-alignment tutorial**
 >
