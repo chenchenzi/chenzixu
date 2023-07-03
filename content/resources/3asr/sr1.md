@@ -113,8 +113,29 @@ for i in range(len(transcription["segments"])):
     transcription["segments"][i]["end"],
     transcription["segments"][i]["text"]))
 
-print(result)
+results ="\n".join(result)
+print(results)
 ```
+
+The two types of output are as follows for a sample audio:
+
+```
+The North Wind and the Sun were disputing which was the stronger when a traveler came along wrapped in a warm cloak. They agreed that the one who first succeeded in making the traveler take off his cloak should be considered stronger than the other. Then the North Wind blew as hard as he could, but the more he blew, the more closely did the traveler fold his cloak around him, and at last the North Wind gave up the attempt. Then the Sun shined out warmly, and immediately the traveler took off his cloak, and so the North Wind was obliged to confess that the Sun was the stronger of the two.
+
+```
+
+```
+[0.0 -> 4.64] The North Wind and the Sun were disputing which was the stronger when a traveler came along
+[4.64 -> 6.76] wrapped in a warm cloak.
+[6.76 -> 11.28] They agreed that the one who first succeeded in making the traveler take off his cloak
+[11.28 -> 13.8] should be considered stronger than the other.
+[13.8 -> 17.92] Then the North Wind blew as hard as he could, but the more he blew, the more closely did
+[17.92 -> 23.36] the traveler fold his cloak around him, and at last the North Wind gave up the attempt.
+[23.36 -> 28.88] Then the Sun shined out warmly, and immediately the traveler took off his cloak, and so the
+[28.88 -> 32.12] North Wind was obliged to confess that the Sun was the stronger of the two.
+
+```
+
 
 ## Wav2Vec2.0 by Facebook
 

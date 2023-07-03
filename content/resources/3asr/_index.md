@@ -53,7 +53,7 @@ The tutorial starts with employing state-of-the-art pre-trained ASR models to ge
 
 The main audience expected for this online tutorial is linguistic researchers and students. All scripts were tested on my MacBook Air (M1 2020). Please click on the chapters in the Table of Contents (left side) to [**START**](https://chenzixu.rbind.io/resources/3asr/sr1/).
 
-`{{< icon name="terminal" pack="fas" >}} Unix Shell` `{{< icon name="python" pack="fab" >}} Python` `SoX`
+`{{< icon name="terminal" pack="fas" >}} Unix Shell` `{{< icon name="python" pack="fab" >}} Python`
 
 
 >**DISCLAIMER**
