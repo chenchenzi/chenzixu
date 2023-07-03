@@ -26,6 +26,8 @@ menu:
     weight: 1
 ---
 
+<br>
+
 Automatic Speech Recognition (ASR), or Speech-to-text (TTS), maps a sequence of audio inputs to a sequence of text outputs. Not only is it the core in applications such as voice assistants, video captioning, and minutes-taking, but it can also facilitate linguistic fieldwork and speech data preprocessing.  
 
 There are many open-source resources that can empower us to integrate ASR into our linguistic research workflows. This tutorial aims to help you understand the basic concepts in ASR and guide you step-by-step to utilise ASR in your own linguistic research. 

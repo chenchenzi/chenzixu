@@ -188,7 +188,9 @@ The output of above script is as follows:
 the north wind and the sun were disputing which was the stronger when a traveller came along wrapped in a warm cloak they agreed that the one who first succeeded and making the traveller take off his cloak should be considered stronger than the other then the north wind blew as hard as he could but the more he blew the more closely did the traveller fold his cloak around him and at last the north wind gave up the attempt then the sun shined out warmly and immediately the traveler took off his cloak and so the north wind was obliged to confess that the sun was the stronger of the two
 ```
 
-## Many Other Models
+<br>
+
+## 1.4 Many Other Models
 
 In a similar way, you can have access to many other ASR models on the Hugging Face platform including [Facebook's Hubert](https://huggingface.co/facebook/hubert-large-ls960-ft) and [Fine-tuned XLSR-53 large model](https://huggingface.co/jonatasgrosman/wav2vec2-large-xlsr-53-english). You can follow the instructions detailed in the website to try it out.
 
