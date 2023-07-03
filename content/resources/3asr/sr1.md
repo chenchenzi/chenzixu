@@ -14,6 +14,8 @@ menu:
 weight: 1
 ---
 
+<br>
+
 In this chapter, I demonstrate how to utilise two sets of open-source state-of-the-art pre-trained ASR models which were trained on very large dataset to transcribe English speech: (1) OpenAI's Whisper; (2) Facebook's Wav2Vec2. The models come in various sizes and accuracy. The larger models are usually much slower but generate more accurate transcripts.
 
 You will benefit from this tutorial if (1) you are working on one of the major languages with pre-trained ASR models and (2) you want to transcribe speech recordings of the language. Although having some basic knowledge of Unix Shell and Python would enhance your understanding of the tutorial, don't worry if you're not familiar with them. Feel free to follow along regardless!
@@ -42,7 +44,9 @@ In phonetic research we prefer uncompressed audio formats such as WAV.
 
 We will be using Python and related packages. Setting up an environment to manage these packages is a good starting point.
 
-## Setting up an environment
+<br>
+
+## 1.1 Setting up an environment
 
 I recommend [Anaconda](https://www.anaconda.com/download) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html) (the small, bootstrap version of Anaconda), a free all-in-one installer and environment management system. You can install it through the Installer downloaded from the official website.
 
@@ -73,7 +77,9 @@ We will use ASR models shared on [Hugging Face](https://huggingface.co/models?pi
 # $Huggingface_token will be needed here
 ```
 
-## Whisper by OpenAI
+<br>
+
+## 1.2 Whisper by OpenAI
 [Whisper](https://openai.com/research/whisper) is a powerful general-purpose speech recognition model developed by OpenAI. It is a **multitasking** model that can perform **multilingual** speech recognition, speech translation, and language identification.
 
 There are five freely available model sizes (`tiny`, `base`, `small`, `medium`, and `large`), offering speed and accuracy tradeoffs. Please  visit [this Github repo](https://github.com/openai/whisper) for more details.
@@ -136,8 +142,9 @@ The North Wind and the Sun were disputing which was the stronger when a traveler
 
 ```
 
+<br>
 
-## Wav2Vec2.0 by Facebook
+## 1.3 Wav2Vec2.0 by Facebook
 
 The [Wav2Vec2 model](https://huggingface.co/facebook/wav2vec2-base-960h) trained on 960 hours of Librispeech (with 16kHz sampling rate) is available at Hugging Face. You can also check out their [paper](https://arxiv.org/abs/2006.11477).
 
