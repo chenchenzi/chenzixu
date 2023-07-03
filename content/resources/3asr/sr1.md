@@ -14,7 +14,7 @@ menu:
 weight: 1
 ---
 
-In this chapter, I demonstrate how to make use of a few open-source state-of-the-art pre-trained ASR models which were trained on very large dataset to transcribe English speech. The models are in various sizes and accuracy. The larger models are usually much slower but generate more accurate transcripts.
+In this chapter, I demonstrate how to utilise two sets of open-source state-of-the-art pre-trained ASR models which were trained on very large dataset to transcribe English speech: (1) OpenAI's Whisper; (2) Facebook's Wav2Vec2. The models come in various sizes and accuracy. The larger models are usually much slower but generate more accurate transcripts.
 
 You will benefit from this tutorial if (1) you are working on one of the major languages with pre-trained ASR models and (2) you want to transcribe speech recordings of the language. Although having some basic knowledge of Unix Shell and Python would enhance your understanding of the tutorial, don't worry if you're not familiar with them. Feel free to follow along regardless!
 
@@ -170,13 +170,19 @@ with audio as source:
         logits = model(inputs).logits
         tokens = torch.argmax(logits, axis=-1) # get the distributions of each time step
         text = tokenizer.batch_decode(tokens) #tokens into a string
-        print(str(text).lower)
+        print(str(text).lower())
     except Exception as e:
         print("Exception: "+str(e))
 
 ```
-In a similar way, you can have access to many other ASR models on Hugging Face including [Facebook's Hubert](https://huggingface.co/facebook/hubert-large-ls960-ft) and [Fine-tuned XLSR-53 large model](https://huggingface.co/jonatasgrosman/wav2vec2-large-xlsr-53-english).
 
-## SpeechBrain
+The output of above script is as follows:
+```
+the north wind and the sun were disputing which was the stronger when a traveller came along wrapped in a warm cloak they agreed that the one who first succeeded and making the traveller take off his cloak should be considered stronger than the other then the north wind blew as hard as he could but the more he blew the more closely did the traveller fold his cloak around him and at last the north wind gave up the attempt then the sun shined out warmly and immediately the traveler took off his cloak and so the north wind was obliged to confess that the sun was the stronger of the two
+```
 
-Coming soon...
+## Many Other Models
+
+In a similar way, you can have access to many other ASR models on the Hugging Face platform including [Facebook's Hubert](https://huggingface.co/facebook/hubert-large-ls960-ft) and [Fine-tuned XLSR-53 large model](https://huggingface.co/jonatasgrosman/wav2vec2-large-xlsr-53-english). You can follow the instructions detailed in the website to try it out.
+
+More coming soon...
