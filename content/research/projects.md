@@ -36,6 +36,14 @@ subtitle = ""
   [[content.filter_button]]
     name = "Speech Perception"
     tag = "Speech Perception"
+    
+  [[content.filter_button]]
+    name = "Forensic Phonetics"
+    tag = "Forensic Phonetics"
+    
+  [[content.filter_button]]
+    name = "ASR"
+    tag = "ASR"
 
 [design]
   # Choose how many columns the section has. Valid values: 1 or 2.

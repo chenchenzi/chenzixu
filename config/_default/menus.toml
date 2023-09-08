@@ -39,6 +39,11 @@
   url = "resources/3asr"
   weight = 30
   parent = "resources"
+[[main]]
+  name = "Research Hacks"
+  url = "resources/4researchskill"
+  weight = 40
+  parent = "resources"
 
 [[main]]
   name = "Teaching"
