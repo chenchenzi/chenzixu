@@ -58,7 +58,7 @@ Here is another APA option from the second search result (as of September 13, 20
 This paper in fact was from the 31st International Conference on Neural Information Processing Systems (NIPS) in 2017. Here is another APA option with relatively good APA conference paper format, having skimmed many Google Scholar search results.
 > **APA** Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., ... & Polosukhin, I. (2017, December). Attention is all you need. In *Proceedings of the 31st International Conference on Neural Information Processing Systems* (pp. 6000-6010).
 
-**B. Information Input and Re-use** 
+**B. Information Importing and Re-use** 
 
 It is extremely **time-consuming** and painfully **tedious** to manually type your reference list or fill in the boxes of a reference generator. We should probably avoid this as much as possible and divert our efforts on more important things. Ad hoc reference generators may be good for one-time formatting, but not sustainable nor efficient for the long run. If you are going to cite the same paper in many of your writing pieces, you do not want to repeat the same procedure again and again.
 
@@ -72,13 +72,15 @@ A reference management software {{< icon name="folder-open" pack="fas" >}} is es
 
 ## 1.3 Reference management software **TIER LIST**
 
-Over the past years, I have garnered some experience in various reference management software. The figure below shows my reference management software tier list. The **S** tier (the best) software is **Zotero**, A tier Mendeley, and B tier EndNote, Paperpile, and RefWorks. 
-
-All the software on the B tier is paywalled (which is why they stopped at the B tier despite their respective strengths), although they may be freely available if you are a student or researcher of a partner university. But what if you graduate or leave the university? You might not want to lose your carefully-built research databases, unless you start to purchase a subscription (potentially forever)!
+Over the past years, I have garnered some experience in various reference management software. The figure below shows my reference management software tier list. The **S** tier (the best) software is **Zotero**, created at the Roy Rosenzweig Center for History and New Media at George Mason University. **A** tier contains Mendeley, by Elsevier, and **B** tier (from left to right) features EndNote (by Clarivate Analytics), Paperpile (by Paperpile LLC), and RefWorks (by ProQuest). 
 
 {{< figure library="true" src="biblio.png" title="Tier List of Reference Management Software (personal opinion)" >}}
 
 **Disclaimer**: The rankings are based on my subjective user experience and asynchronous comparisons, and some software may have already improved over time.
+
+All software listed can fulfill the basic needs of reference management. Paperpile and RefWorks are rather lightweight and entirely web-based. Paperpile is specially well-integrated for Chrome and Google Apps including Google Drive and Docs. A limitation of these products is that offline support is limited. Both Zotero and Mendeley are compatible with Windows, Mac, and Linux, with iPad, iPhone, and Android apps. EndNote is Windows and Mac only.
+
+All the software on the B tier is paywalled (which is why they stopped at the B tier despite their respective strengths), although they may be freely available if you are a student or researcher of a partner university. But what if you graduate or leave the university? You might not want to lose your carefully-built research databases, unless you start to purchase a subscription (potentially forever)! The university RefWorks subscription usually extends free access to alumni, but free access to EndNote is terminated beyond graduation from the university. 
 
 Both Mendeley and Zotero are **FREE**, but with charges for adding additional cloud storage space. Cloud storage is mandatory for Mendeley, but optional for Zotero. There is a workaround in Zotero to avoid the additional cloud storage charges (I will introduce this in a later section). Despite the support for Macintosh, Windows, and Linux system, Mendeley's Mac desktop client was not the best -- it crashed or froze many times on my MacBook Pro a few years ago. That was the time I switched to Zotero.
 
@@ -106,25 +108,67 @@ Always double-check the entries when possible to ensure complete details require
 
 ## 1.4 Recommended **Zotero** Setup{#zotero-setup}
 
-The installation is straightforward if you follow the official [online guide](https://www.zotero.org/support/installation). ...to be continued.
+The installation is straightforward if you follow the official [online guide](https://www.zotero.org/support/installation). 
+
+The figure below shows the Zotero interface on a Mac. On the left panel, you can organise your reference entries (items) into different collections (i.e. by theme, publication etc.) with various hierarchical structures. An item can be affiliated with multiple collections. In the middle panel, you can see all items in a selected collection / library. The type of an item is signaled by the mini icon preceding the title such as a book, book chapter, conference paper, dissertation, webpage, article, letter, software, artwork, audio recording etc. When you click on an item, its metadata information will be displayed on the right panel. An item can have notes, files, and links attached to it. By toggling the grey triangular arrow to the left of an item, attachments can be shown.
+
+{{< figure library="true" src="zotero.png" title="Zotero Interface on a Mac (M1)" >}}
 
 ### 1.4.1 Must-have Plug-ins
 
-[**Zotero Connector**](https://www.zotero.org/download/connectors)
+Apart from downloading and installing the Zotero desktop app, plugins have elevated Zotero to the next-level. The following plugins are must-haves.
 
-[**ZotFile**](http://zotfile.com/)
+**1.** [**Zotero Connector**](https://www.zotero.org/download/connectors) is the web browser plugin and available for Chrome, Firefox, or Safari, enabling automatically creating new items and populating the metadata fields using information available on the internet, with **a simple click**. A full-text PDF if available is downloaded together with the click.
+
+The figure below illustrates the Zotero plugin on Chrome, the blue webpage icon. When you hover your mouse on the icon, you will see "Save to Zotero". The icon changes along with the potential source document type. Sometimes the webpage icon is grey when the webpages don't provide any information Zotero can recognise.
+
+You can click the link provided above to download and install.
+
+{{< figure library="true" src="chrome.png" title="Zotero Connector for Chrome" >}}
+
+**2.** [**ZotFile**](http://zotfile.com/) is a plugin for attachment management. When you download articles from the web, their filenames are likely to be a string of meaningless numbers and letters, which make the file unsearchable. ZotFile enables automatically renaming your files in a consistent manner using the metadata of the file. It can also automatically move and attach the PDFs to the entries. 
+
+To install ZotFile, first click `Download` on the [ZotFile](http://zotfile.com/) website and you will have an extension file `zotfile-5.1.2-fx.xpi`. Then in Zotero software, go to `Tools > Add-ons`. In the Add-ons Manager, click the gear icon {{< icon name="gear" pack="fas" >}} on the top-right of the window, select `Install Add-on From File`, and navigate to the folder where the `.xpi` file is located (possibly in ` Downloads`) and click `Open`. In this way, the ZotFile plugin is installed.
+
+To setup ZotFile, you can go to `Tools > ZotFile Preferences...`. You can setup the customised PDF file renaming rules and file storage path in these tabs. An example of the setup is shown below. 
+
+I used the filename rule `{%F_}{%y_}{%t}` for PDFs, where:
+- **%F** indicates author’s last name with first letter of first name (e.g. EinsteinA).
+- **%y** indicates year (extracted from Date field)
+- **%t** indicates title. Usually truncated after : . ? The maximal length of the remaining part of the title can be changed.
+
+These three fields are connected in `_`. For more renaming rules, check out the [online guide](http://zotfile.com/#renaming-rules).
+
+{{< figure library="true" src="zotfile.png" title="ZotFile Settings: File Renaming Rules (left) and File Storage Path (right)" style="width: 10%">}}
+
+**3.1** [**Better BibTex for Zotero**](https://retorque.re/zotero-better-bibtex/), if you are a Latex user.
+
+**3.2** [**Word Processor Plugins**](https://www.zotero.org/support/word_processor_integration), if you are a Word user. The word processor plugins are bundled with Zotero and should be installed automatically for each supported word processor on your computer when you first start Zotero.
+
+### 1.4.2 More Valuable Plug-ins
+
+[**Zotero Reference**](https://github.com/MuiseDestiny/zotero-reference)
+
+{{< figure library="true" src="reference.png" title="Adding References from a Reference List" >}}
+
+[**Jasminum**](https://github.com/l0o0/jasminum)
+
+{{< figure library="true" src="bulk.png" title="Bulk Save in CNKI Database" >}}
+
+[**Zotero Better Notes**](https://github.com/windingwind/zotero-better-notes) and 
+[**ZotCard**](https://github.com/018/zotcard)
 
 
-[**Better BibTex for Zotero**](https://retorque.re/zotero-better-bibtex/), if you are a Latex user.
+### 1.4.2 GPT Meet Zotero...
 
-**Zotero Word for Mac Integration**, if you are a Word user.
-
-### 1.4.2 More Plug-ins
-
-
+[**Zotero GPT**](https://github.com/MuiseDestiny/zotero-gpt)
 
 ## 1.5 **Zotero** User Cases
 
+
+There are a number of ways of adding items to Zotero.
+
+First and foremost is via your web browser. ... to be continued.
 
 The official Zotero guide is available [here](https://www.zotero.org/support/).
 
