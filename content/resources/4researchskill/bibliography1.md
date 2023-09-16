@@ -1,9 +1,9 @@
 ---
-title: Let's talk about reference management
-linktitle: 1. Let's talk about reference management
+title: Let's talk about reference management and Zotero
+linktitle: 1. Let's talk about reference management and Zotero
 toc: true
 type: docs
-date: "2023-6-20T00:00:00+01:00"
+date: "2023-9-10T00:00:00+01:00"
 draft: false
 menu:
   researchhacks:
@@ -108,9 +108,11 @@ Always double-check the entries when possible to ensure complete details require
 
 ## 1.4 Recommended **Zotero** Setup{#zotero-setup}
 
-The installation is straightforward if you follow the official [online guide](https://www.zotero.org/support/installation). 
+The installation of Zotero is straightforward if you follow the official [online guide](https://www.zotero.org/support/installation). 
 
-The figure below shows the Zotero interface on a Mac. On the left panel, you can organise your reference entries (items) into different collections (i.e. by theme, publication etc.) with various hierarchical structures. An item can be affiliated with multiple collections. In the middle panel, you can see all items in a selected collection / library. The type of an item is signaled by the mini icon preceding the title such as a book, book chapter, conference paper, dissertation, webpage, article, letter, software, artwork, audio recording etc. When you click on an item, its metadata information will be displayed on the right panel. An item can have notes, files, and links attached to it. By toggling the grey triangular arrow to the left of an item, attachments can be shown.
+**Zotero (v.6.0.27) Interface**
+
+The figure below shows an example Zotero interface on a Mac. On the left panel, you can organise your reference entries (**items**) into different **collections** (i.e. by theme, publication etc.) with various hierarchical structures. An item can be affiliated with multiple collections. In the middle panel, you can see all items in a selected collection / library. The type of an item is signaled by the mini icon preceding the title such as a book, book chapter, conference paper, dissertation, webpage, article, letter, software, artwork, audio recording etc. When you click on an item, its metadata information will be displayed on the right panel. An item can have notes, files, and links attached to it. By toggling the grey triangular arrow to the left of an item, attachments can be shown.
 
 {{< figure library="true" src="zotero.png" title="Zotero Interface on a Mac (M1)" >}}
 
@@ -118,7 +120,8 @@ The figure below shows the Zotero interface on a Mac. On the left panel, you can
 
 Apart from downloading and installing the Zotero desktop app, plugins have elevated Zotero to the next-level. The following plugins are must-haves.
 
-**1.** [**Zotero Connector**](https://www.zotero.org/download/connectors) is the web browser plugin and available for Chrome, Firefox, or Safari, enabling automatically creating new items and populating the metadata fields using information available on the internet, with **a simple click**. A full-text PDF if available is downloaded together with the click.
+#### 1.4.1.1 Zotero connector
+[**Zotero Connector**](https://www.zotero.org/download/connectors) is the web browser plugin and available for Chrome, Firefox, or Safari, enabling automatically creating new items and populating the metadata fields using information available on the internet, with **a simple click**. A full-text PDF if available is downloaded together with the click.
 
 The figure below illustrates the Zotero plugin on Chrome, the blue webpage icon. When you hover your mouse on the icon, you will see "Save to Zotero". The icon changes along with the potential source document type. Sometimes the webpage icon is grey when the webpages don't provide any information Zotero can recognise.
 
@@ -126,11 +129,22 @@ You can click the link provided above to download and install.
 
 {{< figure library="true" src="chrome.png" title="Zotero Connector for Chrome" >}}
 
-**2.** [**ZotFile**](http://zotfile.com/) is a plugin for attachment management. When you download articles from the web, their filenames are likely to be a string of meaningless numbers and letters, which make the file unsearchable. ZotFile enables automatically renaming your files in a consistent manner using the metadata of the file. It can also automatically move and attach the PDFs to the entries. 
+#### 1.4.1.2 ZotFile 
+[**ZotFile**](http://zotfile.com/) is a plugin for attachment management. When you download articles from the web, their filenames are likely to be a string of meaningless numbers and letters, which make the file unsearchable. ZotFile enables automatically renaming your files in a consistent manner using the metadata of the file. It can also automatically move and attach the PDFs to the entries. 
 
-To install ZotFile, first click `Download` on the [ZotFile](http://zotfile.com/) website and you will have an extension file `zotfile-5.1.2-fx.xpi`. Then in Zotero software, go to `Tools > Add-ons`. In the Add-ons Manager, click the gear icon {{< icon name="gear" pack="fas" >}} on the top-right of the window, select `Install Add-on From File`, and navigate to the folder where the `.xpi` file is located (possibly in ` Downloads`) and click `Open`. In this way, the ZotFile plugin is installed.
+To **install** ZotFile, first click `Download` on the [ZotFile](http://zotfile.com/) website and you will have an extension file `zotfile-5.1.2-fx.xpi`. Then in Zotero software, go to `Tools > Add-ons`. In the Add-ons Manager, click the gear icon {{< icon name="gear" pack="fas" >}} on the top-right of the window, select `Install Add-on From File`, and navigate to the folder where the `.xpi` file is located (possibly in ` Downloads`) and click `Open`. In this way, the ZotFile plugin is installed.
 
-To setup ZotFile, you can go to `Tools > ZotFile Preferences...`. You can setup the customised PDF file renaming rules and file storage path in these tabs. An example of the setup is shown below. 
+{{% alert note %}}
+**Plugin Installation**: Most of the plugins below should follow the same procedure of installation as ZotFile (so I shall not repeat the description of installations of plugins).
+
+①  Download the  `.xpi` file of the plugin;
+
+②  Go to `Tools > Add-ons`, and click gear icon `> Install Add-on From File` to install the `.xpi` file;
+
+③  Restart Zotero.
+{{% /alert %}}
+
+To **set up** ZotFile, you can go to `Tools > ZotFile Preferences...`. You can set up the customised PDF file renaming rules and file storage path in these tabs. An example of the setup is shown below. 
 
 I used the filename rule `{%F_}{%y_}{%t}` for PDFs, where:
 - **%F** indicates author’s last name with first letter of first name (e.g. EinsteinA).
@@ -141,9 +155,12 @@ These three fields are connected in `_`. For more renaming rules, check out the 
 
 {{< figure library="true" src="zotfile.png" title="ZotFile Settings: File Renaming Rules (left) and File Storage Path (right)" style="width: 10%">}}
 
-**3.1** [**Better BibTex for Zotero**](https://retorque.re/zotero-better-bibtex/), if you are a Latex user.
+#### 1.4.1.3  Better BibTex for Zotero
+[**Better BibTex for Zotero**](https://retorque.re/zotero-better-bibtex/), if you are a Latex user.
 
-**3.2** [**Word Processor Plugins**](https://www.zotero.org/support/word_processor_integration), if you are a Word user. The word processor plugins are bundled with Zotero and should be installed automatically for each supported word processor on your computer when you first start Zotero.
+
+#### 1.4.1.3 Word Processor Plugin
+[**Word Processor Plugins**](https://www.zotero.org/support/word_processor_integration), if you are a Word user. The word processor plugins are bundled with Zotero and should be installed automatically for each supported word processor (i.e. Word, LibreOffice, Google Docs) on your computer when you first start Zotero.
 
 ### 1.4.2 More Valuable Plug-ins
 
@@ -158,6 +175,10 @@ These three fields are connected in `_`. For more renaming rules, check out the 
 [**Zotero Better Notes**](https://github.com/windingwind/zotero-better-notes) and 
 [**ZotCard**](https://github.com/018/zotcard)
 
+{{< figure library="true" src="notes.png" title="Note-taking Helper in Zotero" >}}
+
+[**Zotero Style**](https://github.com/MuiseDestiny/zotero-style)
+{{< figure library="true" src="style.png" title="Modified Zotero Columns to show Reading Progress" >}}
 
 ### 1.4.2 GPT Meet Zotero...
 
@@ -165,11 +186,15 @@ These three fields are connected in `_`. For more renaming rules, check out the 
 
 ## 1.5 **Zotero** User Cases
 
-
+### 1.5.1 Importing References
 There are a number of ways of adding items to Zotero.
 
 First and foremost is via your web browser. ... to be continued.
 
 The official Zotero guide is available [here](https://www.zotero.org/support/).
+
+### 1.5.2 TroubleShooting
+
+### 1.5.3 Exporting References
 
 More coming soon...
