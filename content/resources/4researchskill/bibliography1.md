@@ -288,7 +288,7 @@ To install, find the `.xpi` file via the provided link. More introduction is ava
 
 <br>
 
-## 4.3 GPT Meet Zotero...
+## 4.3 GPT Meets Zotero...
 
 There are infinite possibilities when we bridge ChatGPT and Zotero. 
 You will need to purchase the OpenAI API to use [**Zotero GPT**](https://github.com/MuiseDestiny/zotero-gpt). I haven't fully explored this plugin yet. I will update this when I tested it out.
