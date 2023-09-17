@@ -123,7 +123,7 @@ In the middle panel, you can see all items in a selected collection or library. 
 
 ## 4.1 Must-have Plug-ins
 
-Apart from downloading and installing the Zotero desktop app, plugins elevate Zotero to the next-level. The following plugins greatly enhance the user experience, which I considered as must-haves.
+Apart from downloading and installing the Zotero desktop app, plugins elevate Zotero to the next-level. The following plugins greatly enhance the user experience, which I considered as must-haves: **Zotero Connector** for reference importing, **ZotFile** for attachment (PDF) management, **Better BibTex** or **Word processor Plugin** for reference exporting.
 
 ### 4.1.1 Zotero Connector
 [**Zotero Connector**](https://www.zotero.org/download/connectors) is the web browser plugin and available for Chrome, Firefox, or Safari, enabling automatically creating new items and populating the metadata fields using information available on the internet, with **a simple click**. A full-text PDF if available is downloaded together with the click.
