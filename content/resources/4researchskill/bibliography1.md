@@ -26,7 +26,7 @@ When you write an academic article or dissertation, how do you cite other source
 
 You will greatly benefit from this tutorial if (1) you are still using one of the ways described above to create your bibliography, (2) you want to have a head start on reference management, or (3) you have never tried [Zotero](https://www.zotero.org/), a free reference management software (this is not an advertisement XD).
 
-This guide will show you the importance of structured citations, introduce you to one of the best tools, and provide strategies to optimise your research pipeline. (Feel free to jump to [Section 1.4](#zotero-setup) if you are already convinced to try Zotero.)
+This guide will show you the importance of structured citations, introduce you to one of the best tools, and provide strategies to optimise your research pipeline. (Feel free to jump to [**Section 1.4** Recommended Zotero Setup](#zotero-setup) if you are already convinced to try Zotero.)
 
 
 <br>
@@ -82,7 +82,7 @@ All software listed can fulfill the basic needs of reference management. Paperpi
 
 All the software on the B tier is paywalled (which is why they stopped at the B tier despite their respective strengths), although they may be freely available if you are a student or researcher of a partner university. But what if you graduate or leave the university? You might not want to lose your carefully-built research databases, unless you start to purchase a subscription (potentially forever)! The university RefWorks subscription usually extends free access to alumni, but free access to EndNote is terminated beyond graduation from the university. 
 
-Both Mendeley and Zotero are **FREE**, but with charges for adding additional cloud storage space. Cloud storage is mandatory for Mendeley, but optional for Zotero. There is a workaround in Zotero to avoid the additional cloud storage charges (I will introduce this in a later section). Despite the support for Macintosh, Windows, and Linux system, Mendeley's Mac desktop client was not the best -- it crashed or froze many times on my MacBook Pro a few years ago. That was the time I switched to Zotero.
+Both Mendeley and Zotero are **FREE**, but with charges for adding additional cloud storage space. Cloud storage is mandatory for Mendeley, but optional for Zotero. There is a workaround in Zotero to avoid the additional cloud storage charges (I will introduce this in [Section 1.4.1.2](#zotfile)). Despite the support for Macintosh, Windows, and Linux system, Mendeley's Mac desktop client was not the best -- it crashed or froze many times on my MacBook Pro a few years ago. That was the time I switched to Zotero.
 
 Zotero is **open-source** and has an active development community. Robust community support and contributions (e.g. plugins) make Zotero versatile and powerful. The main strengths of Zotero include:
 
@@ -112,57 +112,73 @@ The installation of Zotero is straightforward if you follow the official [online
 
 **Zotero (v.6.0.27) Interface**
 
-The figure below shows an example Zotero interface on a Mac. On the left panel, you can organise your reference entries (**items**) into different **collections** (i.e. by theme, publication etc.) with various hierarchical structures. An item can be affiliated with multiple collections. In the middle panel, you can see all items in a selected collection / library. The type of an item is signaled by the mini icon preceding the title such as a book, book chapter, conference paper, dissertation, webpage, article, letter, software, artwork, audio recording etc. When you click on an item, its metadata information will be displayed on the right panel. An item can have notes, files, and links attached to it. By toggling the grey triangular arrow to the left of an item, attachments can be shown.
+The figure below shows an example Zotero interface on a Mac. On the left panel, you can organise your reference entries (**items**) into different **collections** (i.e. by theme, project, publication etc.) with various hierarchical structures in your **library** or **shared libraries**. Collections are like playlists in Spotify {{< icon name="spotify" pack="fab" >}}: items in collections are aliases (links) to a single copy of the item in the library. An item can be affiliated with multiple collections. 
+
+In the middle panel, you can see all items in a selected collection or library. The type of an item is signaled by the mini icon preceding the title such as a book, book chapter, conference paper, dissertation, webpage, article, letter, software, artwork, audio recording etc. When you click on an item, its metadata information will be displayed on the right panel. An item can have notes, files, and links attached to it. By toggling the grey triangular arrow to the left of an item, attachments can be shown.
 
 {{< figure library="true" src="zotero.png" title="Zotero Interface on a Mac (M1)" >}}
 
 ### 1.4.1 Must-have Plug-ins
 
-Apart from downloading and installing the Zotero desktop app, plugins have elevated Zotero to the next-level. The following plugins are must-haves.
+Apart from downloading and installing the Zotero desktop app, plugins elevate Zotero to the next-level. The following plugins greatly enhance the user experience, which I considered as must-haves.
 
 #### 1.4.1.1 Zotero connector
-[**Zotero Connector**](https://www.zotero.org/download/connectors) is the web browser plugin and available for Chrome, Firefox, or Safari, enabling automatically creating new items and populating the metadata fields using information available on the internet, with **a simple click**. A full-text PDF if available is downloaded together with the click.
+[**https://www.zotero.org/download/connectors**](https://www.zotero.org/download/connectors) is the web browser plugin and available for Chrome, Firefox, or Safari, enabling automatically creating new items and populating the metadata fields using information available on the internet, with **a simple click**. A full-text PDF if available is downloaded together with the click.
 
-The figure below illustrates the Zotero plugin on Chrome, the blue webpage icon. When you hover your mouse on the icon, you will see "Save to Zotero". The icon changes along with the potential source document type. Sometimes the webpage icon is grey when the webpages don't provide any information Zotero can recognise.
+The figure below illustrates the Zotero Connector on Chrome, the blue webpage icon. When you hover your mouse on the icon, you will see "Save to Zotero".If you click on this icon, this webpage will be added as an item in the current library and/or collection by default (the one you opened and displayed in the middle panel in your Zotero desktop). You can also select the destination folder in the dialog box `Saving to` popped up right after the click. You need to have Zotero desktop app running when using Zotero Connector.
 
-You can click the link provided above to download and install.
+The icon **changes** along with the potential source document type. Sometimes the webpage icon is grey when the webpages don't provide any information Zotero can recognise. On webpages such as Google Scholar that contain multiple potential sources, the icon will change into  a folder {{< icon name="folder" pack="fas" >}}. By clicking the folder, a dialog box will pop up from which source references can be selected and saved to Zotero. In this way you can import multiple items in one go.
+
+You can click the link provided above to download and install Zotero Connectors.
 
 {{< figure library="true" src="chrome.png" title="Zotero Connector for Chrome" >}}
 
-#### 1.4.1.2 ZotFile 
+#### 1.4.1.2 ZotFile{#zotfile}
 [**ZotFile**](http://zotfile.com/) is a plugin for attachment management. When you download articles from the web, their filenames are likely to be a string of meaningless numbers and letters, which make the file unsearchable. ZotFile enables automatically renaming your files in a consistent manner using the metadata of the file. It can also automatically move and attach the PDFs to the entries. 
 
-To **install** ZotFile, first click `Download` on the [ZotFile](http://zotfile.com/) website and you will have an extension file `zotfile-5.1.2-fx.xpi`. Then in Zotero software, go to `Tools > Add-ons`. In the Add-ons Manager, click the gear icon {{< icon name="gear" pack="fas" >}} on the top-right of the window, select `Install Add-on From File`, and navigate to the folder where the `.xpi` file is located (possibly in ` Downloads`) and click `Open`. In this way, the ZotFile plugin is installed.
+To **install** ZotFile, first click `Download` on the [ZotFile](http://zotfile.com/) website and you will acquire an extension file `zotfile-5.1.2-fx.xpi`. Then in Zotero software, go to `Tools > Add-ons`. In the Add-ons Manager, click the gear icon {{< icon name="gear" pack="fas" >}} on the top-right corner of the window, select `Install Add-on From File`, and navigate to the folder where the `.xpi` file is located (possibly in ` Downloads`) and click `Open` (or `install`). In this way, the ZotFile plugin is installed. Restart Zotero.
 
 {{% alert note %}}
-**Plugin Installation**: Most of the plugins below should follow the same procedure of installation as ZotFile (so I shall not repeat the description of installations of plugins).
+**Plugin Installation**: Most of the plugins below should follow the same procedure of installation as ZotFile (so I shall not repeat the description of installations of plugins). The general procedure:
 
-①  Download the  `.xpi` file of the plugin;
+①  Download the  `.xpi` file of the plugin from a website or Github page;
 
 ②  Go to `Tools > Add-ons`, and click gear icon `> Install Add-on From File` to install the `.xpi` file;
 
 ③  Restart Zotero.
 {{% /alert %}}
 
-To **set up** ZotFile, you can go to `Tools > ZotFile Preferences...`. You can set up the customised PDF file renaming rules and file storage path in these tabs. An example of the setup is shown below. 
+To **set up** ZotFile, you can go to `Tools > ZotFile Preferences...`. You can set up the **customised PDF file renaming rules** and file storage path in these tabs. An example of the setup is shown below. 
 
-I used the filename rule `{%F_}{%y_}{%t}` for PDFs, where:
+In the `Renaming Rules` tab, I used the filename rule `{%F_}{%y_}{%t}` for PDFs, where:
 - **%F** indicates author’s last name with first letter of first name (e.g. EinsteinA).
 - **%y** indicates year (extracted from Date field)
 - **%t** indicates title. Usually truncated after : . ? The maximal length of the remaining part of the title can be changed.
 
-These three fields are connected in `_`. For more renaming rules, check out the [online guide](http://zotfile.com/#renaming-rules).
+These three fields are connected in `_`. For more place holders in formatting filenames, check out the [online guide](http://zotfile.com/#renaming-rules).
 
 {{< figure library="true" src="zotfile.png" title="ZotFile Settings: File Renaming Rules (left) and File Storage Path (right)" style="width: 10%">}}
 
-#### 1.4.1.3  Better BibTex for Zotero
-[**Better BibTex for Zotero**](https://retorque.re/zotero-better-bibtex/), if you are a Latex user.
+In the `General Settings` tab, you can specify where you want to store your downloaded PDFs of articles and book chapters. If you store a copy of your PDFs in Zotero, they will be synced to the Zotero server and you can have access to them across devices. The drawback is that this fills up the free Cloud storage space (300 MB) pretty fast. 
 
+A **workaround** to avoid payments is to use `Custom Location` here to move your attachment files (PDFs) to a custom folder and link to that location from Zotero. In the above example I stored neatly-renamed PDFs in a folder called `research_lib` on my laptop. Next, you go to `Zotero > Settings... (or Preferences...) > Advanced > Files and Folders`. In the section `Linked Attachment Base Directory` you can set up the Base directory using the storage path (where the PDFs are) you set up in ZotFile. In this case, it was `/Users/cx936/Documents/research_lib`. Zotero will use relative paths for linked files within the base directory. This means that as long as we have consistent filenames, we can have different base directory on different computers in order to access attachment files, given that the attachment folder, `research_lib` in this example, is copied over to a different machine or you use some Cloud space (e.g. Dropbox and Google Drive) as storage. 
+
+To **use** ZotFile, select an item and right-click. Then in the menu, select `Manage Attachments > Rename and Move`, and you will find that the file is renamed, moved, and linked. You can select all files in a library or collection and right-click to bulk rename all of them (same command) in one go.
+
+#### 1.4.1.3  Better BibTex for Zotero
+
+If you are a Latex / Markdown user, [**Better BibTex for Zotero**](https://retorque.re/zotero-better-bibtex/) facilitates managing bibliographic data. It generates unique citation keys, which are customisable to your liking. It also allows **auto-exports** so that the exported `.bib` file is automatically updated when you changed items in the corresponding collection or library.
+
+To **export** a library or collection, right-click on it in the left Zotero panel and choose `Export Library...` or `Export Collection...`. In the pop=up menu, select one of the Better BibTex's export translators (all start with "Better"", e.g. `Better BibLaTex`). Checking the `Keep updated` option will register the export for automation, which is very helpful when you are revising your draft. After you have completed the current export, any changes to the collection or library will trigger an automatic re-export to update the export file. Click `OK` to start exporting. 
+
+In `Zotero > Settings... (or Preferences...) > Better BibTex > Open Better BibTex preferences...`, you can configure the citation key formula (or just keep the default) and automatic export options. 
 
 #### 1.4.1.3 Word Processor Plugin
-[**Word Processor Plugins**](https://www.zotero.org/support/word_processor_integration), if you are a Word user. The word processor plugins are bundled with Zotero and should be installed automatically for each supported word processor (i.e. Word, LibreOffice, Google Docs) on your computer when you first start Zotero.
 
-### 1.4.2 More Valuable Plug-ins
+If you are a Word user, [**Word Processor Plugins**](https://www.zotero.org/support/word_processor_integration) helps you **cite as you write**. The word processor plugins are bundled with Zotero and should be installed automatically for each supported word processor (i.e. Word, LibreOffice, Google Docs) on your computer when you first start Zotero.
+You can check out Zotero integration with your favorite editor [here](https://retorque.re/zotero-better-bibtex/citing/cayw/). 
+
+### 1.4.2 More Valuable Plug-ins (optional)
 
 [**Zotero Reference**](https://github.com/MuiseDestiny/zotero-reference)
 
@@ -191,10 +207,12 @@ There are a number of ways of adding items to Zotero.
 
 First and foremost is via your web browser. ... to be continued.
 
-The official Zotero guide is available [here](https://www.zotero.org/support/).
+
 
 ### 1.5.2 TroubleShooting
 
 ### 1.5.3 Exporting References
+
+The present guide is based on the official Zotero documentation available [here](https://www.zotero.org/support/).
 
 More coming soon...
