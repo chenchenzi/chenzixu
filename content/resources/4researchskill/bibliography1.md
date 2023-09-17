@@ -22,7 +22,7 @@ When you write an academic article or dissertation, how do you cite other source
 
 **B. Ad hoc Referencing Generator** approach:  You use a (mostly browser-based) referencing generator freely available online to automatically generate formatted academic references in a certain style. Or you use the basic referencing function in Word and add new sources by manually filling the boxes. {{< icon name="laptop-code" pack="fas" >}}
 
-**C. Manual Typing** approach: You are probably a fast-typer and know the rules of citation style by heart. You create the reference texts and adjust the format from scratch. {{< icon name="keyboard" pack="fas" >}}
+**C. Manual Typing** approach: You are probably a fast-typer and know the rules of citation styles by heart. You create the reference texts and adjust the format from scratch. {{< icon name="keyboard" pack="fas" >}}
 
 You will greatly benefit from this tutorial if (1) you are still using one of the ways described above to create your bibliography, (2) you want to have a head start on reference management, or (3) you have never tried [Zotero](https://www.zotero.org/), a free reference management software (this is not an advertisement XD).
 
