@@ -26,17 +26,17 @@ When you write an academic article or dissertation, how do you cite other source
 
 You will greatly benefit from this tutorial if (1) you are still using one of the ways described above to create your bibliography, (2) you want to have a head start on reference management, or (3) you have never tried [Zotero](https://www.zotero.org/), a free reference management software (this is not an advertisement XD).
 
-This guide will show you the importance of structured citations, introduce you to one of the best tools, and provide strategies to optimise your research pipeline. (Feel free to jump to [**Section 4** Recommended Zotero Setup](#zotero-setup) if you are already convinced to try Zotero.)
+This guide will show you the importance of structured citations, introduce you to one of the best tools, and provide strategies to optimise your research pipeline. Feel free to jump to [**Section 4 Recommended Zotero Setup**](#zotero-setup) if you are already convinced to try Zotero.
 
 <br>
 
-# 1 Why do we cite?
+# 1 Why do We Cite?
 
 Briefly speaking, citing sources is a win-win practice for both you and the original author(s) who produced the sources. On their end, citations give their work credit and may reward them with career advancement (in the same line of thinking, you would want others to cite your original ideas or creation too). On your end, with citations you engage in academic conversations, contextualise your topic, and establish your credibility. Most importantly, you **avoid plagiarism**, which can have serious ethical and professional consequences.
 
 <br>
 
-# 2 What is reference management?
+# 2 What is Reference Management?
 
 The core of reference management is to (1) **collect**, (2) **organise**, and (3) **format** bibliographic citations. Effective reference management is conducive to seamless academic writing and research, and a good reference management software is the unsung hero of academic and professional research. 
 
@@ -69,7 +69,7 @@ A reference management software {{< icon name="folder-open" pack="fas" >}} is es
 
 <br>
 
-# 3 Reference management software **TIER LIST**
+# 3 Reference Management Software **TIER LIST**
 
 Over the past years, I have garnered some experience in various reference management software. The figure below shows my reference management software tier list. The **S** tier (the best) software is **Zotero**, created at the Roy Rosenzweig Center for History and New Media at George Mason University. **A** tier contains Mendeley, by Elsevier, and **B** tier (from left to right) features EndNote (by Clarivate Analytics), Paperpile (by Paperpile LLC), and RefWorks (by ProQuest). 
 
@@ -193,9 +193,9 @@ You can check out Zotero integration with your favorite editor [here](https://re
 
 <br>
 
-## 1.4.2 More Valuable Plug-ins (Optional)
+## 4.2 More Valuable Plug-ins (Optional)
 
-My overall advice is not to install too many plugins, otherwise the desktop Zotero gets a bit clunky. Feel free to try out the plugins I introduced below to see if you like them (I think they are very cool)!
+My overall advice is not to install too many plugins, otherwise the desktop Zotero gets a bit clunky. Feel free to read about or try out the plugins I introduced below to see if you like them (I think they are very cool)! You can see a list of plugins in the table of contents to the right of your laptop screen.
 
 ### 4.2.1 Zotero Reference
 
