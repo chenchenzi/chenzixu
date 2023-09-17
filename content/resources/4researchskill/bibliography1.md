@@ -20,9 +20,9 @@ When you write an academic article or dissertation, how do you cite other source
 
 **A. Copy and Paste** approach: You copy citations from Google Scholar {{< icon name="quote-right" pack="fas" >}}, or existing publications {{< icon name="newspaper" pack="far" >}};
 
-**B. Ad hoc Referencing Generator** approach:  You use a (mostly browser-based) Referencing Generator freely available online or provided by a university to automatically generate formatted academic references in a certain style. Or you use the basic referencing function in Word and add new sources by manually filling the boxes. {{< icon name="laptop-code" pack="fas" >}}
+**B. Ad hoc Referencing Generator** approach:  You use a (mostly browser-based) referencing henerator freely available online to automatically generate formatted academic references in a certain style. Or you use the basic referencing function in Word and add new sources by manually filling the boxes. {{< icon name="laptop-code" pack="fas" >}}
 
-**C. Manual Typing** approach: You are probably a fast-typer and know the rules of citation style by heart. You create the reference texts and adjust the formatting from scratch. {{< icon name="keyboard" pack="fas" >}}
+**C. Manual Typing** approach: You are probably a fast-typer and know the rules of citation style by heart. You create the reference texts and adjust the format from scratch. {{< icon name="keyboard" pack="fas" >}}
 
 You will greatly benefit from this tutorial if (1) you are still using one of the ways described above to create your bibliography, (2) you want to have a head start on reference management, or (3) you have never tried [Zotero](https://www.zotero.org/), a free reference management software (this is not an advertisement XD).
 
@@ -195,7 +195,11 @@ You can check out Zotero integration with your favorite editor [here](https://re
 
 ## 4.2 More Valuable Plug-ins (Optional)
 
-My overall advice is not to install too many plugins, otherwise the desktop Zotero gets a bit clunky. Feel free to read about or try out the plugins I introduced below to see if you like them (I think they are very cool)! You can see a list of plugins in the table of contents to the right of your laptop screen.
+My overall advice is not to install too many plugins, otherwise the desktop Zotero gets a bit clunky. Feel free to read about or try out the plugins I introduced below to see if you like them (I think they are very cool!): **Zotero Reference** for finding connected references, **Jasminum** for Chinese language support, **Zotero Better Notes** and **ZotCard** for taking notes, and **Zotero Style** for tracking reading progress and interface styling. You can scroll down or navigate using the table of contents to the right of your laptop screen.
+
+{{% alert note %}}
+**Zotero Trouble Shooting**: Restarting Zotero seems to solve 99% of the problems.
+{{% /alert %}}
 
 ### 4.2.1 Zotero Reference
 
@@ -280,7 +284,9 @@ To install, find the `.xpi` file via the provided links. More introduction is av
 
 [**Zotero Style**](https://github.com/MuiseDestiny/zotero-style) provides personalised modification to the columns in the middle panel.
 
-In the figure below, you see shades of pink in the `Title` column, which indicates the reading progress of a reference document -- it is the distribution of your reading time of each page for the PDF under an item. I also added an extra `Progress` column, which represents the annotation word count of each page of the PDF under an item. I enabled these setup to keep track of my literature reading. It is straightforward to see which ones I haven't read yet. There are more style-related options including changing the colors and adding various tags and stars. Check out the Github page (above link) for more information. Don't spend too much time on the look:D
+In the figure below, you see shades of pink in the `Title` column, which indicates the reading progress of a reference document -- it is the distribution of your reading time spent on each page of the PDF attached to an item. I also added an extra `Progress` column, which represents the annotation word count of each page of the PDF attached to an item. I enabled these setup to keep track of my literature reading. It is straightforward to see which ones I haven't read yet. 
+
+There are more style-related options including changing colors and adding various tags and stars. You can also automatically track the Impact Factor and ranking for a publication, which may help you set your priority in literature review. Check out the Github page (above link) for more information. Don't spend too much time on the look:D
 
 {{< figure library="true" src="style.png" title="Modified Zotero Columns to show Reading Progress" >}}
 
@@ -300,10 +306,6 @@ To install, find the `.xpi` file via the provided link. More introduction is ava
 # Concluding Remarks
 
 The present guide is based on the official Zotero documentation available [here](https://www.zotero.org/support/). There are a lot more [plugins](https://www.zotero.org/support/plugins) in the Zotero community.
-
-{{% alert note %}}
-**Zotero Trouble Shooting**: Restarting Zotero seems to solve 99% of the problems.
-{{% /alert %}}
 
 Effective reference management is the backbone of research and academic writing, and Zotero, with its ability to streamline the citation process, emerges as a valuable tool in this endeavor. Zotero may not be the easiest to set up to release its fullest potential. You might not need all of the (additional) functions, but that's the beauty of Zotero -- You can tailor it to suit your unique workflow and preferences. I hope this blog has been a useful and time-saving resource to help you on your path to academic excellence.
 
