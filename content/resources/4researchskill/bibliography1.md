@@ -20,7 +20,7 @@ When you write an academic article or dissertation, how do you cite other source
 
 **A. Copy and Paste** approach: You copy citations from Google Scholar {{< icon name="quote-right" pack="fas" >}}, or existing publications {{< icon name="newspaper" pack="far" >}};
 
-**B. Ad hoc Referencing Generator** approach:  You use a (mostly browser-based) referencing henerator freely available online to automatically generate formatted academic references in a certain style. Or you use the basic referencing function in Word and add new sources by manually filling the boxes. {{< icon name="laptop-code" pack="fas" >}}
+**B. Ad hoc Referencing Generator** approach:  You use a (mostly browser-based) referencing generator freely available online to automatically generate formatted academic references in a certain style. Or you use the basic referencing function in Word and add new sources by manually filling the boxes. {{< icon name="laptop-code" pack="fas" >}}
 
 **C. Manual Typing** approach: You are probably a fast-typer and know the rules of citation style by heart. You create the reference texts and adjust the format from scratch. {{< icon name="keyboard" pack="fas" >}}
 
