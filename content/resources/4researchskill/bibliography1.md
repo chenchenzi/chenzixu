@@ -125,6 +125,10 @@ Apart from downloading and installing the Zotero desktop app, plugins elevate Zo
 #### 1.4.1.1 Zotero connector
 [**https://www.zotero.org/download/connectors**](https://www.zotero.org/download/connectors) is the web browser plugin and available for Chrome, Firefox, or Safari, enabling automatically creating new items and populating the metadata fields using information available on the internet, with **a simple click**. A full-text PDF if available is downloaded together with the click.
 
+{{% alert note %}}
+You need to have access to / subscribed the source databases (e.g. logged-in) to be able to download the full-text DPF with the click.
+{{% /alert %}}
+
 The figure below illustrates the Zotero Connector on Chrome, the blue webpage icon. When you hover your mouse on the icon, you will see "Save to Zotero".If you click on this icon, this webpage will be added as an item in the current library and/or collection by default (the one you opened and displayed in the middle panel in your Zotero desktop). You can also select the destination folder in the dialog box `Saving to` popped up right after the click. You need to have Zotero desktop app running when using Zotero Connector.
 
 The icon **changes** along with the potential source document type. Sometimes the webpage icon is grey when the webpages don't provide any information Zotero can recognise. On webpages such as Google Scholar that contain multiple potential sources, the icon will change into  a folder {{< icon name="folder" pack="fas" >}}. By clicking the folder, a dialog box will pop up from which source references can be selected and saved to Zotero. In this way you can import multiple items in one go.
@@ -180,39 +184,116 @@ You can check out Zotero integration with your favorite editor [here](https://re
 
 ### 1.4.2 More Valuable Plug-ins (optional)
 
-[**Zotero Reference**](https://github.com/MuiseDestiny/zotero-reference)
+My overall advice is not to install too many plugins, otherwise the desktop Zotero gets a bit clunky. Feel free to try out the plugins I introduced below to see if you like them (I think they are very cool)!
+
+#### 1.4.2.1 Zotero Reference
+
+One of the most efficient ways to collect references revolving around a topic or a research area during literature review is to check out the reference list or works cited in a document published in that area. [**Zotero Reference**](https://github.com/MuiseDestiny/zotero-reference) automatically extracts all references in a document and provides a shortcut for adding the interested ones to your collection.
+
+When you open a PDF document, you will notice there is a new tab named `References`. After clicking the `refresh` button, the works cited in this paper are extracted and listed here. When you hover your mouse on one of the listed references, a floating window will appear showing some metadata including the abstract of this reference. This is illustrated in the following screen capture. The small pink dots in the floating window represent four different data sources (click to switch). Clicking the `+` to the right of the reference adds it to your collection / library.
 
 {{< figure library="true" src="reference.png" title="Adding References from a Reference List" >}}
 
-[**Jasminum**](https://github.com/l0o0/jasminum)
+To install, find the `.xpi` file via the provided link. More introduction is available in the Github page.
+
+#### 1.4.2.2 Jasminum
+
+[**Jasminum**](https://github.com/l0o0/jasminum) adds support for Chinese sources, especially the CNKI (China National Knowledge Infrastructure; 中国知网) database. To set up Jasminum, go to `Zotero > Settings... (or Preferences...) > Jasminum > Unofficial Translators Repository` and click `Update All`. You can occasionally go to `Zotero > Settings... (or Preferences...) > Advanced`, click `Update now` for `Automatically check for updated translators and styles` under the Miscellaneous section.
+
+The figure below demonstrate bulk downloading themed Chinese articles from the CNKI database of journal articles.
 
 {{< figure library="true" src="bulk.png" title="Bulk Save in CNKI Database" >}}
 
-[**Zotero Better Notes**](https://github.com/windingwind/zotero-better-notes) and 
-[**ZotCard**](https://github.com/018/zotcard)
+To install, find the `.xpi` file via the provided link. More introduction is available in the Github page.
+
+#### 1.4.2.3 Zotero Better Notes and ZotCard
+
+[**Zotero Better Notes**](https://github.com/windingwind/zotero-better-notes) and [**ZotCard**](https://github.com/018/zotcard) are two plugins for note-taking in Zotero.
+
+**Better Notes** works great if you want to jot down quick notes while reading. It allows linking different annotations and notes from different references inside Zotero, facilitating information organisation for a particular theme. Check out the Github page (link above) for its usage.
+
+**Zotcard** provides customised card templates for note-taking and sorting the information. The figure below demonstrates a note with pre-defined sections themed on research methods and automatically populated metadata information. I can add notes relevant to the sections as I read along.
 
 {{< figure library="true" src="notes.png" title="Note-taking Helper in Zotero" >}}
 
-[**Zotero Style**](https://github.com/MuiseDestiny/zotero-style)
+To set up a note card template, go to `Tools > zotCard Option > Config`. In the window zotCard Option, you can see some read-made cards, as well as `card1` to `card6`. The latter ones are empty cards which you can customise. Click on `card1` for example, and write in the `Template` box (check out the ready-made cards for format). Since Zotero notes is HTML-based, some HTML foundation may be required to create a card. There are also many card templates shared among the community, available at the [Discussions](https://github.com/018/zotcard/discussions) in the Github page. The card I used in above figure can be created using the following code (modified from free521521521's [sharing](https://www.freezhao.com/zoterozotcard-template/)):
+
+```html
+<h1> <span>Method_Overview_${title}</span></h1>
+<h2 style="color: #1B5E20; background-color:#F1F8E9;">💡 Meta Data </h2> 
+<table>
+  <tr>         
+    <th style="background-color:#dbeedd;">
+      <p style="text-align: right">Title </p>
+    </th>         
+    <td style="background-color:#dbeedd;">${title}</td>      
+  </tr>
+  <tr>
+    <th style="background-color:#f3faf4;">
+      <p style="text-align: right">Journal</p>
+    </th>         
+    <td style="background-color:#f3faf4;">${publicationTitle}&nbsp;<em>(<a href="https://doi.org/${DOI}">${DOI}</a>)</em></td>
+  </tr> 
+  <tr>
+    <th style="background-color:#dbeedd;">
+      <p style="text-align: right">Authors </p> 
+    </th>
+    <td style="background-color:#dbeedd;"> ${authors}</td>  
+  </tr>
+  <tr>
+    <th style="background-color:#f3faf4;">
+      <p style="text-align: right">Date </p>
+    </th> 
+    <td style="background-color:#f3faf4;">${date}</td>  
+  </tr>
+ </table>
+<h2 style="color: #E65100; background-color: #FFF8E1;" >📜 Language Variety and Tone System</h2>
+<p></p>
+<h2 style="color: #2E7D32; background-color: #F1F8E9;" >🗣 Speaker Information</h2>
+<p></p>
+<h2 style="color: #1565C0; background-color: #E1F5FE;" >📋 Stimuli Information</h2>
+<p></p>
+<h2 style="color: #4A148C; background-color: #F5F5F5;" >🎙 Recording Information</h2>
+<p></p>
+<h2 style="color: #006064; background-color: #E0F7FA;" >💻 Acoustic Analysis</h2>
+<p></p>
+<hr/>
+<h3 style="color: #1565C0"font-family: arial,sans-serif;>Other Notes:</h3>
+<p></p>
+
+```
+
+To install, find the `.xpi` file via the provided links. More introduction is available in the Github pages.
+
+#### 1.4.2.4 Zotero Style
+
+[**Zotero Style**](https://github.com/MuiseDestiny/zotero-style) provides personalised modification to the columns in the middle panel.
+
+In the figure below, you see shades of pink in the `Title` column, which indicates the reading progress of a reference document -- it is the distribution of your reading time of each page for the PDF under an item. I also added an extra `Progress` column, which represents the annotation word count of each page of the PDF under an item. I enabled these setup to keep track of my literature reading. It is straightforward to see which ones I haven't read yet. There are more style-related options including changing the colors and adding various tags and stars. Check out the Github page (above link) for more information. Don't spend too much time on the look:D
+
 {{< figure library="true" src="style.png" title="Modified Zotero Columns to show Reading Progress" >}}
 
-### 1.4.2 GPT Meet Zotero...
+To install, find the `.xpi` file via the provided link. More introduction is available in the Github page.
 
-[**Zotero GPT**](https://github.com/MuiseDestiny/zotero-gpt)
+### 1.4.3 GPT Meet Zotero...
+
+There are infinite possibilities when we bridge ChatGPT and Zotero. 
+You will need to purchase the OpenAI API to use [**Zotero GPT**](https://github.com/MuiseDestiny/zotero-gpt). I haven't fully explored this plugin yet. I will update this when I tested it out.
+
+To install, find the `.xpi` file via the provided link. More introduction is available in the Github page.
+
+{{< figure library="true" src="gpt.png" title="Integrating ChatGPT with Zotero" >}}
 
 ## 1.5 **Zotero** User Cases
 
-### 1.5.1 Importing References
-There are a number of ways of adding items to Zotero.
-
-First and foremost is via your web browser. ... to be continued.
-
-
-
-### 1.5.2 TroubleShooting
-
-### 1.5.3 Exporting References
+{{% alert note %}}
+**TroubleShooting**: Restarting Zotero seems to solve 99% of the problems.
+{{% /alert %}}
 
 The present guide is based on the official Zotero documentation available [here](https://www.zotero.org/support/).
 
 More coming soon...
+
+
+
+
