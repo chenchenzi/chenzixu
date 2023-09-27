@@ -38,7 +38,7 @@ featured: true
 links:
 - name: Many Speech project
   url: https://many-speech-analyses.github.io/
-url_pdf: 'manyspeech.pdf'
+url_pdf: 'files/manyspeech.pdf'
 # url_code: '#'
 # url_dataset: '#'
 # url_poster: '#'

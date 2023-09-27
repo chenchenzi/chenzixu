@@ -20,7 +20,7 @@ When you write an academic article or dissertation, how do you cite other source
 
 **A. Copy and Paste** approach: You copy citations from Google Scholar {{< icon name="quote-right" pack="fas" >}}, or existing publications {{< icon name="newspaper" pack="far" >}};
 
-**B. Ad hoc Referencing Generator** approach:  You use a (mostly browser-based) referencing generator freely available online to automatically generate formatted academic references in a certain style. Or you use the basic referencing function in Word and add new sources by manually filling the boxes. {{< icon name="laptop-code" pack="fas" >}}
+**B. Ad hoc Referencing Generator** approach:  You use a free online (mostly browser-based) referencing generator to automatically generate formatted academic references in a certain style. Or you use the basic referencing function in Word and add new sources by manually filling the boxes. {{< icon name="laptop-code" pack="fas" >}}
 
 **C. Manual Typing** approach: You are probably a fast-typer and know the rules of citation styles by heart. You create the reference texts and adjust the format from scratch. {{< icon name="keyboard" pack="fas" >}}
 
@@ -231,7 +231,7 @@ To install, find the `.xpi` file via the provided link. More introduction is ava
 
 {{< figure library="true" src="notes.png" title="Note-taking Helper in Zotero" >}}
 
-To set up a note card template, go to `Tools > zotCard Option > Config`. In the window zotCard Option, you can see some read-made cards, as well as `card1` to `card6`. The latter ones are empty cards which you can customise. Click on `card1` for example. You can change the card name by filling in the `Menu` box, keep `Enable` checked, write in the `Template` box (check out the ready-made cards for format), and finally `Save`. Since Zotero notes is HTML-based, some HTML foundation may be required to create a card. There are also many card templates shared among the community, available at the [Discussions](https://github.com/018/zotcard/discussions) in the Github page. The card I used in above figure can be created using the following code (modified from free521521521's [sharing](https://www.freezhao.com/zoterozotcard-template/)):
+To set up a note card template, go to `Tools > zotCard Option > Config`. In the window zotCard Option, you can see some ready-made cards, as well as `card1` to `card6`. The latter ones are empty cards which you can customise. Click on `card1` for example. You can change the card name by filling in the `Menu` box, keep `Enable` checked, write in the `Template` box (check out the ready-made cards for format), and finally `Save`. Since Zotero notes is HTML-based, some HTML foundation may be required to create a card. There are also many card templates shared among the community, available at the [Discussions](https://github.com/018/zotcard/discussions) in the Github page. The card I used in above figure can be created using the following code (modified from free521521521's [sharing](https://www.freezhao.com/zoterozotcard-template/)):
 
 ```html
 <h1> <span>Method_Overview_${title}</span></h1>

@@ -36,10 +36,10 @@ education:
   - course: MPhil (Distinction) in General Linguistics and Comparative Philology
     institution: University of Oxford
     year: 2016-2018
-  - course: BA (First Class Honours) in English Studies for the Professions Minor in Translation and Bilingual Communication
+  - course: BA Hons (First Class Honours) in English Studies for the Professions Minor in Translation and Bilingual Communication
     institution: The Hong Kong Polytechnic University
     year: 2012-2016
-  - course: University of California Education Abroad Progamme 
+  - course: University of California Education Abroad Programme 
     institution: University of California, Berkeley
     year: 2015
 
@@ -79,6 +79,6 @@ email: ""
 #- Visitors
 ---
 
-I obtained my DPhil (PhD) in Linguistics at the **University of Oxford** and I specialise in **phonetics**. Currently I am working as a postdoctoral research associate at the **University of York**. Speech sounds of all kinds never fail to fascinate me. Abundant information ranging from lexical meanings and discourse structure to emotions, attitudes, and speaker identity is ubiquitous in speech. I'm interested in exploring the ways different layers of meanings encode in speech. 
+Welcome! I am a postdoctoral research associate at the **University of York**, and will soon be a Leverhulme Early Career Fellow at the **University of Oxford**. I obtained my DPhil (PhD) in Linguistics at the University of Oxford, specialising in **phonetics**. Speech sounds of all kinds never fail to fascinate me. Abundant information ranging from lexical meanings and discourse structure to emotions, attitudes, and speaker identity is inherent in speech. I'm interested in exploring the ways different layers of meanings encode in speech. 
 
 I am keen in experimental and computational approaches to phonetic research and encourage open and reproducible research workflow. Here I wrote step-by-step guide on topics in phonetic research, available in the *Resources* section. 
