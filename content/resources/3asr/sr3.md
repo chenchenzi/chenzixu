@@ -18,6 +18,10 @@ weight: 3
 
 In this chapter, I demonstrate how to train acoustic models from scratch using a classic HMM-GMM model (Kaldi) and a neural-network-based model.
 
+<br>
+
+# Training acoustic models using Kaldi
+
 ## 1.1 Kaldi Installation
 
 The **Kaldi** download and installation is documented in the official [Kaldi](http://www.kaldi-asr.org/doc/install.html) website. Eleanor Chodroff's [tutorial](https://eleanorchodroff.com/tutorial/kaldi/installation.html) also provided the steps in detail. Here is a recap of the general downloading and installation instructions.
@@ -245,3 +249,5 @@ make -j 4
 In the same way we enable the multi-CPU build by supplying the `-j` option. Then you can just wait till it finishes. 
 
 Hopefully you will see `Done` in your terminal output and the Kaldi installation is successful.😎
+
+...to be continued.
