@@ -70,7 +70,7 @@ xcode-select --install
 ```
 You will be prompted to start the installation, and to accept a software license. Then the tools will download and install automatically.
 
-❷* [Homebrew](https://brew.sh/), one of the best free and open-source software package management systems for MacOS (and Linux) is recommended, you can install it using the following code.
+❷* [Homebrew](https://brew.sh/), one of the best free and open-source software package management systems for MacOS (and Linux), is recommended. You can install it using the following code.
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -233,7 +233,7 @@ sysctl -n hw.ncpu
 If you had other (failed) attempts of `make`, make sure to clean up the resulting downloaded directories such as `openfst-1.7.2` before running the Makefile again.
 {{% /alert %}}
 
-**Installing Src**
+**Installing Source**
 
 Navigate to the `kaldi/src/` directory, run the configuration and the Makefiles as follows:
 
