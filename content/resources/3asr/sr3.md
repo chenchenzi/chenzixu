@@ -20,9 +20,9 @@ In this chapter, I demonstrate how to train acoustic models from scratch using a
 
 <br>
 
-## 1.1 Kaldi Installation
+## 3.1 Kaldi Installation
 
-The **Kaldi** download and installation is documented in the official [Kaldi](http://www.kaldi-asr.org/doc/install.html) website. Eleanor Chodroff's [tutorial](https://eleanorchodroff.com/tutorial/kaldi/installation.html) also provided the steps in detail. Here is a recap of the general downloading and installation instructions.
+The **Kaldi** download and installation is documented in the official [Kaldi](http://www.kaldi-asr.org/doc/install.html) website. [Eleanor Chodroff's tutorial](https://eleanorchodroff.com/tutorial/kaldi/installation.html) also provided the steps in detail. Here is a recap of the general downloading and installation instructions.
 
 If you are a MacOS user with M1 chip, feel free to jump to [Section 1.1.1](#mac-m1) for more details.
 
@@ -55,7 +55,7 @@ cd ../src
 make depend  
 make
 ```
-### 1.1 Installing Kaldi on a Mac with M1 chip{#mac-m1}
+### 3.1.1 Installing Kaldi on a Mac with M1 chip{#mac-m1}
 
 I have encountered many challenges in installing Kaldi on my Mac (Ventura 13.1) with an M1 chip (updated 27 Sept, 2023) and spent a long time debugging. Here I would like to share some tips for those who have similar laptops and builds to assist you in this installation process 🫶. 
 
@@ -70,8 +70,7 @@ xcode-select --install
 ```
 You will be prompted to start the installation, and to accept a software license. Then the tools will download and install automatically.
 
-❷* [Homebrew]
-(https://brew.sh/), one of the best free and open-source software package management systems for MacOS (and Linux) is recommended, you can install it using the following code.
+❷* [Homebrew](https://brew.sh/), one of the best free and open-source software package management systems for MacOS (and Linux) is recommended, you can install it using the following code.
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -248,4 +247,5 @@ In the same way we enable the multi-CPU build by supplying the `-j` option. Then
 
 Hopefully you will see `Done` in your terminal output and the Kaldi installation is successful.😎
 
+### 3.1.2 Dataset
 ...to be continued.
