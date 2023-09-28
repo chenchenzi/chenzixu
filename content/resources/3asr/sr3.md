@@ -20,8 +20,6 @@ In this chapter, I demonstrate how to train acoustic models from scratch using a
 
 <br>
 
-# Training acoustic models using Kaldi
-
 ## 1.1 Kaldi Installation
 
 The **Kaldi** download and installation is documented in the official [Kaldi](http://www.kaldi-asr.org/doc/install.html) website. Eleanor Chodroff's [tutorial](https://eleanorchodroff.com/tutorial/kaldi/installation.html) also provided the steps in detail. Here is a recap of the general downloading and installation instructions.
