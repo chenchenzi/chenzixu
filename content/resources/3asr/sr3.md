@@ -1,6 +1,6 @@
 ---
-title: ASR from Scratch
-linktitle: 3. ASR from scratch
+title: "ASR from Scratch I: Training models of Hong Kong Cantonese using the Kaldi recipe"
+linktitle: "3. ASR from Scratch I: Training models of Hong Kong Cantonese using the Kaldi recipe"
 toc: true
 type: docs
 date: "2023-9-27T00:00:00+01:00"
@@ -16,13 +16,18 @@ weight: 3
 
 <br>
 
-In this chapter, I demonstrate how to train acoustic models from scratch using a classic HMM-GMM model (Kaldi) and a neural-network-based model.
+It is surprising that mainstream forced aligner tools such as MFA, WebMAUS, CLARIN, FAVE, P2FA, and Charsiu have not yet had any pre-trained models of Cantonese (Yue Chinese), native to approximately 82.4 million speakers (Wikipedia), at the time of this blog (2 Oct 2023). Hence, in this chapter I demonstrate how to train acoustic models of Hong Kong Cantonese from scratch using a classic HMM-GMM model through [Kaldi](https://kaldi-asr.org/doc/about.html), a state-of-the-art ASR toolkit.
+
+This tutorial is built on Eleanor Chodroff's excellent [tutorial](https://eleanorchodroff.com/tutorial/kaldi/index.html) on Kaldi and the Kaldi [official guide](https://kaldi-asr.org/doc/kaldi_for_dummies.html), with enriched implementation details. A dozen of Python snippets were created to prepare the datasets and acquire the forced alignment outputs in the TextGrid format. 
+For more details on the explanations of certain steps, please refer to their tutorials. 
+
+All the Python scripts will be available on my Github {{< icon name="github" pack="fab" >}} [to be updated]. Feel free to click on the menu on the right to jump to a specific section.
 
 <br>
 
 ## 3.1 Kaldi Installation
 
-The **Kaldi** download and installation is documented in the official [Kaldi](http://www.kaldi-asr.org/doc/install.html) website. [Eleanor Chodroff's tutorial](https://eleanorchodroff.com/tutorial/kaldi/installation.html) also provided the steps in detail. Here is a recap of the general downloading and installation instructions.
+The **Kaldi** download and installation is documented in the official [Kaldi](http://www.kaldi-asr.org/doc/install.html) website. Eleanor's [tutorial](https://eleanorchodroff.com/tutorial/kaldi/installation.html) also provided the steps in detail. Here is a recap of the general downloading and installation instructions.
 
 If you are a MacOS user with M1 chip, feel free to jump to [Section 1.1.1](#mac-m1) for more details.
 
@@ -55,7 +60,7 @@ cd ../src
 make depend  
 make
 ```
-### 3.1.1 Installing Kaldi on a Mac with M1 chip{#mac-m1}
+### 3.1.1 Installing Kaldi on a Mac with M1 chip or above{#mac-m1}
 
 I have encountered many challenges in installing Kaldi on my Mac (Ventura 13.1) with an M1 chip (updated 27 Sept, 2023) and spent a long time debugging. Here I would like to share some tips for those who have similar laptops and builds to assist you in this installation process 🫶. 
 
@@ -247,5 +252,226 @@ In the same way we enable the multi-CPU build by supplying the `-j` option. Then
 
 Hopefully you will see `Done` in your terminal output and the Kaldi installation is successful.😎
 
-### 3.1.2 Dataset
+<br>
+
+## 3.2 The Common Voice Dataset
+
+We will be using the latest `Chinese (Hong Kong)` subset of the publicly available Common Voice corpus `Common Voice Corpus 15.0` updated on 9/14/2023, which contains 108 hours of validated speech with 3001 voices (3.3G `.mp3` files).
+
+You can download the dataset [here](https://commonvoice.mozilla.org/en/datasets) and unzip it to your working directory. The downloaded corpus has the following structure:
+
+```
+├── cv-corpus-15.0-2023-09-08
+... └── zh-HK
+        ├── clip_durations.tsv
+        ├── train.tsv
+        ├── validated.tsv
+        ├── dev.tsv
+        ├── test.tsv
+        ├── Invalidated.tsv
+        ├── other.tsv
+        ├── reported.tsv
+        ├── times.txt
+        └── clips
+            ├── common_voice_zh-HK_20096730.mp3
+            ├── common_voice_zh-HK_20096731.mp3
+            ├── common_voice_zh-HK_20096732.mp3
+            ├── ...
+            └── ... #118736 items in total
+```
+Most of the audio clips are short utterances or sentences (fewer than 30 syllables) and have their corresponding transcription in these `.tsv` files. In this tutorial, we will mainly use the training set (see `train.tsv`) which has 8426 recordings.
+
+<br>
+
+## 3.3 Data preprocessing
+
+### 3.3.1 Setting up the environment
+
+I created a new Conda environment named 'acoustics' for acoustic processing. This step is not compulsory, but highly recommend because you can manage a collection of packages and their dependencies related to this project or pipeline in one place.
+
+```bash
+conda create -n acoustics
+conda activate acoustics
+```
+
+The Python packages I used include: `datasets`, `re`, `os`, `pandas`, `csv`, `tqdm`, `subprocess`, `transformers`, `lingpy`, `praatio`. You can install these via Conda or other package management systems. We also need [sox](https://sourceforge.net/projects/sox/), a command-line audio editing software.
+
+I created a working directory for data pre-processing `fa-cantonese/` and moved the data folder here:  `fa-cantonese/cv-corpus-15.0-2023-09-08/`.
+
+```bash
+cd ~/Work
+mkdir fa-cantonese
+```
+
+### 3.3.2 Audio preprocessing: `.mp3` to `.wav`
+
+While the compressed format `.mp3` is storage-friendly, we should use `.wav` for acoustic modeling and training.
+Inside the Common Voice directory `cv-corpus-15.0-2023-09-08/`, I created a new directory `clips_wavs/` for converted `.wav` files.
+
+In my working directory `fa-cantonese/`, I wrote a python script to convert the audio format from `.mp3` to `.wav` with 16K sampling rate, using `sox`. The package `subprocess` enables running the external `sox` command in parallel.
+
+```python
+import re
+import os
+from tqdm import tqdm
+import subprocess
+from tqdm.contrib.concurrent import process_map
+
+path = 'cv-corpus-15.0-2023-09-08/zh-HK/clips'
+output = 'cv-corpus-15.0-2023-09-08/zh-HK/clips_wavs'
+
+file_pairs = [(file,re.search(r'(.*?)\.mp3',file).group(1)+'.wav') for file in tqdm(os.listdir(path))]
+
+def convert_and_resample(item):
+    command = ['sox', os.path.join(path,item[0]),'-r','16000',os.path.join(output,item[1])]
+    subprocess.run(command)
+
+if __name__ == '__main__':
+    wavs = process_map(convert_and_resample, file_pairs, max_workers=4, chunksize=1)
+```
+
+### 3.3.2 Transcripts preparation: The `text` file
+
+The Kaldi recipe will require a `text` file with the utterance-by-utterance transcript of the corpus, which has the following format (see Elinor's tutorial [here](https://eleanorchodroff.com/tutorial/kaldi/training-acoustic-models.html#text)):
+
+```
+utt_id WORD1 WORD2 WORD3 WORD4 …
+# utt_id = utterance ID
+```
+We can achieve this in two steps:
+
+❶ Define an utterance ID
+
+In our Common Voice corpus, we have the `train.tsv` which contains columns such as `client_id` (I assumed this representing a unique speaker), `path` (a unique file name), and `sentence` (the transcript for the audio file). We can define an utterance ID by concatenating the `client_id` and the unique numbers in `path` after removing the prefix `common_voice_zh-HK_` and the file extension `.mp3`.
+
+❷ Tokenise Cantonese transcript
+
+The Chinese orthography is very useful in identifying syllables. A good way to tokenise Cantonese transcript is to separate each character with a space, so that we will obtain syllable-level alignment of speech and text. Note that in Hong Kong Cantonese, there is often code-switching and thus you will occasionally see English words in the transcripts.
+
+The following Python snippet will help us prepare the `text` file.
+
+```python
+from datasets import load_dataset
+import re
+
+cv_tsv = load_dataset('csv', 
+                      data_files="cv-corpus-15.0-2023-09-08/zh-HK/train.tsv",
+                      sep="\t")
+
+cv_tsv = cv_tsv['train']
+cv_text = cv_tsv.remove_columns(['up_votes', 'down_votes', 'age', 'gender', 'accents', 'variant', 'locale', 'segment'])
+
+def prepare_text(batch):
+  """Function to preprocess the dataset with the .map method"""
+  transcription = batch["sentence"]
+  utt_id = batch['path']
+  spk_id = batch['client_id']
+  
+  #remove punctuation
+  puncs = r'[^\u4e00-\u9FFFa-zA-Z0-9 ]'
+  transcription = re.sub(puncs, '', transcription)
+  
+  #add space between Chinese characters
+  transcription = re.sub(r'([\u4e00-\u9fff])', r'\1 ', transcription).strip()
+  #add space after an English word followed by a Chinese character
+  transcription = re.sub(r'([a-zA-Z0-9_]+)([\u4e00-\u9fff])', r'\1 \2', transcription)
+  
+  batch["sentence"] = transcription
+  batch['client_id']= spk_id+ '-'+ utt_id[19:-4]
+  
+  return batch
+
+texts = cv_text.map(prepare_text, desc="preprocess text")
+texts = texts.remove_columns(['path'])
+texts.to_csv('text', sep='\t', header=False,index=False)
+```
+### 3.3.3 The dictionary `lexicon.txt`: Cantonese G2P
+
+We will need a Cantonese pronunciation dictionary `lexicon.txt` of the words/characters, in fact, **only** the words, present in the training corpus. This will ensure that we do not train extraneous phones. If we want to use IPA for acoustic models, we should transcribe the words/characters in IPA in this dictionary.
+
+We can download [this](https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/zh.txt) Cantonese dictionary and utilise the multilingual [CharsiuG2P](https://github.com/lingjzhu/CharsiuG2P) tool with a pre-trained Cantonese model for grapheme-to-phoneme conversion.
+
+The dictionary has the following format:
+```
+𠻺	/a:˨/
+㝞	/a:˥/
+㰳	/a:˥/, /a:˧/
+...
+䧄	/a:k˥/, /kɔ:k˧/
+...
+```
+Generally we want ❶ each phone in the dictionary to be separated by a space. ❷ The tone label is always put at the end of an IPA token, which gives an impression of a linearly arranged segment while tone is supresegmental. We might want to exclude the tone labels here. ❸
+We can have multiple pronunciation entries for a word, which can be put in different rows. ❹ We need to add the pseudo-word entries such as `<oov>`, `{Sl}`, and `{LG}`, required by the Kaldi training recipe. `<oov>` stands for ‘out of vocabulary’, `{Sl}` for silence, and `{LG}` for unknown sounds including laughter.
+
+We need to revise the format of this downloaded dictionary. 
+
+```python
+from transformers import T5ForConditionalGeneration, AutoTokenizer
+from tqdm import tqdm
+import pandas as pd
+from lingpy import *
+
+# load G2P models
+model = T5ForConditionalGeneration.from_pretrained('charsiu/g2p_multilingual_byT5_small_100')
+tokenizer = AutoTokenizer.from_pretrained('google/byt5-small')
+model.eval()
+
+# load pronunciation dictionary
+pron = {l.split('\t')[0]:l.split('\t')[1].strip() for l in open('yue.tsv','r',encoding="utf-8").readlines()}
+
+with open('lexicon.txt','w', encoding='utf-8') as output:
+    
+    rows=[]
+    with open('words.txt','r',encoding='utf-8') as f:
+        for line in tqdm(f):
+            w = line.strip()
+            word_pron = ''
+            if w in pron:
+                word_pron+=pron[w]
+            else:
+                out = tokenizer(['<yue>: '+w],padding=True,add_special_tokens=False,return_tensors='pt')
+                preds = model.generate(**out,num_beams=1,max_length=50)
+                phones = tokenizer.batch_decode(preds.tolist(),skip_special_tokens=True)
+                word_pron+=phones[0]
+            
+            rows.append([w,word_pron])
+    
+    lexicon = pd.DataFrame(rows, columns=['word', 'ipa'])
+    lexicon['ipa'] = lexicon['ipa'].str.split(',')
+    lexicon = lexicon.explode('ipa')
+    
+    #remove IPA tones and tokenize IPA-encoded strings
+    lexicon['ipa'] = lexicon['ipa'].str.replace(r'[\u02E5-\u02E9]+', '', regex=True)
+    lexicon['ipa'] = lexicon['ipa'].apply(lambda x: ' '.join(map(str, ipa2tokens(x))))
+
+    #remove duplicated rows if any
+    lexicon.drop_duplicates(inplace=True)
+    lexicon.to_csv(output,sep='\t', index=False, header=False)
+```
+
+The revised dictionary is as follows: 
+```
+<oov>	oov
+{LG}	spn
+{SL}	sil
+A	a:
+Annual	a: nn ʊ ŋ
+Anson	a: n s ɔ: n
+B	b i:
+Browser	pʰ r ɔ: w s ɐ
+...
+一	j ɐ t
+丁	t s a: ŋ
+丁	t ɪ ŋ
+丁	t s ɐ ŋ
+...
+```
+
+### 3.3.4 Other text files for Kaldi `data/train` 
+
+
 ...to be continued.
+
+### Credit
+
+I would like to thank Jian Zhu for his G2P help and Yajie Gu for scripting suggestions.
