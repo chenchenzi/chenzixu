@@ -18,10 +18,12 @@ weight: 3
 
 It is surprising that mainstream forced aligner tools such as MFA, WebMAUS, CLARIN, FAVE, P2FA, and Charsiu have not yet had any pre-trained models of Cantonese (Yue Chinese), native to approximately 82.4 million speakers (Wikipedia), at the time of this blog (2 Oct 2023). Hence, in this chapter I demonstrate how to train acoustic models of Hong Kong Cantonese from scratch using a classic HMM-GMM model through [Kaldi](https://kaldi-asr.org/doc/about.html), a state-of-the-art ASR toolkit.
 
-This tutorial is built on Eleanor Chodroff's excellent [tutorial](https://eleanorchodroff.com/tutorial/kaldi/index.html) on Kaldi and the Kaldi [official guide](https://kaldi-asr.org/doc/kaldi_for_dummies.html), with enriched implementation details. A dozen of Python snippets were created to prepare the datasets and acquire the forced alignment outputs in the TextGrid format. 
+This tutorial is built on Eleanor Chodroff's awesome [tutorial](https://eleanorchodroff.com/tutorial/kaldi/index.html) on Kaldi and the Kaldi [official guide](https://kaldi-asr.org/doc/kaldi_for_dummies.html), with enriched implementation details. A dozen of Python snippets were created to prepare the datasets and acquire the forced alignment outputs in the TextGrid format. 
 For more details on the explanations of certain steps, please refer to their tutorials. 
 
 All the Python scripts will be available on my Github {{< icon name="github" pack="fab" >}} [to be updated]. Feel free to click on the menu on the right to jump to a specific section.
+
+> The **Montreal Forced Aligner (MFA)** is built upon Kaldi ASR and provides much straightforward commands for model training and forced alignment. This Kaldi tutorial manifests the inner workings of MFA. For the theory of statistical speech recognition and the MFA approach, check out my [slides](https://chenzixu.rbind.io/slides/asr/asr_talk#/title-slide).  
 
 <br>
 
@@ -254,7 +256,126 @@ Hopefully you will see `Done` in your terminal output and the Kaldi installation
 
 <br>
 
-## 3.2 The Common Voice Dataset
+## 3.2 Setting up Kaldi directories
+
+There is a conventional directory structure for training data and models. We can create a new directory `fa-canto/` under the `kaldi/egs/` directory to house the relevant files for our project of HK Cantonese. The skeleton for `fa-canto/` should be as follows:
+
+```
+. 
+├── cmd.sh
+├── conf
+│   └── mfcc.conf
+├── data
+│   ├── lang
+│   ├── local
+|   |   └── lang
+│   └── train
+├── exp
+├── mfcc
+├── path.sh
+├── src -> ../../src
+├── steps -> ../wsj/s5/steps
+└── utils -> ../wsj/s5/utils
+```
+
+❶ The skeleton structure
+
+To achieve the above structure, you can use the following code in a Unix Shell. For more details, please read [here](https://eleanorchodroff.com/tutorial/kaldi/training-acoustic-models.html#prepare-directories). Alternatively, for the most part you can also just right click your mouse/pad, select `New Folder`(Mac), and rename it accordingly.
+
+```bash
+cd kaldi/egs
+mkdir fa-canto
+
+cd fa-canto
+ln -s ../wsj/s5/steps .
+ln -s ../wsj/s5/utils .
+ln -s ../../src .
+                    
+cp ../wsj/s5/path.sh .
+```
+Check and edit the `path.sh` file in the `vim` editor.
+
+```bash
+vim path.sh
+
+# Press i to insert; esc to exit insert mode;
+# ‘:wq’ to write and quit; ‘:q’ to quit normally; 
+# ‘:q!’ to quit forcibly (without saving)
+```
+In the insert mode, change the path line in `path.sh` to:
+
+```bash
+export KALDI_ROOT='pwd'/../..
+```
+Then complete the `fa-canto/` skeleton:
+
+```
+cd fa-canto
+mkdir exp
+mkdir conf
+mkdir data
+                    
+cd data
+mkdir train
+mkdir lang
+mkdir local
+                    
+cd local
+mkdir lang
+```
+❷ The `mfcc.conf` file
+
+In the `conf/` directory we create a `mfcc.conf` file containing the parameters for MFCC extraction. Again we can use `vim` editor within the Shell:
+
+```
+cd fa-canto/conf
+vim mfcc.conf
+
+# Press i to insert; esc to exit insert mode; 
+# ‘:wq’ to write and quit; ‘:q’ to quit normally; 
+# ‘:q!’ to quit forcibly (without saving)
+```
+In the insert mode, add the following lines:
+
+```
+--use-energy=false  
+--sample-frequency=16000
+```
+The sampling frequency should match that of your audio data. 
+
+❸ The parallelisation wrapper
+
+Kaldi provides a wrapper to implement data processing and training in parallel, taking advantage of the multiple processors/cores. Kaldi’s wrapper scripts include `run.pl`, `queue.pl`, `slurm.pl`, etc. The applicable script and parameters will be specified in a file called `cmd.sh` in our directory. For more details about this, please read Eleanor's [tutorial](https://eleanorchodroff.com/tutorial/kaldi/training-acoustic-models.html#set-the-parallelization-wrapper) and the [official guide](http://www.kaldi-asr.org/doc/queue.html).
+
+Since I am going to train the data on a personal laptop, I used the `run.pl` script and set up the `cmd.sh` as follows:
+
+```
+cd fa-canto  
+vim cmd.sh
+
+# Press i to insert; esc to exit insert mode; 
+# ‘:wq’ to write and quit; ‘:q’ to quit normally; 
+# ‘:q!’ to quit forcibly (without saving)
+```
+Insert the following lines in `cmd.sh`:
+```
+train_cmd="run.pl"
+decode_cmd="run.pl"
+```
+`run.pl` runs all the jobs you request on the local machine, and does so in parallel if you use a job range specifier, e.g. JOB=1:4. 
+
+{{% alert warning %}}
+`run.pl` doesn't keep track of how many CPUs are available or how much memory your machine has. If you use `run.pl` to run scripts that were designed to run with `queue.pl` on a larger grid, you may end up exhausting the memory of your machine or overloading it with jobs (from Kaldi official guide). 
+{{% /alert %}}
+
+Lastly, we run the `cmd.sh` file:
+```
+. ./cmd.sh
+```
+
+<br>
+
+## 3.3 The Common Voice Dataset
 
 We will be using the latest `Chinese (Hong Kong)` subset of the publicly available Common Voice corpus `Common Voice Corpus 15.0` updated on 9/14/2023, which contains 108 hours of validated speech with 3001 voices (3.3G `.mp3` files).
 
@@ -283,9 +404,9 @@ Most of the audio clips are short utterances or sentences (fewer than 30 syllabl
 
 <br>
 
-## 3.3 Data preprocessing
+## 3.4 Data preprocessing
 
-### 3.3.1 Setting up the environment
+### 3.4.1 Setting up the environment
 
 I created a new Conda environment named 'acoustics' for acoustic processing. This step is not compulsory, but highly recommend because you can manage a collection of packages and their dependencies related to this project or pipeline in one place.
 
@@ -303,7 +424,7 @@ cd ~/Work
 mkdir fa-cantonese
 ```
 
-### 3.3.2 Audio preprocessing: `.mp3` to `.wav`
+### 3.4.2 Audio preprocessing: `.mp3` to `.wav`
 
 While the compressed format `.mp3` is storage-friendly, we should use `.wav` for acoustic modeling and training.
 Inside the Common Voice directory `cv-corpus-15.0-2023-09-08/`, I created a new directory `clips_wavs/` for converted `.wav` files.
@@ -330,7 +451,7 @@ if __name__ == '__main__':
     wavs = process_map(convert_and_resample, file_pairs, max_workers=4, chunksize=1)
 ```
 
-### 3.3.2 Transcripts preparation: The `text` file
+### 3.4.3 Transcripts preparation: The `text` file
 
 The Kaldi recipe will require a `text` file with the utterance-by-utterance transcript of the corpus, which has the following format (see Elinor's tutorial [here](https://eleanorchodroff.com/tutorial/kaldi/training-acoustic-models.html#text)):
 
@@ -343,6 +464,11 @@ We can achieve this in two steps:
 ❶ Define an utterance ID
 
 In our Common Voice corpus, we have the `train.tsv` which contains columns such as `client_id` (I assumed this representing a unique speaker), `path` (a unique file name), and `sentence` (the transcript for the audio file). We can define an utterance ID by concatenating the `client_id` and the unique numbers in `path` after removing the prefix `common_voice_zh-HK_` and the file extension `.mp3`.
+
+{{% alert note %}}
+The conventional way to create an **utterance ID** is to concatenate the speaker ID and the utterance index, so that an utterance ID embeds the relevant speaker information. 
+{{% /alert %}}
+
 
 ❷ Tokenise Cantonese transcript
 
@@ -385,7 +511,21 @@ texts = cv_text.map(prepare_text, desc="preprocess text")
 texts = texts.remove_columns(['path'])
 texts.to_csv('text', sep='\t', header=False,index=False)
 ```
-### 3.3.3 The dictionary `lexicon.txt`: Cantonese G2P
+
+The output of the above script looks as follows:
+```
+9a3a...43-22235680	兩 個 人 扯 貓 尾  唔 認 數
+9a3a...43-22235715	你 知 唔 知 點 去 中 環 安 慶 台 嗰 間 缽 仔 糕
+9a3a...43-22235825	車 站 路
+9a3a...43-22235895	陳 師 奶 要 去 深 水 埗 欽 州 街 搵 個 朋 友 一 齊 打 麻 雀
+...
+
+# utterance ID is not fully shown given the space here
+```
+
+We can then move this `text` file to our kaldi training directory at `kaldi/egs/fa-canto/data/train`. 
+
+### 3.4.4 The dictionary `lexicon.txt`: Cantonese G2P
 
 We will need a Cantonese pronunciation dictionary `lexicon.txt` of the words/characters, in fact, **only** the words, present in the training corpus. This will ensure that we do not train extraneous phones. If we want to use IPA for acoustic models, we should transcribe the words/characters in IPA in this dictionary.
 
@@ -467,10 +607,128 @@ Browser	pʰ r ɔ: w s ɐ
 ...
 ```
 
+We can then move this `lexicon.txt` file to our kaldi training directory at `kaldi/egs/fa-canto/data/local/lang`. 
+
 ### 3.3.4 Other text files for Kaldi `data/train` 
 
+To train acoustic models in Kaldi, we also need text files `segments`, `wav.scp`, `utt2spk`, and `spk2utt`. We can generate them in our data working directory `fa-cantonese/` and then move them to the kaldi training directory at `kaldi/egs/fa-canto/data/train`. I included some Python snippets to facilitate creating these files. You can also achieve this in your preferred programming language.
 
+❶ The `utt2spk` file
+
+The `utt2spk` file contains the mapping of each utterance to its corresponding speaker, which has the following general form:
+```
+utt_id spkr
+# utt_id: utterance ID
+# spkr: speaker ID
+```
+We can use the script below:
+
+```python
+import pandas as pd
+
+cv_tsv = pd.read_csv('cv-corpus-15.0-2023-09-08/zh-HK/train.tsv', sep='\t')
+
+df = cv_tsv[['path','client_id']]
+# create utt_id
+df['path']=df['path'].str.replace('common_voice_zh-HK_','')
+df['path']=df['path'].str.replace('.mp3','')
+df['utt_id']=df['client_id'] +'-'+df['path']
+# save it as a reference table
+df.to_csv('table.csv', index=False, header=False)
+
+df = df[['utt_id', 'client_id']]
+df.drop_duplicates(inplace=True)
+df.to_csv('utt2spk', sep=' ', index=False, header=False)
+```
+
+Apart from outputting the `utt2spk` file, I also made a `table.csv` containing the pairing information of `utt_id`, `client_id`, and `path`(file_id) for later reference.
+
+❷ The `wav.scp` file
+
+`wav.scp` contains the file path for all audio files, which has the following general form:
+```
+file_id path/file
+```
+In our case, we only have one utterance in one audio file. So the `file_id` is the same as `utt_id`.
+
+```python
+import os
+import pandas as pd
+
+dir = 'cv-corpus-15.0-2023-09-08/zh-HK/clips_wavs'
+
+table = pd.read_csv('table.csv', names = ['file', 'client_id','utt_id'])
+
+path=[]
+
+for root, dirs, files in os.walk(os.path.abspath(dir)):
+    for file in files:
+        path.append([file[19:-4], os.path.join(root, file)])
+
+df = pd.DataFrame(path, columns=['file', 'path'])
+df['file'] = df['file'].astype('int64')
+
+df_update = pd.merge(df, table, on='file', how='right')
+df_update = df_update[['utt_id','path']]
+df_update.to_csv('wav.scp', sep=' ', index=False, header=False)
+```
+
+❸ The `segments` file
+
+The `segments` file contains the start and end time for each utterance in an audio file, with the following general form:
+```
+utt_id file_id start_time end_time
+```
+Again in our case, the first two fields are the same, the start time is always 0, and the end time is the total duration of an audio file. We can make use of the duration information in `clip_durations.tsv` available in the Common Voice dataset.
+
+```python
+import pandas as pd
+
+dur = pd.read_csv('cv-corpus-15.0-2023-09-08/zh-HK/clip_durations.tsv', sep='\t', header=0)
+
+dur['file']=dur['clip'].str.replace('common_voice_zh-HK_','')
+dur['file']=dur['file'].str.replace('.mp3','')
+dur['file'] = dur['file'].astype('int64')
+
+table = pd.read_csv('table.csv', names = ['file', 'client_id','utt_id'])
+
+df = pd.merge(dur, table, on='file', how='right')
+df['file_id'] = df['utt_id']
+df['start_time'] = 0.0
+df['end_time']= df['duration[ms]']/1000
+df = df[['utt_id','file_id','start_time','end_time']]
+
+df.to_csv('segments', sep=' ', index=False, header=False)
+```
+
+❹ The `spk2utt` file
+
+`spk2utt` is a file that contains the speaker to utterance mapping, with the following general form:
+```
+spkr utt_id1 utt_id2 utt_id3
+```
+We can use the Kaldi script below to automatically generate this file given the `utt2spk` file and also check if all required data files are present and in the correct format.
+
+```bash
+utils/fix_data_dir.sh data/train
+```
+### 3.3.4 Other text files for Kaldi `data/local/lang` 
 ...to be continued.
+
+
+## 3.5 Extracting MFCC features
+
+
+## 3.6 Training and alignment
+
+### 3.6.1 Monophone training and alignment
+
+### 3.6.2 Triphone training and alignment
+
+## 3.7 Forced Alignment
+
+
+
 
 ### Credit
 
