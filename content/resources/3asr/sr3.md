@@ -905,6 +905,33 @@ data/train data/lang exp/tri4a exp/tri4a_ali || exit 1;
 
 ### 3.7.2 Creating Praat TextGrids
 
+```python
+#  tsv2praat.py
+#  Created by Chenzi Xu on 2/10/23.
+
+import os
+import re
+from praatio import textgrid
+from praatio.utilities.constants import Interval
+import pandas as pd
+from tqdm import tqdm
+
+
+for file in tqdm(os.listdir('align_txt/')):
+    name, ext = os.path.splitext(file)
+    if ext != ".txt":
+        continue
+    tg_path = 'tg_phons/' + name + '.TextGrid'
+    tsv=pd.read_csv('align_txt/'+file, sep='\t', names=['file', 'phone_pos','start','end'])
+    dur = tsv.iloc[-1,-1]
+    wordTier = textgrid.IntervalTier('phones', [], 0, dur)
+    tg = textgrid.Textgrid()
+    new = [(round(row[2], 2), round(row[3], 2), re.sub(r'_.*$', '', row[1])) for index, row in tsv.iterrows()]
+    wordTier = wordTier.new(entries=new)
+    tg.addTier(wordTier)
+    tg.save(tg_path, format="short_textgrid", includeBlankSpaces=True)
+```
+
 ### Credit
 
 I would like to thank Jian Zhu for his G2P help and Yajie Gu for scripting suggestions.
