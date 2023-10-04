@@ -323,11 +323,8 @@ mkdir lang
 
 {{% alert note %}}
 `vim` is a command-line editor. Typing `vim <text file>` in a Unix shell opens the file:
-
 - Press `i` to insert and edit; Press `esc` to exit insert mode;
-
 - Press `:wq` to write and quit; `:q` to quit normally; 
-
 - Press `:q!` to quit forcibly (without saving).
 {{% /alert %}}
 
@@ -840,11 +837,67 @@ Kaldi keeps data from the same speakers together, so you do not want more splits
 
 ## 3.6 Training and alignment
 
+The training and alignment procedure follows Eleanor's tutorial, which is briefly recapped here. There are a handful of training scripts based on different algorithms. 
+
+{{% alert note %}}
+A training script takes the following arguments in order:
+
+- Location of the acoustic data: `data/train` 
+- Location of the lexicon: `data/lang`
+- Source directory for the model: `exp/lastmodel`
+- Destination directory for the model: `exp/currentmodel`
+{{% /alert %}}
+
 ...to be continued.
 
 ### 3.6.1 Monophone training and alignment
 
+```
+cd fa-canto  
+utils/subset_data_dir.sh --first data/train 8000 data/train_8k
+
+steps/train_mono.sh --boost-silence 1.25 --nj 4 --cmd "$train_cmd" \
+data/train_8k data/lang exp/mono_8k
+```
+...to be continued.
+
 ### 3.6.2 Triphone training and alignment
+
+```
+steps/train_deltas.sh --boost-silence 1.25 --cmd "$train_cmd" \
+2000 10000 data/train data/lang exp/mono_ali exp/tri1 || exit 1;
+```
+Align delta-based triphones
+```
+steps/align_si.sh --nj 4 --cmd "$train_cmd" \
+data/train data/lang exp/tri1 exp/tri1_ali || exit 1;
+```
+Train delta + delta-delta triphones
+```
+steps/train_deltas.sh --cmd "$train_cmd" \
+2500 15000 data/train data/lang exp/tri1_ali exp/tri2a || exit 1;
+```
+Align delta + delta-delta triphones
+```
+steps/align_si.sh  --nj 4 --cmd "$train_cmd" \
+--use-graphs true data/train data/lang exp/tri2a exp/tri2a_ali  || exit 1;
+```
+Train LDA-MLLT triphones
+```
+steps/train_lda_mllt.sh --cmd "$train_cmd" \
+3500 20000 data/train data/lang exp/tri2a_ali exp/tri3a || exit 1;
+Align LDA-MLLT triphones with FMLLR
+steps/align_fmllr.sh --nj 4 --cmd "$train_cmd" \
+data/train data/lang exp/tri3a exp/tri3a_ali || exit 1;
+```
+Train SAT triphones
+```
+steps/train_sat.sh  --cmd "$train_cmd" \
+4200 40000 data/train data/lang exp/tri3a_ali exp/tri4a || exit 1;
+Align SAT triphones with FMLLR
+steps/align_fmllr.sh  --cmd "$train_cmd" \
+data/train data/lang exp/tri4a exp/tri4a_ali || exit 1;
+```
 
 ## 3.7 Forced Alignment
 
