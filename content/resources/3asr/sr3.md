@@ -903,6 +903,18 @@ data/train data/lang exp/tri4a exp/tri4a_ali || exit 1;
 
 ### 3.7.1 Extracting alignment: from CTM output to phone-n-word alignments
 
+```
+cd fa-canto
+                    
+for i in  exp/tri4a_alignme/ali.*.gz;
+do src/bin/ali-to-phones --ctm-output exp/tri4a/final.mdl \
+ark:"gunzip -c $i|" -> ${i%.gz}.ctm;
+done;
+
+cd fa-canto/exp/tri4a_ali
+cat *.ctm > merged_alignment.txt
+```
+
 ### 3.7.2 Creating Praat TextGrids
 
 ```python
@@ -919,7 +931,7 @@ from tqdm import tqdm
 
 for file in tqdm(os.listdir('align_txt/')):
     name, ext = os.path.splitext(file)
-    if ext != ".txt":
+    if not ext = ".txt":
         continue
     tg_path = 'tg_phons/' + name + '.TextGrid'
     tsv=pd.read_csv('align_txt/'+file, sep='\t', names=['file', 'phone_pos','start','end'])
