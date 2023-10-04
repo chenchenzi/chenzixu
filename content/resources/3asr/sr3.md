@@ -21,7 +21,7 @@ It is surprising that mainstream forced aligner tools such as MFA, WebMAUS, CLAR
 This tutorial is built on Eleanor Chodroff's awesome [tutorial](https://eleanorchodroff.com/tutorial/kaldi/index.html) on Kaldi and the Kaldi [official guide](https://kaldi-asr.org/doc/kaldi_for_dummies.html), with enriched implementation details. A dozen of Python snippets were created to prepare the datasets and acquire the forced alignment outputs in the TextGrid format. 
 For more details on the explanations of certain steps, please refer to their tutorials. 
 
-All the Python scripts will be available on my Github {{< icon name="github" pack="fab" >}} [to be updated]. Feel free to click on the menu on the right to jump to a specific section.
+All the Python scripts will be available on my Github {{< icon name="github" pack="fab" >}} [to be updated]. This tutorial is very long. Feel free to navigate through the menu on the right on a computer screen.
 
 > The **Montreal Forced Aligner (MFA)** is built upon Kaldi ASR and provides much straightforward commands for model training and forced alignment. This Kaldi tutorial manifests the inner workings of MFA. For the theory of statistical speech recognition and the MFA approach, check out my [slides](https://chenzixu.rbind.io/slides/asr/asr_talk#/title-slide).  
 
@@ -293,20 +293,17 @@ ln -s ../../src .
                     
 cp ../wsj/s5/path.sh .
 ```
-Check and edit the `path.sh` file in the `vim` editor.
+Check and edit the `path.sh` file in the `vim` editor. Alternatively, you can open this file in a text editor and modify it from there.
 
 ```bash
 vim path.sh
-
-# Press i to insert; esc to exit insert mode;
-# ‘:wq’ to write and quit; ‘:q’ to quit normally; 
-# ‘:q!’ to quit forcibly (without saving)
 ```
-In the insert mode, change the path line in `path.sh` to:
+Press `i` on your keyboard and change the path line in `path.sh` to:
 
 ```bash
 export KALDI_ROOT='pwd'/../..
 ```
+Press `esc` and then `:wq` to save and quit.
 Then complete the `fa-canto/` skeleton:
 
 ```
@@ -323,6 +320,17 @@ mkdir local
 cd local
 mkdir lang
 ```
+
+{{% alert note %}}
+`vim` is a command-line editor. Typing `vim <text file>` in a Unix shell opens the file:
+
+- Press `i` to insert and edit; Press `esc` to exit insert mode;
+
+- Press `:wq` to write and quit; `:q` to quit normally; 
+
+- Press `:q!` to quit forcibly (without saving).
+{{% /alert %}}
+
 ❷ The `mfcc.conf` file
 
 In the `conf/` directory we create a `mfcc.conf` file containing the parameters for MFCC extraction. Again we can use `vim` editor within the Shell:
@@ -330,10 +338,6 @@ In the `conf/` directory we create a `mfcc.conf` file containing the parameters 
 ```
 cd fa-canto/conf
 vim mfcc.conf
-
-# Press i to insert; esc to exit insert mode; 
-# ‘:wq’ to write and quit; ‘:q’ to quit normally; 
-# ‘:q!’ to quit forcibly (without saving)
 ```
 In the insert mode, add the following lines:
 
@@ -352,10 +356,6 @@ Since I am going to train the data on a personal laptop, I used the `run.pl` scr
 ```
 cd fa-canto  
 vim cmd.sh
-
-# Press i to insert; esc to exit insert mode; 
-# ‘:wq’ to write and quit; ‘:q’ to quit normally; 
-# ‘:q!’ to quit forcibly (without saving)
 ```
 Insert the following lines in `cmd.sh`:
 ```
@@ -527,11 +527,11 @@ We can then move this `text` file to our kaldi training directory at `kaldi/egs/
 
 ### 3.4.4 The dictionary `lexicon.txt`: Cantonese G2P
 
-We will need a Cantonese pronunciation dictionary `lexicon.txt` of the words/characters, in fact, **only** the words, present in the training corpus. This will ensure that we do not train extraneous phones. If we want to use IPA for acoustic models, we should transcribe the words/characters in IPA in this dictionary.
+We will need a Cantonese pronunciation dictionary `lexicon.txt` of the words/characters, in fact, **only** the words, present in the training corpus. This will ensure that we do not train extraneous phones. If we want to use IPA symbols for acoustic models, we should transcribe the words/characters in IPA in this dictionary.
 
-We can download [this](https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/zh.txt) Cantonese dictionary and utilise the multilingual [CharsiuG2P](https://github.com/lingjzhu/CharsiuG2P) tool with a pre-trained Cantonese model for grapheme-to-phoneme conversion.
+We can download an open Cantonese dictionary from {{< icon name="github" pack="fab" >}} [open-dict-data](https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/zh.txt) or {{< icon name="github" pack="fab" >}} [CharsiuG2P](https://raw.githubusercontent.com/lingjzhu/CharsiuG2P/main/dicts/yue.tsv) and utilise the multilingual [CharsiuG2P](https://github.com/lingjzhu/CharsiuG2P) tool with a pre-trained Cantonese model for grapheme-to-phoneme conversion.
 
-The dictionary has the following format:
+The open dictionary has the following format:
 ```
 𠻺	/a:˨/
 㝞	/a:˥/
@@ -540,10 +540,9 @@ The dictionary has the following format:
 䧄	/a:k˥/, /kɔ:k˧/
 ...
 ```
-Generally we want ❶ each phone in the dictionary to be separated by a space. ❷ The tone label is always put at the end of an IPA token, which gives an impression of a linearly arranged segment while tone is supresegmental. We might want to exclude the tone labels here. ❸
-We can have multiple pronunciation entries for a word, which can be put in different rows. ❹ We need to add the pseudo-word entries such as `<oov>`, `{Sl}`, and `{LG}`, required by the Kaldi training recipe. `<oov>` stands for ‘out of vocabulary’, `{Sl}` for silence, and `{LG}` for unknown sounds including laughter.
+Generally, we want ❶ each phone in the dictionary to be separated by a space. ❷ The tone label is always put at the end of an IPA token, which gives an impression of tone being a linearly arranged segment. Tone, however, is suprasegmental. We might want to exclude the tone labels here. ❸ We can have multiple pronunciation entries for a word, which are usually put in different rows. ❹ We need to add the pseudo-word entries such as `<oov>` and `{SL}`, required by the Kaldi training recipe. `<oov>` stands for ‘out of vocabulary’ items including unknown sounds and laughters, `{SL}` for silence.
 
-We need to revise the format of this downloaded dictionary. 
+Therefore, we need to revise the format of a downloaded dictionary. The following python script creates a `lexicon.txt` file using `CharsiuG2P` and their open dictionary.
 
 ```python
 from transformers import T5ForConditionalGeneration, AutoTokenizer
@@ -589,10 +588,9 @@ with open('lexicon.txt','w', encoding='utf-8') as output:
     lexicon.to_csv(output,sep='\t', index=False, header=False)
 ```
 
-The revised dictionary is as follows: 
+The final dictionary is as follows: 
 ```
 <oov>	oov
-{LG}	spn
 {SL}	sil
 A	a:
 Annual	a: nn ʊ ŋ
@@ -609,9 +607,15 @@ Browser	pʰ r ɔ: w s ɐ
 
 We can then move this `lexicon.txt` file to our kaldi training directory at `kaldi/egs/fa-canto/data/local/lang`. 
 
-### 3.3.4 Other text files for Kaldi `data/train` 
+### 3.4.4 Other text files for Kaldi `data/train` 
 
-To train acoustic models in Kaldi, we also need text files `segments`, `wav.scp`, `utt2spk`, and `spk2utt`. We can generate them in our data working directory `fa-cantonese/` and then move them to the kaldi training directory at `kaldi/egs/fa-canto/data/train`. I included some Python snippets to facilitate creating these files. You can also achieve this in your preferred programming language.
+To train acoustic models in Kaldi, we also need text files:
+- `segments`, 
+- `wav.scp`, 
+- `utt2spk`,
+- `spk2utt`.
+
+We can generate them in our data working directory `fa-cantonese/` and then move them to the kaldi training directory at `kaldi/egs/fa-canto/data/train`. I included some Python snippets to facilitate creating these files. You can also achieve this in your preferred programming language.
 
 ❶ The `utt2spk` file
 
@@ -712,14 +716,79 @@ We can use the Kaldi script below to automatically generate this file given the 
 ```bash
 utils/fix_data_dir.sh data/train
 ```
-### 3.3.4 Other text files for Kaldi `data/local/lang` 
-...to be continued.
+### 3.4.5 Other text files for Kaldi `data/local/lang` 
 
+Apart from the `lexicon.txt` file, we should create a few other text files about the language data specific to our training corpus including
+- `nonsilence_phones.txt`,
+- `optional_silence.txt`,
+- `silence_phones.txt`,
+- `extra_questions.txt` (optional).
+
+❶ The `nonsilence_phones.txt` file
+
+This file contains a list of all the typical phones that are not silence.
+
+```bash
+cut -f 2- lexicon.txt | sed 's/ /\n/g' | sort -u > nonsilence_phones.txt
+```
+{{% alert note %}}
+In `lexicon.txt`, I have used a **tab** between a Cantonese character and its tokenised (space-separated) IPA string, which is the default delimiter for the `cut` command. You can specify the delimiter using the flag `-d '(delimiter)'` if you used a different one.
+{{% /alert %}}
+
+❷ The `optional_silence.txt` file
+
+This file only has one line, the `sil` (silence) phone.
+```bash
+echo 'sil' > optional_silence.txt
+```
+
+❸ The `silence_phones.txt` file
+
+This file will contain the special, non-word phones in your dictionary:`sil` and `oov`.
+
+```bash
+echo "sil\noov" > silence_phones.txt
+```
+
+❹ The `extra_questions.txt` file
+
+We can skip this step for now. A Kaldi script will generate a basic `extra_questions.txt` file for you, but in `data/lang/phones`. For more details, read [here](https://eleanorchodroff.com/tutorial/kaldi/training-acoustic-models.html#extra_questions.txt).
+
+### 3.4.6 Creating files for Kaldi `data/lang` 
+
+We then use a script to generate files in  `data/lang`. This shell script takes four arguments: `<dict-dir/>`, `<'oov-word-entry'>`, `<tmp-dir/>`, and `<lang-dir/>`. In our case, we can use the script as follows:
+
+```
+cd fa-canto
+utils/prepare_lang.sh data/local/lang '<oov>' data/local/ data/lang
+```
+You will notice new files generated in the `data/lang` directory: `L.fst`, `L_disambig.fst`, `oov.int`, `oov.txt`, `phones.txt`, `topo`, `words.txt`, and `phones/`. It is worth checking out the `extra_questions.txt` file inside the `phones/` directory to see how the model may be learning more about a phone’s contextual information.
+
+If you arrive at this stage, you have completed the data preparation. We can now start training our first model.
+
+<br>
 
 ## 3.5 Extracting MFCC features
 
+The first step is to extract the Mel Frequency Cepstral Coefficients (MFCCs) of the speech signals and compute the cepstral mean and variance normalization (CMVN) stats, using shell scripts as follows:
+
+```bash
+cd fa-canto
+
+mfccdir=mfcc  
+x=data/train  
+steps/make_mfcc.sh --cmd "$train_cmd" --nj 4 $x exp/make_mfcc/$x $mfccdir  
+steps/compute_cmvn_stats.sh $x exp/make_mfcc/$x $mfccdir
+```
+The `--nj` option specifies the number of jobs to be sent out and processed in parallel. Since I was training the dataset on my (not-too-powerful) laptop, I kept this number low here.
+
+{{% alert note %}}
+Kaldi keeps data from the same speakers together, so you do not want more splits than the number of speakers you have.
+{{% /alert %}}
 
 ## 3.6 Training and alignment
+
+...to be continued.
 
 ### 3.6.1 Monophone training and alignment
 
@@ -727,8 +796,9 @@ utils/fix_data_dir.sh data/train
 
 ## 3.7 Forced Alignment
 
+### 3.7.1 Extracting alignment: from CTM output to phone-n-word alignments
 
-
+### 3.7.2 Creating Praat TextGrids
 
 ### Credit
 
