@@ -21,9 +21,36 @@ It is surprising that mainstream forced aligner tools such as MFA, WebMAUS, CLAR
 This tutorial is built on Eleanor Chodroff's awesome [tutorial](https://eleanorchodroff.com/tutorial/kaldi/index.html) on Kaldi and the Kaldi [official guide](https://kaldi-asr.org/doc/kaldi_for_dummies.html), with enriched implementation details. A dozen of Python snippets were created to prepare the datasets and acquire the forced alignment outputs in the TextGrid format. 
 For more details on the explanations of certain steps, please refer to their tutorials. 
 
-All the Python scripts will be available on my Github {{< icon name="github" pack="fab" >}} [to be updated]. This tutorial is very long. Feel free to navigate through the menu on the right on a computer screen.
+All the Python scripts will be available on my Github {{< icon name="github" pack="fab" >}} [to be updated]. This tutorial is very **long**. Feel free to navigate through the section menu on the right on a computer screen.
 
 > The **Montreal Forced Aligner (MFA)** is built upon Kaldi ASR and provides much straightforward commands for model training and forced alignment. This Kaldi tutorial manifests the inner workings of MFA. For the theory of statistical speech recognition and the MFA approach, check out my [slides](https://chenzixu.rbind.io/slides/asr/asr_talk#/title-slide).  
+
+<br>
+
+**Table of Contents**
+
+- [3.1 Kaldi Installation](#31-kaldi-installation)
+  - [3.1.1 Installing Kaldi on a Mac with M1 chip or above](#311-installing-kaldi-on-a-mac-with-m1-chip-or-abovemac-m1)
+- [3.2 Setting up Kaldi directories](#32-setting-up-kaldi-directories)
+  - [3.2.1 The skeleton structure](#321-the-skeleton-structure)
+  - [3.2.2  The `mfcc.conf` file](#322--the-mfccconf-file)
+  - [3.2.3  The parallelisation wrapper](#323--the-parallelisation-wrapper)
+- [3.3 The Common Voice Dataset](#33-the-common-voice-dataset)
+- [3.4 Data preprocessing](#34-data-preprocessing)
+  - [3.4.1 Setting up the environment](#341-setting-up-the-environment)
+  - [3.4.2 Audio preprocessing: `.mp3` to `.wav`](#342-audio-preprocessing-mp3-to-wav)
+  - [3.4.3 Transcripts preparation: The `text` file](#343-transcripts-preparation-the-text-file)
+  - [3.4.4 The dictionary `lexicon.txt`: Cantonese G2P](#344-the-dictionary-lexicontxt-cantonese-g2p)
+  - [3.4.4 Other text files for Kaldi `data/train`](#344-other-text-files-for-kaldi-datatrain)
+  - [3.4.5 Other text files for Kaldi `data/local/lang`](#345-other-text-files-for-kaldi-datalocallang)
+  - [3.4.6 Creating files for Kaldi `data/lang`](#346-creating-files-for-kaldi-datalang)
+- [3.5 Extracting MFCC features](#35-extracting-mfcc-features)
+- [3.6 Training and alignment](#36-training-and-alignment)
+  - [3.6.1 Monophone training and alignment](#361-monophone-training-and-alignment)
+  - [3.6.2 Triphone training and alignment](#362-triphone-training-and-alignment)
+- [3.7 Forced Alignment](#37-forced-alignment)
+  - [3.7.1 Extracting alignment: from CTM output to phone-n-word alignments](#371-extracting-alignment-from-ctm-output-to-phone-n-word-alignments)
+  - [3.7.2 Creating Praat TextGrids](#372-creating-praat-textgrids)
 
 <br>
 
@@ -31,15 +58,15 @@ All the Python scripts will be available on my Github {{< icon name="github" pac
 
 The **Kaldi** download and installation is documented in the official [Kaldi](http://www.kaldi-asr.org/doc/install.html) website. Eleanor's [tutorial](https://eleanorchodroff.com/tutorial/kaldi/installation.html) also provided the steps in detail. Here is a recap of the general downloading and installation instructions.
 
-If you are a MacOS user with M1 chip, feel free to jump to [Section 1.1.1](#mac-m1) for more details.
+If you are a MacOS user with M1 chip, feel free to jump to [Section 3.1.1](#mac-m1) for more details.
 
-**Prerequisites**
+**❶ Prerequisites**
 
 Kaldi is now hosted on [Github](https://github.com/kaldi-asr/kaldi) for development and distribution. You will need to install [**Git**](https://git-scm.com/downloads) {{< icon name="github" pack="fab" >}}, the version control system, on your machine. 
 
 Software Carpentry has a nice [tutorial](https://swcarpentry.github.io/git-novice/) on Git for beginners, which includes installation of Git across various operating systems.
 
-**Downloading**
+**❷ Downloading**
 
 Navigate to the working directory where you would like to install Kaldi (in my case: `~/Work/`), and download the Kaldi toolkit via `git clone`.
 
@@ -48,7 +75,7 @@ cd ~/Work
 git clone https://github.com/kaldi-asr/kaldi.git kaldi --origin upstream
 ```
 
-**Installation**
+**❸ Installation**
 
 Follow the instructions in the file `INSTALL` in the downloaded directory `kaldi/` to complete the build of the toolkit. It should involve the following steps: 
 
@@ -65,10 +92,9 @@ make
 ### 3.1.1 Installing Kaldi on a Mac with M1 chip or above{#mac-m1}
 
 I have encountered many challenges in installing Kaldi on my Mac (Ventura 13.1) with an M1 chip (updated 27 Sept, 2023) and spent a long time debugging. Here I would like to share some tips for those who have similar laptops and builds to assist you in this installation process 🫶. 
-
 The steps below were tested on macOS Ventura (13.1), but may also work for other recent versions with Apple silicon as well.
 
-**Prerequisites**
+**3.1.1.1 Prerequisites**
 
 ❶ You will need Xcode's Command Line Tools. Install Xcode:
 
@@ -85,7 +111,7 @@ You will be prompted to start the installation, and to accept a software license
 
 ❸* [Anaconda](https://www.anaconda.com/download) or miniconda is recommended for creating environments which allows for isolating project-specific dependencies. Follow the link to download the installer.
 
-**Switching Terminal Architecture**
+**3.1.1.2 Switching Terminal Architecture**
 
 Set up a development environment can be a frustrating process given the updates of different packages and their compatibility. Some applications and tools, for instance, have not yet offer full native support for Apple's M1/M2 architecture.
 
@@ -116,7 +142,7 @@ arch
 ```
 To confirm the switch, you can type `arch`. If the output is `i386`, then it is successful.
 
-**Creating a Specified Python Environment**
+**3.1.1.3 Creating a Specified Python Environment**
 
 Before compiling Kaldi, you can utilise Homebrew (aka `brew`) to install the necessary additional packages.
 
@@ -130,7 +156,7 @@ Python2.7 is also needed somehow, although very much sunsetted. You can create a
 conda create -n kaldi python=2.7
 conda activate kaldi
 ```
-**Downloading Kaldi**
+**3.1.1.4 Downloading Kaldi**
 
 Navigate to the working directory where you would like to install Kaldi (in my case: `~/Work/`), and download the Kaldi toolkit via `git clone`.
 
@@ -139,7 +165,7 @@ cd ~/Work
 git clone https://github.com/kaldi-asr/kaldi.git kaldi --origin upstream
 ```
 
-**Installing Tools**
+**3.1.1.5 Installing Tools**
 
 Navigate to the `kaldi/tools/` directory and check if all required dependencies are installed.
 
@@ -148,7 +174,7 @@ cd kaldi/tools
 extras/check_dependencies.sh
 ```
 
-*OpenBLAS*
+✓ *OpenBLAS*
 
 It is likely that you receive an error message as follows: 
 {{% alert warning %}}
@@ -168,7 +194,7 @@ As suggested, we can install `OpenBLAS`：
 extras/install_openblas.sh
 ```
 
-It is likely that you find the following error message in the Terminal output:
+You may also find the following error message in the Terminal output:
 {{% alert warning %}}
 ```
 mv: rename xianyi-OpenBLAS-* to OpenBLAS: No such file or directory
@@ -198,7 +224,7 @@ extras/install_openblas.sh
 ```
 In this way, OpenBLAS should be installed successfully.
 
-*Intel Math Kernel Libraries (MKL)*
+✓ *Intel Math Kernel Libraries (MKL)*
 
 Having re-run `extras/check_dependencies.sh`, it is likely that you receive another error message as follows: 
 {{% alert warning %}}
@@ -240,7 +266,7 @@ sysctl -n hw.ncpu
 If you had other (failed) attempts of `make`, make sure to clean up the resulting downloaded directories such as `openfst-1.7.2` before running the Makefile again.
 {{% /alert %}}
 
-**Installing Source**
+**3.1.1.6 Installing Source**
 
 Navigate to the `kaldi/src/` directory, run the configuration and the Makefiles as follows:
 
@@ -278,7 +304,7 @@ There is a conventional directory structure for training data and models. We can
 └── utils -> ../wsj/s5/utils
 ```
 
-❶ The skeleton structure
+### 3.2.1 The skeleton structure
 
 To achieve the above structure, you can use the following code in a Unix Shell. For more details, please read [here](https://eleanorchodroff.com/tutorial/kaldi/training-acoustic-models.html#prepare-directories). Alternatively, for the most part you can also just right click your mouse/pad, select `New Folder`(Mac), and rename it accordingly.
 
@@ -328,7 +354,7 @@ mkdir lang
 - Press `:q!` to quit forcibly (without saving).
 {{% /alert %}}
 
-❷ The `mfcc.conf` file
+### 3.2.2  The `mfcc.conf` file
 
 In the `conf/` directory we create a `mfcc.conf` file containing the parameters for MFCC extraction. Again we can use `vim` editor within the Shell:
 
@@ -344,7 +370,7 @@ In the insert mode, add the following lines:
 ```
 The sampling frequency should match that of your audio data. 
 
-❸ The parallelisation wrapper
+### 3.2.3  The parallelisation wrapper
 
 Kaldi provides a wrapper to implement data processing and training in parallel, taking advantage of the multiple processors/cores. Kaldi’s wrapper scripts include `run.pl`, `queue.pl`, `slurm.pl`, etc. The applicable script and parameters will be specified in a file called `cmd.sh` in our directory. For more details about this, please read Eleanor's [tutorial](https://eleanorchodroff.com/tutorial/kaldi/training-acoustic-models.html#set-the-parallelization-wrapper) and the [official guide](http://www.kaldi-asr.org/doc/queue.html).
 
@@ -426,9 +452,12 @@ mkdir fa-cantonese
 While the compressed format `.mp3` is storage-friendly, we should use `.wav` for acoustic modeling and training.
 Inside the Common Voice directory `cv-corpus-15.0-2023-09-08/`, I created a new directory `clips_wavs/` for converted `.wav` files.
 
-In my working directory `fa-cantonese/`, I wrote a python script to convert the audio format from `.mp3` to `.wav` with 16K sampling rate, using `sox`. The package `subprocess` enables running the external `sox` command in parallel.
+In my working directory `fa-cantonese/`, I wrote a python script `mp3towav.py` to convert the audio format from `.mp3` to `.wav` with 16K sampling rate, using `sox`. The Python package `subprocess` enables running the external `sox` command in parallel.
 
 ```python
+# my3towav.py
+# Created by Chenzi Xu on 30/09/2023
+
 import re
 import os
 from tqdm import tqdm
@@ -463,7 +492,7 @@ We can achieve this in two steps:
 In our Common Voice corpus, we have the `train.tsv` which contains columns such as `client_id` (I assumed this representing a unique speaker), `path` (a unique file name), and `sentence` (the transcript for the audio file). We can define an utterance ID by concatenating the `client_id` and the unique numbers in `path` after removing the prefix `common_voice_zh-HK_` and the file extension `.mp3`.
 
 {{% alert note %}}
-The conventional way to create an **utterance ID** is to concatenate the speaker ID and the utterance index, so that an utterance ID embeds the relevant speaker information. 
+The conventional way to create an **utterance ID** is to **concatenate** the speaker ID and the utterance index, so that an utterance ID embeds the relevant speaker information. 
 {{% /alert %}}
 
 
@@ -471,9 +500,12 @@ The conventional way to create an **utterance ID** is to concatenate the speaker
 
 The Chinese orthography is very useful in identifying syllables. A good way to tokenise Cantonese transcript is to separate each character with a space, so that we will obtain syllable-level alignment of speech and text. Note that in Hong Kong Cantonese, there is often code-switching and thus you will occasionally see English words in the transcripts.
 
-The following Python snippet will help us prepare the `text` file.
+The following Python snippet `cv15_totext.py` will help us prepare the `text` file.
 
 ```python
+# cv15_totext.py
+# Created by Chenzi Xu on 30/09/2023.
+
 from datasets import load_dataset
 import re
 
@@ -539,9 +571,12 @@ The open dictionary has the following format:
 ```
 Generally, we want ❶ each phone in the dictionary to be separated by a space. ❷ The tone label is always put at the end of an IPA token, which gives an impression of tone being a linearly arranged segment. Tone, however, is suprasegmental. We might want to exclude the tone labels here. ❸ We can have multiple pronunciation entries for a word, which are usually put in different rows. ❹ We need to add the pseudo-word entries such as `<oov>` and `{SL}`, required by the Kaldi training recipe. `<oov>` stands for ‘out of vocabulary’ items including unknown sounds and laughters, `{SL}` for silence.
 
-Therefore, we need to revise the format of a downloaded dictionary. The following python script creates a `lexicon.txt` file using `CharsiuG2P` and their open dictionary.
+Therefore, we need to revise the format of a downloaded dictionary. The following python script `canto_g2p.py` creates a `lexicon.txt` file using `CharsiuG2P` and their open dictionary.
 
 ```python
+# canto_g2p.py
+# Created by Chenzi Xu on 30/09/2023
+
 from transformers import T5ForConditionalGeneration, AutoTokenizer
 from tqdm import tqdm
 import pandas as pd
@@ -622,9 +657,12 @@ utt_id spkr
 # utt_id: utterance ID
 # spkr: speaker ID
 ```
-We can use the script below:
+We can use the Python script `cv15_utt2spk.py` below:
 
 ```python
+# cv15_utt2spk.py
+# Created by Chenzi Xu on 30/09/2023.
+
 import pandas as pd
 
 cv_tsv = pd.read_csv('cv-corpus-15.0-2023-09-08/zh-HK/train.tsv', sep='\t')
@@ -649,7 +687,6 @@ The output is as follows (the utterance ID is not fully shown):
 01b0...2e-22391576 01b0...2e
 ...
 ```
-
 Apart from outputting the `utt2spk` file, I also made a `table.csv` containing the pairing information of `utt_id`, `client_id`, and `path`(file_id) for later reference.
 
 ❷ The `wav.scp` file
@@ -661,6 +698,9 @@ file_id path/file
 In our case, we **only have one utterance in one audio file**. So the `file_id` is the same as `utt_id`.
 
 ```python
+# cv15_wavscp.py
+# Created by Chenzi Xu on 30/09/2023.
+
 import os
 import pandas as pd
 
@@ -699,6 +739,9 @@ utt_id file_id start_time end_time
 Again in our case, the first two fields are the same, the start time is always 0, and the end time is the total duration of an audio file. We can make use of the duration information in `clip_durations.tsv` available in the Common Voice dataset.
 
 ```python
+# cv15_segments.py
+# Created by Chenzi Xu on 30/09/2023.
+
 import pandas as pd
 
 dur = pd.read_csv('cv-corpus-15.0-2023-09-08/zh-HK/clip_durations.tsv', sep='\t', header=0)
