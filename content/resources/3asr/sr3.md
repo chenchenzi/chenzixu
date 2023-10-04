@@ -645,6 +645,14 @@ df.drop_duplicates(inplace=True)
 df.to_csv('utt2spk', sep=' ', index=False, header=False)
 ```
 
+The output is as follows (the utterance ID is not fully shown):
+```
+01b0...2e-22244218 01b0...2e
+01b0...2e-22391509 01b0...2e
+01b0...2e-22391576 01b0...2e
+...
+```
+
 Apart from outputting the `utt2spk` file, I also made a `table.csv` containing the pairing information of `utt_id`, `client_id`, and `path`(file_id) for later reference.
 
 ❷ The `wav.scp` file
@@ -653,7 +661,7 @@ Apart from outputting the `utt2spk` file, I also made a `table.csv` containing t
 ```
 file_id path/file
 ```
-In our case, we only have one utterance in one audio file. So the `file_id` is the same as `utt_id`.
+In our case, we **only have one utterance in one audio file**. So the `file_id` is the same as `utt_id`.
 
 ```python
 import os
@@ -675,6 +683,14 @@ df['file'] = df['file'].astype('int64')
 df_update = pd.merge(df, table, on='file', how='right')
 df_update = df_update[['utt_id','path']]
 df_update.to_csv('wav.scp', sep=' ', index=False, header=False)
+```
+The output is as follows (the utterance ID is not fully shown):
+
+```
+01b0...2e-22244218 /Users/cx936/Work/fa-cantonese/cv-corpus-15.0-2023-09-08/zh-HK/clips_wavs/common_voice_zh-HK_22244218.wav
+01b0...2e-22391509 /Users/cx936/Work/fa-cantonese/cv-corpus-15.0-2023-09-08/zh-HK/clips_wavs/common_voice_zh-HK_22391509.wav
+01b0...2e-22391576 /Users/cx936/Work/fa-cantonese/cv-corpus-15.0-2023-09-08/zh-HK/clips_wavs/common_voice_zh-HK_22391576.wav
+...
 ```
 
 ❸ The `segments` file
@@ -704,6 +720,14 @@ df = df[['utt_id','file_id','start_time','end_time']]
 
 df.to_csv('segments', sep=' ', index=False, header=False)
 ```
+The output is as follows (the utterance ID is not fully shown):
+
+```
+01b0...2e-22244218 01b0...2e-22244218 0.0 5.832
+01b0...2e-22391509 01b0...2e-22391509 0.0 4.584
+01b0...2e-22391576 01b0...2e-22391576 0.0 4.848
+...
+```
 
 ❹ The `spk2utt` file
 
@@ -716,6 +740,13 @@ We can use the Kaldi script below to automatically generate this file given the 
 ```bash
 utils/fix_data_dir.sh data/train
 ```
+The output is as follows (the utterance ID is not fully shown):
+
+```
+01b0...2e 01b0...2e-22244218 01b0...2e-22391509 01b0...2e-22391576 01b0...2e-22391635 01b0...2e-22391636 ...  
+...
+```
+
 ### 3.4.5 Other text files for Kaldi `data/local/lang` 
 
 Apart from the `lexicon.txt` file, we should create a few other text files about the language data specific to our training corpus including
@@ -735,6 +766,22 @@ cut -f 2- lexicon.txt | sed 's/ /\n/g' | sort -u > nonsilence_phones.txt
 In `lexicon.txt`, I have used a **tab** between a Cantonese character and its tokenised (space-separated) IPA string, which is the default delimiter for the `cut` command. You can specify the delimiter using the flag `-d '(delimiter)'` if you used a different one.
 {{% /alert %}}
 
+The `nonsilence_phones.txt` is displayed below:
+
+```
+a:
+a:i
+a:u
+b
+d
+e
+ei
+f
+h
+i:
+...
+```
+
 ❷ The `optional_silence.txt` file
 
 This file only has one line, the `sil` (silence) phone.
@@ -744,7 +791,12 @@ echo 'sil' > optional_silence.txt
 
 ❸ The `silence_phones.txt` file
 
-This file will contain the special, non-word phones in your dictionary:`sil` and `oov`.
+This file will contain the special, non-word phones in your dictionary:
+```
+sil
+oov
+```
+You can use the following code:
 
 ```bash
 echo "sil\noov" > silence_phones.txt
