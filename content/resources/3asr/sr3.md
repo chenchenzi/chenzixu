@@ -543,7 +543,7 @@ texts.to_csv('text', sep='\t', header=False,index=False)
 
 The output of the above script looks as follows:
 ```
-9a3a...43-22235680	兩 個 人 扯 貓 尾  唔 認 數
+9a3a...43-22235680	兩 個 人 扯 貓 尾 唔 認 數
 9a3a...43-22235715	你 知 唔 知 點 去 中 環 安 慶 台 嗰 間 缽 仔 糕
 9a3a...43-22235825	車 站 路
 9a3a...43-22235895	陳 師 奶 要 去 深 水 埗 欽 州 街 搵 個 朋 友 一 齊 打 麻 雀
@@ -878,12 +878,25 @@ The `--nj` option specifies the number of jobs to be sent out and processed in p
 Kaldi keeps data from the same speakers together, so you do not want more splits than the number of speakers you have.
 {{% /alert %}}
 
+<br>
+
 ## 3.6 Training and alignment
 
-The training and alignment procedure follows Eleanor's tutorial, which is briefly recapped here. There are a handful of training scripts based on different algorithms. 
+The training and alignment procedure follows Eleanor's tutorial, which is briefly recapped here. There are a handful of training scripts based on different algorithms in Kaldi. In our training procedure, we start with a **monophone model**, which is often the bootstrap model leveraged to train more sophisticated models.
+
+### 3.6.1 Monophone training and alignment
+
+❶ To train a monophone model, we use the training script `train_mono.sh`:
+
+```
+cd fa-canto  
+
+steps/train_mono.sh --boost-silence 1.25 --nj 4 --cmd "$train_cmd" data/train data/lang exp/mono
+```
+This script has three optional arguments, i.e. `--boost-silence 1.25`, `--nj 4`, `--cmd "$train_cmd"`, and three base arguments, i.e. `data/train` (acoustic data), `data/lang` (lexicon), `exp/mono` (destination directory). `--boost-silence` is included as standard protocol and `--cmd` designates the machine or system that handles the processing. Recall that we set up the $cmd variable and parameters in `cmd.sh` in §3.2.3.
 
 {{% alert note %}}
-A training script takes the following arguments in order:
+A training script generally takes the following four arguments in order:
 
 - Location of the acoustic data: `data/train` 
 - Location of the lexicon: `data/lang`
@@ -891,53 +904,66 @@ A training script takes the following arguments in order:
 - Destination directory for the model: `exp/currentmodel`
 {{% /alert %}}
 
-...to be continued.
+The training scripts we will be using in §3.6.2 have the same argument structure as above. You have probably noticed that for the first model there are only three (base) arguments, since the source directory for an earlier model does not yet exist.
 
-### 3.6.1 Monophone training and alignment
+❷ To align monophones, we use the `align_si.sh` script:
 
 ```
-cd fa-canto  
-utils/subset_data_dir.sh --first data/train 8000 data/train_8k
-
-steps/train_mono.sh --boost-silence 1.25 --nj 4 --cmd "$train_cmd" \
-data/train_8k data/lang exp/mono_8k
+steps/align_si.sh --boost-silence 1.25 --nj 4 --cmd "$train_cmd" data/train data/lang exp/mono exp/mono_ali || exit 1;
 ```
-...to be continued.
+
+{{% alert note %}}
+Similar to a training script, an alignment script takes the following four arguments in order:
+
+- Location of the acoustic data: `data/train`
+- Location of the lexicon: `data/lang`  
+- Source directory for the model: `exp/currentmodel`  
+- Destination directory for the alignment: `exp/currentmodel_ali`  
+{{% /alert %}}
 
 ### 3.6.2 Triphone training and alignment
 
+To train a triphone model, we need to include additional arguments for the algorithm: ❶ the number of leaves, or HMM states, on the decision tree and ❷ the number of Gaussians. In the following command, we specify 2000 HMM states and 10000 Gaussians, based on heuristics.
+
+> The numbers will largely depend on the amount of data, number of phonetic questions, and goal of the model. There is also the constraint that the number of Gaussians should always exceed the number of leaves (from Eleanor Chodroff's tutorial).
+
 ```
-steps/train_deltas.sh --boost-silence 1.25 --cmd "$train_cmd" \
-2000 10000 data/train data/lang exp/mono_ali exp/tri1 || exit 1;
+steps/train_deltas.sh --boost-silence 1.25 --cmd "$train_cmd" 2000 10000 data/train data/lang exp/mono_ali exp/tri1 || exit 1;
 ```
-Align delta-based triphones
+
+**Align delta-based triphones**
 ```
-steps/align_si.sh --nj 4 --cmd "$train_cmd" \
-data/train data/lang exp/tri1 exp/tri1_ali || exit 1;
+steps/align_si.sh --nj 4 --cmd "$train_cmd" data/train data/lang exp/tri1 exp/tri1_ali || exit 1;
 ```
-Train delta + delta-delta triphones
+**Train delta + delta-delta triphones**
 ```
 steps/train_deltas.sh --cmd "$train_cmd" \
 2500 15000 data/train data/lang exp/tri1_ali exp/tri2a || exit 1;
 ```
-Align delta + delta-delta triphones
+**Align delta + delta-delta triphones**
 ```
 steps/align_si.sh  --nj 4 --cmd "$train_cmd" \
 --use-graphs true data/train data/lang exp/tri2a exp/tri2a_ali  || exit 1;
 ```
-Train LDA-MLLT triphones
+**Train LDA-MLLT triphones**
 ```
 steps/train_lda_mllt.sh --cmd "$train_cmd" \
 3500 20000 data/train data/lang exp/tri2a_ali exp/tri3a || exit 1;
-Align LDA-MLLT triphones with FMLLR
+```
+**Align LDA-MLLT triphones with FMLLR**
+
+```
 steps/align_fmllr.sh --nj 4 --cmd "$train_cmd" \
 data/train data/lang exp/tri3a exp/tri3a_ali || exit 1;
 ```
-Train SAT triphones
+**Train SAT triphones**
 ```
 steps/train_sat.sh  --cmd "$train_cmd" \
 4200 40000 data/train data/lang exp/tri3a_ali exp/tri4a || exit 1;
-Align SAT triphones with FMLLR
+```
+**Align SAT triphones with FMLLR**
+
+```
 steps/align_fmllr.sh  --cmd "$train_cmd" \
 data/train data/lang exp/tri4a exp/tri4a_ali || exit 1;
 ```
