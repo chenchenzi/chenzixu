@@ -267,3 +267,69 @@ Now the working directory for this MFA project has the following structure:
 
 ## 4.4 Training acoustic models using MFA
 
+Before we start, use the `mfa validate` command to look through the training corpus, `train_wavs/` in our case, and to make sure that the dataset is in the proper format for MFA.
+
+```
+mfa validate ~/Work/mfa-canto/train_wavs ~/Work/mfa-canto/lexicon.txt
+```
+The output of this command reports on aspects of the training corpus including the number of speakers, the number of utterances, the total duration, the missing transcriptions or audio files if any, the Out of Vocabulary (oov) items if any, etc. You can see the first 22 INFO lines printed in the Unix Shell below:
+
+```bash
+ INFO     Setting up corpus information...                                  
+ INFO     Found 288 speakers across 8426 files, average number of utterances per speaker: 29.256944444444443      
+ INFO     Jobs already initialized.                                         
+ INFO     Text already normalized.                                          
+ INFO     Features already generated.                                       
+ INFO     Corpus                                                            
+ INFO     8426 sound files                                                  
+ INFO     8426 text files                                                   
+ INFO     288 speakers                                                      
+ INFO     8426 utterances                                                   
+ INFO     34249.574 seconds total duration                                  
+ INFO     Sound file read errors                                            
+ INFO     There were no issues reading sound files.                         
+ INFO     Feature generation                                                
+ INFO     There were no utterances missing features.                        
+ INFO     Files without transcriptions                                      
+ INFO     There were no sound files missing transcriptions.                 
+ INFO     Transcriptions without sound files                                
+ INFO     There were no transcription files missing sound files.            
+ INFO     Dictionary                                                        
+ INFO     Out of vocabulary words                                           
+ INFO     There were no missing words from the dictionary. If you plan on using the a model trained on this       
+          dataset to align other datasets in the future, it is recommended that there be at least some missing    
+          words.        
+ ...
+```
+The above output indicates that we passed our data validation. If there are any missing files or the number of speakers is incorrect, you will need to fix the problems and run `mfa validate` again. Oscillate between these two steps until you have validated your data.
+
+The MFA command for training a new acoustic model is `mfa train`, which takes three arguments:
+```
+mfa train [OPTIONS] <corpus_directory> <dictionary_path> <output_model_path>
+```
+For more details, see the official [guide](https://montreal-forced-aligner.readthedocs.io/en/latest/user_guide/workflows/train_acoustic_model.html#mfa-train).
+
+I have added an optional argument `--output_directory` to put the output TextGrids for our training data.
+
+```
+mfa train ~/Work/mfa-canto/train_wavs ~/Work/mfa-canto/lexicon.txt ~/Work/mfa-canto/new_acoustic_model.zip --output_directory ~/Work/mfa-canto/alignment
+```
+
+If you see the following few lines at the end of the Shell output, congratulations 🎉 on completing training the acoustic model.
+
+```
+ ...
+ INFO     Training model...                                                 
+ INFO     Completed training in 27031.43283891678 seconds!                  
+ INFO     Saved model to /Users/cx936/Work/mfa-canto/new_acoustic_model.zip 
+ WARNING  Alignment analysis not available without using postgresql         
+ INFO     Exporting sat_3_ali TextGrids to /Users/cx936/Work/mfa-canto/alignment...                               
+ 100% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ 8,401/8,426  [ 0:00:30 < 0:00:01 , 293 it/s ]
+ INFO     Finished exporting TextGrids to /Users/cx936/Work/mfa-canto/alignment!                                  
+ INFO     Done! Everything took 27140.052 seconds
+```
+
+An example of the TextGrid output is as follows:
+{{< figure library="true" src="can-fa.png" title="Time-aligned phones for `common_voice_zh-HK_20099684.wav`" style="width: 10%">}}
+
+The `train` subset of the corpus is not very big, with total duration of 9.5 hours, but the time alignment is in fact already looking very good with 9 hours of training data. We can use the whole validated subset of the HK Cantonese Common Voice corpus to train a better model, in the same workflow.
