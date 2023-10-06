@@ -1232,7 +1232,7 @@ common_voice_zh-HK_20099684	sil	1.83	3.12
 
 ```
 
-If we want to convert the tabular format of time-aligned phones into Praat TextGrid format, we can the following Python script.
+If we want to convert the tabular format of time-aligned phones into Praat TextGrid format, we can the following Python script `tsv2praat.py`.
 
 ```python
 #  tsv2praat.py
@@ -1262,10 +1262,9 @@ for file in tqdm(os.listdir('align_txt/')):
 ```
 
 The TextGrid output for the previous example is as follows:
-
 {{< figure library="true" src="cantonese-fa.png" title="Time-aligned phones for `common_voice_zh-HK_20099684.wav`" style="width: 10%">}}
 
-Congratulations 🎉 if you successfully reach here. This is not an easy journey, but you should now have a very good understanding of how Kaldi works. In the next chapter, I will demonstrate a much more straightforward MFA implementation. 
+Congratulations 🎉 if you successfully reach here. This is not an easy journey, but you should now have a very good understanding on how Kaldi works. In the next chapter, I will demonstrate a much more straightforward MFA implementation. 
 
 ### Credit
 
