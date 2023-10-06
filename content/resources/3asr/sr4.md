@@ -18,7 +18,7 @@ weight: 4
 
 In the previous extensive chapter *ASR from Scratch I*, I have demonstrated how to train acoustic models of Hong Kong Cantonese using (source) Kaldi ASR. This chapter achieves the same goal with the help of the Montreal Forced Aligner (MFA), which is also based on Kaldi but a more streamlined process.
 
-Some pre-trained acoustic models of Hong Kong Cantonese are now available in my Github {{< icon name="github" pack="fab" >}} [to be updated].
+Some pre-trained acoustic models of Hong Kong Cantonese are now available in my Github {{< icon name="github" pack="fab" >}}[HKCantonese_models](https://github.com/chenchenzi/HKCantonese_models).
 
 **Table of Contents**
 - [4.1 MFA Installation](#41-mfa-installation)
@@ -172,9 +172,37 @@ for index, row in df.iterrows():
 
 ### 4.3.3 The dictionary `lexicon.txt`: Cantonese G2P
 
-We will need a Cantonese pronunciation dictionary `lexicon.txt` of the words/characters, in fact, **only** the words, present in the training corpus. This will ensure that we do not train extraneous phones. If we want to use IPA symbols for acoustic models, we should transcribe the words/characters in IPA in this dictionary.
+We will need a Cantonese pronunciation dictionary `lexicon.txt` of the words/characters, in fact, **only** the words, present in the training corpus. This will ensure that we do not train extraneous phones. If we want to use IPA symbols for acoustic models, we should transcribe the words/characters in IPA in this dictionary. 
 
-We can download an open Cantonese dictionary from {{< icon name="github" pack="fab" >}} [CharsiuG2P](https://raw.githubusercontent.com/lingjzhu/CharsiuG2P/main/dicts/yue.tsv) and utilise the multilingual [CharsiuG2P](https://github.com/lingjzhu/CharsiuG2P) tool with a pre-trained Cantonese model for grapheme-to-phoneme conversion.
+We first get all the transcripts from the `train.tsv` file:
+
+```python
+# cv15_getscript.py
+# Created by Chenzi Xu on 30/09/2023
+
+import pandas as pd
+import re
+
+dir = '/Users/cx936/Work/mfa-canto/train_wavs/'
+cv_tsv = pd.read_csv('cv-corpus-15.0-2023-09-08/zh-HK/train.tsv', sep='\t', header=0)
+
+cv_tsv = cv_tsv[['sentence']]
+# remove punctuation
+cv_tsv['sentence']=cv_tsv['sentence'].apply(lambda x:re.sub(r'[^\u4e00-\u9FFFa-zA-Z0-9 ]', '', x))
+# add space between Chinese characters
+cv_tsv['sentence']=cv_tsv['sentence'].apply(lambda x: re.sub(r'([\u4e00-\u9fff])', r'\1 ', x).strip())
+# add space after an English word followed by a Chinese character
+cv_tsv['sentence']=cv_tsv['sentence'].apply(lambda x: re.sub(r'([a-zA-Z0-9_]+)([\u4e00-\u9fff])', r'\1 \2', x))
+
+cv_tsv.to_csv('transcripts.txt', index=False, header=False)
+```
+
+We find the list of unique words/characters in the training corpus:
+```
+cut -f 2 transcripts.txt | sed 's/ /\n/g' | sort -u > words.txt
+```
+
+We can then download an open Cantonese dictionary from {{< icon name="github" pack="fab" >}} [CharsiuG2P](https://raw.githubusercontent.com/lingjzhu/CharsiuG2P/main/dicts/yue.tsv) and utilise the multilingual [CharsiuG2P](https://github.com/lingjzhu/CharsiuG2P) tool with a pre-trained Cantonese model for grapheme-to-phoneme conversion.
 
 Generally for a dictionary file, we want ❶ each phone to be separated by a space. ❷ The tone label in `yue.tsv` is always put at the end of an IPA token, which gives an impression of tone being a linearly arranged segment. Tone, however, is suprasegmental. We might want to exclude the tone labels here. ❸ We can have multiple pronunciation entries for a word, which are usually put in different rows. ❹ We need to add the pseudo-word entries following the [MFA non-speech annotation convention](https://montreal-forced-aligner.readthedocs.io/en/latest/user_guide/dictionary.html#non-speech-annotations).
 such as `{LG}` and `{SL}`. `{LG} spn` is used to model unknown words or sounds including coughing and laughter, `{SL} sil` is used to model silence, or non-speech vocalizations that are similar to silence like breathing or exhalation.

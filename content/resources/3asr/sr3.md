@@ -21,7 +21,7 @@ It is surprising that mainstream forced aligner tools such as MFA, WebMAUS, CLAR
 This tutorial is built on Eleanor Chodroff's awesome [tutorial](https://eleanorchodroff.com/tutorial/kaldi/index.html) on Kaldi and the Kaldi [official guide](https://kaldi-asr.org/doc/kaldi_for_dummies.html), with enriched implementation details. A dozen of Python snippets were created to prepare the datasets and acquire the forced alignment outputs in the TextGrid format. 
 For more details on the explanations of certain steps, please refer to their tutorials. 
 
-All the Python scripts will be available on my Github {{< icon name="github" pack="fab" >}} [to be updated]. This tutorial is very **long**. Feel free to navigate through the section menu on the right on a computer screen.
+All the Python scripts will be available on my Github {{< icon name="github" pack="fab" >}} [HKCantonese_models](https://github.com/chenchenzi/HKCantonese_models). This tutorial is very **long**. Feel free to navigate through the section menu on the right on a computer screen.
 
 > The **Montreal Forced Aligner (MFA)** is built upon Kaldi ASR and provides much more straightforward commands for model training and forced alignment. This Kaldi tutorial manifests the inner workings of MFA. For the theory of statistical speech recognition and the MFA approach, check out my [slides](https://chenzixu.rbind.io/slides/asr/asr_talk#/title-slide).  
 
@@ -555,13 +555,18 @@ The output of the above script looks as follows:
 # utterance ID is not fully shown given the space here
 ```
 
-We can then move this `text` file to our kaldi training directory at `kaldi/egs/fa-canto/data/train`. 
+We can then move this `text` file to our Kaldi training directory at `kaldi/egs/fa-canto/data/train`. 
 
 ### 3.4.4 The dictionary `lexicon.txt`: Cantonese G2P
 
 We will need a Cantonese pronunciation dictionary `lexicon.txt` of the words/characters, in fact, **only** the words, present in the training corpus. This will ensure that we do not train extraneous phones. If we want to use IPA symbols for acoustic models, we should transcribe the words/characters in IPA in this dictionary.
 
-We can download an open Cantonese dictionary from {{< icon name="github" pack="fab" >}} [open-dict-data](https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/zh.txt) or {{< icon name="github" pack="fab" >}} [CharsiuG2P](https://raw.githubusercontent.com/lingjzhu/CharsiuG2P/main/dicts/yue.tsv) and utilise the multilingual [CharsiuG2P](https://github.com/lingjzhu/CharsiuG2P) tool with a pre-trained Cantonese model for grapheme-to-phoneme conversion.
+We first find the list of unique words/characters in the training corpus:
+```
+cut -f 2 text | sed 's/ /\n/g' | sort -u > words.txt
+```
+
+We can then download an open Cantonese dictionary from {{< icon name="github" pack="fab" >}} [open-dict-data](https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/zh.txt) or {{< icon name="github" pack="fab" >}} [CharsiuG2P](https://raw.githubusercontent.com/lingjzhu/CharsiuG2P/main/dicts/yue.tsv) and utilise the multilingual [CharsiuG2P](https://github.com/lingjzhu/CharsiuG2P) tool with a pre-trained Cantonese model for grapheme-to-phoneme conversion.
 
 The open dictionary has the following format:
 ```
@@ -803,7 +808,7 @@ Apart from the `lexicon.txt` file, we should create a few other text files about
 This file contains a list of all the typical phones that are not silence.
 
 ```bash
-cut -f 2- lexicon.txt | sed 's/ /\n/g' | sort -u > nonsilence_phones.txt
+cut -f 2 lexicon.txt | sed 's/ /\n/g' | sort -u > nonsilence_phones.txt
 ```
 {{% alert note %}}
 In `lexicon.txt`, I have used a **tab** between a Cantonese character and its tokenised (space-separated) IPA string, which is the default delimiter for the `cut` command. You can specify the delimiter using the flag `-d '(delimiter)'` if you used a different one.
