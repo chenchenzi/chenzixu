@@ -81,7 +81,7 @@ Inside the Common Voice directory `cv-corpus-15.0-2023-09-08/zh-HK/`, I created 
 I wrote a python script `mp3towav.py`, located in the same directory as the Common Voice corpus directory `cv-corpus-15.0-2023-09-08/zh-HK/`, to convert the audio format from `.mp3` to `.wav` with 16K sampling rate, using `sox`. The Python package `subprocess` enables running the external `sox` command in parallel.
 
 ```python
-# my3towav.py
+# mp3towav.py
 # Created by Chenzi Xu on 30/09/2023
 
 import re

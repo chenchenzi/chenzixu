@@ -455,7 +455,7 @@ Inside the Common Voice directory `cv-corpus-15.0-2023-09-08/`, I created a new 
 In my working directory `fa-cantonese/`, I wrote a python script `mp3towav.py` to convert the audio format from `.mp3` to `.wav` with 16K sampling rate, using `sox`. The Python package `subprocess` enables running the external `sox` command in parallel.
 
 ```python
-# my3towav.py
+# mp3towav.py
 # Created by Chenzi Xu on 30/09/2023
 
 import re
@@ -1170,10 +1170,10 @@ common_voice_zh-HK_22267475	丞	1.99	2.21
 
 ### 3.7.2 Creating Praat TextGrids
 
-We can use a Python script `splitAlignments.py` to separate alignment results by unique files. Take the phone transcript as an example.
+We can use a Python script `split_alignment.py` to separate alignment results by unique files. Take the phone transcript as an example.
 
 ```python
-#  splitAlignments.py
+#  split_alignment.py
 #  Created by Eleanor Chodroff on 3/25/15.
 #  Modified by Chenzi Xu on 30/09/23.
 
