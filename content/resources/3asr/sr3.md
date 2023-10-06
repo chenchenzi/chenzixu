@@ -23,7 +23,7 @@ For more details on the explanations of certain steps, please refer to their tut
 
 All the Python scripts will be available on my Github {{< icon name="github" pack="fab" >}} [to be updated]. This tutorial is very **long**. Feel free to navigate through the section menu on the right on a computer screen.
 
-> The **Montreal Forced Aligner (MFA)** is built upon Kaldi ASR and provides much straightforward commands for model training and forced alignment. This Kaldi tutorial manifests the inner workings of MFA. For the theory of statistical speech recognition and the MFA approach, check out my [slides](https://chenzixu.rbind.io/slides/asr/asr_talk#/title-slide).  
+> The **Montreal Forced Aligner (MFA)** is built upon Kaldi ASR and provides much more straightforward commands for model training and forced alignment. This Kaldi tutorial manifests the inner workings of MFA. For the theory of statistical speech recognition and the MFA approach, check out my [slides](https://chenzixu.rbind.io/slides/asr/asr_talk#/title-slide).  
 
 <br>
 
@@ -1029,7 +1029,7 @@ ctm3= ctm3[['filename', 'phone', 'start_real', 'end_real']]
 
 ctm3.to_csv('final_ali_short.txt', sep='\t', index=False, header=False)
 ```
-Using above Python script `id2phone.py`, we can obtain a more readable alignment file:
+Using above Python script `id2phone.py`, we can obtain a more readable file with time-aligned phones:
 ```
 common_voice_zh-HK_22244218	sil	0.0	0.75
 common_voice_zh-HK_22244218	j_B	0.75	0.86
@@ -1108,7 +1108,7 @@ common_voice_zh-HK_22267475	s ɪ ŋ	1.99	2.21
 #
 #  phons2words.py
 #  Created by Eleanor Chodroff on 2/07/16.
-#  Modified by Chenzi Xu on 1/10/23.
+#  Modified by Chenzi Xu on 30/09/23.
 
 #### issues with unicode (u'')
 import sys,csv,os,os.path,re,codecs
@@ -1162,7 +1162,77 @@ common_voice_zh-HK_22267475	丞	1.99	2.21
 
 ### 3.7.2 Creating Praat TextGrids
 
-to be continued...
+We can use a Python script `splitAlignments.py` to separate alignment results by unique files. Take the phone transcript as an example.
+
+```python
+#  splitAlignments.py
+#  Created by Eleanor Chodroff on 3/25/15.
+#  Modified by Chenzi Xu on 30/09/23.
+
+import sys,csv
+results=[]
+
+#name = name of first text file in final_ali_short.txt
+#name_fin = name of final text file in final_ali_short.txt
+
+name = "common_voice_zh-HK_22267475"
+name_fin = "common_voice_zh-HK_23688013"
+
+try:
+    with open("final_ali_short.txt") as f: #pron_alignment
+#        next(f) #skip header
+        for line in f:
+            columns=line.split("\t")
+            name_prev = name
+            name = columns[0]
+            if (name_prev != name):
+                try:
+                    with open("align_txt/"+name_prev+".txt",'w') as fwrite: #align_prons
+                        writer = csv.writer(fwrite)
+                        fwrite.write("\n".join(results))
+                        fwrite.close()
+                #print name
+                except Exception as e:
+                    print("Failed to write file",e)
+                    sys.exit(2)
+                del results[:]
+                results.append(line[0:-1])
+            else:
+                results.append(line[0:-1])
+except Exception as e:
+    print("Failed to read file",e)
+    sys.exit(1)
+# this prints out the last textfile (nothing following it to compare with)
+try:
+    with open("align_txt/"+name_prev+".txt",'w') as fwrite:
+        writer = csv.writer(fwrite)
+        fwrite.write("\n".join(results))
+        fwrite.close()
+                #print name
+except Exception as e:
+    print("Failed to write file", e) 
+    sys.exit(2)
+
+```
+
+For example, here is the phone alignment for the audio file `common_voice_zh-HK_20099684.wav`.
+
+```
+common_voice_zh-HK_20099684	sil	0.0	0.71
+common_voice_zh-HK_20099684	tʰ_B	0.71	0.82
+common_voice_zh-HK_20099684	a:i_E	0.82	1.03
+common_voice_zh-HK_20099684	k_B	1.03	1.13
+common_voice_zh-HK_20099684	u:_E	1.13	1.23
+common_voice_zh-HK_20099684	s_B	1.23	1.33
+common_voice_zh-HK_20099684	ɪ_I	1.33	1.40
+common_voice_zh-HK_20099684	ŋ_E	1.4	1.51
+common_voice_zh-HK_20099684	t_B	1.51	1.57
+common_voice_zh-HK_20099684	ou_E	1.57	1.83
+common_voice_zh-HK_20099684	sil	1.83	3.12
+
+```
+
+If we want to convert the tabular format of time-aligned phones into Praat TextGrid format, we can the following Python script.
 
 ```python
 #  tsv2praat.py
@@ -1190,6 +1260,12 @@ for file in tqdm(os.listdir('align_txt/')):
     tg.addTier(wordTier)
     tg.save(tg_path, format="short_textgrid", includeBlankSpaces=True)
 ```
+
+The TextGrid output for the previous example is as follows:
+
+{{< figure library="true" src="cantonese-fa.png" title="Time-aligned phones for `common_voice_zh-HK_20099684.wav`" style="width: 10%">}}
+
+Congratulations 🎉 if you successfully reach here. This is not an easy journey, but you should now have a very good understanding of how Kaldi works. In the next chapter, I will demonstrate a much more straightforward MFA implementation. 
 
 ### Credit
 
