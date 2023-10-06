@@ -965,22 +965,199 @@ steps/train_sat.sh  --cmd "$train_cmd" 4200 40000 data/train data/lang exp/tri3a
 steps/align_fmllr.sh  --cmd "$train_cmd" data/train data/lang exp/tri4a exp/tri4a_ali || exit 1;
 ```
 
+<br>
+
 ## 3.7 Forced Alignment
 
 Having run an alignment script, the time alignment for the training data can be directly extracted and converted to Praat TextGrids. By doing so we can check how good the models are and see if the forced alignment is sensible.
 
-### 3.7.1 Extracting alignment: from CTM output to phone-n-word alignments
+### 3.7.1 Extracting alignment: from CTM output to phone and word alignments
 
+Let us check out the alignment from the SAT triphone model. We can extract the CTM output, that is, the time-marked conversation file containing temporal information of the phone transcription of utterances. Its general form is: 
+```
+utt_id channel_num start_time phone_dur phone_id
+
+```
+
+We can use the following script to extract the `.ctm` files and concatenate them into a large text file.
 ```
 cd fa-canto
                     
-for i in  exp/tri4a_alignme/ali.*.gz;
-do src/bin/ali-to-phones --ctm-output exp/tri4a/final.mdl \
-ark:"gunzip -c $i|" -> ${i%.gz}.ctm;
+for i in  exp/tri4a_ali/ali.*.gz;
+do src/bin/ali-to-phones --ctm-output exp/tri4a/final.mdl ark:"gunzip -c $i|" -> ${i%.gz}.ctm;
 done;
 
 cd fa-canto/exp/tri4a_ali
 cat *.ctm > merged_alignment.txt
+```
+The CTM output is as follows:
+```
+01b0...2e-22244218 1 0.000 0.750 1
+01b0...2e-22244218 1 0.750 0.110 72
+01b0...2e-22244218 1 0.860 0.070 221
+01b0...2e-22244218 1 0.930 0.070 76
+01b0...2e-22244218 1 1.000 0.070 197
+01b0...2e-22244218 1 1.070 0.160 19
+...
+```
+In this file, ❶ the third and fourth columns report start and end times relative to an utterance. Given that our data has one utterance per file, these can be considered as file times too. Otherwise we will need the `segments` file in `data/train` to convert the utterance times to file times. ❷ The last column represents the phone ID, and we need the `phones.txt` file in `data/lang` to translate them into phone symbols.
+
+```python
+# id2phone.py
+# Created by Chenzi Xu on 30/09/2023.
+
+import pandas as pd
+
+ctm = pd.read_csv('merged_alignment.txt', sep=' ', encoding='utf-8', 
+                   names=['file_utt','utt','start','dur','id'])
+ctm['file'] = ctm['file_utt']
+ctm['filename'] = 'common_voice_zh-HK_' + ctm['file_utt'].str.extract(r'-(\d+)$') #only one utterance per file
+
+phones = pd.read_csv('phones.txt', sep=' ', encoding='utf-8', 
+                   names=['phone','id'])
+
+segments = pd.read_csv('segments', sep=' ', encoding='utf-8', 
+                   names=["file_utt","file","start_utt","end_utt"])
+
+ctm2 = pd.merge(ctm, phones, on='id', how='left')
+ctm3 = pd.merge(ctm2, segments, on=["file_utt","file"], how='left')
+
+ctm3['start_real'] = ctm3['start'] + ctm3['start_utt']
+ctm3['end_real'] = ctm3['start_real'] + ctm3['dur']
+
+ctm3= ctm3[['filename', 'phone', 'start_real', 'end_real']]
+
+ctm3.to_csv('final_ali_short.txt', sep='\t', index=False, header=False)
+```
+Using above Python script `id2phone.py`, we can obtain a more readable alignment file:
+```
+common_voice_zh-HK_22244218	sil	0.0	0.75
+common_voice_zh-HK_22244218	j_B	0.75	0.86
+common_voice_zh-HK_22244218	ɐu_E	0.86	0.93
+common_voice_zh-HK_22244218	k_B	0.93	1.0
+common_voice_zh-HK_22244218	ɔ:_E	1.0	1.07
+common_voice_zh-HK_22244218	a:_S	1.07	1.23
+common_voice_zh-HK_22244218	p_B	1.23	1.3
+...
+```
+
+The [B, I, E, S] suffixes indicate the context in which a phone appears. We can make use of this information to ❶ group phones into word/morpheme-level units (using `phons2pron.py`), and ❷ match the word/morpheme-level units to the corresponding lexical items using the dictionary `lexicon.txt` (using `phons2words.py`).
+
+```python
+#  phons2pron.py
+#  Created by Eleanor Chodroff on 2/07/16.
+#  Modified by Chenzi Xu on 1/10/23.
+
+import glob
+
+pron_ali=open("pron_alignment.txt",'w')
+pron=[]
+
+files = glob.glob('align_txt/*.txt')
+
+# process each file
+for file in files:
+    print(file)
+    f = open(file, 'r')
+    pron_ali.write('\n')
+    for line in f:
+        line = line.split("\t")       
+        file=line[6]
+        file = file.strip()
+        phon_pos=line[7]
+        #print phon_pos
+        if phon_pos == "sil":
+            phon_pos = "sil_S"
+        phon_pos=phon_pos.split("_")
+        phon=phon_pos[0]
+        pos=phon_pos[1]
+        #print pos
+        if pos == "B":
+            start=line[10]
+            pron.append(phon)
+        if pos == "S":
+            start=line[10]
+            end=line[11]
+            pron.append(phon)
+            pron_ali.write(file + '\t' + ' '.join(pron) +'\t'+ str(start) + '\t' + str(end))
+            pron=[]
+        if pos == "E":
+            end=line[11]
+            pron.append(phon)
+            pron_ali.write(file + '\t' + ' '.join(pron) +'\t'+ str(start) + '\t' + str(end))
+            pron=[]
+        if pos == "I":
+            pron.append(phon)
+
+```
+The time alignment of grouped phones:
+```
+common_voice_zh-HK_22267475	sil	0.0	0.82
+common_voice_zh-HK_22267475	t ʊ ŋ	0.82	1.10
+common_voice_zh-HK_22267475	f ɔ: ŋ	1.1	1.53
+common_voice_zh-HK_22267475	sil	1.53	1.6
+common_voice_zh-HK_22267475	t a:i	1.6	1.79
+common_voice_zh-HK_22267475	h ɔ: k	1.79	1.99
+common_voice_zh-HK_22267475	s ɪ ŋ	1.99	2.21
+...
+```
+
+```python
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+#
+#  phons2words.py
+#  Created by Eleanor Chodroff on 2/07/16.
+#  Modified by Chenzi Xu on 1/10/23.
+
+#### issues with unicode (u'')
+import sys,csv,os,os.path,re,codecs
+
+# make dictionary of word: prons
+lex = {}
+
+with codecs.open("lexicon.txt", "rb", "utf-8") as f:
+    for line in f:
+        line = line.strip()
+        columns = line.split("\t")
+        word = columns[0]
+        pron = columns[1]
+        #print pron
+        try:
+            lex[pron].append(word)
+        except:
+            lex[pron] = list()
+            lex[pron].append(word)
+
+# open file to write
+word_ali = codecs.open("word_alignment.txt", "wb", "utf-8")
+
+# read file with most information in it
+with codecs.open("pron_alignment.txt", "rb", "utf-8") as f:
+    for line in f:
+        line = line.strip()
+        line = line.split("\t")
+        # get the pronunciation
+        pron = line[1]
+        # look up the word from the pronunciation in the dictionary
+        word = lex.get(pron)
+        word = word[0]
+        file = line[0]
+        start = line[2]
+        end = line[3]
+        word_ali.write(file + '\t' + word + '\t' + start + '\t' + end + '\n')
+```
+
+The time alignment of lexical items / characters:
+```
+common_voice_zh-HK_22267475	{SL}	0.0	0.82
+common_voice_zh-HK_22267475	冬	0.82	1.0999999999999999
+common_voice_zh-HK_22267475	仿	1.1	1.53
+common_voice_zh-HK_22267475	{SL}	1.53	1.6
+common_voice_zh-HK_22267475	Time	1.6	1.79
+common_voice_zh-HK_22267475	學	1.79	1.99
+common_voice_zh-HK_22267475	丞	1.99	2.21
+...
 ```
 
 ### 3.7.2 Creating Praat TextGrids
