@@ -18,6 +18,17 @@ weight: 4
 
 In the previous extensive chapter *ASR from Scratch I*, I have demonstrated how to train acoustic models of Hong Kong Cantonese using (source) Kaldi ASR. This chapter achieves the same goal with the help of the Montreal Forced Aligner (MFA), which is also based on Kaldi but a more streamlined process.
 
+Some pre-trained acoustic models of Hong Kong Cantonese are now available in my Github {{< icon name="github" pack="fab" >}} [to be updated].
+
+**Table of Contents**
+- [4.1 MFA Installation](#41-mfa-installation)
+- [4.2 The Common Voice Dataset](#42-the-common-voice-dataset)
+- [4.3 Data Preprocessing](#43-data-preprocessing)
+  - [4.3.1 Audio preprocessing: `.mp3` to `.wav`](#431-audio-preprocessing-mp3-to-wav)
+  - [4.3.2 Transcripts preparation: initial TextGrids](#432-transcripts-preparation-initial-textgrids)
+  - [4.3.3 The dictionary `lexicon.txt`: Cantonese G2P](#433-the-dictionary-lexicontxt-cantonese-g2p)
+- [4.4 Training acoustic models using MFA](#44-training-acoustic-models-using-mfa)
+
 <br> 
 
 ## 4.1 MFA Installation
@@ -235,6 +246,22 @@ Browser	pʰ r ɔ: w s ɐ
 ```
 
 We can then move this `lexicon.txt` file to our MFA project directory at `~/Work/mfa-canto/`. 
+
+Now the working directory for this MFA project has the following structure:
+
+```
+.
+├── alignment/
+├── lexicon.txt # pronunciation dictionary
+└── train_wavs # audio data and transcripts
+    ├── common_voice_zh-HK_20099684.TextGrid
+    ├── common_voice_zh-HK_20099684.wav
+    ├── common_voice_zh-HK_20099796.TextGrid
+    ├── common_voice_zh-HK_20099796.wav
+    ├── common_voice_zh-HK_20099797.TextGrid
+    ├── common_voice_zh-HK_20099797.wav
+    ├── ...
+```
 
 <br>
 
