@@ -438,7 +438,7 @@ conda create -n acoustics
 conda activate acoustics
 ```
 
-The Python packages I used include: `datasets`, `re`, `os`, `pandas`, `csv`, `tqdm`, `subprocess`, `transformers`, `lingpy`, `praatio`. You can install these via Conda or other package management systems. We also need [sox](https://sourceforge.net/projects/sox/), a command-line audio editing software.
+The Python packages I used include: `datasets`, `re`, `os`, `sys`, `pandas`, `csv`, `tqdm`, `subprocess`, `transformers`, `lingpy`, `praatio`. You can install these via Conda or other package management systems. We also need [sox](https://sourceforge.net/projects/sox/), a command-line audio editing software.
 
 I created a working directory for data pre-processing `fa-cantonese/` and moved the data folder here:  `fa-cantonese/cv-corpus-15.0-2023-09-08/`.
 
@@ -476,6 +476,9 @@ def convert_and_resample(item):
 if __name__ == '__main__':
     wavs = process_map(convert_and_resample, file_pairs, max_workers=4, chunksize=1)
 ```
+{{% alert note %}}
+To use the Python scripts in this tutorial, make sure to modify the path variables so that they match the file structure on your machine.
+{{% /alert %}}
 
 ### 3.4.3 Transcripts preparation: The `text` file
 
@@ -569,9 +572,9 @@ The open dictionary has the following format:
 䧄	/a:k˥/, /kɔ:k˧/
 ...
 ```
-Generally, we want ❶ each phone in the dictionary to be separated by a space. ❷ The tone label is always put at the end of an IPA token, which gives an impression of tone being a linearly arranged segment. Tone, however, is suprasegmental. We might want to exclude the tone labels here. ❸ We can have multiple pronunciation entries for a word, which are usually put in different rows. ❹ We need to add the pseudo-word entries such as `<oov>` and `{SL}`, required by the Kaldi training recipe. `<oov>` stands for ‘out of vocabulary’ items including unknown sounds and laughters, `{SL}` for silence.
+Generally, we want ❶ each phone in the dictionary to be separated by a space. ❷ The tone label is always put at the end of an IPA token, which gives an impression of tone being a linearly arranged segment. Tone, however, is suprasegmental. We might want to exclude the tone labels here. ❸ We can have multiple pronunciation entries for a word, which are usually put in different rows. ❹ We need to add the pseudo-word entries such as `<oov>` and `{SL}`, required by the Kaldi training recipe. `<oov>` stands for ‘out of vocabulary’ items including unknown sounds and laughter, `{SL}` for silence.
 
-Therefore, we need to revise the format of a downloaded dictionary. The following python script `canto_g2p.py` creates a `lexicon.txt` file using `CharsiuG2P` and their open dictionary.
+Therefore, we need to revise the format of a downloaded dictionary. The following python script `canto_g2p.py` creates a `lexicon.txt` file using `CharsiuG2P` and their open dictionary. Then we manually added the pseudo-word entries.
 
 ```python
 # canto_g2p.py
