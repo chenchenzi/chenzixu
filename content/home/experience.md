@@ -17,13 +17,25 @@ date_format = "Jan 2006"
 #   Required fields are `title`, `company`, and `date_start`.
 #   Leave `date_end` empty if it's your current employer.
 #   Begin/end multi-line descriptions with 3 quotes `"""`.
+
+[[experience]]
+  title = "Leverhulme Early Career Research Fellow"
+  company = "Faculty of Linguistics, Philology and Phonetics, University of Oxford"
+  company_url = "https://sites.google.com/york.ac.uk/pasr/home"
+  location = "York, UK"
+  date_start = "2022-08-01"
+  date_end = "2024-02-29"
+  description = """
+  * Principal Investigator for the Leverhulme ECF project 'The rise and fall of a tone'
+  """
+
 [[experience]]
   title = "Postdoctoral Research Associate"
   company = "Department of Language and Linguistic Science, University of York"
   company_url = "https://sites.google.com/york.ac.uk/pasr/home"
   location = "York, UK"
   date_start = "2022-08-01"
-  date_end = ""
+  date_end = "2024-02-29"
   description = """
   * Working for the ESRC-funded project 'Person-specific automatic speaker recognition: understanding the behaviour of individuals for applications of ASR'
   * Teaching Research Training Seminar module
