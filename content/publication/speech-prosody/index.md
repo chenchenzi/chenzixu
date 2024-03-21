@@ -15,8 +15,8 @@ publishDate: "2019-08-09T00:00:00Z"
 publication_types: ["1"]
 
 # Publication name and optional abbreviated publication name.
-publication: In *Proceedings of the 10th International Conference on Speech Prosody*
-publication_short: In *SpeechProsody2020*
+publication: "*Proceedings of the 10th International Conference on Speech Prosody*. Tokyo, Japan (online). pp.508-512"
+publication_short: ''
 
 abstract: This study examines the duration and fundamental frequency (f<sub>0</sub>) contour of neutral tones in the 1997 Mandarin Broadcast News Speech Corpus. 7208 disyllabic occurrences with a lexical tone syllable preceding a neutral tone syllable and 180 trisyllabic occurrences in which two consecutive neutral tone syllables follow a lexical tone syllable from 21 speakers were analysed using orthogonal polynomial and linear mixed effects models. Instead of the oversimplified claim that neutral tone syllables are shorter than other syllables, the results suggest that the length of a neutral tone syllable is sensitive to its syllable structure. The results also capture a converging low pitch target with large variance for Mandarin neutral tones, having visualised the distribution of f<sub>0</sub> variation of neutral tones.
 

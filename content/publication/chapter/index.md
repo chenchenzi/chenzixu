@@ -17,7 +17,7 @@ publishDate: "2021-01-10T00:00:00Z"
 publication_types: ["6"]
 
 # Publication name and optional abbreviated publication name.
-publication: "*Oxford University Press*"
+publication: "In I. W. Arka, A. Asudeh, & T. H. King (Eds.), *Modular Design of Grammar: Linguistics on the Edge*, Oxford: Oxford University Press. pp. 282-302"
 publication_short: ""
 
 abstract: In this chapter, we examine the intonational phonology of multi-clause con- stituent (‘wh’-) questions in the dialect of Standard Colloquial Bengali (SCB), spoken in Kolkata, West Bengal (cf. Chatterji 1921; Hayes & Lahiri 1991; Lahiri & Kennard 2020). We seek to explore the relationships that exist between into- national phonology, pragmatics (viz. information structure), and semantics (viz. interrogative scope), modelling them in the framework of Lexical-Functional Grammar (LFG). Our goal in eliciting data was to identify patterns of intonation used with ‘wh’-questions in SCB for analysis within the non-derivational frame- work of LFG. In particular, we sought to investigate multiple ‘wh’-questions and multi-clause ‘wh’-questions. We aimed to determine if all ‘regular’ ‘wh’-questions bear the same L* HP LI contour identified in Hayes and Lahiri (1991) regardless of how many ‘wh’-question words appear (single vs. multiple ‘wh’-questions) or how many clauses a ‘wh’-question word may take scope over (single vs. multi- clause ‘wh’-questions). After providing background on intonational phonology and Bengali (Section 17.2), we outline our methodology (Section 17.3), and then present our results (Section 17.4). Discussion and LFG analyses are provided (Section 17.5) before we supply our conclusions (Section 17.6).

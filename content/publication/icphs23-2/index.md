@@ -22,8 +22,8 @@ publishDate: "2023-06-09T00:00:00Z"
 publication_types: ["1"]
 
 # Publication name and optional abbreviated publication name.
-publication: In *Proceedings of the 20th International Congress of Phonetic Sciences*
-publication_short: In *ICPHS2023*
+publication: "*Proceedings of the 20th International Congress of Phonetic Sciences*. Prague, Czechia. pp. 3780-3784"
+publication_short: ''
 
 abstract: Automatic speaker recognition (ASR) systems rely on a complex processing chain in order to compare speech signals and produce likelihood ratios. The complexity of this chain, and of the speech signals themselves, mean that there is still limited understanding about what makes a certain voice easy or difficult for a system to recognise. This gap in understanding is holding back the use of ASR in forensic casework. <br> <br> This study considers two specific parts of the ASR chain &#58; x-vectors (speaker models) and within-speaker comparison scores. Using heavily-controlled data from two phoneticians, we demonstrate that variability in vocal setting results in phonetically-predictable shifts in x-vectors and scores. Shifts in supralaryngeal voice quality produce the biggest deviations from modal voice. The results provide a basis for exploring how properties of the voice affect ASR performance, which in turn can contribute to helping courts and practitioners take advantage of ASR systems in forensic casework.
 

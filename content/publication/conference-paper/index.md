@@ -15,8 +15,8 @@ publishDate: "2019-08-09T00:00:00Z"
 publication_types: ["1"]
 
 # Publication name and optional abbreviated publication name.
-publication: In *Proceedings of the 19th International Congress of Phonetic Sciences*
-publication_short: In *ICPHS2019*
+publication: "*Proceedings of the 19th International Congress of Phonetic Sciences (ICPHS19)*. Melbourne, Australia. pp.696-700"
+publication_short: ''
 
 abstract: This paper presents an experimental investigation of pitch variations of tone sequences under different contexts in Plastic Mandarin, a newly-formed contact-induced regional Mandarin variety. Instead of describing f<sub>0</sub> variations of a single tone-bearing unit, the f<sub>0</sub> contours of trisyllabic phrases varying in tonal composition, utterance position, and focus condition were examined by building orthogonal polynomial models on production data elicited from connected semi-spontaneous natural speech. The coefficients of the models that capture the shape of f<sub>0</sub> contours were subjected to further linear mixed effects analysis. This study reveals the synergistic effects of tone interactions, focus, and declination, exerted on the f<sub>0</sub> of the whole phrase in an integrated manner. The findings enhance our knowledge of a prevalent yet scarcely studied Mandarin variety and contribute to the on-going research into the dynamic realisation of tone and intonation in connected speech.
 
