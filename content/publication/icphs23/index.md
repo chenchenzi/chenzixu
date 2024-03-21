@@ -1,7 +1,7 @@
 ---
 title: "Contributions of acoustic measures to the classification of laryngeal voice quality in continuous English speech"
 authors:
-- admin
+- Chenzi Xu
 - Paul Foulkes
 - Philip Harrison
 - Vincent Hughes
@@ -35,8 +35,22 @@ tags:
 featured: true
 
 links:
-- name: ICPHS2023 Link
+- icon: tag
+  icon_pack: fa
+  name: ICPhS2023
   url: https://www.icphs2023.org/
+- icon: file-pdf
+  icon_pack: fa
+  name: PDF
+  url: https://guarant.cz/icphs2023/772.pdf
+- icon: github
+  icon_pack: fab
+  name: Code
+  url: https://github.com/uoy-research/pasr-output/tree/main/icphs_23_voicequality
+- icon: star
+  icon_pack: fa
+  name: Project
+  url: https://chenzixu.rbind.io/project/icphs23voice-quality/
 url_pdf: ''
 # url_code: '#'
 # url_dataset: '#'
@@ -59,6 +73,7 @@ image:
 #   E.g. `internal-project` references `content/project/internal-project/index.md`.
 #   Otherwise, set `projects: []`.
 projects: []
+#- icphs23voice-quality
 #- internal-project
 
 # Slides (optional).

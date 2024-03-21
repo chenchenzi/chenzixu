@@ -3,7 +3,7 @@ title: "Asymmetric Influence of Vocalic Context on Mandarin Sibilants: Evidence 
 authors:
 - Yaxuan Meng
 - Sandra Kotzor
-- admin
+- Chenzi Xu
 - Hilary S. Z. Wynne
 - Aditi Lahiri
 date: "2021-04-22T00:00:00Z"
@@ -34,10 +34,14 @@ tags:
 - Vocalic Context
 featured: false
 
-# links:
+links:
+- icon: file-pdf
+  icon_pack: fa
+  name: PDF
+  url: https://www.frontiersin.org/article/10.3389/fnhum.2021.617318
 # - name: ""
 #   url: ""
-url_pdf: https://www.frontiersin.org/article/10.3389/fnhum.2021.617318
+url_pdf: 
 url_code: ''
 url_dataset: ''
 url_poster: ''

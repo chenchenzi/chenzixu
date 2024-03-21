@@ -1,7 +1,7 @@
 ---
 title: "Characterising intonation in Plastic Mandarin using polynomial modelling"
 authors:
-- admin
+- Chenzi Xu
 date: "2019-04-19T23:22:00Z"
 doi: ""
 
@@ -31,9 +31,15 @@ tags:
 featured: true
 
 links:
-- name: ICPHS2019 Link
+- icon: tag
+  icon_pack: fa
+  name: ICPhS2019
   url: https://www.icphs2019.org/
-url_pdf: http://www.assta.org/proceedings/ICPhS2019/papers/ICPhS_745.pdf
+- icon: file-pdf
+  icon_pack: fa
+  name: PDF
+  url: http://www.assta.org/proceedings/ICPhS2019/papers/ICPhS_745.pdf
+url_pdf: ''
 # url_code: '#'
 # url_dataset: '#'
 # url_poster: '#'

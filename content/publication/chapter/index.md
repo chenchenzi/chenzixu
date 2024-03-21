@@ -2,7 +2,7 @@
 title: "'Wh'-question intonation in Standard Colloquial Bengali: An LFG analysis"
 authors:
 - Louise Mycock
-- admin
+- Chenzi Xu
 - Aditi Lahiri
 date: "2021-10-15T00:00:00Z"
 doi: ""
@@ -31,7 +31,11 @@ tags:
 - LFG
 featured: false
 
-# links:
+links:
+- icon: book
+  icon_pack: fa
+  name: Book
+  url: https://global.oup.com/academic/product/modular-design-of-grammar-9780192844842?cc=gb&lang=en&#
 # - name: Book Link
 #   url: ""
 url_pdf: ''
@@ -40,7 +44,7 @@ url_dataset: ''
 url_poster: ''
 url_project: ''
 url_slides: ''
-url_source: https://global.oup.com/academic/product/modular-design-of-grammar-9780192844842?cc=gb&lang=en&#
+url_source: ''
 url_video: ''
 
 # Featured image

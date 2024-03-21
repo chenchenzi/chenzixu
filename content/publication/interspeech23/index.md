@@ -8,7 +8,7 @@ authors:
 - Finnian Kelly
 - David van der Vloed
 - Poppy Welch
-- admin
+- Chenzi Xu
 date: "2023-08-20T23:22:00Z"
 doi: ""
 
@@ -38,8 +38,18 @@ tags:
 featured: true
 
 links:
-- name: INTERSPEECH2023 Link
+- icon: tag
+  icon_pack: fa
+  name: INTERSPEECH2023
   url: https://interspeech2023.org/
+- icon: file-pdf
+  icon_pack: fa
+  name: PDF
+  url: https://www.isca-archive.org/interspeech_2023/hughes23_interspeech.pdf
+- icon: github
+  icon_pack: fab
+  name: Code
+  url: https://github.com/uoy-research/pasr-output/tree/main/Interspeech_23_Calibration
 url_pdf: ''
 # url_code: '#'
 # url_dataset: '#'
@@ -61,7 +71,8 @@ image:
 #   Simply enter your project's folder or file name without extension.
 #   E.g. `internal-project` references `content/project/internal-project/index.md`.
 #   Otherwise, set `projects: []`.
-projects: []
+projects:
+- interspeech23
 #- internal-project
 
 # Slides (optional).

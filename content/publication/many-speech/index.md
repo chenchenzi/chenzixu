@@ -4,7 +4,7 @@ authors:
 - Stefano Coretta
 - Joseph V. Casillas
 - ...
-- admin
+- Chenzi Xu
 - ...
 - Timo B. Roettger
 date: "2023-08-20T23:22:00Z"
@@ -36,9 +36,15 @@ tags:
 featured: true
 
 links:
-- name: Many Speech project
+- icon: tag
+  icon_pack: fa
+  name: Many Speech project
   url: https://many-speech-analyses.github.io/
-url_pdf: 'files/manyspeech.pdf'
+- icon: file-pdf
+  icon_pack: fa
+  name: PDF
+  url: files/manyspeech.pdf
+url_pdf: ''
 # url_code: '#'
 # url_dataset: '#'
 # url_poster: '#'

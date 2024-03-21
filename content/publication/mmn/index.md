@@ -3,7 +3,7 @@ title: "Mismatch negativity (MMN) as an index of asymmetric processing of conson
 authors:
 - Yaxuan Meng
 - Sandra Kotzor
-- admin
+- Chenzi Xu
 - Hilary S. Z. Wynne
 - Aditi Lahiri
 date: "2021-12-10T00:00:00Z"
@@ -34,10 +34,14 @@ tags:
 - Consonant Duration
 featured: false
 
-# links:
+links:
+- icon: file-pdf
+  icon_pack: fa
+  name: PDF
+  url: https://www.sciencedirect.com/science/article/pii/S002839322100316X
 # - name: ""
 #   url: ""
-url_pdf: https://www.sciencedirect.com/science/article/pii/S002839322100316X
+url_pdf: ''
 url_code: ''
 url_dataset: ''
 url_poster: ''

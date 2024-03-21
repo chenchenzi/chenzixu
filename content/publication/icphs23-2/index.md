@@ -8,7 +8,7 @@ authors:
 - Finnian Kelly
 - David van der Vloed
 - Poppy Welch
-- admin
+- Chenzi Xu
 date: "2023-08-07T23:22:00Z"
 doi: ""
 
@@ -37,8 +37,18 @@ tags:
 featured: true
 
 links:
-- name: ICPHS2023 Link
+- icon: tag
+  icon_pack: fa
+  name: ICPhS2023
   url: https://www.icphs2023.org/
+- icon: file-pdf
+  icon_pack: fa
+  name: PDF
+  url: https://guarant.cz/icphs2023/187.pdf
+- icon: github
+  icon_pack: fab
+  name: Code
+  url: https://github.com/uoy-research/pasr-output/tree/main/ICPhS_23_Sensitivity
 url_pdf: ''
 # url_code: '#'
 # url_dataset: '#'

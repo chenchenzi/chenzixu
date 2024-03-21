@@ -1,7 +1,7 @@
 ---
 title: "Revisiting Neutral Tone in Mandarin Broadcast News Speech"
 authors:
-- admin
+- Chenzi Xu
 date: "2020-05-19T23:22:00Z"
 doi: ""
 
@@ -32,7 +32,9 @@ tags:
 featured: false
 
 links:
-- name: PDF
+- icon: file-pdf
+  icon_pack: fa
+  name: PDF
   url: https://www.isca-speech.org/archive/speechprosody_2020/xu20_speechprosody.html
 # url_pdf: 
 # url_code: '#'
