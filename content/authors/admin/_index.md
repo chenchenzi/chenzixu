@@ -79,6 +79,6 @@ email: ""
 #- Visitors
 ---
 
-Welcome! I am a Leverhulme Early Career Fellow at the **University of Oxford**. Before the fellowship, I was a postdoctoral research associate at the **University of York**, working on a forensic phonetics project *Person-specific Automatic Speaker Recognition*. I obtained my DPhil (PhD) in Linguistics at the University of Oxford, specialising in **phonetics**. Speech sounds of all kinds never fail to fascinate me. Abundant information ranging from lexical meanings and discourse structure to emotions, attitudes, and speaker identity is inherent in speech. I'm interested in exploring the ways different layers of meanings encode in speech. 
+Welcome! I am a Leverhulme Early Career Fellow at the **University of Oxford**. Before the fellowship, I worked on a forensic phonetics project *Person-specific Automatic Speaker Recognition* at the **University of York**. I obtained my DPhil (PhD) in Linguistics at the University of Oxford, specialising in **phonetics**. Speech sounds of all kinds never fail to fascinate me. Abundant information ranging from lexical meanings and discourse structure to emotions, attitudes, and speaker identity is inherent in speech. I'm interested in exploring the ways different layers of meanings encode in speech. 
 
 I am keen in experimental and computational approaches to phonetic research and encourage open and reproducible research workflow. Here I wrote step-by-step guide on topics in phonetic research, available in the *Resources* section. 
