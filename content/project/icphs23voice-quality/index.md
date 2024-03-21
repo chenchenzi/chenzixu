@@ -1,11 +1,11 @@
 ---
 title: Contributions of acoustic measures to the classification of laryngeal voice quality in continuous English speech
-summary: Phonetics & Phonology Seminar, University of Cambridge
+summary: Poster Presentation at the 20th International Congress of Phonetic Sciences (ICPHS23), Prague, Czechia.
 tags:
 - Voice quality
 - Forensic phonetics
 - Acoustics
-date: "2022-10-24T00:00:00Z"
+date: "2023-08-24T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).
 external_link: ""
