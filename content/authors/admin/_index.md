@@ -36,7 +36,7 @@ education:
   - course: MPhil (Distinction) in General Linguistics and Comparative Philology
     institution: University of Oxford
     year: 2016-2018
-  - course: BA Hons (First Class Honours) in English Studies for the Professions Minor in Translation and Bilingual Communication
+  - course: BA Hons (First Class Honours) in English Studies for the Professions; Minor in Translation and Bilingual Communication
     institution: The Hong Kong Polytechnic University
     year: 2012-2016
   - course: University of California Education Abroad Programme 

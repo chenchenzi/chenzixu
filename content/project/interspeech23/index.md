@@ -1,29 +1,33 @@
 ---
-title: Impact of the changes in long-term acoustic features upon different-speaker ASR scores
-summary: Presentation at the 31st International Association for Forensic Phonetics and Acoustics conference (IAFPA 2023), Universität Zürich, Switzerland.
+title: "Automatic speaker recognition with variation across vocal conditions: a controlled experiment with implications for forensics"
+summary: Proceedings of Interspeech 2023. Dublin, Ireland.
 tags:
 - Voice Quality
 - Forensic Phonetics
-- Acoustics
 - ASR
+- Vocal condition
 date: "2023-07-24T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).
 external_link: ""
 
 image:
-  caption: A typical Automatic Speaker Recognition pipeline.
+  caption: Cllr in matched and mismatched conditions.
   focal_point: Smart
 
 links:
-- icon: desktop
-  icon_pack: fas
-  name: Slides
-  url: "https://chenzixu.rbind.io/files/iafpa2023"
 - icon: twitter
   icon_pack: fab
   name: Follow
   url: https://twitter.com/ChenziAmy
+- icon: github
+  icon_pack: fab
+  name: Code
+  url: https://github.com/uoy-research/pasr-output/tree/main/Interspeech_23_Calibration
+- icon: file-pdf
+  icon_pack: fa
+  name: PDF
+  url: https://www.isca-archive.org/interspeech_2023/hughes23_interspeech.pdf
 url_code: ""
 url_pdf: ""
 url_slides: ""

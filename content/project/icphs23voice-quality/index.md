@@ -19,8 +19,16 @@ links:
   icon_pack: fab
   name: Follow
   url: https://twitter.com/ChenziAmy
+- icon: github
+  icon_pack: fab
+  name: Code
+  url: https://github.com/uoy-research/pasr-output/tree/main/icphs_23_voicequality
+- icon: file-pdf
+  icon_pack: fa
+  name: PDF
+  url: https://guarant.cz/icphs2023/772.pdf
 url_code: ""
-url_pdf: "https://guarant.cz/icphs2023/772.pdf"
+url_pdf: ""
 url_slides: ""
 url_video: ""
 

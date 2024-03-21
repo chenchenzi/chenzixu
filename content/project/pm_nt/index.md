@@ -1,6 +1,6 @@
 ---
 title: Cross-dialectal perspective on Mandarin neutral tone
-summary: Phonetics & Phonology Seminar, University of Cambridge
+summary: Invited talk at Phonetics & Phonology Seminar, University of Cambridge
 tags:
 - Plastic Mandarin
 - Neutral tone
