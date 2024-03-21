@@ -19,7 +19,7 @@ links:
 - icon: desktop
   icon_pack: fas
   name: Slides
-  url: "https://chenzixu.rbind.io/files/iafpa2023"
+  url: "files/iafpa2023.pdf"
 - icon: twitter
   icon_pack: fab
   name: Follow
