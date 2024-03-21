@@ -21,7 +21,7 @@ date_format = "Jan 2006"
 [[experience]]
   title = "Leverhulme Early Career Research Fellow"
   company = "Faculty of Linguistics, Philology and Phonetics, University of Oxford"
-  company_url = "https://sites.google.com/york.ac.uk/pasr/home"
+  company_url = "https://www.leverhulme.ac.uk/early-career-fellowships/rise-and-fall-tone"
   location = "York, UK"
   date_start = "2022-08-01"
   date_end = "2024-02-29"
