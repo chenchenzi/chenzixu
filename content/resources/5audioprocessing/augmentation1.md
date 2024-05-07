@@ -35,9 +35,24 @@ Audio data augmentation is a technique that allows us to enhance the diversity o
 
 ## 3 Audio data augmentation techniques
 
-## 4 Audio data augmentation datasets
+## 4 Audio data augmentation databases
+
+There are plenty of publicly available databases containing various room impulse responses, noises, and music, which can be used for audio data augmentation.
+This [Github page](https://speech.fit.vutbr.cz/software/but-speech-fit-reverb-database) documents a list of up-to-date real-world databases.
+
+Here I introduce two commonly used databases:
+
+- [BUT Speech@FIT Reverb Database](https://speech.fit.vutbr.cz/software/but-speech-fit-reverb-database)
+
+The database collects a large number of various room impulse responses, room environmental noises (or "silences"), and retransmitted speech, with meta-data including the room types, room sizes, positions of microphones, speakers, and so on.
+
+- [MUSAN Database](https://www.openslr.org/17/)
+
+The dataset consists of music from several genres, speech from twelve languages, and a wide assortment of technical and non-technical noises.
 
 ## 5 Offline audio data augmentation demo
+
+The following Python script utilises the MUSAN database to create augmented audios.
 
 ```python
 '''
@@ -60,6 +75,7 @@ class augment_loader(object):
   
         # musan and rir audio files
 		augment_files   = glob.glob(os.path.join(musan_path,'*/*/*/*.wav'))
+		
 		for file in augment_files:
 			if file.split('/')[-4] not in self.noiselist:
 				self.noiselist[file.split('/')[-4]] = []
@@ -84,6 +100,7 @@ class augment_loader(object):
             "noise": self.add_noise(audio, 'noise'),
             "television_noise": self.add_noise(self.add_noise(audio, 'speech'), 'music')
         }
+        
 		for aug_type, aug_audio in augmented_audios.items():
 			filename = f"{basename}_{aug_type}.wav"
 			soundfile.write(filename, aug_audio[0], sr)  
@@ -103,6 +120,7 @@ class augment_loader(object):
 		numnoise    = self.numnoise[noisecat]
 		noiselist   = random.sample(self.noiselist[noisecat], random.randint(numnoise[0],numnoise[1]))
 		noises = []
+	
 		for noise in noiselist:
 			noiseaudio, sr = soundfile.read(noise)
 			length = len(audio)
