@@ -3,7 +3,7 @@ title: "New Update: A Gentle Guide to Montreal Forced Aligner"
 linktitle: "6. New Update: A Gentle Guide to Montreal Forced Aligner"
 toc: true
 type: docs
-date: "2020-04-19T00:00:00+01:00"
+date: "2024-05-08T00:00:00+01:00"
 draft: false
 menu:
   forcedalignment:
@@ -16,7 +16,7 @@ weight: 6
 
 It has been a few years since my previous tutorial on the Montreal Forced Aligner (MFA). MFA is continuously evolving and becoming increasingly powerful. In this new tutorial, I would like to introduce a **more sophisticated general workflow** for producing time-aligned phone boundaries for languages that have a **pretrained acoustic model and pretrained dictionary**, especially if you are working with large datasets. 
 
-*The following workflow has been tested on M-chip Macs and Linux (montreal-forced-aligner v3.0.0+).
+*The following workflow has been tested on M-chip Macs and Linux (montreal-forced-aligner v3.0.0+, May 2024).
 
 - **(Advanced) MFA Forced Alignment Workflow**
     - [6.1. Organisation of working directory and sanity check.](#61-organisation-of-working-directory-and-sanity-check)
@@ -111,6 +111,9 @@ Validate the prepared data and pretrained models before the actual alignment. Th
 
    ```bash
    cd (your project path)
+   
+   mfa validate [OPTIONS] CORPUS_DIRECTORY DICTIONARY_PATH
+   
    mfa validate corpus/ mandarin_china_mfa mandarin_mfa
    ```
 
@@ -134,8 +137,7 @@ For remaining OOVs that are saved as a `oovs.txt`, we can generate a dictionary 
    mfa g2p oovs.txt mandarin_china_mfa oovs.dict
 
    # add probabilities to a dictionary (**optional**)
-   mfa train_dictionary [OPTIONS] CORPUS_DIRECTORY DICTIONARY_PATH
-                     ACOUSTIC_MODEL_PATH OUTPUT_DIRECTORY
+   mfa train_dictionary [OPTIONS] CORPUS_DIRECTORY DICTIONARY_PATH ACOUSTIC_MODEL_PATH OUTPUT_DIRECTORY
                      
    mfa train_dictionary --clean ~/project/corpus/ oovs.dict mandarin_mfa ~/project/
    
@@ -150,6 +152,8 @@ When there is no other issues after the validation, we can now start forced alig
 #### Initial run
 
    ```bash
+   mfa align [OPTIONS] CORPUS_DIRECTORY DICTIONARY_PATH ACOUSTIC_MODEL_PATH OUTPUT_DIRECTORY
+          
    mfa align corpus/ mandarin_china_mfa mandarin_mfa output/tgs0/
    ```
 
@@ -172,6 +176,8 @@ When you have very long transcript for each audio file, I would suggest that you
 You can also fine-tune the pretrained acoustic model to see if it gives better alignment results.
 
    ```bash
+   mfa adapt [OPTIONS] CORPUS_DIRECTORY DICTIONARY_PATH ACOUSTIC_MODEL_PATH OUTPUT_MODEL_PATH
+   
    mfa adapt --clean corpus/ mandarin_new.dict mandarin_mfa output/model/ output/tgs3/ --beam 100
    ```
 
