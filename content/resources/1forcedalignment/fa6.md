@@ -86,9 +86,11 @@ There are a few different [pretrained dictionaries](https://mfa-models.readthedo
 
 The Montreal Forced Aligner has many pretrained models for a number of languages. You can check them out [here](https://mfa-models.readthedocs.io/en/latest/).
 
-## 3. Generating input TextGrids from transcripts
+## 6.3. Generating input TextGrids from transcripts
 
-In many scenarios, the transcript file for each audio recording is in a plain text `.txt` format with a matching filename as the audio. It is recommended to convert transcripts in plain text file to input `.TextGrid` files (all texts in one tier), with the tier names being the speaker ID. MFA automatically includes speaker adaptation. This can be achieved using a Python script `text2tg.py`.
+In many scenarios, the transcript file for each audio recording is in a plain text `.txt` format with a matching filename as the audio. It is recommended to convert transcripts in plain text file to input `.TextGrid` files (all texts in one tier), with the tier names being the speaker ID. MFA automatically includes speaker adaptation. This can be achieved using a customised Python script `text2tg.py`, which depends on the format of the transcript file.
+
+Here I have attached an example 
 
    ```python
    python text2tg.py <directory_name>
@@ -116,7 +118,7 @@ In many scenarios, the transcript file for each audio recording is in a plain te
    > where `1_see_20` is the directory of Southeastern English 20 hours corpus.
 
 
-## 4. Data validation and solutions for OOVS
+## 6.4. Data validation and solutions for OOVS
 
    ```bash
    mfa validate corpus/ mandarin_china_mfa mandarin_mfa
@@ -155,7 +157,7 @@ For the latter two categories, we can go back to Step 3 and update the script `d
    cat oovs.dict english_uk_mfa.dict > english_uk_up.dict
    ```
 
-## 5. MFA alignment.
+## 6.5. MFA alignment.
 
 #### Initial run
 
