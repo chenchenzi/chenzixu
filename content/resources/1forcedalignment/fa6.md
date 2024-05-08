@@ -47,8 +47,11 @@ An example structure of the working directory is as follows.
    │   ├── recording2.wav
    │   ├── recording2.TextGrid
    │   └── ...
-   ├── txts
-   ├── output   
+   ├── txts/
+   │   ├── recording1.txt
+   │   ├── recording2.txt
+   │   └── ...
+   ├── output/   
    └── text2tg.py
    ```
 
@@ -149,10 +152,11 @@ For remaining OOVs that are saved as a `oovs.txt`, we can generate a dictionary 
 
 ## 6.5. MFA alignment.
 
-When there is no other issue after the validation, we can now start forced alignment. You can try to adjust the parameters and compare the output TextGrids.
+When there is no other issue after the validation, we can now start forced alignment. You can try to adjust the parameters and compare the output TextGrids. You don't have to do all of the following four runs -- any of them will generate a set of output TextGrids in the `/output/` directory.
 
 #### Initial run
-This is the straight-out-of-the-box baseline output that you can compare to.
+This is the straight-out-of-the-box baseline output that you can compare to. This might be sufficient for small corpora with no OOVs.
+
    ```bash
    mfa align [OPTIONS] CORPUS_DIRECTORY DICTIONARY_PATH ACOUSTIC_MODEL_PATH OUTPUT_DIRECTORY
           
