@@ -14,6 +14,16 @@ menu:
 weight: 4
 ---
 
+<br>
+
+<br>
+
+{{% alert note %}}
+The following tutorial is based on the legacy version of MFA (v1.1.0). For the most recent MFA (v3.0.0+), please check out my updated MFA guide [*New Update: A Gentle Guide to Montreal Forced Aligner*](https://chenzixu.rbind.io/resources/1forcedalignment/fa6/)
+{{% /alert %}}
+
+<br>
+
 ## 4.1 Installation
 
 The Montreal Forced Aligner (MFA) can be downloaded from [here](https://github.com/MontrealCorpusTools/Montreal-Forced-Aligner/releases). They have a detailed [documentation](https://montreal-forced-aligner.readthedocs.io/en/latest/#), so I will only mention it briefly.

@@ -54,6 +54,8 @@ An example structure of the working directory is as follows.
 
 All `.wav` audio files of a corpus are in the `/corpus/` directory, and all transcript files are in the `/txts/` directory. The generated input TextGrid files can be added to the `/corpus/` directory.
 
+For very large corpora, I usually write a script to perform a sanity check of the original corpora files, so that we know whether there is any filename inconsistencies, and whether there is a transcript file for each audio file.
+
 ## 6.2. Setting up the Montreal Forced Aligner
 
 #### Install MFA and activate conda environment
