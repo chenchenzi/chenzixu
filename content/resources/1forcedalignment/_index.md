@@ -34,6 +34,8 @@ A forced alignment system usually takes an audio file and its corresponding tran
 
 `{{< icon name="terminal" pack="fas" >}} Unix Shell` `{{< icon name="python" pack="fab" >}} Python`
 
+<br>
+
 ## General procedure
 1. Prepare the `.wav` files
 2. Prepare the transcript files (`.txt`/`.lab`/`.TextGrid`)
@@ -43,14 +45,26 @@ A forced alignment system usually takes an audio file and its corresponding tran
 ## Post-alignment options
 5. Convert .Textgrid files into readable table format with temporal information
 
-Here I basically describe how I managed to acquire automatic time-aligned `.Textgrids` using open-source softwares and tools on my Macbook (*Mojave 10.14.6*) in details. 
+<br>
+
+Here I basically describe how I managed to acquire automatic time-aligned `.Textgrids` using open-source softwares and tools on my MacBook (*Mojave 10.14.6*) in details. 
 I first introduce how to prepare input data including `.wav` files and transcript files. Then, I demonstrate how to work with the Penn Forced Aligner and the Montreal Forced Aligner respectively. Mandarin Chinese data will be used as an example. I'm trying my best to be clear and hope this is helpful for those who want to achieve similar goals, especially for non-programmers and linguistic students.
 
 Click on the chapters in the Table of Contents to [**START**](https://chenzixu.rbind.io/resources/1forcedalignment/fa1/).
+
+<br>
+
+{{% alert note %}}
+If you find this tutorial useful for your research, you can cite this website:
+
+Chenzi Xu 2020, *Forced Alignment Using P2FA and MFA for Mandarin data*, accessed DD MONTH YEAR, <https://chenzixu.rbind.io/resources/1forcedalignment/>.
+{{% /alert %}}
+
+<br>
+
+Feel free to share this tutorial! {{< icon name="facebook" pack="fab" >}} {{< icon name="twitter" pack="fab" >}} {{< icon name="whatsapp" pack="fab" >}} {{< icon name="weibo" pack="fab" >}} {{< icon name="weixin" pack="fab" >}}
 
 >**DISCLAIMER**
 >
 >Feel free to contact me if you have a question or issue, but I'm probably unable to offer personal assistance to your problems (I'm in the middle of my dissertation). In short, this website is not responsible for any troubles.
 >**Good luck!**
-
-Feel free to share this tutorial! {{< icon name="facebook" pack="fab" >}} {{< icon name="twitter" pack="fab" >}} {{< icon name="whatsapp" pack="fab" >}} {{< icon name="weibo" pack="fab" >}} {{< icon name="weixin" pack="fab" >}}
