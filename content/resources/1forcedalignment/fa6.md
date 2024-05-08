@@ -52,7 +52,7 @@ An example structure of the working directory is as follows.
    └── text2tg.py
    ```
 
-All `.wav` audio files of a corpus are in the `/corpus/` directory, and all transcript files (`.txt`) are in the `/txts/` directory. The generated input TextGrid files can be added to the `/corpus/` directory.
+All `.wav` audio files of a corpus are in the `/corpus/` directory, and all transcript files (`.txt`) are in the `/txts/` directory. The generated **input TextGrid** files can be added to the `/corpus/` directory.
 
 For very large corpora, I usually write a script to perform a sanity check of the original corpora files, so that we know whether there are any filename inconsistencies, and whether there is a transcript file for each audio file.
 
@@ -149,10 +149,10 @@ For remaining OOVs that are saved as a `oovs.txt`, we can generate a dictionary 
 
 ## 6.5. MFA alignment.
 
-When there is no other issues after the validation, we can now start forced alignment. You can try to adjust the parameters and compare the output TextGrids.
+When there is no other issue after the validation, we can now start forced alignment. You can try to adjust the parameters and compare the output TextGrids.
 
 #### Initial run
-
+This is the straight-out-of-the-box baseline output that you can compare to.
    ```bash
    mfa align [OPTIONS] CORPUS_DIRECTORY DICTIONARY_PATH ACOUSTIC_MODEL_PATH OUTPUT_DIRECTORY
           
@@ -165,9 +165,9 @@ When there is no other issues after the validation, we can now start forced alig
    mfa align corpus/ mandarin_new.dict mandarin_mfa output/tgs1/
    ```
 
-#### Third run with a larger beam parameter (retry beam = 100)
+#### Third run with a larger beam parameter
 
-When you have very long transcript for each audio file, I would suggest that you use a larger beam size in decoding, which originally defaults to 10. This of course will increase the alignment time.
+When you have very long transcript for each audio file, I would suggest that you use a larger beam size in decoding (e.g. retry beam = 100), which originally defaults to 10. This of course will increase the alignment time.
 
    ```bash
    mfa align --clean corpus/ mandarin_new.dict mandarin_mfa output/tgs2/ --beam 100
