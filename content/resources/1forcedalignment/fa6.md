@@ -128,7 +128,7 @@ In the latest version of MFA, you can find a list of the OOVs and which utteranc
 
 #### Backtracking easy-to-fix typos
 
-Sometimes missing words in the dictionary results from spelling mistakes. Using the information in `/Documents/MFA/(your project)/oovs_utterances.txt` from the validation output, we can backtrace the words with typos and fix them in the transcript texts.
+Sometimes missing words in the dictionary result from spelling mistakes. Using the information in `/Documents/MFA/(your project)/oovs_utterances.txt` from the validation output, we can backtrace the words with typos and fix them in the transcript texts.
 
 #### Generating pronunciation dictionary for remaining OOVs
 
