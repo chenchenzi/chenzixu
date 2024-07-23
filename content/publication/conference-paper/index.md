@@ -33,7 +33,7 @@ featured: true
 links:
 - icon: tag
   icon_pack: fa
-  name: ICPhS2019
+  name: ICPhS 2019
   url: https://www.icphs2019.org/
 - icon: file-pdf
   icon_pack: fa

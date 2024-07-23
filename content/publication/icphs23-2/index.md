@@ -39,7 +39,7 @@ featured: true
 links:
 - icon: tag
   icon_pack: fa
-  name: ICPhS2023
+  name: ICPhS 2023
   url: https://www.icphs2023.org/
 - icon: file-pdf
   icon_pack: fa

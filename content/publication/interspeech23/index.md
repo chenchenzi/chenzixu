@@ -40,7 +40,7 @@ featured: true
 links:
 - icon: tag
   icon_pack: fa
-  name: INTERSPEECH2023
+  name: INTERSPEECH 2023
   url: https://interspeech2023.org/
 - icon: file-pdf
   icon_pack: fa
