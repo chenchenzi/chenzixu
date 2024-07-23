@@ -1,5 +1,5 @@
 ---
-title: "Voice quality in telephone speech: Comparing acoustic measures between VoIP telephone and high-quality recordings."
+title: "Voice quality in telephone speech: Comparing acoustic measures between VoIP telephone and high-quality recordings"
 authors:
 - Chenzi Xu
 - Jessica Wormald
