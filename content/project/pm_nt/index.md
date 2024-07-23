@@ -1,5 +1,5 @@
 ---
-title: Cross-dialectal perspective on Mandarin neutral tone
+title: Cross-dialectal perspectives on Mandarin neutral tone
 summary: Invited talk at Phonetics & Phonology Seminar, University of Cambridge
 tags:
 - Plastic Mandarin
@@ -24,6 +24,10 @@ links:
   icon_pack: fab
   name: Follow
   url: https://twitter.com/ChenziAmy
+- icon: file-pdf
+  icon_pack: fa
+  name: PDF
+  url: https://authors.elsevier.com/sd/article/S0095447024000470
 url_code: ""
 url_pdf: ""
 url_slides: ""

@@ -42,10 +42,14 @@ links:
   icon_pack: fa
   name: Odyssey 2024
   url: https://www.odyssey2024.org/
-# - icon: file-pdf
-#   icon_pack: fa
-#   name: PDF
-#   url: https://www.isca-archive.org/interspeech_2023/hughes23_interspeech.pdf
+- icon: file-pdf
+  icon_pack: fa
+  name: PDF
+  url: https://www.isca-archive.org/odyssey_2024/hughes24_odyssey.pdf
+- icon: star
+  icon_pack: fa
+  name: Project
+  url: https://chenzixu.rbind.io/project/odyssey24/
 # - icon: github
 #   icon_pack: fab
 #   name: Code
@@ -72,7 +76,7 @@ image:
 #   E.g. `internal-project` references `content/project/internal-project/index.md`.
 #   Otherwise, set `projects: []`.
 projects:
-#- interspeech23
+#- odyssey24
 #- internal-project
 
 # Slides (optional).
