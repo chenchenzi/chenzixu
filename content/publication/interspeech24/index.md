@@ -1,15 +1,16 @@
 ---
-title: "Exploring individual speaker characteristics within a forensic automatic speaker recognition system"
+title: "Voice quality in telephone speech: Comparing acoustic measures between VoIP telephone and high-quality recordings."
 authors:
-- Vincent Hughes
 - Chenzi Xu
+- Jessica Wormald
 - Paul Foulkes
 - Philip Harrison
-- Poppy Welch
-- Jessica Wormald
+- Vincent Hughes
 - Finnian Kelly
 - David van der Vloed
-date: "2024-04-20T23:22:00Z"
+- Poppy Welch
+
+date: "2024-07-20T23:22:00Z"
 doi: ""
 
 # Schedule page publish date (NOT publication's date).
@@ -22,10 +23,10 @@ publishDate: "2023-06-09T00:00:00Z"
 publication_types: ["1"]
 
 # Publication name and optional abbreviated publication name.
-publication: "*Proceedings of The Speaker and Language Recognition Workshop (Odyssey 2024)*. Quebec, Canada. pp. 1-8"
+publication: "*Proceedings of INTERSPEECH*. Kos Island, Greece. pp. x-x"
 publication_short: ''
 
-abstract: A key issue for automatic speaker recognition (ASR), particularly for forensics, is our lack of understanding about why certain voices prove more or less of a challenge for systems. In this paper, we focus on variability in individual speaker performance within an x-vector ASR system and examine this variability as a function of the phonetic content within speech samples. The inclusion of vowels generally improved performance, but not for all speakers. Indeed, some speakers produced broadly the same Cllr irrespective of the phonetic content in the speech samples. Poor ASR performance was not well correlated with long-term laryngeal features (f0 and laryngeal voice quality) and these features may provide additional speaker discriminatory information for some speakers. We discuss the implications of these findings in terms of developing a speaker quality metric for flagging potentially problematic speakers prior to ASR comparison.
+abstract: "Implementing objective voice quality analysis in a forensic context is challenging. Forensic samples often involve telephone transmission, yet little is known about the impact of telecommunication channels on the acoustic measures of voice quality. This study compares the acoustics of laryngeal voice qualities (breathy, creaky, and modal) in controlled production of continuous English speech under two recording conditions: studio (headband microphone) and VoIP (simultaneously over a telephone line). A wide range of voice quality measures were extracted, including spectral tilts and harmonics-to-noise ratios, cepstral peak prominence (CPP), f0, and formants. Through comparative acoustic and linear discriminant analysis, this study identifies measures susceptible to recording conditions and those that robustly contribute to the differentiation of voice qualities in telephone recordings. Harmonic amplitudes H1H2c and H1c, CPP, and f0 are most reliable voice quality measures across studio and VoIP conditions."
 
 # Summary. An optional shortened abstract.
 summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.
@@ -40,16 +41,12 @@ featured: true
 links:
 - icon: tag
   icon_pack: fa
-  name: Odyssey 2024
-  url: https://www.odyssey2024.org/
-- icon: file-pdf
-  icon_pack: fa
-  name: PDF
-  url: https://www.isca-archive.org/odyssey_2024/hughes24_odyssey.pdf
-- icon: star
-  icon_pack: fa
-  name: Project
-  url: https://chenzixu.rbind.io/project/odyssey24/
+  name: INTERSPEECH2024
+  url: https://interspeech2024.org/
+# - icon: file-pdf
+#   icon_pack: fa
+#   name: PDF
+#   url: https://www.isca-archive.org/interspeech_2023/hughes23_interspeech.pdf
 # - icon: github
 #   icon_pack: fab
 #   name: Code
@@ -76,7 +73,7 @@ image:
 #   E.g. `internal-project` references `content/project/internal-project/index.md`.
 #   Otherwise, set `projects: []`.
 projects:
-#- odyssey24
+#- interspeech23
 #- internal-project
 
 # Slides (optional).

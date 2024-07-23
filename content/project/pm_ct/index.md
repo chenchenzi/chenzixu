@@ -1,6 +1,6 @@
 ---
 title: "Identity in prosody: An introduction to Plastic Mandarin"
-summary: Invited talk at Languages of China Workshop, University of Oxford
+summary: Invited talk at Languages of China Workshop, All Souls College, University of Oxford
 tags:
 - Plastic Mandarin
 - Citation tone
