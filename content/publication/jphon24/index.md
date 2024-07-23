@@ -39,6 +39,10 @@ links:
   icon_pack: fa
   name: Project
   url: https://chenzixu.rbind.io/project/pm_nt/
+- icon: github
+  icon_pack: fab
+  name: Code
+  url: https://osf.io/3cjqp/
 # - name: ""
 #   url: ""
 url_pdf: ''

@@ -1,11 +1,12 @@
 ---
 title: Trisyllabic Phrase Intonation in Plastic Mandarin Using Polynomial Modelling
-summary: Presentation at the ICPHS2019
+summary: Presentation at the ICPHS 2019
 tags:
 - Plastic Mandarin
 - Intonation
 - Polynomial Modelling
 - Fundamental frequency
+- Tone and Intonation
 date: "2016-04-27T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).
