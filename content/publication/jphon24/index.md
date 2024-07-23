@@ -31,7 +31,7 @@ tags:
 featured: false
 
 links:
-- icon: file-pdf
+- icon: download
   icon_pack: fa
   name: PDF
   url: https://authors.elsevier.com/sd/article/S0095447024000470
