@@ -68,3 +68,7 @@ subtitle = ""
  # CSS class.
  css_class = ""
 +++
+
+{{% alert note %}}
+You can cite these online tutorials if you find them useful for your own research.<i class="fas fa-heart"></i>
+{{% /alert %}}
