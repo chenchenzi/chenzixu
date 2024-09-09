@@ -24,10 +24,10 @@ links:
 #  icon_pack: fab
 #  name: Code
 #  url: https://github.com/uoy-research/pasr-output/tree/main/icphs_23_voicequality
-# - icon: file-pdf
-#   icon_pack: fa
-#   name: PDF
-#   url: 
+- icon: download
+  icon_pack: fa
+  name: PDF
+  url: https://www.isca-archive.org/interspeech_2024/xu24j_interspeech.pdf
 url_code: ""
 url_pdf: ""
 url_slides: ""
