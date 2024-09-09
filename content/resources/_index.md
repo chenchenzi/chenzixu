@@ -2,7 +2,7 @@
 title: Resources
 #layout: docs  # Do not modify.
 type: page
-view: 2
+view: 1
 
 # Optional header image (relative to `static/img/` folder).
 header:

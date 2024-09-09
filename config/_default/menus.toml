@@ -19,41 +19,46 @@
   weight = 30
 
 [[main]]
-  name = "Resources"
-  url = "resources/"
+  name = "Tutorials"
+  url = "open_tutorials/"
   weight = 40
-  identifier = "resources"
+#  identifier = "resources"
   
-[[main]]
-  name = "Forced Alignment"
-  url = "resources/1forcedalignment"
-  weight = 10
-  parent = "resources"
-[[main]]
-  name = "Speech Corpus Querying"
-  url = "resources/2speechcorpus"
-  weight = 20
-  parent = "resources"
-[[main]]
-  name = "ASR in Linguistic Research"
-  url = "resources/3asr"
-  weight = 30
-  parent = "resources"
-[[main]]
-  name = "Research Hacks"
-  url = "resources/4researchskill"
-  weight = 40
-  parent = "resources"
-[[main]]
-  name = "Audio Processing"
-  url = "resources/5audioprocessing"
-  weight = 50
-  parent = "resources"
+# [[main]]
+#   name = "Forced Alignment"
+#   url = "resources/1forcedalignment"
+#   weight = 10
+#   parent = "resources"
+# [[main]]
+#   name = "Speech Corpus Querying"
+#   url = "resources/2speechcorpus"
+#   weight = 20
+#   parent = "resources"
+# [[main]]
+#   name = "ASR in Linguistic Research"
+#   url = "resources/3asr"
+#   weight = 30
+#   parent = "resources"
+# [[main]]
+#   name = "Research Hacks"
+#   url = "resources/4researchskill"
+#   weight = 40
+#   parent = "resources"
+# [[main]]
+#   name = "Audio Processing"
+#   url = "resources/5audioprocessing"
+#   weight = 50
+#   parent = "resources"
 
 [[main]]
   name = "Teaching"
   url = "#talks"
   weight = 50
+  
+#[[main]]
+#  name = "Tutorials"
+#  url = "open_tutorials/"
+#  weight = 60
 
 [[main]]
   name = "Contact"

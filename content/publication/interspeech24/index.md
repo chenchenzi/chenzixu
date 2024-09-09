@@ -23,7 +23,7 @@ publishDate: "2023-06-09T00:00:00Z"
 publication_types: ["1"]
 
 # Publication name and optional abbreviated publication name.
-publication: "*Proceedings of INTERSPEECH*. 1-5 September 2024. Kos Island, Greece. pp. 1570-1574."
+publication: "*Proceedings of INTERSPEECH*. 1-5 September 2024. Kos Island, Greece. pp. 1570-1574"
 publication_short: ''
 
 abstract: "Implementing objective voice quality analysis in a forensic context is challenging. Forensic samples often involve telephone transmission, yet little is known about the impact of telecommunication channels on the acoustic measures of voice quality. This study compares the acoustics of laryngeal voice qualities (breathy, creaky, and modal) in controlled production of continuous English speech under two recording conditions: studio (headband microphone) and VoIP (simultaneously over a telephone line). A wide range of voice quality measures were extracted, including spectral tilts and harmonics-to-noise ratios, cepstral peak prominence (CPP), f0, and formants. Through comparative acoustic and linear discriminant analysis, this study identifies measures susceptible to recording conditions and those that robustly contribute to the differentiation of voice qualities in telephone recordings. Harmonic amplitudes H1H2c and H1c, CPP, and f0 are most reliable voice quality measures across studio and VoIP conditions."

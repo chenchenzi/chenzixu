@@ -57,10 +57,10 @@ subtitle = ""
 
 **More about me**
 
-Before my journey at Oxford, I spent half a year at the University of California, Berkeley for academic exchange and about 4 years in Hong Kong completing my undergraduate programme in broad discipline of language, culture, and communication at The Hong Kong Polytechnic University.
+Before my journey at Oxford, I spent half a year at the University of California, Berkeley for academic exchange and about three and half years in Hong Kong completing my undergraduate programme in broad discipline of language, culture, and communication at The Hong Kong Polytechnic University.
 
 Growing up in a mountainous region in China, I was surrounded by a variety of Xiang dialects from an early age. When I was a child, mimicking different dialects was of great fun. It seems, however, the rise of Mandarin has been overshadowing many local dialects. Meanwhile, new regional Mandarin accents are emerging too. I am enthusiastic about maintaining language diversity and probing the social meanings of language varieties. I have been working on a Plastic Mandarin project and conducted fieldwork collecting speech data from urban high school students in Changsha, Hunan, China.
 
 I worked as an intern at a tech start-up [Mo Intelligence Ltd](http://mointelligence.com/), during which I developed skills in building Android phone apps and some experience in speech technology including speech-to-text and speaker identification.
 
-I enjoy films and gain energy from travels. Painting and cooking without a recipe are relaxing for me. Hiking, Bachata dance, and yoga are my nourishing activities. I am learning piano by myself and exploring how to take better photographs using my camera. As a child I aspired to be a writer, but unfortunately [my blog](https://xchenzi1994.wixsite.com/chenchen) is still quite empty without any updates for years. 
+I enjoy films and gain energy from travels. Painting and cooking without a recipe are relaxing for me. Hiking, dancing, and yoga are my nourishing activities. I am learning piano and guitar by myself and exploring how to take better photographs using my camera. As a child I aspired to be a fiction writer, but unfortunately I am at the moment too engaged (occupied) with academic research. 
