@@ -11,7 +11,7 @@ address:
   postcode: 
   country: 
   
-summary: This series features a carefully curated set of research tips, tools, and techniques, empowering you to cut through information clutter effectively and uncover insights that matter efficiently.<br><br><i class="fas fa-book"></i> Zotero
+summary: This series features a carefully curated set of research tips, tools, and techniques, empowering you to cut through information clutter effectively and uncover insights that matter efficiently.<br><i class="fas fa-star"></i>&nbsp;<i class="far fa-star"></i> 1 Chapter<br><br><i class="fas fa-book"></i> Zotero
 
 abstract: "This series features a carefully curated set of research tips, tools, and techniques, empowering you to cut through information clutter effectively and uncover insights that matter efficiently."
 

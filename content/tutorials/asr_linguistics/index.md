@@ -11,7 +11,7 @@ location:
 #   postcode: 'OX2 6LE'
 #   country: United Kingdom
 
-summary: This tutorial is designed to help you understand the basic concepts in ASR and guide you step-by-step to utilise ASR in your own linguistic research.<br><br><i class="fas fa-terminal"></i> Unix Shell&nbsp; <i class="fab fa-python"></i> Python&nbsp; <i class="fab fa-github"></i> Whisper&nbsp; <i class="fas fa-headphones"></i> Kaldi&nbsp; <i class="fas fa-database"></i> Corpora
+summary: This tutorial is designed to help you understand the basic concepts in ASR and guide you step-by-step to utilise ASR in your own linguistic research.<br><i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i>&nbsp;<i class="far fa-star"></i> 4 Chapters<br><br><i class="fas fa-terminal"></i> Unix Shell&nbsp; <i class="fab fa-python"></i> Python&nbsp; <i class="fab fa-github"></i> Whisper&nbsp; <i class="fas fa-headphones"></i> Kaldi&nbsp; <i class="fas fa-language"></i> ASR&nbsp; <i class="fas fa-database"></i> Corpus
 
 abstract: "This tutorial is designed to help you understand the basic concepts in ASR and guide you step-by-step to utilise ASR in your own linguistic research."
 

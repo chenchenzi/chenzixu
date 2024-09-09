@@ -11,8 +11,8 @@ location:
 #   postcode: 'OX2 6LE'
 #   country: United Kingdom
 
-summary: This tutorial will introduce a way to compile a speech corpus and make queries of speech intervals, using the command-line interface.<br><br><i class="fas fa-terminal"></i> Unix Shell&nbsp; <i class="fab fa-python"></i> Python
-abstract: "This tutorial will introduce a way to compile a speech corpus and make queries of speech intervals, using the command-line interface."
+summary: This tutorial introduces a way to compile a speech corpus and make queries of speech intervals, using the command-line interface.<br><i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i> 3 Chapters<br><br><i class="fas fa-terminal"></i> Unix Shell&nbsp; <i class="fab fa-python"></i> Python&nbsp; <i class="fas fa-database"></i> Corpus
+abstract: "This tutorial introduces a way to compile a speech corpus and make queries of speech intervals, using the command-line interface."
 
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.

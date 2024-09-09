@@ -11,7 +11,8 @@ location:
 #   postcode: 'OX2 6LE'
 #   country: United Kingdom
 
-summary: This tutorial walks you through the use of the Penn Forced Aligner (P2FA) and the Montreal Forced Aligner (MFA) on Mandarin data, from data preparation and installation to post-aligning processing. It integrates curated online resources along with original code snippets to streamline the workflow.<br><br><i class="fas fa-terminal"></i> Unix Shell&nbsp; <i class="fab fa-python"></i> Python&nbsp; <i class="fab fa-readme"></i> Montreal Forced Aligner&nbsp; <i class="fab fa-readme"></i> Penn Forced Aligner
+summary: This tutorial walks you through the use of the Penn Forced Aligner (P2FA) and the Montreal Forced Aligner (MFA) on Mandarin data, from data preparation and installation to post-aligning processing. It integrates curated online resources along with original code snippets to streamline the workflow.<br><i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i> 6 Chapters<br><br><i class="fas fa-terminal"></i> Unix Shell&nbsp; <i class="fab fa-python"></i> Python&nbsp; <i class="fab fa-readme"></i> Montreal Forced Aligner&nbsp; <i class="fab fa-readme"></i> Penn Forced Aligner
+
 abstract: "A forced alignment system usually takes an audio file and its corresponding transcript as input and returns a text file, which is time-aligned at the phone and word levels. This tutorial walks you through the use of the Penn Forced Aligner (P2FA) and the Montreal Forced Aligner (MFA) on Mandarin data, from data preparation and installation to post-aligning processing. It integrates curated online resources along with original code snippets to streamline the workflow."
 
 # Talk start and end times.
