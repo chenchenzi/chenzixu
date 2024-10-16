@@ -16,7 +16,7 @@ publishDate: "2024-01-10T00:00:00Z"
 publication_types: ["2"]
 
 # Publication name and optional abbreviated publication name.
-publication: "*Journal of the Acoustical Society of America, 156 (4), pp. 2538–2565*"
+publication: "*Journal of the Acoustical Society of America, 156* (4), pp. 2538–2565"
 publication_short: ""
 
 abstract: "The study of citation tones, lexical tones produced in isolation, is one of the first steps towards understanding speech prosody in tone languages. However, methodologies for investigating citation tones vary significantly, often leading to limited comparability of tone inventories, both within and across languages. This paper presents a systematic review of research methods and practices in 136 citation tone studies on 129 tonal language varieties in China, including 99 studies published in Chinese, which are therefore not easily available to an international scientific readership. The review provides an overview of possible analytical decisions along the research pipeline, and unveils considerable variation in data collection, analysis, and reporting conventions, particularly in how f0, the primary acoustic correlate for tone, is operationalised and reported across studies. Key methodological issues are identified, including small sample sizes and inadequate transparency in communicating methodological decisions and procedure. This paper offers a clear road map for citation tone production research and proposes a range of recommendations on speaker sampling, experimental design, acoustic processing techniques, f0 analysis, and result reporting, with the goal of facilitating future tonal research and enhancing resources for underrepresented tonal varieties."
