@@ -11,7 +11,7 @@ location:
 #   postcode: 'OX2 6LE'
 #   country: United Kingdom
 
-summary: This tutorial introduces a way to compile a speech corpus and make queries of speech intervals, using the command-line interface.<br><i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i> 3 Chapters<br><br><i class="fas fa-terminal"></i> Unix Shell&nbsp; <i class="fab fa-python"></i> Python&nbsp; <i class="fas fa-database"></i> Corpus
+summary: This tutorial introduces a way to compile a speech corpus and make queries of speech intervals, using the command-line interface.<br><i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i> 3 Chapters<br><br><i class="fas fa-terminal"></i> Unix Shell&nbsp; <i class="fab fa-python"></i> Python&nbsp; <i class="fas fa-database"></i> Corpus<br> <br><a href="https://chenzixu.rbind.io/resources/2speechcorpus/sp1/"><i class="fas fa-star"></i>&nbsp;Assemble time-aligned transcription files</a> <br><a href="https://chenzixu.rbind.io/resources/2speechcorpus/sp2/"><i class="fas fa-star"></i>&nbsp;Create query scripts</a> <br><a href="https://chenzixu.rbind.io/resources/2speechcorpus/sp3/"><i class="fas fa-star"></i>&nbsp;Create audio-trimming scripts</a>
 abstract: "This tutorial introduces a way to compile a speech corpus and make queries of speech intervals, using the command-line interface."
 
 # Talk start and end times.

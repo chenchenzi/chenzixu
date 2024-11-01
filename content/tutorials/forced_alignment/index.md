@@ -11,7 +11,7 @@ location:
 #   postcode: 'OX2 6LE'
 #   country: United Kingdom
 
-summary: This tutorial walks you through the use of the Penn Forced Aligner (P2FA) and the Montreal Forced Aligner (MFA) on Mandarin data, from data preparation and installation to post-aligning processing. It integrates curated online resources along with original code snippets to streamline the workflow.<br><i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i> 6 Chapters<br><br><i class="fas fa-terminal"></i> Unix Shell&nbsp; <i class="fab fa-python"></i> Python&nbsp; <i class="fab fa-readme"></i> Montreal Forced Aligner&nbsp; <i class="fab fa-readme"></i> Penn Forced Aligner
+summary: This tutorial walks you through the use of the Penn Forced Aligner (P2FA) and the Montreal Forced Aligner (MFA) on Mandarin data, from data preparation and installation to post-aligning processing. It integrates curated online resources along with original code snippets to streamline the workflow.<br><i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i>&nbsp;<i class="fas fa-star"></i> 6 Chapters<br><br><i class="fas fa-terminal"></i> Unix Shell&nbsp; <i class="fab fa-python"></i> Python&nbsp; <i class="fab fa-readme"></i> Montreal Forced Aligner&nbsp; <i class="fab fa-readme"></i> Penn Forced Aligner<br> <br><a href="https://chenzixu.rbind.io/resources/1forcedalignment/fa1/"><i class="fas fa-star"></i>&nbsp;Prepare Audio Files</a> <br><a href="https://chenzixu.rbind.io/resources/1forcedalignment/fa2/"><i class="fas fa-star"></i>&nbsp;Prepare Transcripts</a> <br><a href="https://chenzixu.rbind.io/resources/1forcedalignment/fa3/"><i class="fas fa-star"></i>&nbsp;Use Penn Forced Aligner</a> <br><a href="https://chenzixu.rbind.io/resources/1forcedalignment/fa4/"><i class="fas fa-star"></i>&nbsp;Use Montreal Forced Aligner (legacy)</a> <br><a href="https://chenzixu.rbind.io/resources/1forcedalignment/fa5/"><i class="fas fa-star"></i>&nbsp;Post-alignment Options</a> <br><a href="https://chenzixu.rbind.io/resources/1forcedalignment/fa6/"><i class="fas fa-star"></i>&nbsp;New Update&#58; A Gentle Guide to Montreal Forced Aligner</a>
 
 abstract: "A forced alignment system usually takes an audio file and its corresponding transcript as input and returns a text file, which is time-aligned at the phone and word levels. This tutorial walks you through the use of the Penn Forced Aligner (P2FA) and the Montreal Forced Aligner (MFA) on Mandarin data, from data preparation and installation to post-aligning processing. It integrates curated online resources along with original code snippets to streamline the workflow."
 
@@ -65,3 +65,9 @@ url_video: ""
 math: false
 ---
 
+1. Prepare Audio Files
+2. Prepare Transcripts
+3. Use Penn Forced Aligner
+4. Use Montreal Forced Aligner (legacy)
+5. Post-alignment Options
+6. New Update: A Gentle Guide to Montreal Forced Aligner

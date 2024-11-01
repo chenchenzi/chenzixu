@@ -11,7 +11,7 @@ address:
   postcode: 
   country: 
   
-summary: This series features a carefully curated set of research tips, tools, and techniques, empowering you to cut through information clutter effectively and uncover insights that matter efficiently.<br><i class="fas fa-star"></i>&nbsp;<i class="far fa-star"></i> 1 Chapter<br><br><i class="ai ai-zotero"></i> Zotero
+summary: This series features a carefully curated set of research tips, tools, and techniques, empowering you to cut through information clutter effectively and uncover insights that matter efficiently.<br><i class="fas fa-star"></i>&nbsp;<i class="far fa-star"></i> 1 Chapter<br><br><i class="ai ai-zotero-square"></i> Zotero<br> <br><a href="https://chenzixu.rbind.io/resources/4researchskill/bibliography1/"><i class="fas fa-star"></i>&nbsp;Let's talk about reference management and Zotero</a>
 
 abstract: "This series features a carefully curated set of research tips, tools, and techniques, empowering you to cut through information clutter effectively and uncover insights that matter efficiently."
 

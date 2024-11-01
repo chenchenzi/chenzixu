@@ -11,7 +11,7 @@ location:
 #   postcode: 'OX2 6LE'
 #   country: United Kingdom
 
-summary: This series takes you on a journey through the fundamental concepts and practical aspects of audio processing.<br><i class="fas fa-star"></i>&nbsp;<i class="far fa-star"></i> 1 Chapter<br><br><i class="fas fa-terminal"></i> Unix Shell&nbsp; <i class="fab fa-python"></i> Python&nbsp; <i class="fas fa-database"></i> Corpus
+summary: This series takes you on a journey through the fundamental concepts and practical aspects of audio processing.<br><i class="fas fa-star"></i>&nbsp;<i class="far fa-star"></i> 1 Chapter<br><br><i class="fas fa-terminal"></i> Unix Shell&nbsp; <i class="fab fa-python"></i> Python&nbsp; <i class="fas fa-database"></i> Corpus<br> <br><a href="https://chenzixu.rbind.io/resources/5audioprocessing/augmentation1/"><i class="fas fa-star"></i>&nbsp;Audio data augmentation (in progress)</a>
 
 abstract: "This series takes you on a journey through the fundamental concepts and practical aspects of audio processing."
 
