@@ -26,7 +26,7 @@ When you write an academic article or dissertation, how do you cite other source
 
 You will greatly benefit from this tutorial if (1) you are still using one of the ways described above to create your bibliography, (2) you want to have a head start on reference management, or (3) you have never tried [Zotero](https://www.zotero.org/), a free reference management software (this is not an advertisement XD).
 
-This guide will show you the importance of structured citations, introduce you to one of the best tools, and provide strategies to optimise your research pipeline. Feel free to jump to [**Section 4 Recommended Zotero Setup**](#zotero-setup) if you are already convinced to try Zotero.
+This guide will show you the importance of structured citations, introduce you to one of the best tools, and provide strategies to optimise your research pipeline. Feel free to jump to Section[**4 Recommended Zotero 6 Setup**](#zotero-setup1) or Section[**5 New Updates: Recommended Zotero 7 Setup**](#zotero-setup2), if you are already convinced to try Zotero <i class="ai ai-zotero"></i>.
 
 <br>
 
@@ -109,7 +109,7 @@ Always double-check the entries when possible to ensure complete details require
 
 <br>
 
-# 4 Recommended **Zotero** Setup{#zotero-setup}
+# 4 Recommended **Zotero 6** Setup{#zotero-setup1}
 
 The installation of Zotero is straightforward if you follow the official [online guide](https://www.zotero.org/support/installation). 
 
@@ -302,6 +302,24 @@ You will need to purchase the OpenAI API to use [**Zotero GPT**](https://github.
 To install, find the `.xpi` file via the provided link. More introduction is available in the Github page (above link).
 
 {{< figure library="true" src="gpt.png" title="Integrating ChatGPT with Zotero" >}}
+
+# New updates: Recommended **Zotero 7** Setup{#zotero-setup2}
+
+In August 2024, [**Zotero 7**](https://www.zotero.org/blog/zotero-7/) with a major redesign and improved performance is released. Most of the third-party plug-ins introduced in [Section 4](#zotero-setup1) support Zotero 7, for instance: 
+- [Better BibTex](https://retorque.re/zotero-better-bibtex/) for managing bibliography and citation keys for Latex users;
+- [Zotero Reference](https://github.com/MuiseDestiny/zotero-reference) for quickly accessing references from reference lists;
+- [Zotero Style (Ethereal Style)](https://github.com/MuiseDestiny/zotero-style) for marking reading progress;
+- [ZotCard](https://github.com/018/zotcard) for creating customised templates for reading notes;
+- [Zotero GPT](https://github.com/MuiseDestiny/zotero-gpt) for utilising GPT API to search and query the PDF files.
+
+The plug-in installation method remains the same, as introduced in [Section 4.1.2](#zotfile). When you download the `.xpi` files from these source websites, make sure to check their versions. The newest version should support Zotero 7.
+
+The "must-have" plug-in **ZotFile** I recommended for managing attachment (PDF) files, unfortunately, is no longer actively maintained and not compatible with Zotero 7. But the plug-in [**Zotero Attanger**](https://github.com/MuiseDestiny/zotero-attanger) inherits the major functions of **ZotFile**. The file renaming rules in **Attanger** are different from the **ZotFile** rules, but follow the [native Zotero 7 rules](https://www.zotero.org/support/file_renaming) (Zotero 7 has integrated this ZotFile functionality!).
+
+I used the following template with regular expressions in the figure to maintain a consistent file-renaming system after migrating from Zotero 6 to Zotero 7. I have to say that I prefer the ZotFile system for its simplicity and brevity (compare the filename template here to the Zotfile template illustrated in [Section 4.1.2](#zotfile)).
+
+{{< figure library="true" src="attanger.png" title="Filenaming template example" >}}
+
 
 # Concluding Remarks
 
