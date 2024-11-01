@@ -36,13 +36,13 @@ links:
   icon_pack: fa
   name: PDF
   url: https://pubs-aip-org.ezproxy-prd.bodleian.ox.ac.uk/asa/jasa/article/156/4/2538/3316982/A-cross-linguistic-review-of-citation-tone
-# - icon: star
-#   icon_pack: fa
-#   name: Project
-#   url: https://chenzixu.rbind.io/project/pm_nt/
-- icon: github
-  icon_pack: fab
+- icon: zotero
+  icon_pack: ai
   name: Database
+  url: https://www.zotero.org/groups/5660568/citationtone/library
+- icon: osf
+  icon_pack: ai
+  name: Code
   url: https://osf.io/7h3ar/
 # - name: ""
 #   url: ""
