@@ -1,18 +1,19 @@
 ---
 title: "The processing of neutral tone in self-supervised learning speech models"
-summary: Poster Presentation at UK and Ireland Speech 2025, York, Cambridge.
+summary: Poster Presentation at UK and Ireland Speech 2025, York, UK.
 tags:
 - Self-supervised Speech Models
 - Wav2Vec2
 - Acoustics
 - Neutral Tone
-date: "2024-07-01T00:00:00Z"
+- ASR
+date: "2025-06-01T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).
 external_link: ""
 
 image:
-  caption: Poster presented at UK and Ireland Speech 2025, York, Cambridge. 16-17 June 2024.
+  caption: Poster presented at UK and Ireland Speech, York, UK. 16-17 June 2025.
   focal_point: Smart
 
 links:
@@ -121,8 +122,7 @@ supervised Cross-Lingual Representation Learning for Speech Recog-
 nition,” in Interspeech 2021. ISCA, Aug. 2021, pp. 2426–2430.
 
 [6] J. Grosman, “Fine-tuned XLSR-53 large model for speech recog-
-nition in Chinese,” https://huggingface.co/jonatasgrosman/wav2vec2-
-large-xlsr-53-chinese-zh-cn, 2021.
+nition in Chinese,” https://huggingface.co/jonatasgrosman/wav2vec2-large-xlsr-53-chinese-zh-cn, 2021.
 
 [7] Z. Tang, D. Wang, Y. Xu, J. Sun, X. Lei, S. Zhao, C. Wen, X. Tan,
 C. Xie, S. Zhou, R. Yan, C. Lv, Y. Han, W. Zou, and X. Li, “KeSpeech:
