@@ -77,9 +77,15 @@ distinct from many Southeast Asian varieties.
 ### References
 
 [1] Pawley, A., & H. Hammarström. 2017. The Trans New Guinea family. In Bill Palmer (Ed.), The languages and linguistics of the New Guinea area: A comprehensive guide. Berlin: De Gruyter, 21–196.
+
 [2] Oatridge, D. & J. Oatridge. 1965. Phonemes of Binumarien. In Frantz, Frantz, Oatridge, Oatridge, Loving, Swick, Pence, Staalsen, Boxwell & Boxwell (Eds.), Papers in New Guinea Linguistics. Canberra: Australian National University, 13-22.
+
 [3] van Dasselaar, R. 2019. Topics in the Grammar of Binumarien: Tone and Switch-reference in a Kainantu Language of Papua New Guinea. Master’s thesis, Leiden University.
+
 [4] Aadoo. 1973. Oosana Oosana Aandau Ufa - Animals and Birds. Summer Institute of Linguistics.
+
 [5] McAuliffe, M., Socolof, M., Mihuc, S., Wagner, M., & Sonderegger, M. 2017. Montreal Forced Aligner: Trainable Text-Speech Alignment Using Kaldi. Interspeech.
+
 [6] Jadoul, Y., Thompson, B., & de Boer, B. 2018. Introducing Parselmouth: A Python interface to Praat. Journal of Phonetics, 71, 1-15. https://doi.org/10.1016/j.wocn.2018.07.001
+
 [7] Boersma, P., & Weenink, D. 2021. Praat: doing phonetics by computer [Computer program]. Version 6.1.38, retrieved 2 January 2021 from http://www.praat.org/
