@@ -38,6 +38,7 @@ The tutorial has the following chapters:
 2. [Fine-tuning Pre-trained Models](https://chenzixu.rbind.io/resources/3asr/sr2/)
 3. [ASR from Scratch I: Training models of Hong Kong Cantonese using the Kaldi recipe](https://chenzixu.rbind.io/resources/3asr/sr3/)
 4. [ASR from Scratch II: Training models of Hong Kong Cantonese with MFA implementation](https://chenzixu.rbind.io/resources/3asr/sr4/)
+5. [ASR from Scratch III: Training models of Bora, a Low-resource Language (MFA)](https://chenzixu.rbind.io/resources/3asr/sr5/)
 
 Chapter 1 employs state-of-the-art pre-trained ASR models to generate transcripts for audio recordings. Chapter 2 is coming soon. Chapter 3 demonstrates training acoustic models and alignment from scratch using the Kaldi ASR toolkit. Chapter 4 continues from Chapter 3 and demonstrates training acoustic models and alignment with much simpler MFA implementation. 
 
