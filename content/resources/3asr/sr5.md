@@ -67,7 +67,7 @@ Temporarily, we can place all the word list recordings in a separate working dir
 ├── bora
 ... ├── bora_dict.txt
     ├── wordlist.txt
-    ├── create_input_tgs.py
+    ├── create_input_tgs_from_wordlists.py
     ├── create_input_tgs_with_sils.praat
     ├── words_in_isolation # temporatry
     |   ├── 01_sp_Panduro_BOR001_20250203_001.wav
@@ -92,12 +92,20 @@ I recommend using the `.TextGrid` format when using MFA (`.txt` or `.lab` should
 
 Solution ❶ for the word list:
 
-The following Python script `create_input_tgs.py` prepares the initial transcript files by
+The following Python script `create_input_tgs_from_wordlists.py` prepares the initial transcript files by
 creating a corresponding `.TextGrid` file for each audio recording, 
 extracting the corresponding word from the word list, and writing it to a `word` tier.
+Note that the audio filenames are **neatly ordered** and correspond to the order of the word list.
+
+To use this Python script, we can do the following in your unix shell:
+```
+cd ~/Wip/bora #your project repository
+python create_input_tgs_from_wordlists.py
+```
+You will need to pre-install packages such as `soundfile` and `praatio` in your environment.
 
 ```python
-# create_input_tgs.py
+# create_input_tgs_from_wordlists.py
 # Created by Chenzi Xu on 31/07/2025
 
 import os
@@ -143,6 +151,8 @@ for i, (wav_file, word) in enumerate(zip(audio_files, words)):
 print("Done! TextGrids created for all audio files.")
 ```
 
+<br>
+
 Solution ❷ for the word list:
 
 The problem with the first approach is that the onset boundaries of words tend to messy in the output when the dataset is extremely small. 
@@ -174,7 +184,8 @@ to get a feel for the best parameters.
 {{< figure library="true" src="bora_input.png" title="Illustration of the Two options of Input TextGrids" style="width: 10%">}}
 
 
-```praat
+```
+# create_input_tgs_with_sils.praat
 # Written by Chenzi XU (30 July 2025)
 
 form Batch annotate wordlist
@@ -256,14 +267,14 @@ Now the `bora_corpus/` repository contains both the sound files and their corres
 ├── bora
 ... ├── bora_dict.txt
     ├── wordlist.txt
-    ├── create_input_tgs.py
+    ├── create_input_tgs_from_wordlists.py
     ├── create_input_tgs_with_sils.praat
     ├── ...
     └── bora_corpus
         ├── 01_sp_Panduro_BOR001_20250203_001.wav
         ├── 01_sp_Panduro_BOR001_20250203_001.TextGrid
         ├── 01_sp_Panduro_BOR001_20250203_002.wav
-        ├── ...
+        ├── 01_sp_Panduro_BOR001_20250203_002.TextGrid
         └── ... 
 ```
 
