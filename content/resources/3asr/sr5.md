@@ -155,10 +155,10 @@ print("Done! TextGrids created for all audio files.")
 
 <br>
 
-#### Option ❷ for the word list transcription:
+#### Option ❷ for the word list transcription: Bootstrapped input TextGrids
 
 The problem with the first approach is that the onset boundaries of words tend to messy in the output when the dataset is extremely small. 
-One way to address this is to create additional bootstrapped input TextGrids to provide more information (e.g. initial time boundaries) about the speech intervals.
+One way to address this is to create additional **bootstrapped input TextGrids** to provide more information (e.g. initial time boundaries) about the speech intervals.
 We can potentially use the word tier of first-pass output as input and rerun the training and/or alignment.
 Or we can use the following Praat script to generate initial word boundaries through silence/speech detection (see above figure, Tier 2). 
 
