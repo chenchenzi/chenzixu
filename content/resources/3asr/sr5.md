@@ -62,26 +62,29 @@ For longer utterances, each audio file has a transcription roughly marked in a c
 
 These utterances are ready for training an acoustic model using MFA.
 All sound files are organised in a repository `bora_corpus/` under the project repository `bora/`.
-
+Temporarily, we can place all the word list recordings in a separate working directory, `words_in_isolation/`, to make transcript generation easier.
 ```
 ├── bora
 ... ├── bora_dict.txt
     ├── wordlist.txt
     ├── create_input_tgs.py
     ├── create_input_tgs_with_sils.praat
+    ├── words_in_isolation # temporatry
+    |   ├── 01_sp_Panduro_BOR001_20250203_001.wav
+    |   ├── 01_sp_Panduro_BOR001_20250203_002.wav
+    |   └── ...
     ├── ...
     └── bora_corpus
         ├── 01_sp_Panduro_BOR001_20250203_001.wav
         ├── 01_sp_Panduro_BOR001_20250203_002.wav
         ├── 01_sp_Panduro_BOR001_20250203_003.wav
         ├── ...
-        └── ... #913 items in total
+        └── ... #913 wav items in total
 ```
 
 <br> 
 
 ## 5.2 Data Preprocessing
-
 ### 5.2.1 Transcripts preparation: initial TextGrids in two approaches
 
 The next step is to prepare an input transcription for each wordlist sound file.
@@ -218,7 +221,6 @@ Remove
 appendInfoLine: "Done! ", numberOfWavs, " TextGrids created."
 ```
 
-
 ### 5.2.2 The dictionary by linguists
 
 We prepared a Bora pronunciation dictionary, `bora_dict.txt`, for the list of words collected by Jose. 
@@ -247,20 +249,22 @@ allúrí	a t͡sʲ ú r í
 
 ```
 
-Now the working directory for this MFA project has the following structure:
+Now the `bora_corpus/` repository contains both the sound files and their corresponding input transcriptions:
 
 ```
 .
-├── alignment/
-├── lexicon.txt # pronunciation dictionary
-└── train_wavs # audio data and transcripts
-    ├── common_voice_zh-HK_20099684.TextGrid
-    ├── common_voice_zh-HK_20099684.wav
-    ├── common_voice_zh-HK_20099796.TextGrid
-    ├── common_voice_zh-HK_20099796.wav
-    ├── common_voice_zh-HK_20099797.TextGrid
-    ├── common_voice_zh-HK_20099797.wav
+├── bora
+... ├── bora_dict.txt
+    ├── wordlist.txt
+    ├── create_input_tgs.py
+    ├── create_input_tgs_with_sils.praat
     ├── ...
+    └── bora_corpus
+        ├── 01_sp_Panduro_BOR001_20250203_001.wav
+        ├── 01_sp_Panduro_BOR001_20250203_001.TextGrid
+        ├── 01_sp_Panduro_BOR001_20250203_002.wav
+        ├── ...
+        └── ... 
 ```
 
 <br>
