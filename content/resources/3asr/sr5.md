@@ -140,12 +140,40 @@ for i, (wav_file, word) in enumerate(zip(audio_files, words)):
 print("Done! TextGrids created for all audio files.")
 ```
 
-Solution ❷  for the word list:
+Solution ❷ for the word list:
 
-The problem of the first approach is that the onset boundaries of words tend to messey in the output, when the dataset is extremely small. 
-We can try to create more bootstrapped input TextGrid to give more information about the speech intervals.
+The problem with the first approach is that the onset boundaries of words tend to messy in the output when the dataset is extremely small. 
+One way to address this is to create additional bootstrapped input TextGrids to provide more information (e.g. initial time boundaries) about the speech intervals.
+We can potentially use the word tier of first-pass output as input and rerun the training and/or alignment.
+Or we can use the following Praat script to generate initial word boundaries through silence/speech detection. 
+This method works well when the recording of the word lists is highly consistent without much environmental noises (good clean recordings).
+
+In this Praat script, the key parameters we need to consider is in this line:
+```
+To TextGrid (silences): 75, 0, -35, 0.15, 0.1, "", word$
+```
+
+- Parameters for the intensity analysis:
+  - Pitch floor (Hz)
+  - Time step (s): 0.0 (= auto)
+- Silent intervals detection:
+  - Silence threshold (dB)
+  - Minimum silent interval (s)
+  - Minimum sounding interval (s)
+  - Silent interval label
+  - Sounding interval label
+
+This command takes seven arguments, among which the pitch floor, silence threshold, and minimum silent interval (in seconds) 
+typically need to be customized based on the speech data — for example, the speaker’s pitch range and speech rate, the recording conditions, and the level of background noise. 
+A practical way to determine optimal values is to randomly open a few sound files in Praat
+and run the command from the graphical interface (`Annotate >To TextGrid (silences)`) with a range of parameters
+to get a feel for the best parameters.
+{{< figure library="true" src="bora_input.png" title="Illustration of the Two options of Input TextGrids" style="width: 10%">}}
+
 
 ```praat
+# Written by Chenzi XU (30 July 2025)
+
 form Batch annotate wordlist
     sentence WordListFile /Users/chenzi/Wip/bora/02_wordlist.txt
     sentence AudioFolder /Users/chenzi/Wip/bora/02_words_in_isolation
@@ -174,7 +202,7 @@ for i from 1 to numberOfWavs
     Read from file: fullWavPath$
     soundName$ = selected$("Sound")
 
-    To TextGrid (silences): 100, 0, -35, 0.12, 0.1, "", word$
+    To TextGrid (silences): 75, 0, -35, 0.15, 0.1, "", word$
 
 	selectObject: "TextGrid " + soundName$
 	Set tier name: 1, "word"
@@ -189,6 +217,7 @@ select all
 Remove
 appendInfoLine: "Done! ", numberOfWavs, " TextGrids created."
 ```
+
 
 ### 5.2.2 The dictionary by linguists
 
