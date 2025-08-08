@@ -16,7 +16,9 @@ weight: 5
 
 <br> 
 
-This chapter we focus on Bora, an endangered indigenous language of South America, primarily spoken in the western Amazon rainforest. I will demonstrate how to train a mini Bora acoustic model for forced alignment. Even with just 1.5 hours of Bora speech from Dr Jose Elias-Ulloa's fieldwork, we can produce surprisingly decent time-aligned TextGrids.
+This chapter we focus on Bora, an endangered indigenous language of South America, primarily spoken in the western Amazon rainforest. 
+I will demonstrate how to train a mini Bora acoustic model for forced alignment. 
+Even with just 1.5 hours of Bora speech from Dr Jose Elias-Ulloa's fieldwork, we can produce surprisingly decent time-aligned TextGrids.
 
 This tutorial is designed for researchers working on low-resource languages, where open-source speech materials are scarce and pre-trained models are not available.
 
@@ -26,7 +28,7 @@ For the installation of MFA, please refer to [§4.1](https://chenzixu.rbind.io/r
 - [5.1 The fieldwork dataset](#51-the-fieldwork-dataset)
 - [5.2 Data Preprocessing](#52-data-preprocessing)
   - [5.2.1 Transcripts preparation: initial TextGrids in two approaches](#521-transcripts-preparation-initial-textgrids-in-two-approaches)
-  - [5.2.2 The dictionary by a linguist](#522-the-dictionary-by-a-linguist)
+  - [5.2.2 The dictionary by linguists](#522-the-dictionary-by-linguists)
 - [5.3 Training acoustic models using MFA](#53-training-acoustic-models-using-mfa)
 
 <br> 
@@ -35,9 +37,31 @@ For the installation of MFA, please refer to [§4.1](https://chenzixu.rbind.io/r
 
 Phonetic fieldwork on a lesser-studied language often begins with recording word lists and short stories.
 The Bora data we used here consist of 913 sound files (`.wav`) with about 1.55 hours total duration from one Bora speaker. 
-The majority of these files feature a single word repeated three times with pauses in between, while 152 files contain longer utterances drawn from short stories.
+The majority of these files feature a single word repeated three times with pauses in between (see below), while 152 files contain longer utterances drawn from short stories.
 
-All sound files are organised in a repository `bora_corpus/`.
+{{< figure library="true" src="bora_word.png" title="An example recording of a bora word repeated three times" style="width: 10%">}}
+
+In this case, we also have the list of words that the informant read out aloud. For instance, in a text file `wordlist.txt`, we have:
+
+```
+...
+gábuuve
+gáyaga
+gayága
+garága
+gapáco
+gááraco
+gáárapo
+gáápaco
+gaañúro
+...
+```
+
+For longer utterances, each audio file has a transcription roughly marked in a corresponding TextGrid file as follows:
+{{< figure library="true" src="bora_long.png" title="Bora Transcription Illustration for `02_sp_Panduro_ROR001_20250212_016.wav`">}}
+
+These utterances are ready for training an acoustic model using MFA.
+All sound files are organised in a repository `bora_corpus/` under the project repository `bora/`.
 
 ```
 ├── bora
@@ -54,160 +78,145 @@ All sound files are organised in a repository `bora_corpus/`.
         └── ... #913 items in total
 ```
 
-## 5.2 Data Preprocessing
-
-
-
-
 <br> 
 
-
-
-
+## 5.2 Data Preprocessing
 
 ### 5.2.1 Transcripts preparation: initial TextGrids in two approaches
 
-The following Python script `cv15_totgs.py` prepares the initial transcript files for training acoustic models in MFA. It creates a corresponding `.TextGrid` file for each audio recording, and writes in the transcription in a processed format: ❶ all punctuation marks are removed; ❷ Chinese characters / morphemes or English words are separated with a space. Furthermore, the tier name of transcriptions is indicated by `client_id` so that transcripts belonging to the same speaker has the same tier name.
+The next step is to prepare an input transcription for each wordlist sound file.
+I recommend using the `.TextGrid` format when using MFA (`.txt` or `.lab` should work too).
+
+Solution ❶ for the word list:
+
+The following Python script `create_input_tgs.py` prepares the initial transcript files by
+creating a corresponding `.TextGrid` file for each audio recording, 
+extracting the corresponding word from the word list, and writing it to a `word` tier.
 
 ```python
-# cv15_totgs.py
-# Created by Chenzi Xu on 30/09/2023
+# create_input_tgs.py
+# Created by Chenzi Xu on 31/07/2025
 
-import pandas as pd
-import re
+import os
+import soundfile as sf
 from praatio import textgrid
 
-dir = '/Users/cx936/Work/mfa-canto/train_wavs/'
-cv_tsv = pd.read_csv('cv-corpus-15.0-2023-09-08/zh-HK/train.tsv', sep='\t', header=0)
+# Path to the audio folder and dictionary
+audio_folder = "words_in_isolation"
+dictionary_file = "wordlist.txt"
 
-cv_tsv = cv_tsv[['client_id', 'path', 'sentence']]
-# remove punctuation
-cv_tsv['sentence']=cv_tsv['sentence'].apply(lambda x:re.sub(r'[^\u4e00-\u9FFFa-zA-Z0-9 ]', '', x))
-# add space between Chinese characters
-cv_tsv['sentence']=cv_tsv['sentence'].apply(lambda x: re.sub(r'([\u4e00-\u9fff])', r'\1 ', x).strip())
-# add space after an English word followed by a Chinese character
-cv_tsv['sentence']=cv_tsv['sentence'].apply(lambda x: re.sub(r'([a-zA-Z0-9_]+)([\u4e00-\u9fff])', r'\1 \2', x))
-dur = pd.read_csv('cv-corpus-15.0-2023-09-08/zh-HK/clip_durations.tsv', sep='\t', header=0)
+# Load words from wordlist
+with open(dictionary_file, "r", encoding="utf-8") as f:
+    words = [line.strip().split()[0] for line in f if line.strip()]
 
-df = pd.merge(cv_tsv, dur, left_on='path', right_on='clip')
+# Sort audio files (make sure it's consistent with dictionary order)
+audio_files = sorted([f for f in os.listdir(audio_folder) if f.endswith(".wav")])
 
-for index, row in df.iterrows():
-    try:
-        tg_path = dir + row['path'][:-4] + '.TextGrid'
-        entry = (0, row['duration[ms]']/1000, row['sentence'])
-        #print(entry)
-        wordTier = textgrid.IntervalTier(row['client_id'], [entry], 0, row['duration[ms]']/1000)
-        tg = textgrid.Textgrid()
-        tg.addTier(wordTier)
-        tg.save(tg_path, format="short_textgrid", includeBlankSpaces=True)
-    except Exception as e:
-        print("Failed to write file",e)
+# Check count matches
+if len(audio_files) != len(words):
+    raise ValueError(f"Mismatch: {len(audio_files)} wav files vs {len(words)} words")
+
+# Loop over each file and create TextGrid
+for i, (wav_file, word) in enumerate(zip(audio_files, words)):
+    wav_path = os.path.join(audio_folder, wav_file)
+
+    with sf.SoundFile(wav_path) as f:
+        duration = len(f) / f.samplerate
+
+    label = f"{word} {word} {word}"
+
+    tg = textgrid.Textgrid()
+    tier = textgrid.IntervalTier("word", [(0.0, duration, label)], 0.0, duration)
+    tg.addTier(tier)
+
+    base_name = os.path.splitext(wav_file)[0]
+    tg_name = f"{base_name}.TextGrid"
+    tg.save(
+        os.path.join(audio_folder, tg_name),
+        format="long_textgrid",
+        includeBlankSpaces=True,
+    )
+
+print("Done! TextGrids created for all audio files.")
 ```
 
-### 5.2.2 The dictionary by a linguist
+Solution ❷  for the word list:
 
-We will need a Cantonese pronunciation dictionary `lexicon.txt` of the words/characters, in fact, **only** the words, present in the training corpus. This will ensure that we do not train extraneous phones. If we want to use IPA symbols for acoustic models, we should transcribe the words/characters in IPA in this dictionary. 
+The problem of the first approach is that the onset boundaries of words tend to messey in the output, when the dataset is extremely small. 
+We can try to create more bootstrapped input TextGrid to give more information about the speech intervals.
 
-We first get all the transcripts from the `train.tsv` file:
+```praat
+form Batch annotate wordlist
+    sentence WordListFile /Users/chenzi/Wip/bora/02_wordlist.txt
+    sentence AudioFolder /Users/chenzi/Wip/bora/02_words_in_isolation
+endform
 
-```python
-# cv15_getscript.py
-# Created by Chenzi Xu on 30/09/2023
+Read Strings from raw text file... 'WordListFile$'
+Rename... wordList
+numberOfWords = Get number of strings
 
-import pandas as pd
-import re
+Create Strings as file list... wavList 'AudioFolder$'/*.wav
+Sort
+numberOfWavs = Get number of strings
 
-dir = '/Users/cx936/Work/mfa-canto/train_wavs/'
-cv_tsv = pd.read_csv('cv-corpus-15.0-2023-09-08/zh-HK/train.tsv', sep='\t', header=0)
+if numberOfWords <> numberOfWavs
+    exit ("Mismatch: ", numberOfWords, " words vs ", numberOfWavs, " audio files.")
+endif
 
-cv_tsv = cv_tsv[['sentence']]
-# remove punctuation
-cv_tsv['sentence']=cv_tsv['sentence'].apply(lambda x:re.sub(r'[^\u4e00-\u9FFFa-zA-Z0-9 ]', '', x))
-# add space between Chinese characters
-cv_tsv['sentence']=cv_tsv['sentence'].apply(lambda x: re.sub(r'([\u4e00-\u9fff])', r'\1 ', x).strip())
-# add space after an English word followed by a Chinese character
-cv_tsv['sentence']=cv_tsv['sentence'].apply(lambda x: re.sub(r'([a-zA-Z0-9_]+)([\u4e00-\u9fff])', r'\1 \2', x))
 
-cv_tsv.to_csv('transcripts.txt', index=False, header=False)
+for i from 1 to numberOfWavs
+	selectObject: "Strings wavList"
+    wavFile$ = Get string: i
+	selectObject: "Strings wordList"
+	word$ = Get string: i
+    fullWavPath$ = "'AudioFolder$'/'wavFile$'"
+
+    Read from file: fullWavPath$
+    soundName$ = selected$("Sound")
+
+    To TextGrid (silences): 100, 0, -35, 0.12, 0.1, "", word$
+
+	selectObject: "TextGrid " + soundName$
+	Set tier name: 1, "word"
+
+    tgFile$ = replace$(fullWavPath$, ".wav", ".TextGrid",1)
+    Save as text file: tgFile$
+
+    appendInfoLine: "Annotated: ", wavFile$, " with label: ", word$
+endfor
+
+select all
+Remove
+appendInfoLine: "Done! ", numberOfWavs, " TextGrids created."
 ```
 
-We find the list of unique words/characters in the training corpus:
+### 5.2.2 The dictionary by linguists
+
+We prepared a Bora pronunciation dictionary, `bora_dict.txt`, for the list of words collected by Jose. 
+Each word in this dictionary is transcribed in IPA, with individual IPA symbols separated by **spaces** and a **tab** character separating the word from its transcription.
+
 ```
-cut -f 2 transcripts.txt | sed 's/ /\n/g' | sort -u > words.txt
-```
-
-We can then download an open Cantonese dictionary from {{< icon name="github" pack="fab" >}} [CharsiuG2P](https://raw.githubusercontent.com/lingjzhu/CharsiuG2P/main/dicts/yue.tsv) and utilise the multilingual [CharsiuG2P](https://github.com/lingjzhu/CharsiuG2P) tool with a pre-trained Cantonese model for grapheme-to-phoneme conversion.
-
-Generally for a dictionary file, we want ❶ each phone to be separated by a space. ❷ The tone label in `yue.tsv` is always put at the end of an IPA token, which gives an impression of tone being a linearly arranged segment. Tone, however, is suprasegmental. We might want to exclude the tone labels here. ❸ We can have multiple pronunciation entries for a word, which are usually put in different rows. ❹ We need to add the pseudo-word entries following the [MFA non-speech annotation convention](https://montreal-forced-aligner.readthedocs.io/en/latest/user_guide/dictionary.html#non-speech-annotations).
-such as `{LG}` and `{SL}`. `{LG} spn` is used to model unknown words or sounds including coughing and laughter, `{SL} sil` is used to model silence, or non-speech vocalizations that are similar to silence like breathing or exhalation.
-
-Therefore, we need to revise the format of a downloaded open dictionary. The following python script `canto_g2p.py` creates a `lexicon.txt` file using `CharsiuG2P` and their open dictionary. Then we manually added the pseudo-word entries.
-
-```python
-# canto_g2p.py
-# Created by Chenzi Xu on 30/09/2023
-
-from transformers import T5ForConditionalGeneration, AutoTokenizer
-from tqdm import tqdm
-import pandas as pd
-from lingpy import *
-
-# load G2P models
-model = T5ForConditionalGeneration.from_pretrained('charsiu/g2p_multilingual_byT5_small_100')
-tokenizer = AutoTokenizer.from_pretrained('google/byt5-small')
-model.eval()
-
-# load pronunciation dictionary
-pron = {l.split('\t')[0]:l.split('\t')[1].strip() for l in open('yue.tsv','r',encoding="utf-8").readlines()}
-
-with open('lexicon.txt','w', encoding='utf-8') as output:
-    
-    rows=[]
-    with open('words.txt','r',encoding='utf-8') as f:
-        for line in tqdm(f):
-            w = line.strip()
-            word_pron = ''
-            if w in pron:
-                word_pron+=pron[w]
-            else:
-                out = tokenizer(['<yue>: '+w],padding=True,add_special_tokens=False,return_tensors='pt')
-                preds = model.generate(**out,num_beams=1,max_length=50)
-                phones = tokenizer.batch_decode(preds.tolist(),skip_special_tokens=True)
-                word_pron+=phones[0]
-            
-            rows.append([w,word_pron])
-    
-    lexicon = pd.DataFrame(rows, columns=['word', 'ipa'])
-    lexicon['ipa'] = lexicon['ipa'].str.split(',')
-    lexicon = lexicon.explode('ipa')
-    
-    #remove IPA tones and tokenize IPA-encoded strings
-    lexicon['ipa'] = lexicon['ipa'].str.replace(r'[\u02E5-\u02E9]+', '', regex=True)
-    lexicon['ipa'] = lexicon['ipa'].apply(lambda x: ' '.join(map(str, ipa2tokens(x))))
-
-    #remove duplicated rows if any
-    lexicon.drop_duplicates(inplace=True)
-    lexicon.to_csv(output,sep='\t', index=False, header=False)
-```
-
-The final dictionary is as follows: 
-```
-{LG}	spn
-{SL}	sil
-A	a:
-Annual	a: nn ʊ ŋ
-Anson	a: n s ɔ: n
-B	b i:
-Browser	pʰ r ɔ: w s ɐ
+<oov> oov
+{LG}  spn
+{SL}  sil
+aabéváa	aː p é b âː
+aacu	aː kʰ u
+aamédítyuváa	aː m é t í tʲʰ u b âː
+aaméne	aː m é n e
+aaméváa	aː m é b âː
+aamɨ́nema	aː m ɨ́ n e m a
+aanévané	aː n é b a n é
+aanéváa	aː n é b âː
+aaúváa	aː ú b âː
+acháháchá	a t͡sʲʰ á ʔ á t͡sʲʰ á
+adówatu	a t ó k͡p a tʰ u
+adówááñé	a t ó k͡p áː ɲ é
+ahdújucóváa	a ʔ t ú h u kʰ ó b âː
+ajchóta	a h t͡sʲʰ ó tʰ a
+allúrí	a t͡sʲ ú r í
 ...
-一	j ɐ t
-丁	t s a: ŋ
-丁	t ɪ ŋ
-丁	t s ɐ ŋ
-...
-```
 
-We can then move this `lexicon.txt` file to our MFA project directory at `~/Work/mfa-canto/`. 
+```
 
 Now the working directory for this MFA project has the following structure:
 
@@ -229,38 +238,35 @@ Now the working directory for this MFA project has the following structure:
 
 ## 5.3 Training acoustic models using MFA
 
-Before we start, use the `mfa validate` command to look through the training corpus, `train_wavs/` in our case, and to make sure that the dataset is in the proper format for MFA.
+Before we start, use the `mfa validate` command to look through the training corpus, `bora_corpus/` in our case, and to make sure that the dataset is in the proper format for MFA.
 
 ```
-mfa validate ~/Work/mfa-canto/train_wavs ~/Work/mfa-canto/lexicon.txt
+mfa validate --clean --single_speaker bora_corpus bora_dict.txt --output_directory ~/Wip/bora
 ```
-The output of this command reports on aspects of the training corpus including the number of speakers, the number of utterances, the total duration, the missing transcriptions or audio files if any, the Out of Vocabulary (oov) items if any, etc. You can see the first 22 INFO lines printed in the Unix Shell below:
+The output of this command reports on aspects of the training corpus including the number of speakers, 
+the number of utterances, the total duration, the missing transcriptions or audio files if any, the Out of Vocabulary (oov) items if any, etc. 
+You can see some of the INFO lines printed in the Unix Shell as follows:
 
 ```bash
- INFO     Setting up corpus information...                                  
- INFO     Found 288 speakers across 8426 files, average number of utterances per speaker: 29.256944444444443      
- INFO     Jobs already initialized.                                         
- INFO     Text already normalized.                                          
- INFO     Features already generated.                                       
- INFO     Corpus                                                            
- INFO     8426 sound files                                                  
- INFO     8426 text files                                                   
- INFO     288 speakers                                                      
- INFO     8426 utterances                                                   
- INFO     34249.574 seconds total duration                                  
- INFO     Sound file read errors                                            
- INFO     There were no issues reading sound files.                         
- INFO     Feature generation                                                
- INFO     There were no utterances missing features.                        
- INFO     Files without transcriptions                                      
- INFO     There were no sound files missing transcriptions.                 
- INFO     Transcriptions without sound files                                
- INFO     There were no transcription files missing sound files.            
- INFO     Dictionary                                                        
- INFO     Out of vocabulary words                                           
- INFO     There were no missing words from the dictionary. If you plan on using the a model trained on this       
-          dataset to align other datasets in the future, it is recommended that there be at least some missing    
-          words.        
+ INFO     Corpus
+ INFO     913 sound files
+ INFO     913 text files
+ INFO     1 speakers
+ INFO     1773 utterances
+ INFO     5584.087 seconds total duration
+ INFO     Sound file read errors
+ INFO     There were no issues reading sound files.
+ INFO     Feature generation
+ INFO     There were no utterances missing features.
+ INFO     Files without transcriptions
+ INFO     There were no sound files missing transcriptions.
+ INFO     Transcriptions without sound files
+ INFO     There were no transcription files missing sound files.
+ INFO     Dictionary
+ INFO     Out of vocabulary words
+ INFO     There were no missing words from the dictionary. If you plan on using the a model
+          trained on this dataset to align other datasets in the future, it is recommended that
+          there be at least some missing words.        
  ...
 ```
 The above output indicates that we passed our data validation. If there are any missing files or the number of speakers is incorrect, you will need to fix the problems and run `mfa validate` again. Oscillate between these two steps until you have validated your data.
@@ -274,24 +280,18 @@ For more details, see the official [guide](https://montreal-forced-aligner.readt
 I have added an optional argument `--output_directory` to put the output TextGrids for our training data.
 
 ```
-mfa train ~/Work/mfa-canto/train_wavs ~/Work/mfa-canto/lexicon.txt ~/Work/mfa-canto/new_acoustic_model.zip --output_directory ~/Work/mfa-canto/alignment
+mfa train --single_speaker bora_corpus bora_dict.txt bora_model.zip --output_directory tgs --subset_word_count 1 --minimum_utterance_length 1
 ```
 
-If you see the following few lines at the end of the Shell output, congratulations 🎉 on completing training the acoustic model.
+If you see the following few lines at the end of the Shell output, congratulations 🎉 on completing training an acoustic model.
 
 ```
- ...
- INFO     Training model...                                                 
- INFO     Completed training in 27031.43283891678 seconds!                  
- INFO     Saved model to /Users/cx936/Work/mfa-canto/new_acoustic_model.zip 
- WARNING  Alignment analysis not available without using postgresql         
- INFO     Exporting sat_3_ali TextGrids to /Users/cx936/Work/mfa-canto/alignment...                               
- 100% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ 8,401/8,426  [ 0:00:30 < 0:00:01 , 293 it/s ]
- INFO     Finished exporting TextGrids to /Users/cx936/Work/mfa-canto/alignment!                                  
- INFO     Done! Everything took 27140.052 seconds
+INFO     Finished exporting TextGrids to xxxxxx!                                  
+INFO     Done! Everything took xxxxx seconds
+
 ```
 
 An example of the TextGrid output is as follows:
-{{< figure library="true" src="can-fa.png" title="Time-aligned phones for `common_voice_zh-HK_20099684.wav`" style="width: 10%">}}
+{{< figure library="true" src="bora_fa.png" title="Time-aligned phones for `sp_Panduro_BOR001_20250217_088.wav`" style="width: 10%">}}
 
-The `train` subset of the corpus is not very big, with total duration of 9.5 hours, but the time alignment is in fact already looking very good with 9 hours of training data. We can use the whole validated subset of the HK Cantonese Common Voice corpus to train a better model, in the same workflow.
+With such a small training corpus (~1.55 hours), the resulting alignment is surprisingly good. Although in the example above, the alignment for the bilabial nasal /m/ and vowel /u/ is off.
