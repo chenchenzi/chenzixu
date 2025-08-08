@@ -89,12 +89,14 @@ Temporarily, we can place all the word list recordings in a separate working dir
 
 The next step is to prepare an input transcription for each wordlist sound file.
 I recommend using the `.TextGrid` format when using MFA (`.txt` or `.lab` should work too).
+Here I demonstrate two options for the input TextGrids.
+{{< figure library="true" src="bora_input.png" title="Illustration of the Two options of Input TextGrids" style="width: 10%">}}
 
-Solution ❶ for the word list:
+#### Option ❶ for the word list transcription:
 
 The following Python script `create_input_tgs_from_wordlists.py` prepares the initial transcript files by
 creating a corresponding `.TextGrid` file for each audio recording, 
-extracting the corresponding word from the word list, and writing it to a `word` tier.
+extracting the corresponding word from the word list, and writing it to a `word` tier (see above figure, Tier 1).
 Note that the audio filenames are **neatly ordered** and correspond to the order of the word list.
 
 To use this Python script, we can do the following in your unix shell:
@@ -153,12 +155,13 @@ print("Done! TextGrids created for all audio files.")
 
 <br>
 
-Solution ❷ for the word list:
+#### Option ❷ for the word list transcription:
 
 The problem with the first approach is that the onset boundaries of words tend to messy in the output when the dataset is extremely small. 
 One way to address this is to create additional bootstrapped input TextGrids to provide more information (e.g. initial time boundaries) about the speech intervals.
 We can potentially use the word tier of first-pass output as input and rerun the training and/or alignment.
-Or we can use the following Praat script to generate initial word boundaries through silence/speech detection. 
+Or we can use the following Praat script to generate initial word boundaries through silence/speech detection (see above figure, Tier 2). 
+
 This method works well when the recording of the word lists is highly consistent without much environmental noises (good clean recordings).
 
 In this Praat script, the key parameters we need to consider is in this line:
@@ -176,13 +179,11 @@ To TextGrid (silences): 75, 0, -35, 0.15, 0.1, "", word$
   - Silent interval label
   - Sounding interval label
 
-This command takes seven arguments, among which the pitch floor, silence threshold, and minimum silent interval (in seconds) 
+This command takes seven arguments, among which the **pitch floor, silence threshold, and minimum silent interval** (in seconds) 
 typically need to be customized based on the speech data — for example, the speaker’s pitch range and speech rate, the recording conditions, and the level of background noise. 
 A practical way to determine optimal values is to randomly open a few sound files in Praat
 and run the command from the graphical interface (`Annotate >To TextGrid (silences)`) with a range of parameters
 to get a feel for the best parameters.
-{{< figure library="true" src="bora_input.png" title="Illustration of the Two options of Input TextGrids" style="width: 10%">}}
-
 
 ```
 # create_input_tgs_with_sils.praat
@@ -259,8 +260,9 @@ allúrí	a t͡sʲ ú r í
 ...
 
 ```
-
-Now the `bora_corpus/` repository contains both the sound files and their corresponding input transcriptions:
+Then we can clean up the project repository.
+The `bora_corpus/` repository contains both the sound files and their corresponding input transcriptions.
+A `tgs/` repository is added to house the output TextGrids.
 
 ```
 .
@@ -270,6 +272,7 @@ Now the `bora_corpus/` repository contains both the sound files and their corres
     ├── create_input_tgs_from_wordlists.py
     ├── create_input_tgs_with_sils.praat
     ├── ...
+    ├── tgs # for output TextGrids
     └── bora_corpus
         ├── 01_sp_Panduro_BOR001_20250203_001.wav
         ├── 01_sp_Panduro_BOR001_20250203_001.TextGrid
@@ -324,7 +327,7 @@ For more details, see the official [guide](https://montreal-forced-aligner.readt
 I have added an optional argument `--output_directory` to put the output TextGrids for our training data.
 
 ```
-mfa train --single_speaker bora_corpus bora_dict.txt bora_model.zip --output_directory tgs --subset_word_count 1 --minimum_utterance_length 1
+mfa train --clean --single_speaker bora_corpus bora_dict.txt bora_model.zip --output_directory tgs --subset_word_count 1 --minimum_utterance_length 1
 ```
 
 If you see the following few lines at the end of the Shell output, congratulations 🎉 on completing training an acoustic model.
@@ -332,7 +335,6 @@ If you see the following few lines at the end of the Shell output, congratulatio
 ```
 INFO     Finished exporting TextGrids to xxxxxx!                                  
 INFO     Done! Everything took xxxxx seconds
-
 ```
 
 An example of the TextGrid output is as follows:
