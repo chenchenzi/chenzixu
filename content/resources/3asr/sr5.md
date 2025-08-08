@@ -30,6 +30,7 @@ For the installation of MFA, please refer to [§4.1](https://chenzixu.rbind.io/r
   - [5.2.1 Transcripts preparation: initial TextGrids in two approaches](#521-transcripts-preparation-initial-textgrids-in-two-approaches)
   - [5.2.2 The dictionary by linguists](#522-the-dictionary-by-linguists)
 - [5.3 Training acoustic models using MFA](#53-training-acoustic-models-using-mfa)
+- [5.4 Next steps](#54-next-steps)
 
 <br> 
 
@@ -341,3 +342,7 @@ An example of the TextGrid output is as follows:
 {{< figure library="true" src="bora_fa.png" title="Time-aligned phones for `sp_Panduro_BOR001_20250217_088.wav`" style="width: 10%">}}
 
 With such a small training corpus (~1.55 hours), the resulting alignment is surprisingly good. Although in the example above, the alignment for the bilabial nasal /m/ and vowel /u/ is off.
+
+## 5.4 Next steps
+
+The [Bora DoReCo dataset](https://doreco.huma-num.fr/languages/bora1263) may help us improve the mini acoustic model with more speech data from more speakers. (coming soon)
