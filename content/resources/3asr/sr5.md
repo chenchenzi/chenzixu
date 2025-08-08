@@ -175,8 +175,8 @@ to get a feel for the best parameters.
 # Written by Chenzi XU (30 July 2025)
 
 form Batch annotate wordlist
-    sentence WordListFile /Users/chenzi/Wip/bora/02_wordlist.txt
-    sentence AudioFolder /Users/chenzi/Wip/bora/02_words_in_isolation
+    sentence WordListFile /Users/chenzi/Wip/bora/wordlist.txt
+    sentence AudioFolder /Users/chenzi/Wip/bora/words_in_isolation
 endform
 
 Read Strings from raw text file... 'WordListFile$'
