@@ -22,7 +22,7 @@ Even with just 1.5 hours of Bora speech from Dr Jose Elias-Ulloa's fieldwork, we
 
 This tutorial is designed for researchers working on low-resource languages, where open-source speech materials are scarce and pre-trained models are not available.
 
-For the installation of MFA, please refer to [§4.1](https://chenzixu.rbind.io/resources/3asr/sr4/#41-mfa-installation) in the previous chapter. 
+For the installation of MFA, please refer to [§4.1](https://chenzixu.rbind.io/resources/3asr/sr4/#41-mfa-installation) in the previous chapter or the official installation [guide](https://montreal-forced-aligner.readthedocs.io/en/latest/installation.html). 
 
 **Table of Contents**
 - [5.1 The fieldwork dataset](#51-the-fieldwork-dataset)
