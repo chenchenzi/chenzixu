@@ -20,7 +20,7 @@ date: "2025-08-14T15:50:00Z"
 all_day: false
 
 # Schedule page publish date (NOT talk date).
-publishDate: "2025-8-11T00:00:00Z"
+publishDate: "2025-8-1T00:00:00Z"
 
 authors: []
 tags: [ASR, Corpus, Speech technology, research skills]
