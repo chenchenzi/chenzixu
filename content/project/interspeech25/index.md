@@ -1,18 +1,18 @@
 ---
-title: "Voice quality in telephone speech: Comparing acoustic measures between VoIP telephone and high-quality recordings"
-summary: Poster Presentation at INTERSPEECH 2024, Kos Island, Greece.
+title: "Performance of Montreal Forced Aligner on Cantonese Spontaneous Speech"
+summary: Poster Presentation at INTERSPEECH 2025, Rotterdam, The Netherlands.
 tags:
-- Voice Quality
-- Forensic Phonetics
-- Acoustics
+- MFA
+- Forced alignment
+- Cantonese
 - ASR
-date: "2024-07-01T00:00:00Z"
+date: "2025-08-01T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).
 external_link: ""
 
 image:
-  caption: Poster presented at INTERSPEECH, Kos Island, Greece. 1-5 September 2024.
+  caption: Poster presented at INTERSPEECH, Rotterdam, The Netherlands. 17-21 August 2025.
   focal_point: Smart
 
 links:
