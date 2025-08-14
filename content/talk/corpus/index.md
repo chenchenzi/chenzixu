@@ -4,12 +4,12 @@ event: DiLLA Speech Workshop, Universiteit Leiden
 event_url: 
 
 location: Leiden University
-address:
+address: Herta Mohr Building 1.80
   street: 
-  city: 
+  city: Leiden
   region: 
   postcode: 
-  country: 
+  country: The Netherlands
 
 summary: Introduction to pipeline and tools for phonetic research using large-scale speech corpora.
 abstract: "Large-scale speech datasets are increasingly central to research. This talk provides a practical overview of end-to-end workflows for working with large speech corpora, from acquisition and storage to preprocessing and querying. We will compare popular management ecosystems, including the file-based Kaldi style and the Hugging Face Datasets API, highlighting their respective advantages for annotation, scalability, and interoperability. Participants will learn how to adapt pre-trained large speech models such as Whisper, structure and validate metadata, efficiently query and filter large datasets, and leverage modern tools for distributed processing."
