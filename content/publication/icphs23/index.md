@@ -47,9 +47,9 @@ links:
   icon_pack: fab
   name: Code
   url: https://github.com/uoy-research/pasr-output/tree/main/icphs_23_voicequality
-- icon: star
+- icon: chalkboard
   icon_pack: fa
-  name: Project
+  name: Poster
   url: https://chenzixu.rbind.io/project/icphs23voice-quality/
 url_pdf: ''
 # url_code: '#'

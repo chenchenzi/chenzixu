@@ -49,6 +49,10 @@ links:
 - icon: star
   icon_pack: fa
   name: Project
+  url: https://pasr.york.ac.uk/
+- icon: chalkboard
+  icon_pack: fa
+  name: Poster
   url: https://chenzixu.rbind.io/project/odyssey24/
 # - icon: github
 #   icon_pack: fab

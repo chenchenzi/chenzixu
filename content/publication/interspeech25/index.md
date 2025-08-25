@@ -7,7 +7,7 @@ authors:
 - Peggy Mok
 
 date: "2025-08-20T23:22:00Z"
-doi: ""
+doi: "10.21437/Interspeech.2025-1882"
 
 # Schedule page publish date (NOT publication's date).
 publishDate: "2025-06-09T00:00:00Z"

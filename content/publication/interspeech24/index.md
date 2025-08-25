@@ -11,7 +11,7 @@ authors:
 - Poppy Welch
 
 date: "2024-07-20T23:22:00Z"
-doi: ""
+doi: "10.21437/Interspeech.2024-2240"
 
 # Schedule page publish date (NOT publication's date).
 publishDate: "2023-06-09T00:00:00Z"
@@ -47,6 +47,10 @@ links:
   icon_pack: fa
   name: PDF
   url: https://www.isca-archive.org/interspeech_2024/xu24j_interspeech.pdf
+- icon: chalkboard
+  icon_pack: fa
+  name: Poster
+  url: https://chenzixu.rbind.io/project/interspeech24/
 # - icon: github
 #   icon_pack: fab
 #   name: Code

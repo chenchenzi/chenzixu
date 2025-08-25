@@ -35,12 +35,12 @@ links:
   icon_pack: fa
   name: PDF
   url: https://authors.elsevier.com/sd/article/S0095447024000470
-- icon: star
+- icon: person-chalkboard
   icon_pack: fa
-  name: Project
+  name: Talk
   url: https://chenzixu.rbind.io/project/pm_nt/
-- icon: github
-  icon_pack: fab
+- icon: osf
+  icon_pack: ai
   name: Code
   url: https://osf.io/3cjqp/
 # - name: ""
