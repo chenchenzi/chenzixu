@@ -43,9 +43,9 @@ links:
   icon_pack: fa
   name: PDF
   url: https://www.isca-archive.org/interspeech_2025/so25_interspeech.pdf
-- icon: star
+- icon: chalkboard
   icon_pack: fa
-  name: Project
+  name: Poster
   url: https://chenzixu.rbind.io/project/interspeech25/
 # - icon: github
 #   icon_pack: fab
