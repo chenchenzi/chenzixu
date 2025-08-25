@@ -3,8 +3,8 @@ title: "Working with large-scale speech corpus for phonetic research: Pipeline a
 event: DiLLA Speech Workshop, Universiteit Leiden
 event_url: 
 
-location: Leiden University
-address: Herta Mohr Building 1.80
+location: Herta Mohr Building 1.80, Leiden University
+address: 
   street: 
   city: Leiden
   region: 

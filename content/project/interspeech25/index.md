@@ -27,7 +27,7 @@ links:
 - icon: download
   icon_pack: fa
   name: PDF
-  url: https://www.isca-archive.org/interspeech_2024/xu24j_interspeech.pdf
+  url: https://www.isca-archive.org/interspeech_2025/so25_interspeech.html
 url_code: ""
 url_pdf: ""
 url_slides: ""
@@ -41,4 +41,9 @@ url_video: ""
 # slides: example
 ---
 
-Implementing objective voice quality analysis in a forensic context is challenging. Forensic samples often involve telephone transmission, yet little is known about the impact of telecommunication channels on the acoustic measures of voice quality. This study compares the acoustics of laryngeal voice qualities (breathy, creaky, and modal) in controlled production of continuous English speech under two recording conditions&#58; studio (headband microphone) and VoIP (simultaneously over a telephone line). A wide range of voice quality measures were extracted, including spectral tilts and harmonics-to-noise ratios, cepstral peak prominence (CPP), f0, and formants. Through comparative acoustic and linear discriminant analysis, this study identifies measures susceptible to recording conditions and those that robustly contribute to the differentiation of voice qualities in telephone recordings. Harmonic amplitudes H1H2c and H1c, CPP, and f0 are most reliable voice quality measures across studio and VoIP conditions.
+The study presents a comprehensive evaluation of the Montreal Forced Aligner (MFA) in aligning phone boundaries of Hong Kong Cantonese (HKC) spontaneous speech. 
+We developed two tailored Cantonese MFA models, designed to address distinct Cantonese phonetic features, such as checked syllables. 
+These models were applied to align the same set of recordings from spontaneous interviews, and their performance was compared against human annotations. 
+Our results reveal that the updated Cantonese MFA models achieved decent alignment accuracy on spontaneous speech, with a satisfactory level of agreement with manually adjusted boundaries in vowels. 
+However, Cantonese-specific features and connected speech process remain major challenges for the current models. 
+This observation allows us to propose specific amendments to the models to improve alignment performance, as well as recommendations on manual boundary adjustments.
