@@ -35,7 +35,7 @@ links:
   icon_pack: fa
   name: PDF
   url: https://authors.elsevier.com/sd/article/S0095447024000470
-- icon: person-chalkboard
+- icon: chalkboard
   icon_pack: fa
   name: Talk
   url: https://chenzixu.rbind.io/project/pm_nt/
