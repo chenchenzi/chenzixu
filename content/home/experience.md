@@ -26,7 +26,7 @@ date_format = "Jan 2006"
   date_start = "2026-01-07"
   date_end = ""
   description = """
-  * Start-up Grant '*ManyTones: Production and perception of co-intrinsic pitch across languages*'
+  * Principal Investigator for the Start-up Grant project '*ManyTones: Production and perception of co-intrinsic pitch across languages*'
   """
 
 [[experience]]
