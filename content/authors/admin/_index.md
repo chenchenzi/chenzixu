@@ -79,6 +79,10 @@ email: ""
 #- Visitors
 ---
 
-Welcome! I am a Leverhulme Early Career Fellow at the **University of Oxford**, incoming Assistant Professor at **Nanyang Technological University, Singapore**. Before the fellowship, I worked on a forensic phonetics project *Person-specific Automatic Speaker Recognition* at the **University of York**. I obtained my DPhil (PhD) in Linguistics at the University of Oxford, specialising in **phonetics**. Speech sounds of all kinds never fail to fascinate me. Abundant information ranging from lexical meanings and discourse structure to emotions, attitudes, and speaker identity is inherent in speech. I'm interested in exploring the ways different layers of meanings encode in speech. 
+Welcome! I am an Assistant Professor at **Nanyang Technological University (NTU), Singapore**. Before joining NTU, I was a Leverhulme Early Career Fellow at the **University of Oxford**. 
+I also worked on a forensic phonetics project *Person-specific Automatic Speaker Recognition* at the **University of York**. I hold a DPhil (PhD) in Linguistics at the University of Oxford, specialising in **phonetics**. 
+
+Speech sounds of all kinds never fail to fascinate me. Abundant information ranging from lexical meanings and discourse structure to emotions, attitudes, and speaker identity is inherent in speech. 
+My research explores how different layers of meanings encode in speech and how they are perceived. 
 
 I am keen in experimental and computational approaches to phonetic research and encourage open and reproducible research workflow. Here I wrote step-by-step guide on topics in phonetic research, available in the **Tutorials** section. Feel free to check out the [web app](https://chenzixu.shinyapps.io/shinytone/) that I am currently developing for tonal research.
