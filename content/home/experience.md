@@ -19,14 +19,25 @@ date_format = "Jan 2006"
 #   Begin/end multi-line descriptions with 3 quotes `"""`.
 
 [[experience]]
+  title = "Assistant Professor"
+  company = "School of Humanities, Nanyang Technological University"
+  company_url = "https://dr.ntu.edu.sg/entities/person/Chenzi-Xu"
+  location = "Singapore"
+  date_start = "2026-01-07"
+  date_end = ""
+  description = """
+  * Start-up Grant '*ManyTones: Production and perception of co-intrinsic pitch across languages*'
+  """
+
+[[experience]]
   title = "Leverhulme Early Career Research Fellow"
   company = "Faculty of Linguistics, Philology and Phonetics, University of Oxford"
   company_url = "https://www.leverhulme.ac.uk/early-career-fellowships/rise-and-fall-tone"
   location = "Oxford, UK"
-  date_start = "2022-08-01"
-  date_end = "2024-02-29"
+  date_start = "2024-03-01"
+  date_end = "2026-01-15"
   description = """
-  * Principal Investigator for the Leverhulme ECF project 'The rise and fall of a tone'
+  * Principal Investigator for the Leverhulme ECF project '[*The rise and fall of a tone*](https://www.leverhulme.ac.uk/early-career-fellowships/rise-and-fall-tone)'
   """
 
 [[experience]]
@@ -37,7 +48,7 @@ date_format = "Jan 2006"
   date_start = "2022-08-01"
   date_end = "2024-02-29"
   description = """
-  * Working for the ESRC-funded project 'Person-specific automatic speaker recognition: understanding the behaviour of individuals for applications of ASR'
+  * Working for the ESRC-funded project '*Person-specific automatic speaker recognition: understanding the behaviour of individuals for applications of ASR*'
   * Teaching Research Training Seminar module
   """
   
