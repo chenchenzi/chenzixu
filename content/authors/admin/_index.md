@@ -10,12 +10,12 @@ authors:
 superuser: true
 
 # Role/position
-role: Leverhulme Early Career Fellow
+role: Assistant Professor
 
 # Organizations/Affiliations
 organizations:
-- name: University of Oxford
-  url: "https://www.ling-phil.ox.ac.uk/"
+- name: Nanyang Technological University
+  url: "https://www.ntu.edu.sg/"
 
 # Short bio (displayed in user profile at end of posts)
 bio: My research interests include speech prosody, speech perception, and speech technology.
@@ -85,4 +85,4 @@ I also worked on a forensic phonetics project *Person-specific Automatic Speaker
 Speech sounds of all kinds never fail to fascinate me. Abundant information ranging from lexical meanings and discourse structure to emotions, attitudes, and speaker identity is inherent in speech. 
 My research explores how different layers of meanings encode in speech and how they are perceived. 
 
-I am keen in experimental and computational approaches to phonetic research and encourage open and reproducible research workflow. Here I wrote step-by-step guide on topics in phonetic research, available in the **Tutorials** section. Feel free to check out the [web app](https://chenzixu.shinyapps.io/shinytone/) that I am currently developing for tonal research.
+I am keen in experimental and computational approaches to phonetic research and encourage open and reproducible research workflow. Here I wrote step-by-step guide on topics in phonetic research, available in the **Tutorials** section. Feel free to check out the [Shinytone](https://chenzixu.shinyapps.io/shinytone/) web app that I am currently developing for tonal research.
