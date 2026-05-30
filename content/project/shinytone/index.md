@@ -4,7 +4,7 @@ summary: An interactive Shiny app and R package that integrates the full citatio
 tags:
 - Tone and Intonation
 
-date: "2025-05-01T00:00:00Z"
+date: "2026-05-01T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).
 external_link: https://chenzixu.shinyapps.io/shinytone/

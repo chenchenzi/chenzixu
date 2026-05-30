@@ -6,7 +6,7 @@ tags:
 - Tone and Intonation
 - Speech Perception
 
-date: "2024-08-01T00:00:00Z"
+date: "2026-05-01T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).
 external_link: https://chenchenzi.github.io/manytones/
