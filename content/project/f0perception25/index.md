@@ -6,6 +6,7 @@ tags:
 - CF0 perception
 - Fundamental frequency
 - Tone and Intonation
+- Speech Perception
 date: "2026-05-24T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).
