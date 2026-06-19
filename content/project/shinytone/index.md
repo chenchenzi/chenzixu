@@ -45,6 +45,6 @@ url_video: ""
 # slides: example
 ---
 
-**shinytone** brings the full citation-tone analysis workflow into one place — f0 extraction, by-speaker normalisation, outlier and artefact inspection, growth-curve and generalised additive mixed-effects modelling, and Chao tone-numeral summarisation. It is built for phoneticians, typologists, fieldworkers, and students working on lexical tone production across tone languages.
+**Shinytone** brings the full citation-tone analysis workflow into one place: f0 extraction, by-speaker normalisation, outlier and artefact inspection, growth-curve and generalised additive mixed-effects modelling, and Chao tone-numeral summarisation. It is built for phoneticians, typologists, fieldworkers, and students working on lexical tone production across tone languages.
 
-It comes in two forms: an interactive [web app](https://chenzixu.shinyapps.io/shinytone/) you can use in the browser with no installation, and an R package for scripted, reproducible analysis. Full documentation lives on the [package website](https://chenchenzi.github.io/citationtone_hub/). Developed with [Cong Zhang](https://congzhang-linguist.github.io).
+It comes in two forms: an interactive [web app](https://chenzixu.shinyapps.io/shinytone/) you can use in the browser with no installation, and an R package for scripted, reproducible analysis. Full documentation lives on the [package website](https://chenchenzi.github.io/citationtone_hub/). Co-created with [Cong Zhang](https://congzhang-linguist.github.io).
