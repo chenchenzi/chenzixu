@@ -2,6 +2,7 @@
 title: Impact of the changes in long-term acoustic features upon different-speaker ASR scores
 summary: Presentation at the 31st International Association for Forensic Phonetics and Acoustics conference (IAFPA 2023), Universität Zürich, Switzerland.
 tags:
+- Corpus Phonetics
 - Voice Quality
 - Forensic Phonetics
 - Acoustics

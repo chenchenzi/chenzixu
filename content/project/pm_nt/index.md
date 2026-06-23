@@ -2,6 +2,7 @@
 title: Cross-dialectal perspectives on Mandarin neutral tone
 summary: Invited talk at Phonetics & Phonology Seminar, University of Cambridge
 tags:
+- Corpus Phonetics
 - Plastic Mandarin
 - Neutral tone
 - Fundamental frequency

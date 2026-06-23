@@ -2,6 +2,7 @@
 title: "Tone Patterns in Binumarien Noun Stems (Kainantu, Trans-New Guinea)"
 summary: Poster Presentation at Phonetics and Phonology in Europe 2025, Palma, Spain.
 tags:
+- Corpus Phonetics
 - Low-resource Language
 - Tone and Intonation
 - Acoustics

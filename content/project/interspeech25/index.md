@@ -2,6 +2,7 @@
 title: "Performance of Montreal Forced Aligner on Cantonese Spontaneous Speech"
 summary: Poster Presentation at INTERSPEECH 2025, Rotterdam, The Netherlands.
 tags:
+- Corpus Phonetics
 - MFA
 - Forced alignment
 - Cantonese

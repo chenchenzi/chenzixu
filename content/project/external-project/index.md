@@ -3,10 +3,10 @@ title: Revisiting Neutral Tone in Mandarin Broadcast News Speech
 summary: Presentation at Speech Prosody 2020
 
 tags:
+- Corpus Phonetics
 - Mandarin
 - Neutral Tone
 - Polynomial Modelling
-- corpus
 date: "2020-04-27T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).

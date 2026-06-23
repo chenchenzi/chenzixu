@@ -45,6 +45,10 @@ subtitle = ""
     name = "ASR"
     tag = "ASR"
 
+  [[content.filter_button]]
+    name = "Corpus Phonetics"
+    tag = "Corpus Phonetics"
+
 [design]
   # Choose how many columns the section has. Valid values: 1 or 2.
   columns = "2"

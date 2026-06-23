@@ -2,6 +2,7 @@
 title: Exploring individual speaker performance within a forensic automatic speaker recognition system
 summary: Poster Presentation at the UK and Ireland Speech Workshop 2024, Cambridge, UK.
 tags:
+- Corpus Phonetics
 - Voice Quality
 - Forensic Phonetics
 - Acoustics

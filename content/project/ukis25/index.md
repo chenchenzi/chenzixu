@@ -2,6 +2,7 @@
 title: "The processing of neutral tone in self-supervised learning speech models"
 summary: Poster Presentation at UK and Ireland Speech 2025, York, UK.
 tags:
+- Corpus Phonetics
 - Self-supervised Speech Models
 - Wav2Vec2
 - Acoustics

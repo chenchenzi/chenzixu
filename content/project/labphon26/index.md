@@ -2,10 +2,10 @@
 title: "Voice quality in connected speech: annotating creaky, breathy, and whispery phonation"
 summary: Lightning demo and poster presentation at the CorpusPhon 2 workshop, LabPhon 2026, on a frame-ready annotation protocol for creaky, breathy, and whispery phonation in connected speech.
 tags:
+- Corpus Phonetics
 - Forensic Phonetics
 - Voice quality
 - Phonation
-- Corpus phonetics
 date: "2026-06-22T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).
