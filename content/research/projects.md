@@ -30,11 +30,11 @@ subtitle = ""
     tag = "Plastic Mandarin"
   
   [[content.filter_button]]
-    name = "Tone and Intonation"
+    name = "Tone"
     tag = "Tone and Intonation"
 
   [[content.filter_button]]
-    name = "Speech Perception"
+    name = "Perception"
     tag = "Speech Perception"
     
   [[content.filter_button]]
@@ -46,7 +46,7 @@ subtitle = ""
     tag = "ASR"
 
   [[content.filter_button]]
-    name = "Corpus Phonetics"
+    name = "Corpus"
     tag = "Corpus Phonetics"
 
 [design]
