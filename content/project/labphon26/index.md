@@ -14,6 +14,7 @@ external_link: ""
 image:
   caption: Annotating creaky, breathy, and whispery phonation in connected speech
   focal_point: Smart
+  placement: 2
 
 links:
 - icon: twitter
