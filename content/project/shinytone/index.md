@@ -20,6 +20,10 @@ links:
   icon_pack: fas
   name: Slides
   url: https://chenzixu.rbind.io/slides/shinytone/index.html
+- icon: file-pdf
+  icon_pack: fas
+  name: Poster
+  url: "files/shinytone_poster.pdf"
 - icon: rocket
   icon_pack: fas
   name: Web app
