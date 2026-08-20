@@ -36,8 +36,8 @@ image:
 links:
 - icon: desktop
   icon_pack: fas
-  name: Week 1 slides
-  url: https://chenzixu.rbind.io/slides/speech-synthesis/week01.html
+  name: Week 2 slides
+  url: https://chenzixu.rbind.io/slides/speech-synthesis/week02.html
 url_code: ""
 url_pdf: ""
 url_slides: ""
@@ -97,11 +97,13 @@ a.hg-card:hover .hg-thumb,a.hg-card:focus-visible .hg-thumb{opacity:1;transform:
     <span class="hg-topic">Inside the black box: what ASR and TTS do · Math primer I: vectors &amp; similarity</span>
     <span class="hg-go">View slides →</span>
   </a>
-  <div class="hg-card hg-soon">
+  <a class="hg-card" href="https://chenzixu.rbind.io/slides/speech-synthesis/week02.html">
+    <span class="hg-thumb" style="background-image:url('thumb-week02.jpg')"></span>
     <span class="hg-week">Week 2</span>
     <span class="hg-dates">17 – 21 Aug</span>
     <span class="hg-topic">Math primer II: probability, Bayes&rsquo; rule, logs &amp; surprisal</span>
-  </div>
+    <span class="hg-go">View slides →</span>
+  </a>
   <div class="hg-card hg-soon">
     <span class="hg-week">Week 3</span>
     <span class="hg-dates">24 – 28 Aug</span>
