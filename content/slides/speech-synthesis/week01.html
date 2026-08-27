@@ -1949,8 +1949,8 @@
     <div class="grow">
       <ul class="biglist" style="font-size:19px;line-height:1.65">
         <li class="rise d3">The field&rsquo;s standard textbook, and it is <b>free online</b></li>
-        <li class="rise d3">A <b>living draft</b>, updated continually: we cite the <b>January 2026 release</b>, and chapter numbers move between releases, so follow the syllabus&rsquo;s numbers</li>
-        <li class="rise d4">Our chapters: <span class="mono teal" style="font-size:14px">Ch 3</span> n&#8209;grams (W2, W6) &#183; <span class="mono teal" style="font-size:14px">Ch 14</span> phonetics &amp; features (W3&ndash;4) &#183; <span class="mono teal" style="font-size:14px">Ch 15</span> ASR (W5&ndash;9) &#183; <span class="mono teal" style="font-size:14px">Ch 16</span> TTS (W10&ndash;12) &#183; <span class="mono teal" style="font-size:14px">Ch 25</span> conversation (W13)</li>
+        <li class="rise d3">A <b>living draft</b>, updated continually: we cite the <b>August 2026 release</b>, and chapter numbers move between releases, so follow the syllabus&rsquo;s numbers</li>
+        <li class="rise d4">Our chapters: <span class="mono teal" style="font-size:14px">Ch 3</span> n&#8209;grams (W2, W6) &#183; <span class="mono teal" style="font-size:14px">Ch 15</span> phonetics &amp; features (W3&ndash;4) &#183; <span class="mono teal" style="font-size:14px">Ch 16</span> ASR (W5&ndash;9) &#183; <span class="mono teal" style="font-size:14px">Ch 17</span> TTS (W10&ndash;12) &#183; <span class="mono teal" style="font-size:14px">Ch 25</span> conversation (W13)</li>
       </ul>
     </div>
   </div>
@@ -1961,8 +1961,8 @@
   <div class="kicker rise d1">Before next week</div>
   <h2 class="rise d1">This week&rsquo;s readings</h2>
   <div class="rise d2">
-    <div class="reading"><span class="req">REQ</span><b>Jurafsky &amp; Martin, <i>Speech and Language Processing</i> (3rd ed., free online): Ch 15 &amp; 16, intros only</b>
-      <p>Just the chapter openings of the ASR and TTS chapters: the bird's-eye view of today's two pipelines. web.stanford.edu/~jurafsky/slp3 (chapter numbers refer to the Jan 2026 release)</p></div>
+    <div class="reading"><span class="req">REQ</span><b>Jurafsky &amp; Martin, <i>Speech and Language Processing</i> (3rd ed., free online): Ch 16 &amp; 17, intros only</b>
+      <p>Just the chapter openings of the ASR and TTS chapters: the bird's-eye view of today's two pipelines. web.stanford.edu/~jurafsky/slp3 (chapter numbers follow the Aug 2026 draft)</p></div>
     <div class="reading"><span class="req">REQ</span><b>3Blue1Brown, <i>Essence of Linear Algebra</i>: “Vectors”, “Dot products”, “Linear transformations and matrices” &amp; “Matrix multiplication as composition” (~45 min video)</b>
       <p>The geometric picture from today, animated better than any slide; the last two episodes are today's matrix slides, moving. 3blue1brown.com/lessons/ vectors · dot-products · linear-transformations · matrix-multiplication</p></div>
     <div class="reading"><span class="req opt">OPT</span><b>VanderPlas, <i>A Whirlwind Tour of Python</i> (free)</b>
@@ -1980,7 +1980,7 @@
     <div class="reading"><span class="req">REQ</span><b>Goldsmith (2007), &ldquo;Probability for linguists&rdquo;</b>
       <p>Written exactly for this audience: probability taught through phones and words, no engineering background assumed. Free online.</p></div>
     <div class="reading"><span class="req">REQ</span><b>Jurafsky &amp; Martin, <i>SLP</i> Ch 3 &ldquo;N-gram Language Models&rdquo;: &sect;3.1&ndash;3.3 and the perplexity section</b>
-      <p>Skip smoothing for now: it returns in Week 6. (Chapter numbers refer to the Jan 2026 release.)</p></div>
+      <p>Skip smoothing for now: it returns in Week 6. (Chapter numbers follow the Aug 2026 draft.)</p></div>
     <div class="reading"><span class="req">REQ</span><b>3Blue1Brown, &ldquo;Bayes theorem, the geometry of changing beliefs&rdquo; (15 min video)</b>
       <p>Next week&rsquo;s hardest idea, animated: watch it before Friday and the lecture will feel like revision.</p></div>
     <div class="reading"><span class="req opt">OPT</span><b>Shannon (1951), &ldquo;Prediction and Entropy of Printed English&rdquo;</b>
@@ -2380,7 +2380,21 @@
       else if(de.webkitRequestFullscreen){ de.webkitRequestFullscreen(); }
     }
   });
+  // touch navigation (phones/tablets): swipe left/right anywhere; tap right side = next, left edge = back
+  var _tX=null,_tY=null,_suppressClick=false;
+  document.addEventListener('touchstart',function(e){ if(menuOpen()) return; var t=e.changedTouches[0]; _tX=t.clientX; _tY=t.clientY; },{passive:true});
+  document.addEventListener('touchend',function(e){
+    if(menuOpen()||_tX===null) return;
+    var t=e.changedTouches[0], dx=t.clientX-_tX, dy=t.clientY-_tY; _tX=_tY=null;
+    if(Math.abs(dx)>50&&Math.abs(dx)>2*Math.abs(dy)){ _suppressClick=true; if(dx<0) next(); else prev(); return; }
+    if(Math.abs(dx)<12&&Math.abs(dy)<12){
+      if(window.getSelection&&String(window.getSelection())!=='') return;
+      var x=t.clientX/window.innerWidth;
+      if(x>0.55){ _suppressClick=true; next(); } else if(x<0.2){ _suppressClick=true; prev(); }
+    }
+  },{passive:true});
   document.addEventListener('click',function(e){
+    if(_suppressClick){_suppressClick=false;return;}
     if(menuOpen()) return;
     if(e.target&&e.target.tagName==='BUTTON') return;
     if(window.getSelection&&String(window.getSelection())!=='') return;

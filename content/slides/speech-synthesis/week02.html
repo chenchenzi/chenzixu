@@ -241,7 +241,7 @@
      said MORE THAN two). The quote below is Johnson, Acoustic and Auditory Phonetics 2e
      (2003) p. 22, verified verbatim against the page scan; Coleman (2005) §2.5 "The sampling
      theorem" (p. 28) states the full theorem in the same chapter Week 1's quantisation slides
-     use. J&M SLP3 §14.4.2 has the looser "at least two samples per cycle" version with the
+     use. J&M SLP3 §15.4.2 (Aug 2026 draft) has the looser "at least two samples per cycle" version with the
      positive-part / negative-part intuition, if a third framing helps. -->
 <!-- ▸ MUDDIEST POINTS -->
 <section class="slide">
@@ -495,6 +495,49 @@
         <p class="mono frag" style="font-size:13px;margin-top:4px;white-space:nowrap">by column: &nbsp;P(ɹ) &middot; P(t|ɹ) = 70/200 × 40/70 = 40/200</p>
         <p class="frag" style="font:400 14.5px/1.5 var(--sans);color:var(--muted);margin-top:8px">Two different conditionals reach the same cell. Setting them equal and dividing by one marginal is exactly step 3.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ▸ P(SOUND) TRANSITION -->
+<section class="slide">
+  <div class="kicker rise d1">The flip&rsquo;s missing denominator</div>
+  <h2 class="rise d1">P(sound): what it is, and why we may drop it</h2>
+  <div class="cols" style="gap:36px">
+    <div class="grow">
+      <div class="panel rise d2" style="padding:16px 22px">
+        <div class="lab">What it is: every route to the sound, summed</div>
+        <svg viewBox="0 0 520 200" style="width:100%;height:190px">
+          <rect x="16" y="18" width="168" height="56" rx="10" fill="rgba(14,111,102,.10)" stroke="var(--teal)" stroke-width="1.5"/>
+          <text x="100" y="42" text-anchor="middle" font-size="17" font-weight="600" fill="var(--teal)">sip</text>
+          <text x="100" y="62" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="var(--muted)">prior 0.10</text>
+          <rect x="16" y="126" width="168" height="56" rx="10" fill="rgba(176,124,20,.10)" stroke="var(--gold)" stroke-width="1.5"/>
+          <text x="100" y="150" text-anchor="middle" font-size="17" font-weight="600" fill="var(--gold)">ship</text>
+          <text x="100" y="170" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="var(--muted)">prior 0.90</text>
+          <line x1="184" y1="46" x2="360" y2="92" stroke="var(--teal)" stroke-width="2.5"/>
+          <line x1="184" y1="154" x2="360" y2="108" stroke="var(--gold)" stroke-width="2.5"/>
+          <text x="268" y="52" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="var(--teal)">likelihood 0.6</text>
+          <text x="268" y="160" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="var(--gold)">likelihood 0.4</text>
+          <circle cx="392" cy="100" r="30" fill="rgba(217,71,43,.10)" stroke="var(--coral)" stroke-width="1.5"/>
+          <text x="392" y="97" text-anchor="middle" font-size="13" fill="var(--coral)">the</text>
+          <text x="392" y="112" text-anchor="middle" font-size="13" fill="var(--coral)">sound</text>
+        </svg>
+        <p class="mono" style="font-size:16px;margin-top:6px;white-space:nowrap">P(sound) = &Sigma;<sub>word</sub> P(sound|word) · P(word) &nbsp;<span style="color:var(--faint);font-size:14px">the law of total probability</span></p>
+        <p class="mono" style="font-size:15.5px;margin-top:4px;white-space:nowrap;color:var(--muted)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 0.6×0.10 + 0.4×0.90 = .060+.360 = .420</p>
+        <p class="qr-note" style="margin-top:5px">The candidates are exclusive and exhaustive, so the routes&rsquo; probabilities add. It is the same marginalising as the count table&rsquo;s row sums.</p>
+      </div>
+    </div>
+    <div class="grow">
+      <div class="panel frag" style="padding:16px 22px;border-left:3px solid var(--teal)">
+        <div class="lab">Why the &prop; may drop it: it is the same for every candidate</div>
+        <table class="ctab" style="margin:8px 0">
+          <tr><th></th><th>likelihood × prior</th><th>÷ .420</th></tr>
+          <tr><th style="color:var(--gold)">ship</th><td>.360</td><td>86%</td></tr>
+          <tr><th style="color:var(--teal)">sip</th><td>.060</td><td>14%</td></tr>
+        </table>
+        <p style="font-size:16.5px;line-height:1.5;color:var(--muted)">Dividing both scores by the same .420 rescales them to <b style="color:var(--ink)">sum to 1</b>, but cannot change the order: <b style="color:var(--ink)">ship wins either way</b>. A recognizer only needs the winner, so it never computes P(sound).</p>
+      </div>
+      <p class="sub frag" style="font-size:17px;margin-top:14px;max-width:none">Keep the .420 in sight anyway: it returns as the <b style="color:var(--ink)">total shaded area</b> three slides from now, and as the denominator of EX 2.1.</p>
     </div>
   </div>
 </section>
@@ -799,7 +842,6 @@
     <p>MacKay defines the <i>Shannon information content</i> of an outcome x as h(x) = log&#8322; 1/P(x), measured in bits: the same number as &minus;log&#8322; P(x). Psycholinguists call it the <i>surprisal</i> of a word in its context (Hale 2001; Levy 2008): the name is literal, it measures how surprised you should be by the outcome that actually happened.</p>
     <span class="src">MacKay (2003), <i>Information Theory, Inference, and Learning Algorithms</i>, &sect;2.4 (free online). The name goes back to Tribus (1961).</span></div>
 </section>
-
 <!-- ▸ DISCRETE VS CONTINUOUS -->
 <section class="slide">
   <div class="kicker rise d1">Two kinds of data</div>
@@ -877,7 +919,7 @@
         <span class="src">Jurafsky &amp; Martin, <i>SLP</i> 3rd ed., &sect;3.7, eq. (3.32); Shannon (1948).</span></div>
     </div>
     <div class="rise d3" style="width:420px">
-      <div class="panel"><div class="lab">Letters, if all 26 were equally likely</div><p style="font:600 30px var(--display)">4.70 bits</p><p class="qr-note">computed: log&#8322; 26</p></div>
+      <div class="panel"><div class="lab">Letters, if all 26 were equally likely</div><p style="font:600 30px var(--display)">4.70 bits</p><p class="qr-note">each letter: P = 1/26, so surprisal = log&#8322; 26; equal surprisals average to themselves</p></div>
       <div class="panel" style="margin-top:14px"><div class="lab">English letter frequencies (unigram)</div><p style="font:600 30px var(--display)">≈ 4.1 bits</p><p class="qr-note">the formula, fed corpus letter counts; you compute it on a novel in the practical</p></div>
       <div class="panel" style="margin-top:14px;border-left:3px solid var(--coral)"><div class="lab">A human using full context (Shannon's 1951 estimate)</div><p style="font:600 30px var(--display)">≈ 1 bit / letter</p><p class="qr-note">measured with the guessing game, next slide; his bounds: 0.6 to 1.3 bits</p></div>
     </div>
@@ -929,17 +971,102 @@
   </div>
 </section>
 
+<!-- ▸ THREE TOOLS THREE JOBS -->
+<section class="slide">
+  <div class="kicker rise d1">Three tools, three jobs</div>
+  <h2 class="rise d1">Why we need these numbers</h2>
+  <div class="cards rise d2" style="grid-template-columns:1fr 1fr 1fr;gap:18px">
+    <div class="card" style="padding:20px 22px">
+      <div class="tag">SURPRISAL &middot; SCORES ONE GUESS</div>
+      <p style="font-size:15.5px;color:var(--ink)">Decoders rank candidates by <b>adding evidence</b>. &minus;log&#8322;P makes probability addable: best = least surprising.</p>
+      <p class="qr-note" style="margin-top:8px">W5&ndash;8: every decoder score &middot; W7&ndash;8: the training loss</p>
+    </div>
+    <div class="card" style="padding:20px 22px">
+      <div class="tag" style="color:var(--gold);border-color:rgba(176,124,20,.4)">ENTROPY &middot; AVERAGES MANY</div>
+      <p style="font-size:15.5px;color:var(--ink)">Real questions span <b>many guesses</b>: how good is a model? how predictable is a language? The average surprisal answers them.</p>
+      <p class="qr-note" style="margin-top:8px">letters &asymp; 4.1 bits, a reader &asymp; 1: the gap is what a better model can still win</p>
+    </div>
+    <div class="card" style="padding:20px 22px">
+      <div class="tag" style="color:var(--coral);border-color:rgba(217,71,43,.4)">PERPLEXITY &middot; MAKES IT READABLE</div>
+      <p style="font-size:15.5px;color:var(--ink)">2<sup>H</sup> turns bits into a grade anyone can read: <b>&ldquo;as confused as a 13-way choice&rdquo;</b>.</p>
+      <p class="qr-note" style="margin-top:8px">W6: the babbler&rsquo;s exam, on held-out text (next slide)</p>
+    </div>
+  </div>
+  <div class="panel frag" style="margin-top:18px;border-left:3px solid var(--teal);padding:14px 22px">
+    <p style="font-size:17.5px;line-height:1.5">One chain: <b>score a guess &rarr; average many &rarr; un-log into options.</b></p>
+  </div>
+</section>
+
 <!-- ▸ HELD-OUT RULE -->
 <section class="slide">
   <div class="kicker rise d1">One rule we keep for the rest of the term</div>
-  <h2 class="rise d1">The exam rule: <span class="em">held-out</span> data</h2>
-  <p class="mantra rise d2" style="font-size:44px;margin-top:6px">We always examine a model<br>on sentences it <span class="hl">never saw</span>.</p>
-  <div class="cards rise d3" style="grid-template-columns:1fr 1fr 1fr;gap:18px;margin-top:30px">
-    <div class="card"><h3>Training set</h3><p>The text the model counted. Its textbook.</p></div>
-    <div class="card"><h3>Held-out test set</h3><p>The exam: text it could not have memorized.</p></div>
-    <div class="card" style="border-left:3px solid var(--gold)"><h3>In the practical</h3><p>Your bigram model's perplexity on a fresh paragraph vs the <b>same paragraph shuffled</b>. Commit now: which is higher, and why?</p></div>
+  <h2 class="rise d1">The held-out evaluation: <span class="em">train&ndash;test split</span></h2>
+  <div class="panel rise d2" style="padding:16px 20px">
+    <svg viewBox="0 0 1060 212" style="width:100%;height:206px">
+      <rect x="200" y="22" width="450" height="54" rx="9" fill="rgba(14,111,102,.14)" stroke="var(--teal)" stroke-width="1.5"/>
+      <text x="425" y="45" text-anchor="middle" font-size="14.5" font-weight="600" fill="var(--teal)">training set &middot; the model counts this</text>
+      <text x="425" y="64" text-anchor="middle" font-size="12.5" fill="var(--muted)">the first 90% of Emma</text>
+      <rect x="666" y="22" width="196" height="54" rx="9" fill="rgba(176,124,20,.12)" stroke="var(--gold)" stroke-width="1.5" stroke-dasharray="6 4"/>
+      <text x="764" y="45" text-anchor="middle" font-size="14.5" font-weight="600" fill="var(--gold)">held-out &middot; locked away</text>
+      <text x="764" y="64" text-anchor="middle" font-size="12.5" fill="var(--muted)">the last 10%: never counted</text>
+      <line x1="355" y1="76" x2="355" y2="118" stroke="var(--teal)" stroke-width="2"/>
+      <polygon points="355,126 349,114 361,114" fill="var(--teal)"/>
+      <rect x="250" y="128" width="210" height="54" rx="10" fill="var(--panel)" stroke="var(--ink)" stroke-width="1.5"/>
+      <text x="355" y="151" text-anchor="middle" font-size="15" font-weight="600" fill="var(--ink)">the model</text>
+      <text x="355" y="169" text-anchor="middle" font-size="12.5" fill="var(--muted)">bigram counts &rarr; probabilities</text>
+      <line x1="460" y1="155" x2="600" y2="155" stroke="var(--ink)" stroke-width="2"/>
+      <polygon points="608,155 596,149 596,161" fill="var(--ink)"/>
+      <text x="534" y="143" text-anchor="middle" font-size="12" fill="var(--muted)">evaluated on</text>
+      <line x1="764" y1="76" x2="764" y2="118" stroke="var(--gold)" stroke-width="2"/>
+      <polygon points="764,126 758,114 770,114" fill="var(--gold)"/>
+      <rect x="616" y="128" width="296" height="54" rx="10" fill="rgba(217,71,43,.07)" stroke="var(--coral)" stroke-width="1.5"/>
+      <text x="764" y="151" text-anchor="middle" font-size="15" font-weight="600" fill="var(--coral)">perplexity, measured here</text>
+      <text x="764" y="169" text-anchor="middle" font-size="12.5" fill="var(--muted)">on text the model could not have memorised</text>
+    </svg>
   </div>
-  <p class="sub rise d4" style="margin-top:26px;font-size:18px">Acing your own textbook proves memory, not knowledge. From here to Week 13, every number we trust is measured on held-out data.</p>
+  <div class="cards rise d3" style="grid-template-columns:1fr 1fr;gap:18px;margin-top:14px">
+    <div class="card" style="padding:16px 20px">
+      <h3 style="font-size:18px">Why text it never saw?</h3>
+      <p style="font-size:15px">A model <b>memorises</b> when its counts store the training text itself. Scored on that same text, every guess is certain: probability 1 &rarr; surprisal 0 bits &rarr; perplexity 2&#8304; = 1. A perfect grade, nothing learned. Only unseen text measures <b>learning</b>: and unseen text is all a real recognizer ever faces.</p>
+    </div>
+    <div class="card" style="padding:16px 20px;border-left:3px solid var(--gold)">
+      <h3 style="font-size:18px">In the practical</h3>
+      <p style="font-size:15px">Your bigram model&rsquo;s perplexity on a fresh paragraph vs the <b>same paragraph shuffled</b>. Commit now: which is higher, and why?</p>
+    </div>
+  </div>
+  <p class="sub rise d4" style="margin-top:14px;font-size:17px;max-width:none">From here to Week 13, every number we trust is measured on held-out data.</p>
+</section>
+
+<!-- ▸ SCORING IN FOUR STEPS -->
+<section class="slide">
+  <div class="kicker rise d1">How a passage is scored</div>
+  <h2 class="rise d1">Perplexity, computed in four steps</h2>
+  <div class="cards rise d2" style="grid-template-columns:1fr 1fr 1fr 1fr;gap:14px">
+    <div class="card" style="padding:16px 18px">
+      <div class="tag">1 &middot; TRAIN</div>
+      <p style="font-size:14.5px;color:var(--ink)">Count bigrams on the <b>training</b> text; the counts become the model&rsquo;s table, then it is frozen.</p>
+      <p class="mono" style="font-size:13.5px;color:var(--muted);margin-top:8px">P(h|t) = 0.3<br>P(e|h) = 0.6</p>
+    </div>
+    <div class="card" style="padding:16px 18px">
+      <div class="tag">2 &middot; SCORE</div>
+      <p style="font-size:14.5px;color:var(--ink)">Walk the <b>held-out</b> passage: it supplies the questions. At each symbol, ask the <b>trained table</b> what it gave the actual next one; add the logs.</p>
+      <p class="mono" style="font-size:13.5px;color:var(--muted);margin-top:8px">&ldquo;the&rdquo;: log&#8322;.3 + log&#8322;.6<br>= &minus;1.74 &minus; 0.74 = &minus;2.48</p>
+    </div>
+    <div class="card" style="padding:16px 18px">
+      <div class="tag">3 &middot; AVERAGE</div>
+      <p style="font-size:14.5px;color:var(--ink)">Flip the sign, divide by the number of predictions: <b>average surprisal</b>, in bits.</p>
+      <p class="mono" style="font-size:13.5px;color:var(--muted);margin-top:8px">2.48 / 2 = 1.24 bits</p>
+    </div>
+    <div class="card" style="padding:16px 18px">
+      <div class="tag">4 &middot; UN-LOG</div>
+      <p style="font-size:14.5px;color:var(--ink)">2<sup>average</sup> = <b>perplexity</b>: the score as an effective number of options.</p>
+      <p class="mono" style="font-size:13.5px;color:var(--muted);margin-top:8px">2<sup>1.24</sup> &asymp; 2.4-way choice</p>
+    </div>
+  </div>
+  <div class="panel rise d3" style="margin-top:16px;border-left:3px solid var(--coral);padding:14px 22px">
+    <p style="font-size:16.5px;line-height:1.55">A model with enough memory can <b>store the training text</b>. Scored on that same text: every lookup returns <b>1</b> &rarr; every log is 0 &rarr; sum 0 bits &rarr; average 0 &rarr; <b>perplexity 1</b>. A perfect grade for pure storage: hence held-out, always. <span style="color:var(--muted)">(A bigram cannot memorise a novel; big models can.)</span></p>
+  </div>
+  <p class="sub rise d4" style="margin-top:12px;font-size:16px;max-width:none">These four steps are Part 6&rsquo;s provided functions in the practical: <span class="mono" style="font-size:14.5px">train_bigram</span>, the log-probability walk, and <span class="mono" style="font-size:14.5px">perplexity</span>. You run them; now you know what they do.</p>
 </section>
 
 <!-- ▸ BREAK 2 -->
@@ -1080,7 +1207,7 @@
     <div class="reading"><span class="req">REQ</span><b>Goldsmith (2007), “Probability for linguists”</b>
       <p>Written exactly for you: linguists with secondary-school math. At least the opening sections: probability vs frequency, distributions over words and phones. journals.openedition.org/msh/7933</p></div>
     <div class="reading"><span class="req">REQ</span><b>Jurafsky &amp; Martin, <i>SLP</i> (3rd ed., free online): Ch 3 “N-gram Language Models”, §3.1–3.3 + the perplexity section</b>
-      <p>Skip smoothing for now; we return to it in Week 6. web.stanford.edu/~jurafsky/slp3 (chapter numbers refer to the Jan 2026 release)</p></div>
+      <p>Skip smoothing for now; we return to it in Week 6. web.stanford.edu/~jurafsky/slp3 (chapter numbers follow the Aug 2026 draft)</p></div>
     <div class="reading"><span class="req">REQ</span><b>3Blue1Brown, “Bayes theorem, the geometry of changing beliefs” (15 min video)</b>
       <p>Watch before the practical: the area-based picture is the one we draw on the board. 3blue1brown.com/lessons/bayes-theorem</p></div>
     <div class="reading"><span class="req opt">OPT</span><b>Shannon (1951), “Prediction and Entropy of Printed English”</b>
@@ -1099,8 +1226,8 @@
       <p>Meet the course&rsquo;s second free resource: short pages with runnable audio examples. Unit 1 is waveforms, sampling and spectrograms; the course follows us to Week 13. huggingface.co/learn/audio-course</p></div>
     <div class="reading"><span class="req">REQ</span><b>Schaedler, <i>Seeing Circles, Sines, and Signals</i> (interactive)</b>
       <p>The sine, sampling and aliasing pages: Week 1&rsquo;s samples-per-cycle slides, animated and draggable. jackschaedler.github.io/circles-sines-signals</p></div>
-    <div class="reading"><span class="req">REQ</span><b>Jurafsky &amp; Martin, <i>SLP</i> Ch 14 &ldquo;Phonetics and Speech Feature Extraction&rdquo;: acoustics sections</b>
-      <p>Stop at feature extraction: that is Week 4&rsquo;s whole story. (Chapter numbers refer to the Jan 2026 release.)</p></div>
+    <div class="reading"><span class="req">REQ</span><b>Jurafsky &amp; Martin, <i>SLP</i> Ch 15 &ldquo;Phonetics and Speech Feature Extraction&rdquo;: acoustics sections</b>
+      <p>Stop at feature extraction: that is Week 4&rsquo;s whole story. (Chapter numbers follow the Aug 2026 draft.)</p></div>
     <div class="reading"><span class="req opt">OPT</span><b>3Blue1Brown, &ldquo;But what is the Fourier Transform?&rdquo; &middot; first 10 minutes</b>
       <p>The winding-machine picture behind next week&rsquo;s spectrograms.</p></div>
     <div class="reading"><span class="req opt">OPT</span><b>Styler, <i>Using Praat for Linguistic Research</i></b>
@@ -1118,7 +1245,7 @@
     <li class="rise d2">Explain why the same sound flipped from ship to sip when the context changed</li>
     <li class="rise d3">Convert a probability to bits and back (¼ is 2 bits; 3 bits is 8× less probable)</li>
     <li class="rise d3">Say why decoders add scores instead of multiplying probabilities</li>
-    <li class="rise d4">State the exam rule: models are judged on held-out data, always</li>
+    <li class="rise d4">State the held-out rule: models are evaluated on data they never saw, always</li>
   </ul>
 </section>
 
@@ -1127,7 +1254,7 @@
   <div class="glyph" style="font-size:520px;right:60px">θ</div>
   <div style="height:190px"></div>
   <p class="mantra rise d1">Hear a sound, weigh every explanation,<br>pick the <span class="hl">least surprising</span>.</p>
-  <p class="sub rise d2" style="margin-top:36px;font-size:22px">That's Bayes, and that's a recognizer. &nbsp;<b style="color:var(--ink)">Next week:</b> the sound itself becomes numbers (sampling, spectrograms, source–filter), and you will hear what a 4 kHz telephone ceiling removes from /s/.</p>
+  <p class="sub rise d2" style="max-width:none;margin-top:36px;font-size:22px">That's Bayes, and that's a recognizer. &nbsp;<b style="color:var(--ink)">Next week, &ldquo;Seeing Speech&rdquo;:</b> the sound itself becomes numbers, and you will hear what a 4 kHz telephone ceiling removes from /s/.</p>
   <svg id="zipf-end" viewBox="0 0 1200 120" class="rise d3" style="position:absolute;left:88px;bottom:90px;width:1104px;height:90px;fill:var(--teal);opacity:.7"></svg>
 </section>
 
@@ -1143,7 +1270,7 @@
     <p style="margin-bottom:10px"><b style="color:var(--ink)">Aylett, M. &amp; Turk, A.</b> (2004). <i>Language and Speech</i> 47(1), 31&ndash;56. &nbsp;<b style="color:var(--ink)">Bell, A. et al.</b> (2009). <i>Journal of Memory and Language</i> 60(1), 92&ndash;111. Probabilistic reduction: predictability shortens words.</p>
     <p style="margin-bottom:10px"><b style="color:var(--ink)">Norris, D. &amp; McQueen, J. M.</b> (2008). &ldquo;Shortlist B: A Bayesian model of continuous speech recognition.&rdquo; <i>Psychological Review</i> 115(2), 357&ndash;395.</p>
     <p style="margin-bottom:10px"><b style="color:var(--ink)">Johnson, K.</b> (2003). <i>Acoustic and Auditory Phonetics</i>, 2nd ed. Blackwell, p. 22 (the Nyquist sentence). &nbsp;<b style="color:var(--ink)">Coleman, J.</b> (2005). <i>Introducing Speech and Language Processing</i>. CUP, &sect;2.5.</p>
-    <p style="margin-bottom:10px"><b style="color:var(--ink)">Jurafsky, D. &amp; Martin, J. H.</b> <i>Speech and Language Processing</i>, 3rd ed. (Jan 2026 release), Ch 3. Definitions quoted on the formal slide.</p>
+    <p style="margin-bottom:10px"><b style="color:var(--ink)">Jurafsky, D. &amp; Martin, J. H.</b> <i>Speech and Language Processing</i>, 3rd ed. (Aug 2026 draft), Ch 3. Definitions quoted on the formal slide.</p>
     <p><b style="color:var(--ink)">3Blue1Brown</b>, &ldquo;Bayes theorem, the geometry of changing beliefs&rdquo;: the area picture. &nbsp;<b style="color:var(--ink)"><i>Seeing Theory</i></b> (Kunin et al., Brown University): interactive probability.</p>
   </div>
 </section>
@@ -1343,7 +1470,21 @@
       else if(de.webkitRequestFullscreen){ de.webkitRequestFullscreen(); }
     }
   });
+  // touch navigation (phones/tablets): swipe left/right anywhere; tap right side = next, left edge = back
+  var _tX=null,_tY=null,_suppressClick=false;
+  document.addEventListener('touchstart',function(e){ if(menuOpen()) return; var t=e.changedTouches[0]; _tX=t.clientX; _tY=t.clientY; },{passive:true});
+  document.addEventListener('touchend',function(e){
+    if(menuOpen()||_tX===null) return;
+    var t=e.changedTouches[0], dx=t.clientX-_tX, dy=t.clientY-_tY; _tX=_tY=null;
+    if(Math.abs(dx)>50&&Math.abs(dx)>2*Math.abs(dy)){ _suppressClick=true; if(dx<0) next(); else prev(); return; }
+    if(Math.abs(dx)<12&&Math.abs(dy)<12){
+      if(window.getSelection&&String(window.getSelection())!=='') return;
+      var x=t.clientX/window.innerWidth;
+      if(x>0.55){ _suppressClick=true; next(); } else if(x<0.2){ _suppressClick=true; prev(); }
+    }
+  },{passive:true});
   document.addEventListener('click',function(e){
+    if(_suppressClick){_suppressClick=false;return;}
     if(menuOpen()) return;
     if(window.getSelection&&String(window.getSelection())!=='') return;
     var x=e.clientX/window.innerWidth;
