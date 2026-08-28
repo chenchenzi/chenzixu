@@ -38,6 +38,10 @@ links:
   icon_pack: fas
   name: Week 3 slides
   url: https://chenzixu.rbind.io/slides/speech-synthesis/week03.html
+- icon: github
+  icon_pack: fab
+  name: Course materials
+  url: https://github.com/chenchenzi/hg4052-materials
 url_code: ""
 url_pdf: ""
 url_slides: ""
