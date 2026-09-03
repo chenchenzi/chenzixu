@@ -36,8 +36,8 @@ image:
 links:
 - icon: desktop
   icon_pack: fas
-  name: Week 3 slides
-  url: https://chenzixu.rbind.io/slides/speech-synthesis/week03.html
+  name: Week 4 slides
+  url: https://chenzixu.rbind.io/slides/speech-synthesis/week04.html
 - icon: github
   icon_pack: fab
   name: Course materials
@@ -115,11 +115,13 @@ a.hg-card:hover .hg-thumb,a.hg-card:focus-visible .hg-thumb{opacity:1;transform:
     <span class="hg-topic">Acoustics primer: sampling, aliasing, the Fourier idea, spectrograms, source–filter</span>
     <span class="hg-go">View slides →</span>
   </a>
-  <div class="hg-card hg-soon">
+  <a class="hg-card" href="https://chenzixu.rbind.io/slides/speech-synthesis/week04.html">
+    <span class="hg-thumb" style="background-image:url('thumb-week04.jpg')"></span>
     <span class="hg-week">Week 4</span>
     <span class="hg-dates">31 Aug – 4 Sep</span>
     <span class="hg-topic">From waveform to features: mel spectrograms, MFCCs, F0</span>
-  </div>
+    <span class="hg-go">View slides →</span>
+  </a>
   <div class="hg-card hg-soon">
     <span class="hg-week">Week 5</span>
     <span class="hg-dates">7 – 11 Sep</span>
