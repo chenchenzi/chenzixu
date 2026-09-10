@@ -36,8 +36,8 @@ image:
 links:
 - icon: desktop
   icon_pack: fas
-  name: Week 4 slides
-  url: https://chenzixu.rbind.io/slides/speech-synthesis/week04.html
+  name: Week 5 slides
+  url: https://chenzixu.rbind.io/slides/speech-synthesis/week05.html
 - icon: github
   icon_pack: fab
   name: Course materials
@@ -122,11 +122,13 @@ a.hg-card:hover .hg-thumb,a.hg-card:focus-visible .hg-thumb{opacity:1;transform:
     <span class="hg-topic">From waveform to features: mel spectrograms, MFCCs, F0</span>
     <span class="hg-go">View slides →</span>
   </a>
-  <div class="hg-card hg-soon">
+  <a class="hg-card" href="https://chenzixu.rbind.io/slides/speech-synthesis/week05.html">
+    <span class="hg-thumb" style="background-image:url('thumb-week05.jpg')"></span>
     <span class="hg-week">Week 5</span>
     <span class="hg-dates">7 – 11 Sep</span>
     <span class="hg-topic">ASR I: variability, template matching, dynamic time warping, word error rate</span>
-  </div>
+    <span class="hg-go">View slides →</span>
+  </a>
   <div class="hg-card hg-soon">
     <span class="hg-week">Week 6</span>
     <span class="hg-dates">14 – 18 Sep</span>
