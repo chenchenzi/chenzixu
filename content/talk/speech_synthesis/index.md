@@ -36,8 +36,8 @@ image:
 links:
 - icon: desktop
   icon_pack: fas
-  name: Week 5 slides
-  url: https://chenzixu.rbind.io/slides/speech-synthesis/week05.html
+  name: Week 6 slides
+  url: https://chenzixu.rbind.io/slides/speech-synthesis/week06.html
 - icon: github
   icon_pack: fab
   name: Course materials
@@ -129,11 +129,13 @@ a.hg-card:hover .hg-thumb,a.hg-card:focus-visible .hg-thumb{opacity:1;transform:
     <span class="hg-topic">ASR I: variability, template matching, dynamic time warping, word error rate</span>
     <span class="hg-go">View slides →</span>
   </a>
-  <div class="hg-card hg-soon">
+  <a class="hg-card" href="https://chenzixu.rbind.io/slides/speech-synthesis/week06.html">
+    <span class="hg-thumb" style="background-image:url('thumb-week06.jpg')"></span>
     <span class="hg-week">Week 6</span>
     <span class="hg-dates">14 – 18 Sep</span>
     <span class="hg-topic">ASR II: HMMs, Viterbi, lexicons &amp; n-gram language models · Singlish case study</span>
-  </div>
+    <span class="hg-go">View slides →</span>
+  </a>
   <div class="hg-card hg-soon">
     <span class="hg-week">Week 7</span>
     <span class="hg-dates">21 – 25 Sep</span>
