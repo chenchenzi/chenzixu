@@ -36,8 +36,8 @@ image:
 links:
 - icon: desktop
   icon_pack: fas
-  name: Week 6 slides
-  url: https://chenzixu.rbind.io/slides/speech-synthesis/week06.html
+  name: Week 7 slides
+  url: https://chenzixu.rbind.io/slides/speech-synthesis/week07.html
 - icon: github
   icon_pack: fab
   name: Course materials
@@ -136,11 +136,13 @@ a.hg-card:hover .hg-thumb,a.hg-card:focus-visible .hg-thumb{opacity:1;transform:
     <span class="hg-topic">ASR II: HMMs, Viterbi, lexicons &amp; n-gram language models · Singlish case study</span>
     <span class="hg-go">View slides →</span>
   </a>
-  <div class="hg-card hg-soon">
+  <a class="hg-card" href="https://chenzixu.rbind.io/slides/speech-synthesis/week07.html">
+    <span class="hg-thumb" style="background-image:url('thumb-week07.jpg')"></span>
     <span class="hg-week">Week 7</span>
     <span class="hg-dates">21 – 25 Sep</span>
     <span class="hg-topic">Neural networks primer: from neurons to vowel classifiers</span>
-  </div>
+    <span class="hg-go">View slides →</span>
+  </a>
   <div class="hg-recess">Recess week · 28 Sep – 4 Oct</div>
   <div class="hg-card hg-soon">
     <span class="hg-week">Week 8</span>
