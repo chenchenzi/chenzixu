@@ -298,7 +298,7 @@
       <p class="step rise d3" style="font-size:21px">y = σ( w · x + b )</p>
       <ul class="biglist" style="font-size:19px;line-height:1.8;margin-top:8px">
         <li class="rise d3">x is the input (say a vowel's F1 and F2), w the weights: the dot product w · x scores <b>similarity to a learned pattern</b>, Week 5's template idea with the pattern learned</li>
-        <li class="rise d4">The bias b shifts the threshold; the squash σ turns the score into a value between 0 and 1</li>
+        <li class="rise d4">The squash σ turns the score into a value between 0 and 1; the <b>bias b</b> sets how much evidence the neuron needs: σ gives exactly 0.5 when w · x + b = 0</li>
         <li class="rise d5">Read the output as graded evidence: <b>how /i/-like is this vowel?</b></li>
       </ul>
     </div>
@@ -521,22 +521,14 @@
     <div class="lab">The chain rule on one weight: three functions in a row, three slopes multiplied</div>
     <svg id="fig-chain" viewBox="0 0 1080 206" style="width:100%;height:196px"></svg>
     <p style="font:400 13.5px/1.5 var(--sans);color:var(--faint);margin:2px 0 4px">Illustrative values: input x = 2 and weight w = 0.5 give z = 1, so y = σ(1) ≈ 0.73 (bias left out). σ: the sigmoid, 1 / (1 + e<sup>−z</sup>).</p>
+    <p style="font:400 15.5px/1.5 var(--sans);color:var(--ink);margin:0 0 4px"><b>So what:</b> the slope is negative, so raising w lowers the loss. One gradient-descent step (w ← w − η · slope, with η = <span id="ch-eta">0.1</span>) moves w from <span id="ch-w0">0.50</span> to <span id="ch-w1">0.55</span>; P(correct) rises from <span id="ch-y0">0.73</span> to <span id="ch-y1">0.75</span> and the loss falls from <span id="ch-L0">0.31</span> to <span id="ch-L1">0.29</span>.</p>
   </div>
-  <div class="cols" style="margin-top:16px;gap:28px">
-    <div class="grow">
-      <ul class="biglist" style="font-size:19px;line-height:1.75">
-        <li class="rise d3">A network is functions inside functions; the <b>chain rule</b> says slopes of nested functions multiply</li>
-        <li class="rise d3">Backpropagation is the bookkeeping that computes every weight's slope in one backward sweep, <b>reusing shared work</b></li>
-        <li class="rise d4">You met that trick twice already: dynamic programming</li>
-      </ul>
-      <p class="sub rise d5" style="font-size:15px;color:var(--faint);margin-top:4px">For the curious: two extra slides on the chain rule, with worked examples, in the appendix at the end of the deck.</p>
-    </div>
-    <div class="card rise d4" style="width:380px;padding:18px 22px;border-left:3px solid var(--teal)">
-      <div class="tag">IN PRACTICE</div>
-      <p class="mono" style="font-size:16px;color:var(--ink)">loss.backward()</p>
-      <p style="font:400 15.5px/1.55 var(--sans);color:var(--muted);margin-top:8px">One line: the library differentiates the whole network for you. Understanding the slope is your job; computing a million of them is the machine's.</p>
-    </div>
-  </div>
+  <ul class="biglist" style="font-size:19px;line-height:1.6;margin-top:14px">
+    <li class="rise d3">A network is functions inside functions; the <b>chain rule</b> says slopes of nested functions multiply</li>
+    <li class="rise d3">Backpropagation starts at the loss and works backwards, giving every weight its slope in one sweep; in code it is one line, <span class="mono" style="font-size:17px">loss.backward()</span></li>
+    <li class="rise d4"><b>The trick:</b> each slope is computed once, stored, and reused by the layer before it. DTW and Viterbi used the same trick: each table cell is filled once, from cells already filled</li>
+  </ul>
+  <p class="sub rise d5" style="font-size:14.5px;color:var(--faint);margin-top:4px">For the curious: the appendix shows the reuse with two weights (two extra slides at the end of the deck).</p>
 </section>
 
 <!-- 19 ▸ CLASSIFIER SETUP -->
@@ -939,12 +931,12 @@ whole    <span style="color:var(--coral);font-weight:600">8</span> × <span styl
   <div class="panel rise d2" style="padding:12px 20px 6px">
     <div class="lab">One hidden neuron, one output neuron: values forward on top, slopes of the loss backward underneath</div>
     <svg id="fig-chainB" viewBox="0 0 1080 262" style="width:100%;height:246px"></svg>
-    <p style="font:400 13.5px/1.5 var(--sans);color:var(--faint);margin:2px 0 4px">Illustrative values: input x = 2, w<sub>1</sub> = 0.5, w<sub>2</sub> = 1.5 (biases left out). Local slopes, as on the backpropagation slide: y(1 − y) for the sigmoid σ, −1/y for −log.</p>
+    <p style="font:400 13.5px/1.5 var(--sans);color:var(--faint);margin:2px 0 4px">Illustrative values: input <i>x</i> = 2, <i>w</i><sub>1</sub> = 0.5, <i>w</i><sub>2</sub> = 1.5 (biases left out). Local slopes, as on the backpropagation slide: <i>y</i>(1 − <i>y</i>) for the sigmoid σ, −1/<i>y</i> for −log.</p>
   </div>
   <ul class="biglist" style="font-size:18px;line-height:1.6;margin-top:14px">
     <li class="rise d3">Forward, left to right: compute every value. Backward, right to left: start at the loss with slope 1 and multiply by <b>one local slope per step</b></li>
-    <li class="rise d4">A weight's slope = the slope arriving at its weighted sum × the input it multiplies: for w<sub>2</sub>, <span id="chB-gz2">−0.250</span> × <span id="chB-h">0.731</span></li>
-    <li class="rise d4">The slope for w<sub>1</sub> reuses the <span id="chB-gz2b">−0.250</span> already computed for w<sub>2</sub>: nothing is computed twice, so one backward sweep gives every weight's slope</li>
+    <li class="rise d4">A weight's slope = the slope arriving at its weighted sum × the input it multiplies: for <i>w</i><sub>2</sub>, <span id="chB-gz2">−0.250</span> × <span id="chB-h">0.731</span></li>
+    <li class="rise d4">The slope for <i>w</i><sub>1</sub> reuses the <span id="chB-gz2b">−0.250</span> already computed for <i>w</i><sub>2</sub>: nothing is computed twice, so one backward sweep gives every weight's slope</li>
   </ul>
   <p class="sub rise d5" style="font-size:14.5px;color:var(--faint);margin-top:8px">When a value feeds several later boxes, the slopes arriving along each path are added.</p>
 </section>
@@ -1133,6 +1125,9 @@ whole    <span style="color:var(--coral);font-weight:600">8</span> × <span styl
     var s1=x, s2=y*(1-y), s3=-1/y, prod=s1*s2*s3;
     var yn=1/(1+Math.exp(-(w+0.001)*x)), nud=(-Math.log(yn)-L)/0.001;
     function fm(v,d){ return v.toFixed(d).replace('-','\u2212'); }
+    // so what: one gradient-descent step with this slope (shown under the figure)
+    var eta=0.1, w1=w-eta*prod, y1=1/(1+Math.exp(-w1*x)), L1=-Math.log(y1);
+    [['ch-eta',String(eta)],['ch-w0',w.toFixed(2)],['ch-w1',w1.toFixed(2)],['ch-y0',y.toFixed(2)],['ch-y1',y1.toFixed(2)],['ch-L0',L.toFixed(2)],['ch-L1',L1.toFixed(2)]].forEach(function(p){ var e=document.getElementById(p[0]); if(e) e.textContent=p[1]; });
     var s='<defs><marker id="charr" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0 0 L7.5 3 L0 6 z" fill="var(--coral)"/></marker>';
     s+='<marker id="charb" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0 0 L7.5 3 L0 6 z" fill="var(--gold)"/></marker></defs>';
     var X=[80,390,690,990], Y=58, BW=128, BH=48;
@@ -1203,13 +1198,15 @@ whole    <span style="color:var(--coral);font-weight:600">8</span> × <span styl
     var gy=-1/F.y, gz2=gy*F.y*(1-F.y), gw2=gz2*F.h, gh=gz2*w2, gz1=gh*F.h*(1-F.h), gw1=gz1*x;
     var nud=(fwd(w1+0.001,w2).L-F.L)/0.001;
     function fm(v,d){ return v.toFixed(d).replace('-','−'); }
-    function sb(t,n){ return t+'<tspan baseline-shift="sub" font-size="72%">'+n+'</tspan>'; }
+    // variable names in italics, so the letter x never looks like the times sign ×
+    function iv(t){ return '<tspan font-style="italic">'+t+'</tspan>'; }
+    function sb(t,n){ return iv(t)+'<tspan baseline-shift="sub" font-size="72%">'+n+'</tspan>'; }
     var X=[80,264,448,632,816,1000], Y=118, BW=116, BH=44, Yb=198;
     var s='<defs><marker id="chBc" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0 0 L7.5 3 L0 6 z" fill="var(--coral)"/></marker>'
          +'<marker id="chBt" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0 0 L7.5 3 L0 6 z" fill="var(--teal)"/></marker>'
          +'<marker id="chBg" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0 0 L7.5 3 L0 6 z" fill="var(--gold)"/></marker></defs>';
-    var nodes=[['x = '+x,'input','var(--ink)'],[sb('z','1')+' = '+F.z1.toFixed(2),'weighted sum','var(--ink)'],['h = '+F.h.toFixed(2),'squash','var(--ink)'],
-               [sb('z','2')+' = '+F.z2.toFixed(2),'weighted sum','var(--ink)'],['y = '+F.y.toFixed(2),'squash: P(correct)','var(--ink)'],['L = '+F.L.toFixed(2),'loss','var(--coral)']];
+    var nodes=[[iv('x')+' = '+x,'input','var(--ink)'],[sb('z','1')+' = '+F.z1.toFixed(2),'weighted sum','var(--ink)'],[iv('h')+' = '+F.h.toFixed(2),'squash','var(--ink)'],
+               [sb('z','2')+' = '+F.z2.toFixed(2),'weighted sum','var(--ink)'],[iv('y')+' = '+F.y.toFixed(2),'squash: P(correct)','var(--ink)'],[iv('L')+' = '+F.L.toFixed(2),'loss','var(--coral)']];
     // each neuron = a weighted sum, then a squash: shade the two neurons
     [[1,2,'hidden neuron'],[3,4,'output neuron']].forEach(function(gp){
       var gx=X[gp[0]]-BW/2-14, gw=X[gp[1]]+BW/2+14-gx;
@@ -1229,7 +1226,7 @@ whole    <span style="color:var(--coral);font-weight:600">8</span> × <span styl
       s+='<text x="'+((xa+xb)/2)+'" y="'+(Y+21)+'" text-anchor="middle" font-family="IBM Plex Mono" font-size="13.5" fill="var(--coral)">'+ops[k]+'</text>';
     }
     // the two weights, joining their multiplications, with their slopes above
-    [[172,'1',w1,gz1,3,'× '+x+' (x)','',gw1],[540,'2',w2,gz2,3,'× '+F.h.toFixed(3)+' (h)','',gw2]].forEach(function(wt){
+    [[172,'1',w1,gz1,3,'× '+x+' ('+iv('x')+')','',gw1],[540,'2',w2,gz2,3,'× '+F.h.toFixed(3)+' ('+iv('h')+')','',gw2]].forEach(function(wt){
       var g=wt[0];
       s+='<rect x="'+(g-50)+'" y="27" width="100" height="27" rx="8" fill="var(--panel)" stroke="var(--teal)" stroke-width="2"/>';
       s+='<text x="'+g+'" y="45" text-anchor="middle" font-family="IBM Plex Mono" font-size="14.5" font-weight="600" fill="var(--teal)">'+sb('w',wt[1])+' = '+wt[2]+'</text>';
@@ -1238,16 +1235,16 @@ whole    <span style="color:var(--coral);font-weight:600">8</span> × <span styl
     });
     // backward row: the slope of L for each box, filled right to left
     var back=[null, fm(gz1,3), fm(gh,3), fm(gz2,3), fm(gy,3), '1'];
-    s+='<text x="'+X[0]+'" y="'+(Yb-2)+'" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="var(--gold)">slope of L</text>';
+    s+='<text x="'+X[0]+'" y="'+(Yb-2)+'" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="var(--gold)">slope of '+iv('L')+'</text>';
     s+='<text x="'+X[0]+'" y="'+(Yb+14)+'" text-anchor="middle" font-family="Inter" font-size="12" fill="var(--gold)">for each box ←</text>';
     for(var k=1;k<6;k++) s+='<text x="'+X[k]+'" y="'+(Yb+4)+'" text-anchor="middle" font-family="IBM Plex Mono" font-size="16" font-weight="700" fill="var(--gold)">'+back[k]+'</text>';
-    var mult=['× h(1 − h)','× '+sb('w','2'),'× y(1 − y)','× −1/y'];
+    var mult=['× '+iv('h')+'(1 − '+iv('h')+')','× '+sb('w','2'),'× '+iv('y')+'(1 − '+iv('y')+')','× −1/'+iv('y')];
     for(var k=1;k<5;k++){
       var xa=X[k+1]-38, xb=X[k]+40;
       s+='<line x1="'+xa+'" y1="'+(Yb-1)+'" x2="'+xb+'" y2="'+(Yb-1)+'" stroke="var(--gold)" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#chBg)"/>';
       s+='<text x="'+((xa+xb)/2)+'" y="'+(Yb+20)+'" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="var(--muted)">'+mult[k-1]+'</text>';
     }
-    s+='<text x="540" y="252" text-anchor="middle" font-family="Inter" font-size="13.5" fill="var(--muted)">nudge test for '+sb('w','1')+': (L('+sb('w','1')+' + 0.001) − L('+sb('w','1')+')) / 0.001 = '+fm(nud,3)+', the same number</text>';
+    s+='<text x="540" y="252" text-anchor="middle" font-family="Inter" font-size="13.5" fill="var(--muted)">nudge test for '+sb('w','1')+': ('+iv('L')+'('+sb('w','1')+' + 0.001) − '+iv('L')+'('+sb('w','1')+')) / 0.001 = '+fm(nud,3)+', the same number</text>';
     el.innerHTML=s;
     [['chB-gz2',fm(gz2,3)],['chB-gz2b',fm(gz2,3)],['chB-h',F.h.toFixed(3)]].forEach(function(p){ var e=document.getElementById(p[0]); if(e) e.textContent=p[1]; });
   })();
