@@ -425,8 +425,10 @@
         <table style="width:100%;border-collapse:collapse;font:500 17px var(--mono);color:var(--ink);text-align:center;margin-top:4px">
           <tr><td style="text-align:left;padding:6px 4px;border-bottom:1px solid var(--line);font:600 14px var(--sans);color:var(--muted)">vowel</td><td style="padding:6px 4px;border-bottom:1px solid var(--line)">/i/</td><td style="padding:6px 4px;border-bottom:1px solid var(--line)">/ɑ/</td><td style="padding:6px 4px;border-bottom:1px solid var(--line)">/u/</td></tr>
           <tr><td style="text-align:left;padding:6px 4px;font:600 14px var(--sans);color:var(--teal)">p (label)</td><td style="padding:6px 4px">1</td><td style="padding:6px 4px">0</td><td style="padding:6px 4px">0</td></tr>
+          <tr><td style="text-align:left;padding:6px 4px;font:600 14px var(--sans);color:var(--muted)">score z</td><td style="padding:6px 4px">2.0</td><td style="padding:6px 4px">0.7</td><td style="padding:6px 4px">0.05</td></tr>
           <tr><td style="text-align:left;padding:6px 4px;font:600 14px var(--sans);color:var(--coral)">q (softmax)</td><td style="padding:6px 4px">0.71</td><td style="padding:6px 4px">0.19</td><td style="padding:6px 4px">0.10</td></tr>
         </table>
+        <p style="font:400 14px/1.5 var(--sans);color:var(--muted);margin-top:6px">Softmax: make each score positive (e<sup>z</sup>), then divide by the total. More in the appendix.</p>
         <p style="font:500 15px/1.6 var(--mono);color:var(--ink);margin-top:12px;white-space:pre">H(p, q) = −(1 · log 0.71
            + 0 · log 0.19
            + 0 · log 0.10)
@@ -941,6 +943,46 @@ whole    <span style="color:var(--coral);font-weight:600">8</span> × <span styl
   <p class="sub rise d5" style="font-size:14.5px;color:var(--faint);margin-top:8px">When a value feeds several later boxes, the slopes arriving along each path are added.</p>
 </section>
 
+<!-- ▸ APPENDIX: SOFTMAX (extra, not core) -->
+<section class="slide" data-section="Extra: softmax">
+  <div class="kicker rise d1" style="color:var(--teal)">Appendix: extra for the curious · not core</div>
+  <h2 class="rise d1">Softmax: from scores to probabilities</h2>
+  <div class="cols" style="gap:30px">
+    <div class="grow">
+      <div class="panel rise d2" style="padding:14px 18px">
+        <div class="lab">One token of /i/, step by step</div>
+        <table style="width:100%;border-collapse:collapse;font:500 16px var(--mono);color:var(--ink);text-align:center;margin-top:2px">
+          <tr><td style="text-align:left;padding:5px 4px;font:600 13.5px var(--sans);color:var(--muted);border-bottom:1px solid var(--line)"></td><td style="padding:5px 4px;border-bottom:1px solid var(--line)">/i/</td><td style="padding:5px 4px;border-bottom:1px solid var(--line)">/ɑ/</td><td style="padding:5px 4px;border-bottom:1px solid var(--line)">/u/</td><td style="padding:5px 4px;border-bottom:1px solid var(--line);color:var(--muted)">total</td></tr>
+          <tr><td style="text-align:left;padding:5px 4px;font:600 13.5px var(--sans);color:var(--muted)">1. score <i>z</i></td><td style="padding:5px 4px" id="sm-z0">2.0</td><td style="padding:5px 4px" id="sm-z1">0.7</td><td style="padding:5px 4px" id="sm-z2">0.05</td><td style="padding:5px 4px"></td></tr>
+          <tr><td style="text-align:left;padding:5px 4px;font:600 13.5px var(--sans);color:var(--muted)">2. make positive: e<sup><i>z</i></sup></td><td style="padding:5px 4px" id="sm-e0">7.39</td><td style="padding:5px 4px" id="sm-e1">2.01</td><td style="padding:5px 4px" id="sm-e2">1.05</td><td style="padding:5px 4px;color:var(--muted)" id="sm-t">10.45</td></tr>
+          <tr><td style="text-align:left;padding:5px 4px;font:600 13.5px var(--sans);color:var(--muted);color:var(--coral)">3. divide by the total</td><td style="padding:5px 4px;color:var(--coral);font-weight:600" id="sm-p0">0.71</td><td style="padding:5px 4px;color:var(--coral);font-weight:600" id="sm-p1">0.19</td><td style="padding:5px 4px;color:var(--coral);font-weight:600" id="sm-p2">0.10</td><td style="padding:5px 4px;color:var(--muted)">1.00</td></tr>
+          <tr><td style="text-align:left;padding:5px 4px;font:600 13.5px var(--sans);color:var(--muted);border-top:1px solid var(--line)">add 10 to every score</td><td style="padding:5px 4px;border-top:1px solid var(--line)" id="sm-zs0">12.0</td><td style="padding:5px 4px;border-top:1px solid var(--line)" id="sm-zs1">10.7</td><td style="padding:5px 4px;border-top:1px solid var(--line)" id="sm-zs2">10.05</td><td style="padding:5px 4px;border-top:1px solid var(--line)"></td></tr>
+          <tr><td style="text-align:left;padding:5px 4px;font:600 13.5px var(--sans);color:var(--muted);color:var(--coral)">softmax again</td><td style="padding:5px 4px;color:var(--coral);font-weight:600" id="sm-ps0">0.71</td><td style="padding:5px 4px;color:var(--coral);font-weight:600" id="sm-ps1">0.19</td><td style="padding:5px 4px;color:var(--coral);font-weight:600" id="sm-ps2">0.10</td><td style="padding:5px 4px;color:var(--muted)">same</td></tr>
+        </table>
+      </div>
+      <ul class="biglist rise d3" style="font-size:17.5px;line-height:1.55;margin-top:12px">
+        <li>Why e<sup><i>z</i></sup>: scores can be negative, and e<sup><i>z</i></sup> is always positive (e<sup>−1</sup> ≈ 0.37)</li>
+        <li>Only differences matter: a score 1 higher gives about 2.72 times the probability; adding the same number to every score changes nothing</li>
+        <li>The order stays the same: the highest score gets the highest probability</li>
+      </ul>
+    </div>
+    <div class="rise d3" style="width:400px">
+      <div class="formula" style="display:flex;align-items:center;gap:14px;font-size:22px;padding:14px 20px">P(<i>k</i>) =<span style="display:inline-flex;flex-direction:column;align-items:center;line-height:1.25"><span style="color:var(--teal);font-weight:600;padding:0 6px 4px">e<sup><i>z</i><sub><i>k</i></sub></sup></span><span style="color:var(--coral);font-weight:600;border-top:2px solid var(--ink);padding:5px 6px 0">Σ<sub><i>j</i></sub> e<sup><i>z</i><sub><i>j</i></sub></sup></span></span></div>
+      <div style="font-size:15px;line-height:1.55;margin-top:8px;color:var(--muted)">
+        <p><b style="color:var(--ink)"><i>z</i><sub><i>k</i></sub></b>: the top layer's score for class <i>k</i></p>
+        <p><b style="color:var(--teal);font-weight:600">e<sup><i>z</i><sub><i>k</i></sub></sup></b> (top): that score made positive</p>
+        <p><b style="color:var(--coral);font-weight:600">Σ<sub><i>j</i></sub> e<sup><i>z</i><sub><i>j</i></sub></sup></b> (bottom): every class's positive score, added</p>
+        <p><b style="color:var(--ink)">P(<i>k</i>)</b>: class <i>k</i>'s share of the total</p>
+      </div>
+      <div class="card" style="margin-top:12px;padding:14px 18px;border-left:3px solid var(--gold)">
+        <div class="tag" style="color:var(--gold);border-color:rgba(176,124,20,.4)">TWO CLASSES = THE SIGMOID</div>
+        <p style="font:400 15px/1.55 var(--sans);color:var(--muted)">With scores (<i>z</i>, 0): e<sup><i>z</i></sup> ÷ (e<sup><i>z</i></sup> + 1) = 1 ÷ (1 + e<sup>−<i>z</i></sup>) = σ(<i>z</i>), the neuron's squash. One sigmoid neuron is a two-class softmax.</p>
+      </div>
+      <p style="font:400 13.5px/1.5 var(--sans);color:var(--faint);margin-top:8px">Training with cross-entropy is what makes these numbers useful probabilities; before training they still sum to 1 but mean little.</p>
+    </div>
+  </div>
+</section>
+
 <script>
 (function(){
   var ANIM={}; window.HG=window.HG||{};
@@ -1247,6 +1289,19 @@ whole    <span style="color:var(--coral);font-weight:600">8</span> × <span styl
     s+='<text x="540" y="252" text-anchor="middle" font-family="Inter" font-size="13.5" fill="var(--muted)">nudge test for '+sb('w','1')+': ('+iv('L')+'('+sb('w','1')+' + 0.001) − '+iv('L')+'('+sb('w','1')+')) / 0.001 = '+fm(nud,3)+', the same number</text>';
     el.innerHTML=s;
     [['chB-gz2',fm(gz2,3)],['chB-gz2b',fm(gz2,3)],['chB-h',F.h.toFixed(3)]].forEach(function(p){ var e=document.getElementById(p[0]); if(e) e.textContent=p[1]; });
+  })();
+
+  // extra: softmax table computed from the scores
+  (function(){
+    if(!document.getElementById('sm-z0')) return;
+    var z=[2.0,0.7,0.05], shift=10;
+    function soft(v){ var e=v.map(Math.exp), t=e.reduce(function(a,b){return a+b;},0); return {e:e,t:t,p:e.map(function(x){return x/t;})}; }
+    var a=soft(z), b=soft(z.map(function(v){return v+shift;}));
+    function put(id,v){ var el=document.getElementById(id); if(el) el.textContent=v; }
+    function fz(v){ var t=String(+v.toFixed(2)); return t.indexOf('.')<0 ? t+'.0' : t; }
+    z.forEach(function(v,i){ put('sm-z'+i, fz(v)); put('sm-e'+i, a.e[i].toFixed(2)); put('sm-p'+i, a.p[i].toFixed(2));
+      put('sm-zs'+i, fz(v+shift)); put('sm-ps'+i, b.p[i].toFixed(2)); });
+    put('sm-t', a.t.toFixed(2));
   })();
 
   // vowel figures: Hillenbrand et al. (1995), via the phonTools R package; /i ɑ u/ tokens as [F1, F2] in Hz.
