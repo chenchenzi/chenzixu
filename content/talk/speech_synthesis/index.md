@@ -36,8 +36,8 @@ image:
 links:
 - icon: desktop
   icon_pack: fas
-  name: Week 8 slides
-  url: https://chenzixu.rbind.io/slides/speech-synthesis/week08.html
+  name: Week 9 slides
+  url: https://chenzixu.rbind.io/slides/speech-synthesis/week09.html
 - icon: github
   icon_pack: fab
   name: Course materials
@@ -151,11 +151,13 @@ a.hg-card:hover .hg-thumb,a.hg-card:focus-visible .hg-thumb{opacity:1;transform:
     <span class="hg-topic">End-to-end neural ASR: CTC, attention, wav2vec 2.0, Whisper</span>
     <span class="hg-go">View slides →</span>
   </a>
-  <div class="hg-card hg-soon">
+  <a class="hg-card" href="https://chenzixu.rbind.io/slides/speech-synthesis/week09.html">
+    <span class="hg-thumb" style="background-image:url('thumb-week09.jpg')"></span>
     <span class="hg-week">Week 9</span>
     <span class="hg-dates">12 – 16 Oct</span>
     <span class="hg-topic">Evaluation, bias &amp; forced alignment · speech corpora and ethics</span>
-  </div>
+    <span class="hg-go">View slides →</span>
+  </a>
   <div class="hg-card hg-soon">
     <span class="hg-week">Week 10</span>
     <span class="hg-dates">19 – 23 Oct</span>
