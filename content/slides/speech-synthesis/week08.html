@@ -458,7 +458,7 @@
     <li class="rise d3">Known in training: the transcript “no”. Unknown: which frames are n and which are o</li>
     <li class="rise d3">Rows: add a ∅ before, between and after the letters. Columns: the frames</li>
     <li class="rise d4">A path: left to right, one cell per frame. Each step: stay (the label lasts), move down one, or skip a ∅ between different letters</li>
-    <li class="rise d4"><span id="fwd-npaths">210</span> such paths in this example; the table adds them all in one pass</li>
+    <li class="rise d4"><span id="fwd-npaths">210</span> such paths in this example (how to count them: appendix); the table adds them all in one pass</li>
   </ul>
 </section>
 
@@ -729,11 +729,20 @@
   <div class="cards rise d2" style="gap:20px">
     <div class="card" style="border-top:3px solid var(--muted)">
       <div class="tag" style="color:var(--muted);border-color:var(--line)">CLASSICAL PIPELINE · LOST</div>
-      <p style="font:400 17px/1.7 var(--sans)">Every part can be inspected · a bad pronunciation is fixed by editing one lexicon line · phonetic knowledge entered each module directly</p>
+      <ul class="biglist" style="font-size:17px;line-height:1.55">
+        <li>Every part can be inspected</li>
+        <li>A bad pronunciation is fixed by editing one lexicon line</li>
+        <li>Phonetic knowledge entered each module directly</li>
+      </ul>
     </div>
     <div class="card" style="border-top:3px solid var(--teal)">
       <div class="tag">END TO END · GAINED</div>
-      <p style="font:400 17px/1.7 var(--sans)">Lower error rates, given enough training data · coarticulation modelled, not assumed away · new languages without hand-built lexicons · one model to deploy</p>
+      <ul class="biglist" style="font-size:17px;line-height:1.55">
+        <li>Lower error rates, given enough training data</li>
+        <li>Coarticulation modelled, not assumed away</li>
+        <li>New languages without hand-built lexicons</li>
+        <li>One model to deploy</li>
+      </ul>
     </div>
   </div>
   <div class="panel rise d4" style="margin-top:22px;border-left:3px solid var(--coral)">
@@ -931,9 +940,90 @@
   <div class="ansbox rise d3"><span class="en">EX 8.2</span>
     <p>Job 1: a label for frames that start <b>no new letter</b> (silence, transitions, the middle of a sound). Job 2: a <b>separator</b> that keeps real double letters apart. Without ∅, repeats always merge, so words with a double letter (“book”, “hello”, “lorry”) cannot be output, and silent frames must be labelled with some letter.</p></div>
   <div class="ansbox rise d4"><span class="en">EX 8.3</span>
-    <p>First: DTW's path is <b>hard</b> (each frame of one recording is matched to specific frames of the other), while an attention row is <b>soft</b> (a probability distribution; every frame gets some weight). Second: DTW's monotonic shape is <b>fixed by a rule</b>, while attention's near-diagonal shape is <b>learned from data</b>, and nothing stops it from looking back or jumping. (Also acceptable: DTW compares two given signals; attention aligns an output being generated to its input.)</p></div>
+    <p>First: DTW's path is <b>hard</b> (each frame is matched to specific frames), an attention row is <b>soft</b> (a probability distribution over frames). Second: DTW's shape is <b>fixed by a rule</b>; attention's near-diagonal shape is <b>learned from data</b>, and nothing stops it from looking back. (Also acceptable: DTW compares two given signals; attention aligns an output being generated to its input.)</p></div>
   <div class="ansbox rise d5"><span class="en">EX 8.4</span>
-    <p>Reason 1: the decoder is a strong English language model, so unclear audio becomes frequent English words and names. Reason 2: “makan” is probably rare in the training transcripts, so its word pieces score low against look-alikes. One remedy: <b>fine-tune on Singapore English speech</b> (for example the NSC), which adapts what the model hears (the encoder) and what it expects (the decoder); the practical's A/B is one before-and-after example.</p></div>
+    <p>Reason 1: the decoder is a strong English language model, so unclear audio becomes frequent English words. Reason 2: “makan” is probably rare in the training transcripts, so its word pieces score low. One remedy: <b>fine-tune on Singapore English speech</b> (for example the NSC), adapting what the model hears (encoder) and expects (decoder); the practical's A/B is one before-and-after example.</p></div>
+</section>
+
+<section class="slide">
+  <div class="kicker rise d1" style="color:var(--teal)">Appendix: worked answers</div>
+  <h2 class="rise d1">Answer: the stretch</h2>
+  <p class="sub rise d1" style="font-size:18px;margin-top:4px">Two frames; on both, P(a) = 0.4 and P(∅) = 0.6 (illustrative numbers)</p>
+  <div class="cols" style="gap:36px;margin-top:14px;align-items:flex-start">
+    <div class="panel rise d2" style="width:470px;padding:12px 18px">
+      <div class="lab">Every path, collapsed</div>
+      <table style="width:100%;border-collapse:collapse;font:500 18px var(--mono);color:var(--ink)">
+        <tr style="font:600 13px var(--sans);color:var(--muted)"><td style="padding:6px 14px;border-bottom:1px solid var(--line)">path</td><td style="padding:6px 14px;border-bottom:1px solid var(--line)">collapses to</td><td style="padding:6px 14px;border-bottom:1px solid var(--line);text-align:right">probability</td></tr>
+        <tbody id="st-rows"></tbody>
+      </table>
+    </div>
+    <div class="grow">
+      <ul class="biglist rise d3" style="font-size:19px;line-height:1.6">
+        <li><b>Greedy</b> keeps the most probable label in each frame: ∅ ∅, the single best path (<span id="st-best">0.36</span>), so it outputs nothing</li>
+        <li><b>Summing paths per transcript</b>: “a” = <span id="st-sum">0.16 + 0.24 + 0.24 = 0.64</span>, more than nothing (<span id="st-none">0.36</span>)</li>
+        <li>A search over transcripts (beam search) picks “a”</li>
+        <li><b>The best path is not always the best transcript</b>: three weaker paths share “a” and together win</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ▸ APPENDIX: COUNTING THE PATHS (extra, not core) -->
+<section class="slide" data-section="Extra: counting the paths">
+  <div class="kicker rise d1" style="color:var(--teal)">Appendix: extra for the curious · not core</div>
+  <h2 class="rise d1">Counting the paths: stars and bars</h2>
+  <div class="panel rise d2" style="padding:8px 18px 2px">
+    <svg id="fig-sb" viewBox="0 0 1080 250" style="width:100%;height:246px"></svg>
+  </div>
+  <div class="cols" style="gap:28px;margin-top:10px">
+    <div class="grow">
+      <ul class="biglist rise d3" style="font-size:17.5px;line-height:1.55">
+        <li>Every path that spells “no” has five blocks, in order: ∅s, n's, ∅s, o's, ∅s</li>
+        <li>n and o need one frame each: 8 − 2 = <b>6 spare frames</b></li>
+        <li>Spare frames <b class="teal">●</b>, walls between blocks <b class="accent">|</b>: 6 + 4 = 10 symbols</li>
+        <li>Each path is one choice of which 4 of the 10 positions hold the walls</li>
+      </ul>
+    </div>
+    <div class="card rise d4" style="width:430px;padding:16px 22px;border-left:3px solid var(--teal)">
+      <div style="font:500 22px/1.4 var(--sans);color:var(--ink);display:flex;align-items:center;gap:10px"><span>C(<b class="teal">10</b>, <b class="accent">4</b>) =</span>
+        <span style="display:inline-flex;flex-direction:column;align-items:center;font-size:18px;line-height:1.25"><span style="padding:0 6px 3px;border-bottom:2px solid var(--ink)">10 × 9 × 8 × 7</span><span style="padding:3px 6px 0">4 × 3 × 2 × 1</span></span>
+        <span>= <b>210</b></span></div>
+      <p style="font:400 15px/1.5 var(--sans);color:var(--muted);margin-top:6px"><b>C(n, k)</b>, “n choose k”: the number of ways to pick k positions out of n · <b class="teal">10</b>: positions (6 ● + 4 |) · <b class="accent">4</b>: positions that hold a wall</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="kicker rise d1" style="color:var(--teal)">Appendix: extra for the curious · not core</div>
+  <h2 class="rise d1">Any word, any length</h2>
+  <div class="cols" style="gap:28px;margin-top:4px">
+    <div class="grow">
+      <div class="card rise d2" style="padding:16px 22px;border-left:3px solid var(--teal)">
+        <div style="font:500 24px/1.5 var(--sans);color:var(--ink)">paths = C(<b class="teal">T</b> + <b class="accent">U</b> − <b class="gold">R</b>, 2<b class="accent">U</b>)</div>
+        <p style="font:400 15.5px/1.55 var(--sans);color:var(--muted);margin-top:6px"><b class="teal">T</b>: frames · <b class="accent">U</b>: letters · <b class="gold">R</b>: double letters, like the oo of “book” · a word of U letters has 2U + 1 blocks, so 2U walls; the U letter blocks and the R ∅s between double letters need a frame each</p>
+      </div>
+      <table class="rise d3" style="margin-top:14px;width:100%;border-collapse:collapse;font:500 16px var(--mono);color:var(--ink)">
+        <tr style="font:600 13px var(--sans);color:var(--muted)"><td style="padding:4px 8px;border-bottom:1px solid var(--line)">word</td><td style="padding:4px 8px;border-bottom:1px solid var(--line)">T, U, R</td><td style="padding:4px 8px;border-bottom:1px solid var(--line)">formula</td><td style="padding:4px 8px;border-bottom:1px solid var(--line);text-align:right">paths</td><td style="padding:4px 8px;border-bottom:1px solid var(--line);text-align:right">counted one by one</td></tr>
+        <tbody id="sb-rows"></tbody>
+      </table>
+    </div>
+    <div style="width:420px">
+      <div class="panel rise d3" style="padding:14px 18px">
+        <div class="lab">Exact count vs upper bound</div>
+        <ul class="biglist" style="font-size:16.5px;line-height:1.55">
+          <li>All label strings: 3<sup>8</sup> = <span id="sb-all">6,561</span>, the upper bound for any transcript</li>
+          <li>Strings that spell “no”: exactly <span id="sb-no">210</span></li>
+        </ul>
+      </div>
+      <div class="panel rise d4" style="padding:14px 18px;margin-top:12px">
+        <div class="lab">Why the table wins · illustrative sizes</div>
+        <ul class="biglist" style="font-size:16.5px;line-height:1.55">
+          <li>A 5-letter word in 50 frames (1 second): <span id="sb-big">29,248,649,430</span> paths (about 29 billion)</li>
+          <li>Its forward table: 11 rows × 50 columns = <span id="sb-cells">550</span> cells</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </section>
 
 <script>
@@ -1469,6 +1559,70 @@
     s+='<text x="26" y="204" font-family="Inter" font-size="13" fill="var(--muted)">base errors: '+o.S+' subs, '+o.D+' del, '+o.I+' ins ('+(o.S+o.D+o.I)+' edits, '+o.N+' words)</text>';
     s+='<text x="26" y="224" font-family="Inter" font-size="13" fill="var(--muted)">errors that stayed: (your findings here)</text>';
     el.innerHTML=s;
+  })();
+
+  (function(){
+    // stars and bars: each path that spells "no" -> block sizes -> spare frames -> dots and walls
+    var el=document.getElementById('fig-sb'); if(!el) return;
+    var B='∅', paths=['nn∅ooo∅∅','∅nnoooo∅','no∅∅∅∅∅∅'], notes=['the greedy path','skips the middle ∅','ends on six ∅s'];
+    function blocks(p){ var c=[0,0,0,0,0], st=0; p.split('').forEach(function(s){ if(st===0&&s==='n') st=1; else if(st===1&&s!=='n') st=(s==='o')?3:2; else if(st===2&&s==='o') st=3; else if(st===3&&s!=='o') st=4; c[st]++; }); return c; }
+    var bcol=['var(--muted)','var(--teal)','var(--muted)','var(--gold)','var(--muted)'], need=[0,1,0,1,0];
+    var X={path:20, blk:330, spare:560, sb:800}, s='';
+    function head(x,t){ return '<text x="'+x+'" y="20" font-family="Inter" font-size="13.5" font-weight="600" fill="var(--muted)">'+t+'</text>'; }
+    s+=head(X.path,'a path (8 frames)')+head(X.blk,'block sizes')+head(X.spare,'minus one n, one o')+head(X.sb,'● spare frame, | wall');
+    ['∅','n','∅','o','∅'].forEach(function(l,i){ [X.blk,X.spare].forEach(function(x0){ s+='<text x="'+(x0+4+i*29)+'" y="38" text-anchor="middle" font-family="IBM Plex Mono" font-size="12.5" fill="'+bcol[i]+'" opacity=".75">'+l+'</text>'; }); });
+    paths.forEach(function(p,r){
+      var y=70+r*58, c=blocks(p), sp=c.map(function(v,i){ return v-need[i]; });
+      // the path, chips coloured by block
+      var st=0, k=0;
+      p.split('').forEach(function(lab,t){
+        var cc=blocks(p.slice(0,t+1)); var bi=cc.reduce(function(a,v,i){ return v>0?i:a; },0);
+        s+='<rect x="'+(X.path+t*34)+'" y="'+(y-18)+'" width="30" height="28" rx="6" fill="var(--panel)" stroke="'+bcol[bi]+'" stroke-width="1.6"/>';
+        s+='<text x="'+(X.path+t*34+15)+'" y="'+(y+1)+'" text-anchor="middle" font-family="IBM Plex Mono" font-size="15" font-weight="600" fill="'+bcol[bi]+'">'+lab+'</text>';
+      });
+      s+='<text x="'+X.path+'" y="'+(y+26)+'" font-family="Inter" font-size="11.5" fill="var(--faint)">'+notes[r]+'</text>';
+      s+='<text x="'+(X.blk-26)+'" y="'+(y+1)+'" font-family="Inter" font-size="16" fill="var(--faint)">→</text>';
+      c.forEach(function(v,i){ s+='<text x="'+(X.blk+4+i*29)+'" y="'+(y+1)+'" text-anchor="middle" font-family="IBM Plex Mono" font-size="16" font-weight="600" fill="'+bcol[i]+'">'+v+'</text>'; });
+      s+='<text x="'+(X.spare-26)+'" y="'+(y+1)+'" font-family="Inter" font-size="16" fill="var(--faint)">→</text>';
+      sp.forEach(function(v,i){ s+='<text x="'+(X.spare+4+i*29)+'" y="'+(y+1)+'" text-anchor="middle" font-family="IBM Plex Mono" font-size="16" font-weight="600" fill="'+bcol[i]+'">'+v+'</text>'; });
+      s+='<text x="'+(X.spare+140)+'" y="'+(y+1)+'" font-family="Inter" font-size="12" fill="var(--faint)">sum '+sp.reduce(function(a,b){return a+b;},0)+'</text>';
+      s+='<text x="'+(X.sb-26)+'" y="'+(y+1)+'" font-family="Inter" font-size="16" fill="var(--faint)">→</text>';
+      var sym=[]; sp.forEach(function(v,i){ for(var j=0;j<v;j++) sym.push('●'); if(i<4) sym.push('|'); });
+      sym.forEach(function(ch,j){ s+='<text x="'+(X.sb+4+j*28)+'" y="'+(y+2)+'" text-anchor="middle" font-family="IBM Plex Mono" font-size="'+(ch==='|'?22:17)+'" font-weight="700" fill="'+(ch==='|'?'var(--coral)':'var(--teal)')+'">'+ch+'</text>'; });
+    });
+    for(var j=0;j<10;j++) s+='<text x="'+(X.sb+4+j*28)+'" y="236" text-anchor="middle" font-family="Inter" font-size="11" fill="var(--faint)">'+(j+1)+'</text>';
+    s+='<text x="'+(X.sb-26)+'" y="236" text-anchor="end" font-family="Inter" font-size="11.5" fill="var(--faint)">position</text>';
+    s+='<text x="'+X.path+'" y="236" font-family="Inter" font-size="12.5" fill="var(--muted)">every path gives one pattern of 6 ● and 4 |, and every pattern gives one path</text>';
+    el.innerHTML=s;
+
+    // the general formula, checked against counting every label string one by one
+    function C(n,k){ if(k<0||k>n) return 0; var r=1; for(var i=1;i<=k;i++) r=r*(n-k+i)/i; return Math.round(r); }
+    function collapse(a){ var o='', prev=null; a.forEach(function(x){ if(x!==prev && x!==B) o+=x; prev=x; }); return o; }
+    function brute(word,T){ var labs=[B].concat(word.split('').filter(function(v,i,a){ return a.indexOf(v)===i; })), n=Math.pow(labs.length,T), cnt=0;
+      for(var code=0; code<n; code++){ var c=code, a=[]; for(var t=0;t<T;t++){ var j=c%labs.length; c=(c-j)/labs.length; a.push(labs[j]); } if(collapse(a)===word) cnt++; } return cnt; }
+    var rows=[['no',8],['cat',6],['book',8]], html='';
+    rows.forEach(function(w){ var word=w[0], T=w[1], U=word.length, R=0; for(var i=1;i<U;i++) if(word[i]===word[i-1]) R++;
+      var f=C(T+U-R,2*U), b=brute(word,T);
+      html+='<tr><td style="padding:5px 8px">“'+word+'”</td><td style="padding:5px 8px">'+T+', '+U+', '+R+'</td><td style="padding:5px 8px">C('+(T+U-R)+', '+(2*U)+')</td><td style="padding:5px 8px;text-align:right;font-weight:700">'+f+'</td><td style="padding:5px 8px;text-align:right;color:var(--teal)">'+b+(b===f?' ✓':'')+'</td></tr>'; });
+    var tb=document.getElementById('sb-rows'); if(tb) tb.innerHTML=html;
+    function put(id,v){ var e=document.getElementById(id); if(e) e.textContent=v; }
+    put('sb-all', Math.pow(3,8).toLocaleString('en-US')); put('sb-no', C(10,4)); put('sb-big', C(55,10).toLocaleString('en-US')); put('sb-cells', (2*5+1)*50);
+  })();
+
+  (function(){
+    // the stretch answer: every two-frame path over {a, ∅}, collapsed, with its probability
+    var tb=document.getElementById('st-rows'); if(!tb) return;
+    var p={'a':0.4,'∅':0.6}, labs=['∅','a'], tot={}, rows='', parts=[];
+    labs.forEach(function(x){ labs.forEach(function(y){
+      var pr=p[x]*p[y], out=''; [x,y].forEach(function(l,i){ if(l!=='∅' && (i===0 || l!==[x,y][i-1])) out+=l; });
+      tot[out]=(tot[out]||0)+pr; if(out==='a') parts.push(pr.toFixed(2));
+      rows+='<tr><td style="padding:6px 14px">'+x+' '+y+'</td><td style="padding:6px 14px">'+(out?'“'+out+'”':'(nothing)')+'</td><td style="padding:6px 14px;text-align:right">'+p[x].toFixed(1)+' × '+p[y].toFixed(1)+' = '+pr.toFixed(2)+'</td></tr>';
+    }); });
+    rows+='<tr style="font-weight:700"><td colspan="2" style="padding:8px 14px;border-top:1px solid var(--line)">“a” in total</td><td style="padding:8px 14px;border-top:1px solid var(--line);text-align:right;color:var(--teal)">'+tot['a'].toFixed(2)+'</td></tr>';
+    rows+='<tr style="font-weight:700"><td colspan="2" style="padding:4px 14px">(nothing) in total</td><td style="padding:4px 14px;text-align:right">'+tot[''].toFixed(2)+'</td></tr>';
+    tb.innerHTML=rows;
+    function put(id,v){ var e=document.getElementById(id); if(e) e.textContent=v; }
+    put('st-best', tot[''].toFixed(2)); put('st-none', tot[''].toFixed(2)); put('st-sum', parts.join(' + ')+' = '+tot['a'].toFixed(2));
   })();
 
   // ---------- animation engine (rAF, pauses off-slide, auto-finish + speed + state) ----------
