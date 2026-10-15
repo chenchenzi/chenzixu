@@ -125,6 +125,7 @@
   .biglist{font:400 26px/2 var(--sans)}
   .biglist li{list-style:none;padding-left:34px;position:relative}
   .biglist li::before{content:"";position:absolute;left:0;top:.9em;width:14px;height:2px;background:var(--coral)}
+  .biglist .sublist li::before{top:.62em;left:4px;width:7px;height:7px;background:none;border:1.6px solid var(--muted);border-radius:50%}
 
   .mantra{font:800 54px/1.22 var(--display);letter-spacing:-.02em;max-width:1000px}
   .mantra .hl{color:var(--coral)}
@@ -322,6 +323,28 @@
 
 <!-- 4 ▸ PIPELINES -->
 <section class="slide" data-section="The course at a glance">
+  <div class="kicker rise d1">The course at a glance</div>
+  <h2 class="rise d1">Welcome to <span class="em">HG4052</span>!</h2>
+  <p class="rise d2" style="font:700 24px var(--sans);color:var(--ink)">Goals.</p>
+  <ol class="rise d2" style="font:400 22px/1.65 var(--sans);margin:4px 0 0 34px;padding-left:10px">
+    <li>Understand how speech <b>recognition</b> and <b>synthesis</b> systems <b>work</b>, and where <b>linguistics</b> fits in</li>
+    <li>Learn to <b>evaluate</b> and <b>use</b> them in research, with <b>Singapore's speech</b> as a running case</li>
+  </ol>
+  <p class="rise d3" style="font:700 24px var(--sans);color:var(--ink);margin-top:22px">Audience.</p>
+  <ul class="biglist rise d3" style="font-size:22px;line-height:1.65;margin-top:4px">
+    <li>Interested in speech technology
+      <ul class="sublist" style="margin-top:2px">
+        <li>Career goal: speech and language technology, research</li>
+        <li>A project: fieldwork, corpus work, a thesis</li>
+        <li>“AI literacy” or curiosity</li>
+      </ul>
+    </li>
+    <li class="rise d4">Prerequisite: HG2003 Phonetics &amp; Phonology; secondary-school maths</li>
+    <li class="rise d4">Programming: not required, but some basics are a plus (all Python runs in Colab)</li>
+  </ul>
+</section>
+
+<section class="slide">
   <div class="kicker rise d1">The map</div>
   <h2 class="rise d1">Two pipelines, mirror images</h2>
   <svg class="rise d2" viewBox="0 0 1100 420" style="width:1100px;height:420px">
