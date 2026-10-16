@@ -172,7 +172,7 @@
   · Decide before 16 Oct whether NSC files in Colab/Google Drive count as a third-party upload under the brief,
     and tell students where their corpus files may live (the Week 8 rig left the same question open).
   · TextGrid stage: a pre-aligned sentence (the lecturer's own recording, or the synthetic Week 3 sentence,
-    labelled synthetic), with its TextGrid; the praatio stretch needs a small set of TextGrids too.
+    labeled synthetic), with its TextGrid; the praatio stretch needs a small set of TextGrids too.
   · MFA: pre-aligned TextGrid is the guaranteed path; live MFA only in the take-home Colab notebook
     (condacolab; the runtime restarts once). Pin the MFA 3.x version you tested.
   · The split-the-average and alignment slides have play/pause buttons (alignment has a speed control).
@@ -212,7 +212,7 @@
 
 <!-- 3 ▸ RETRIEVAL OPENER -->
 <section class="slide">
-  <div class="kicker rise d1">Before new material · 3 minutes, tell your neighbour</div>
+  <div class="kicker rise d1">Before new material · 3 minutes, tell your neighbor</div>
   <h2 class="rise d1">Five echoes from Week 8</h2>
   <div style="margin-top:4px">
     <p class="step rise d2" style="font-size:22px">1. The CTC collapse rule, in order?</p>
@@ -258,7 +258,7 @@
   <ul class="biglist" style="font-size:24px">
     <li class="rise d2"><b>Normalization</b>: why a correct transcript can score 100% WER</li>
     <li class="rise d3"><b class="accent">Disaggregation</b>: what one overall WER hides; Koenecke et al. (2020)</li>
-    <li class="rise d3">The <b>National Speech Corpus</b>: parts, speakers, metadata, licence</li>
+    <li class="rise d3">The <b>National Speech Corpus</b>: parts, speakers, metadata, license</li>
     <li class="rise d4"><b>Forced alignment</b>: Viterbi with the words known</li>
     <li class="rise d5">Practical: an audit table, an error log, a TextGrid</li>
   </ul>
@@ -538,7 +538,7 @@
     <svg id="fig-nsc" viewBox="0 0 1080 230" style="width:100%;height:214px"></svg>
   </div>
   <ul class="biglist rise d3" style="font-size:17.5px;line-height:1.6;margin-top:12px">
-    <li>A corpus is audio + transcripts (whose conventions?) + metadata (who is speaking) + licence (who may use it, for what)</li>
+    <li>A corpus is audio + transcripts (whose conventions?) + metadata (who is speaking) + license (who may use it, for what)</li>
     <li>Commissioned by IMDA (Infocomm Media Development Authority), built with NTU linguists; before it, the largest Singapore English speech corpus had about 125 hours</li>
     <li>Parts 1 and 2 oversample Malay and Indian speakers: about 60% Chinese, 19% Malay, 19% Indian (citizen population: 74%, 13%, 9%)</li>
     <li><b>Singapore Open Data Licence v1.0</b>: research and commercial use, on request; name IMDA and the NSC when you use it</li>
@@ -610,7 +610,7 @@
     <div class="card" style="padding:18px 22px">
       <h3>Consent has a scope</h3>
       <ul class="biglist" style="font-size:15.5px;line-height:1.5">
-        <li>NSC speakers were recruited and agreed to a stated use under a licence</li>
+        <li>NSC speakers were recruited and agreed to a stated use under a license</li>
         <li>Whisper's 680,000 hours are audio found on the web, with no record of who the speakers are or what they agreed to</li>
         <li>Week 12 returns to consent</li>
       </ul>
@@ -638,7 +638,7 @@
         <li class="rise d2">Recognition asked: <b>which words?</b> Alignment already knows the words and asks only: <b>when?</b></li>
         <li class="rise d2">Week 6's machinery without the language model: lexicon → phones → one chain of phone HMMs → <b>Viterbi</b> places the boundaries</li>
         <li class="rise d3">Two inputs besides the audio: a <b>pronunciation dictionary</b> and an <b>acoustic model</b></li>
-        <li class="rise d3">Output: a <b>TextGrid</b> (Praat's annotation file: labelled time intervals on tiers), with a word tier and a phone tier</li>
+        <li class="rise d3">Output: a <b>TextGrid</b> (Praat's annotation file: labeled time intervals on tiers), with a word tier and a phone tier</li>
         <li class="rise d4">You have made one already: the boundary between /n/ and /o/ in Week 6's backtraced state path</li>
       </ul>
     </div>
@@ -681,9 +681,11 @@
     <div class="formula" style="display:block;font-size:20px;padding:10px 16px;white-space:nowrap"><span style="color:var(--teal);font-weight:600">V</span>(<i>s</i>, <i>t</i>) = <span style="color:var(--gold);font-weight:600">P</span>(<i>x</i><sub><i>t</i></sub> | <i>s</i>) × max[ <span style="color:var(--coral);font-weight:600">V(<i>s</i>, <i>t</i>−1)</span>, <span style="color:var(--coral);font-weight:600">V(<i>s</i>−1, <i>t</i>−1)</span> ]</div>
     <ul class="biglist" style="font-size:16px;line-height:1.5;flex:1">
       <li><i>s</i>: a phone, in the word's order; the path can only <span style="color:var(--coral)">stay</span> in <i>s</i> or <span style="color:var(--coral)">move</span> on from <i>s</i>−1</li>
-      <li>Start in /k/ at x<sub>1</sub>, end in /i/ at x<sub>8</sub>; stay and move are equally likely here, so they drop out</li>
     </ul>
   </div>
+  <ul class="biglist rise d4" style="font-size:16px;line-height:1.5;margin-top:6px">
+    <li><b>Our simplifying assumption:</b> <span style="color:var(--coral)">stay</span> and <span style="color:var(--coral)">move</span> are each 0.5 in every phone. Every path from /k/ at x<sub>1</sub> to /i/ at x<sub>8</sub> has 4 stays and 3 moves, so all get the same 0.5<sup>7</sup> and the best path cannot change: we leave the transitions out (real aligners learn them: appendix)</li>
+  </ul>
 </section>
 
 <!-- 22 ▸ MFA -->
@@ -992,10 +994,62 @@
   <div class="ansbox rise d3"><span class="en">EX 9.2</span>
     <p>A(<span style="color:var(--teal);font-weight:600">p</span>) = 8<span style="color:var(--teal);font-weight:600">p</span> + 25<span style="color:var(--coral);font-weight:600">(1 − p)</span> and B(<span style="color:var(--teal);font-weight:600">p</span>) = 13<span style="color:var(--teal);font-weight:600">p</span> + 15<span style="color:var(--coral);font-weight:600">(1 − p)</span>, with <span style="color:var(--teal);font-weight:600">p</span> = group M's share and <span style="color:var(--coral);font-weight:600">1 − p</span> = group C's share of the reference words. Equal when 25 − 17p = 15 − 2p: 15p = 10, <b>p = 2/3</b>. Above two thirds group M, A has the lower average; below, B does. The models never changed: only the mix did.</p></div>
   <div class="ansbox rise d4"><span class="en">EX 9.3</span>
-    <p>mfa validate flags “makan” as out-of-vocabulary; MFA aligns it as spoken noise (<b>spn</b>): one interval with no boundaries between its phones, so its vowels cannot be measured, and its edges with the neighbouring words are less reliable. Fix: add one tab-separated dictionary line (makan, then its phones in the acoustic model's phone set) and re-align. A fixed lexicon again, but here the fix is one line you add yourself.</p></div>
+    <p>mfa validate flags “makan” as out-of-vocabulary; MFA aligns it as spoken noise (<b>spn</b>): one interval with no boundaries between its phones, so its vowels cannot be measured, and its edges with the neighboring words are less reliable. Fix: add one tab-separated dictionary line (makan, then its phones in the acoustic model's phone set) and re-align. A fixed lexicon again, but here the fix is one line you add yourself.</p></div>
   <div class="ansbox rise d5"><span class="en">EX 9.4</span>
     <p>Possible, for example: WER by gender within Part 3; base-vs-fine-tune gains by ethnic group on a part the fine-tune was not trained on (it used Part 2). Not answerable, for example: whether errors track how many Singlish features (particles, Singlish grammar) an utterance contains (no such column: register is not recorded per utterance), or speakers' <b>language dominance</b> (ethnic group is an administrative category, not a linguistic profile). Metadata names cells; it does not describe repertoires.</p></div>
 </section>
+
+<!-- ▸ APPENDIX: WHY THE TRANSITIONS DROP OUT -->
+<section class="slide" data-section="Extra: transitions">
+  <div class="kicker rise d1" style="color:var(--teal)">Appendix: extra for the curious · not core</div>
+  <h2 class="rise d1">Why the transitions drop out of the “kopi” table</h2>
+  <div class="cols" style="gap:28px;margin-top:4px;align-items:flex-start">
+    <div class="grow">
+      <ul class="biglist rise d2" style="font-size:17.5px;line-height:1.55">
+        <li>Every path from /k/ at x<sub>1</sub> to /i/ at x<sub>8</sub> takes 7 steps</li>
+        <li>It moves out of /k/, /ɔ/ and /p/ once each: <b>3 moves</b>; the other <b>4 steps are stays</b></li>
+        <li>A longer /ɔ/ means a shorter phone elsewhere: the stays only change places</li>
+      </ul>
+    </div>
+    <div class="card rise d3" style="width:440px;padding:14px 20px;border-left:3px solid var(--teal)">
+      <div style="font:500 22px/1.4 var(--sans);color:var(--ink)">transitions of any path = <b class="accent">a</b><sup>4</sup> × <b class="accent">b</b><sup>3</sup></div>
+      <p style="font:400 15px/1.5 var(--sans);color:var(--muted);margin-top:6px"><b class="accent">a</b>: stay probability · <b class="accent">b</b>: move probability · if both are the same in every phone, every path is multiplied by the same number</p>
+    </div>
+  </div>
+  <table class="rise d3" style="margin-top:14px;width:100%;border-collapse:collapse;font:500 16px var(--mono);color:var(--ink)">
+    <tr><td style="padding:4px 10px;border-bottom:1px solid var(--line);font:600 13px var(--sans);color:var(--muted)">two of the <span id="tr-n">35</span> paths · illustrative numbers</td><td style="padding:4px 10px;border-bottom:1px solid var(--line);font:600 13px var(--sans);color:var(--muted);text-align:right">emissions only</td><td style="padding:4px 10px;border-bottom:1px solid var(--line);font:600 13px var(--sans);color:var(--muted);text-align:right">× transitions:<br><span class="accent">stay</span> 0.5, <span class="accent">move</span> 0.5 everywhere</td><td style="padding:4px 10px;border-bottom:1px solid var(--line);font:600 13px var(--sans);color:var(--muted);text-align:right">× transitions:<br><span class="accent">stay</span> 0.6, <span class="accent">move</span> 0.4 everywhere</td><td style="padding:4px 10px;border-bottom:1px solid var(--line);font:600 13px var(--sans);color:var(--muted);text-align:right">× transitions:<br>/ɔ/ <span class="accent">stay</span> 0.9, <span class="accent">move</span> 0.1; others 0.5</td></tr>
+    <tbody id="tr-rows"></tbody>
+  </table>
+  <ul class="biglist rise d4" style="font-size:16.5px;line-height:1.5;margin-top:12px">
+    <li>The same stay and move probabilities in every phone: A ÷ B never changes, so the best path cannot change</li>
+    <li>Different stays per phone: every path still leaves /k/, /ɔ/ and /p/ once, so the moves still cancel</li>
+    <li>B trades a /k/ stay (0.5) for an /ɔ/ stay (0.9): its score rises <span id="tr-gain">1.8</span>× relative to A, favoring a longer /ɔ/; A still scores higher</li>
+  </ul>
+</section>
+
+<!-- ▸ APPENDIX: WHAT A REAL ALIGNER ADDS -->
+<section class="slide">
+  <div class="kicker rise d1" style="color:var(--teal)">Appendix: extra for the curious · not core</div>
+  <h2 class="rise d1">What a real aligner adds: same recipe, bigger table</h2>
+  <table class="rise d2" style="width:100%;border-collapse:collapse;font:400 15px/1.4 var(--sans);color:var(--ink)">
+    <tr><td style="padding:4px 10px;border-bottom:1px solid var(--line);font:600 13px var(--sans);color:var(--muted);width:170px"></td><td style="padding:4px 10px;border-bottom:1px solid var(--line);font:600 13px var(--sans);color:var(--muted);width:250px">our “kopi” table</td><td style="padding:4px 10px;border-bottom:1px solid var(--line);font:600 13px var(--sans);color:var(--muted)">MFA's English model (english_mfa 3.1, used in the practical)</td></tr>
+    <tr><td style="padding:5px 10px;border-bottom:1px solid var(--line);font-weight:600">States per phone</td><td style="padding:5px 10px;border-bottom:1px solid var(--line)">1</td><td style="padding:5px 10px;border-bottom:1px solid var(--line)">3 for most phones (beginning, middle, end); only the middle one can stay. Silence: 5, all can stay</td></tr>
+    <tr><td style="padding:5px 10px;border-bottom:1px solid var(--line);font-weight:600"><span class="accent">Stay</span> probability</td><td style="padding:5px 10px;border-bottom:1px solid var(--line)">0.5, the same everywhere</td><td style="padding:5px 10px;border-bottom:1px solid var(--line)">Learned from 3,573 hours, per phone and group of similar contexts; middle-state medians: /k/ 0.87, /ɔ/ 0.83, /p/ 0.87, /i/ 0.83 (/ə/ 0.73, /s/ 0.90)</td></tr>
+    <tr><td style="padding:5px 10px;border-bottom:1px solid var(--line);font-weight:600">Shortest phone</td><td style="padding:5px 10px;border-bottom:1px solid var(--line)">1 frame</td><td style="padding:5px 10px;border-bottom:1px solid var(--line)">1 frame (10 ms) is possible, but rare: leaving after the first state has probability 0.01</td></tr>
+    <tr><td style="padding:5px 10px;border-bottom:1px solid var(--line);font-weight:600">Emissions</td><td style="padding:5px 10px;border-bottom:1px solid var(--line)">Made-up probabilities</td><td style="padding:5px 10px;border-bottom:1px solid var(--line)">Gaussian mixtures (several bell curves added together, fitted to data) over Week 4's MFCCs: each frame plus 3 neighbors on each side, reduced to 40 numbers</td></tr>
+    <tr><td style="padding:5px 10px;border-bottom:1px solid var(--line);font-weight:600">Context</td><td style="padding:5px 10px;border-bottom:1px solid var(--line)">One /ɔ/ for every context</td><td style="padding:5px 10px;border-bottom:1px solid var(--line)">Triphones: the model for /ɔ/ depends on its left and right neighbors, and similar contexts share one; 5,600 shared state models in all</td></tr>
+    <tr><td style="padding:5px 10px;border-bottom:1px solid var(--line);font-weight:600">Speakers</td><td style="padding:5px 10px;border-bottom:1px solid var(--line)">No adaptation</td><td style="padding:5px 10px;border-bottom:1px solid var(--line)">Adapted to each speaker's voice</td></tr>
+    <tr><td style="padding:5px 10px;border-bottom:1px solid var(--line);font-weight:600">Table for “kopi”</td><td style="padding:5px 10px;border-bottom:1px solid var(--line)">4 rows × 8 columns</td><td style="padding:5px 10px;border-bottom:1px solid var(--line)">About 12 rows (4 phones × 3 states) plus silence; 40 columns for a 400 ms “kopi” (illustrative)</td></tr>
+  </table>
+  <div class="card rise d3" style="margin-top:16px;padding:14px 20px;border-left:3px solid var(--teal)">
+    <ul class="biglist" style="font-size:17px;line-height:1.5">
+      <li>Stays in “kopi” itself: /k/ 0.84, /ɔ/ 0.80, /p/ 0.88, /i/ 0.94; /i/ before silence is well above its 0.83 median, as phrase-final vowels tend to be long</li>
+      <li>Those differences are small next to the emissions, which still decide most boundaries</li>
+    </ul>
+    <p style="font:400 13px/1.4 var(--sans);color:var(--faint);margin-top:6px">Values read from the model file (final.mdl) with MFA 3.3.3; McAuliffe et al. (2017)</p>
+  </div>
+</section>
+
 
 <script>
 (function(){
@@ -1247,7 +1301,7 @@
       return time>=END;
     }
     render(99);
-    ANIM.vtab=render; ANIM.vtabEl=el.closest('section'); ANIM.vtabEnd=END;
+    ANIM.vtab=render; ANIM.vtabEl=el.closest('section'); ANIM.vtabEnd=END; ANIM.vtabE=E;   // shared with the appendix table
   })();
 
   // practical artefact: an audit chart (illustrative counts; every WER computed from errors and words)
@@ -1304,6 +1358,26 @@
     if(splitAnim.elapsed()>=SPLIT_END){ if(splitAnim.playing()) splitAnim.toggle(); splitAnim.reset(); splitAnim.toggle(); }
     else splitAnim.toggle();
   };
+  (function(){
+    // appendix: two "kopi" paths with and without transition probabilities, from the same illustrative emissions
+    var tb=document.getElementById('tr-rows'); if(!tb||!ANIM.vtabE) return;
+    var E=ANIM.vtabE, ph=['k','ɔ','p','i'], T=8;
+    function em(p){ var r=1; p.forEach(function(s,t){ r*=E[s][t]; }); return r; }
+    function tr(p,stay){ var r=1; for(var t=1;t<p.length;t++) r*= (p[t]===p[t-1]) ? stay[p[t-1]] : 1-stay[p[t-1]]; return r; }
+    function score(p,st){ return em(p)*(st?tr(p,st):1); }
+    var all=[]; for(var a=1;a<T;a++) for(var b=a+1;b<T;b++) for(var c=b+1;c<T;c++){ var p=[]; for(var t=0;t<T;t++) p.push(t<a?0:t<b?1:t<c?2:3); all.push(p); }
+    var A=[0,0,1,1,2,2,3,3], B=[0,1,1,1,2,2,3,3], S=[null,[.5,.5,.5,.5],[.6,.6,.6,.6],[.5,.9,.5,.5]];
+    function str(p){ return p.map(function(s){ return ph[s]; }).join(' '); }
+    function fmt(x){ return String(Number(x.toPrecision(2))); }   // 2 significant figures, as in the kopi table
+    var td='padding:5px 10px;border-bottom:1px solid var(--line)', tdr=td+';text-align:right', html='';
+    [['A',A],['B',B]].forEach(function(r){ html+='<tr><td style="'+td+'">'+r[0]+': '+str(r[1])+'</td>'+S.map(function(st){ return '<td style="'+tdr+'">'+fmt(score(r[1],st))+'</td>'; }).join('')+'</tr>'; });
+    html+='<tr><td style="'+td+';font-family:var(--sans);font-weight:600">A ÷ B</td>'+S.map(function(st){ return '<td style="'+tdr+';font-weight:700">'+(score(A,st)/score(B,st)).toFixed(1)+'</td>'; }).join('')+'</tr>';
+    html+='<tr><td style="'+td+';font-family:var(--sans);font-weight:600">best of all '+all.length+'</td>'+S.map(function(st){ var best=all.reduce(function(m,p){ return score(p,st)>score(m,st)?p:m; }); return '<td style="'+tdr+'">'+str(best)+'</td>'; }).join('')+'</tr>';
+    tb.innerHTML=html;
+    var n=document.getElementById('tr-n'); if(n) n.textContent=all.length;
+    var g=document.getElementById('tr-gain'); if(g) g.textContent=((score(A,S[1])/score(B,S[1]))/(score(A,S[3])/score(B,S[3]))).toFixed(1);
+  })();
+
   var VTAB_END=ANIM.vtabEnd||19;
   function vtabLabel(playing, elapsed){
     var b=document.getElementById('btn-vtab'); if(!b) return;
