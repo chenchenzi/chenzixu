@@ -162,7 +162,7 @@
 <!-- WEEK 9 RIG (instructor notes, not shown)
   · Title tagline is a PLACEHOLDER: options "Errors and Alignments" · "Speakers and Scores" · "Averages and Boundaries".
   · A1 brief: "Steps 5 and 6 are the Week 9 practical with your own numbers" (audit table; error analysis with
-    the brief's categories). Slide 4 quotes the steps; nothing beyond the brief on the slides.
+    the brief's categories). Slide 5 quotes the steps; nothing beyond the brief on the slides.
   · Practical BUILT 15 Oct: week09_practical.ipynb (master, INSTRUCTOR cell) from demo_audio/week09/build_week09_notebook.py.
     Class data = 38 REAL Mozilla Common Voice 17.0 clips (CC0; 19 Singaporean English from 12 speakers, 19 US English),
     transcripts pre-run with the two Week 8 models; align_clip.TextGrid from MFA 3.3.3. Four parts: normalizer TODO;
@@ -194,7 +194,22 @@
   <div class="footer-hint">→ / space to advance · F for fullscreen · M for the slide menu</div>
 </section>
 
-<!-- 2 ▸ SESSION MAP -->
+<!-- 2 ▸ ROADMAP -->
+<section class="slide">
+  <div class="glyph">Δ</div>
+  <div class="kicker rise d1">Today</div>
+  <h2 class="rise d2">Roadmap</h2>
+  <ul class="biglist" style="font-size:24px">
+    <li class="rise d2"><b>Normalization</b>: why a correct transcript can score 100% WER</li>
+    <li class="rise d3"><b class="accent">Disaggregation</b>: what one overall WER hides; Koenecke et al. (2020)</li>
+    <li class="rise d3">The <b>National Speech Corpus</b>: parts, speakers, metadata, license</li>
+    <li class="rise d4"><b>Forced alignment</b>: Viterbi with the words known</li>
+    <li class="rise d5">Practical: an audit table, an error log, a TextGrid</li>
+  </ul>
+  <p class="sub rise d5" style="margin-top:30px;font-size:18px">Hold all morning: <b style="color:var(--ink)">a WER gap describes the system and the test, never a deficit in the speakers</b>.</p>
+</section>
+
+<!-- 3 ▸ SESSION MAP -->
 <section class="slide">
   <div class="glyph">t</div>
   <div class="kicker rise d1">The shape of the morning</div>
@@ -210,7 +225,7 @@
   </div>
 </section>
 
-<!-- 3 ▸ RETRIEVAL OPENER -->
+<!-- 4 ▸ RETRIEVAL OPENER -->
 <section class="slide">
   <div class="kicker rise d1">Before new material · 3 minutes, tell your neighbor</div>
   <h2 class="rise d1">Five echoes from Week 8</h2>
@@ -228,7 +243,7 @@
   </div>
 </section>
 
-<!-- 4 ▸ ASSIGNMENT 1 -->
+<!-- 5 ▸ ASSIGNMENT 1 -->
 <section class="slide" data-section="Assignment 1">
   <div class="glyph">A</div>
   <div class="kicker rise d1">Assignment 1 · one week to go</div>
@@ -248,21 +263,6 @@
       <p style="font:400 15px/1.55 var(--sans);color:var(--faint);margin-top:10px">Everything task-specific is in the brief on NTULearn. Corpus audio and transcripts stay inside the module.</p>
     </div>
   </div>
-</section>
-
-<!-- 5 ▸ ROADMAP -->
-<section class="slide">
-  <div class="glyph">Δ</div>
-  <div class="kicker rise d1">Today</div>
-  <h2 class="rise d2">Roadmap</h2>
-  <ul class="biglist" style="font-size:24px">
-    <li class="rise d2"><b>Normalization</b>: why a correct transcript can score 100% WER</li>
-    <li class="rise d3"><b class="accent">Disaggregation</b>: what one overall WER hides; Koenecke et al. (2020)</li>
-    <li class="rise d3">The <b>National Speech Corpus</b>: parts, speakers, metadata, license</li>
-    <li class="rise d4"><b>Forced alignment</b>: Viterbi with the words known</li>
-    <li class="rise d5">Practical: an audit table, an error log, a TextGrid</li>
-  </ul>
-  <p class="sub rise d5" style="margin-top:30px;font-size:18px">Hold all morning: <b style="color:var(--ink)">a WER gap describes the system and the test, never a deficit in the speakers</b>.</p>
 </section>
 
 <!-- 6 ▸ NORMALIZATION -->

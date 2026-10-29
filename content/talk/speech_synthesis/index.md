@@ -36,8 +36,8 @@ image:
 links:
 - icon: desktop
   icon_pack: fas
-  name: Week 10 slides
-  url: https://chenzixu.rbind.io/slides/speech-synthesis/week10.html
+  name: Week 11 slides
+  url: https://chenzixu.rbind.io/slides/speech-synthesis/week11.html
 - icon: github
   icon_pack: fab
   name: Course materials
@@ -165,11 +165,13 @@ a.hg-card:hover .hg-thumb,a.hg-card:focus-visible .hg-thumb{opacity:1;transform:
     <span class="hg-topic">TTS I (classical): text normalisation, G2P, formant / unit-selection / articulatory synthesis</span>
     <span class="hg-go">View slides →</span>
   </a>
-  <div class="hg-card hg-soon">
+  <a class="hg-card" href="https://chenzixu.rbind.io/slides/speech-synthesis/week11.html">
+    <span class="hg-thumb" style="background-image:url('thumb-week11.jpg')"></span>
     <span class="hg-week">Week 11</span>
     <span class="hg-dates">26 – 30 Oct</span>
     <span class="hg-topic">TTS II (neural): acoustic models, vocoders, end-to-end voices, speaker embeddings</span>
-  </div>
+    <span class="hg-go">View slides →</span>
+  </a>
   <div class="hg-card hg-soon">
     <span class="hg-week">Week 12</span>
     <span class="hg-dates">2 – 6 Nov</span>
