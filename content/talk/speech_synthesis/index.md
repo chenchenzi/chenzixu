@@ -36,8 +36,8 @@ image:
 links:
 - icon: desktop
   icon_pack: fas
-  name: Week 11 slides
-  url: https://chenzixu.rbind.io/slides/speech-synthesis/week11.html
+  name: Week 12 slides
+  url: https://chenzixu.rbind.io/slides/speech-synthesis/week12.html
 - icon: github
   icon_pack: fab
   name: Course materials
@@ -172,11 +172,13 @@ a.hg-card:hover .hg-thumb,a.hg-card:focus-visible .hg-thumb{opacity:1;transform:
     <span class="hg-topic">TTS II (neural): acoustic models, vocoders, end-to-end voices, speaker embeddings</span>
     <span class="hg-go">View slides →</span>
   </a>
-  <div class="hg-card hg-soon">
+  <a class="hg-card" href="https://chenzixu.rbind.io/slides/speech-synthesis/week12.html">
+    <span class="hg-thumb" style="background-image:url('thumb-week12.jpg')"></span>
     <span class="hg-week">Week 12</span>
     <span class="hg-dates">2 – 6 Nov</span>
     <span class="hg-topic">Prosody, voice cloning &amp; the ethics of synthetic voices</span>
-  </div>
+    <span class="hg-go">View slides →</span>
+  </a>
   <div class="hg-card hg-soon">
     <span class="hg-week">Week 13</span>
     <span class="hg-dates">9 – 13 Nov</span>
