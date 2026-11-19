@@ -36,8 +36,8 @@ image:
 links:
 - icon: desktop
   icon_pack: fas
-  name: Week 12 slides
-  url: https://chenzixu.rbind.io/slides/speech-synthesis/week12.html
+  name: Week 13 slides
+  url: https://chenzixu.rbind.io/slides/speech-synthesis/week13.html
 - icon: github
   icon_pack: fab
   name: Course materials
@@ -179,9 +179,11 @@ a.hg-card:hover .hg-thumb,a.hg-card:focus-visible .hg-thumb{opacity:1;transform:
     <span class="hg-topic">Prosody, voice cloning &amp; the ethics of synthetic voices</span>
     <span class="hg-go">View slides →</span>
   </a>
-  <div class="hg-card hg-soon">
+  <a class="hg-card" href="https://chenzixu.rbind.io/slides/speech-synthesis/week13.html">
+    <span class="hg-thumb" style="background-image:url('thumb-week13.jpg')"></span>
     <span class="hg-week">Week 13</span>
     <span class="hg-dates">9 – 13 Nov</span>
-    <span class="hg-topic">Frontiers: spoken dialogue, speech LLMs, speech-to-speech translation · careers panel &amp; poster fair</span>
-  </div>
+    <span class="hg-topic">Poster Fair, a mini conference: A2 poster pitches · career panel · the table trick revisited</span>
+    <span class="hg-go">View slides →</span>
+  </a>
 </div>
